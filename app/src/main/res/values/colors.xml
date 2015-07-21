@@ -18,4 +18,5 @@
 	<color name="type.hotel">#3dabff</color>
 	<color name="white">#ffffff</color>
 	<color name="pelmel">#f48020</color>
+	<color name="pelmelActionBar">#eb7500</color>
 </resources>

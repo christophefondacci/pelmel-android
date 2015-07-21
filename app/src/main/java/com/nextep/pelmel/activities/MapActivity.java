@@ -1,12 +1,9 @@
 package com.nextep.pelmel.activities;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.content.Intent;
 import android.content.res.Resources;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -18,14 +15,20 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.PelMelConstants;
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.helpers.GeoUtils;
 import com.nextep.pelmel.listeners.UserListener;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.User;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MapActivity extends MainActionBarActivity implements UserListener,
 		OnInfoWindowClickListener {
@@ -73,50 +76,88 @@ public class MapActivity extends MainActionBarActivity implements UserListener,
 	}
 
 	@Override
-	public void userInfoAvailable(User user) {
+	public void userInfoAvailable(final User user) {
 		final Location loc = getLocalizationService().getLocation();
-		final List<Place> places = PelMelApplication.getDataService()
-				.getNearbyPlaces(user, loc.getLatitude(), loc.getLongitude(),
-						null, null, null, false);
+		AsyncTask<Void, Void, List<Place>> asyncTask = new AsyncTask<Void, Void, List<Place>>() {
+			@Override
+			protected List<Place> doInBackground(Void... params) {
+				final List<Place> places = PelMelApplication.getDataService()
+						.getNearbyPlaces(user, loc.getLatitude(), loc.getLongitude(),
+								null, null, null, false);
+				return places;
+			}
 
-		if (places != cachedPlaces) {
-			map.clear();
-			placeMarkersMap.clear();
-			cachedPlaces = places;
+			@Override
+			protected void onPostExecute(List<Place> places) {
+				if (places != cachedPlaces) {
+					map.clear();
+					placeMarkersMap.clear();
+					cachedPlaces = places;
 
-			final Resources res = PelMelApplication.getInstance()
-					.getResources();
-			for (final Place p : places) {
-				int markerCode;
-				if (p != null) {
-					if (Place.PLACE_TYPE_BAR.equals(p.getType())) {
-						markerCode = R.drawable.marker_bar;
-					} else if (Place.PLACE_TYPE_ASSOCIATION.equals(p.getType())) {
-						markerCode = R.drawable.marker_asso;
-					} else if (Place.PLACE_TYPE_CLUB.equals(p.getType())) {
-						markerCode = R.drawable.marker_club;
-					} else if (Place.PLACE_TYPE_RESTAURANT.equals(p.getType())) {
-						markerCode = R.drawable.marker_restaurant;
-					} else if (Place.PLACE_TYPE_SAUNA.equals(p.getType())) {
-						markerCode = R.drawable.marker_sauna;
-					} else if (Place.PLACE_TYPE_SEXCLUB.equals(p.getType())) {
-						markerCode = R.drawable.marker_sexclub;
-					} else if (Place.PLACE_TYPE_SHOP.equals(p.getType())) {
-						markerCode = R.drawable.marker_sexshop;
-					} else {
-						markerCode = R.drawable.marker_bar;
+					// Creating bounds around user loc to check number of places inside
+					// Will be our initial zoom if enough points in there
+					final LatLng userLoc = new LatLng(loc.getLatitude(),loc.getLongitude());
+					final LatLngBounds userZoomBounds = GeoUtils.createBoundsFromPointWithDistance(userLoc,PelMelConstants.MAP_USERLOCATION_RADIUS);
+					int placesInUserZoom = 0;
+
+					// Preparing a bounds builder for zoom fit (will be our default zoom if not
+					// enough points in user zoom bounds
+					final LatLngBounds.Builder zoomFitBoundsBuilder = new LatLngBounds.Builder();
+
+					// Processing places
+					final Resources res = PelMelApplication.getInstance()
+							.getResources();
+					for (final Place p : places) {
+						int markerCode;
+						if (p != null) {
+							if (Place.PLACE_TYPE_BAR.equals(p.getType())) {
+								markerCode = R.drawable.marker_bar;
+							} else if (Place.PLACE_TYPE_ASSOCIATION.equals(p.getType())) {
+								markerCode = R.drawable.marker_asso;
+							} else if (Place.PLACE_TYPE_CLUB.equals(p.getType())) {
+								markerCode = R.drawable.marker_club;
+							} else if (Place.PLACE_TYPE_RESTAURANT.equals(p.getType())) {
+								markerCode = R.drawable.marker_restaurant;
+							} else if (Place.PLACE_TYPE_SAUNA.equals(p.getType())) {
+								markerCode = R.drawable.marker_sauna;
+							} else if (Place.PLACE_TYPE_SEXCLUB.equals(p.getType())) {
+								markerCode = R.drawable.marker_sexclub;
+							} else if (Place.PLACE_TYPE_SHOP.equals(p.getType())) {
+								markerCode = R.drawable.marker_sexshop;
+							} else if (Place.PLACE_TYPE_HOTEL.equals(p.getType())) {
+								markerCode = R.drawable.marker_hotel;
+							} else if (Place.PLACE_TYPE_OUTDOORS.equals(p.getType())) {
+								markerCode = R.drawable.marker_outdoor;
+							} else {
+								markerCode = R.drawable.marker_bar;
+							}
+							final BitmapDescriptor bitmapDesc = BitmapDescriptorFactory
+									.fromResource(markerCode);
+							final LatLng markerPos = new LatLng(p.getLatitude(),
+									p.getLongitude());
+							final Marker marker = map.addMarker(new MarkerOptions()
+									.position(markerPos).icon(bitmapDesc)
+									.title(p.getName()).snippet(p.getDistanceLabel()));
+							placeMarkersMap.put(marker, p);
+
+							// Zoom management
+							if(userZoomBounds.contains(markerPos)) {
+								placesInUserZoom++;
+							}
+							zoomFitBoundsBuilder.include(markerPos);
+						}
 					}
-					final BitmapDescriptor bitmapDesc = BitmapDescriptorFactory
-							.fromResource(markerCode);
-					final LatLng markerPos = new LatLng(p.getLatitude(),
-							p.getLongitude());
-					final Marker marker = map.addMarker(new MarkerOptions()
-							.position(markerPos).icon(bitmapDesc)
-							.title(p.getName()).snippet(p.getDistanceLabel()));
-					placeMarkersMap.put(marker, p);
+					if(placesInUserZoom>=PelMelConstants.MAP_MINIMUM_PLACES_FOR_ZOOM) {
+						final CameraUpdate upd = CameraUpdateFactory.newLatLngBounds(userZoomBounds,0);
+						map.animateCamera(upd);
+					} else {
+						final CameraUpdate upd = CameraUpdateFactory.newLatLngBounds(zoomFitBoundsBuilder.build(),30);
+						map.animateCamera(upd);
+					}
 				}
 			}
-		}
+
+		}.execute();
 	}
 
 	@Override

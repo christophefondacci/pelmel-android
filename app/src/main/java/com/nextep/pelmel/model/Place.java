@@ -11,6 +11,8 @@ public interface Place extends CalObject {
 	String PLACE_TYPE_SAUNA = "sauna";
 	String PLACE_TYPE_SEXCLUB = "sexclub";
 	String PLACE_TYPE_SHOP = "sexshop";
+	String PLACE_TYPE_HOTEL = "hotel";
+	String PLACE_TYPE_OUTDOORS = "outdoors";
 
 	String getType();
 

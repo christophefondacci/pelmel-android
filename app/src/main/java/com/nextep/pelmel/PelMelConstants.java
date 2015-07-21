@@ -22,4 +22,8 @@ public interface PelMelConstants {
 	String PLACE_TYPE_ASSOCIATION = "asso";
 	String PLACE_TYPE_HOTEL = "hotel";
 	String PLACE_TYPE_SAUNA = "sauna";
+
+
+	double MAP_USERLOCATION_RADIUS = 1000;
+	int MAP_MINIMUM_PLACES_FOR_ZOOM = 3;
 }

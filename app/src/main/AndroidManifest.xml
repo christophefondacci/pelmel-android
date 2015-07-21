@@ -5,7 +5,7 @@
     android:versionName="1.5" >
 
     <uses-sdk
-        android:minSdkVersion="10"
+        android:minSdkVersion="14"
         android:targetSdkVersion="14" />
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -33,31 +33,31 @@
         android:allowBackup="true"
         android:icon="@drawable/pelmel_icon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" android:name="PelMelApplication">
+        android:theme="@style/CustomActionBarTheme" android:name="PelMelApplication">
         <activity android:name=".activities.TabBarActivity">
         </activity>
-        <activity android:theme="@style/Theme.AppCompat.Light" 
+        <activity
             android:name="com.nextep.pelmel.activities.ListPlacesActivity"
             android:label="@string/app_name" >
         </activity>
-        <activity android:theme="@style/Theme.AppCompat.Light" 
+        <activity
             android:name="com.nextep.pelmel.activities.OverviewActivity"></activity>
 
-        <activity android:theme="@style/Theme.AppCompat.Light" android:name=".activities.MapActivity"></activity><meta-data
+        <activity android:name=".activities.MapActivity"></activity><meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyCUrzVh3F9ttywWpMdtRfRUrkpLKCCGUIQ" />
 <!--             android:value="AIzaSyCrHWO2iZlLYbCM3U9UrCOYNQ6kiMmxWTQ" /> -->
-        <activity android:theme="@style/Theme.AppCompat.Light" android:name=".activities.AccountActivity"></activity>
-        <activity android:theme="@style/Theme.AppCompat.Light" android:name=".activities.PhotosManagerActivity"></activity>
+        <activity android:name=".activities.AccountActivity"></activity>
+        <activity android:name=".activities.PhotosManagerActivity"></activity>
         <activity android:name=".activities.LoginActivity"><intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter></activity>
-        <activity android:theme="@style/Theme.AppCompat.Light"  android:name=".activities.ListEventsActivity"></activity>
-        <activity android:theme="@style/Theme.AppCompat.Light" android:name=".activities.ChatActivity"></activity>
+        <activity android:name=".activities.ListEventsActivity"></activity>
+        <activity android:name=".activities.ChatActivity"></activity>
         <activity android:name=".activities.TextActivity"></activity>
-        <activity android:theme="@style/Theme.AppCompat.Light" android:name=".activities.MainActionBarActivity"></activity>
+        <activity android:name=".activities.MainActionBarActivity"></activity>
         
         
     </application>

@@ -86,6 +86,7 @@
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="pelmel">#f48020</color>
+    <color name="pelmelActionBar">#eb7500</color>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
     <eat-comment/>
     <color name="primary_dark_material_dark">#ff000000</color>
@@ -262,6 +263,11 @@
     <item name="progress_circular" type="id"/>
     <item name="progress_horizontal" type="id"/>
     <item name="split_action_bar" type="id"/>
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.maps.android/android-maps-utils/0.3.4/res/values/values.xml -->
+    <eat-comment/>
+    <item name="text" type="id"/>
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
+    <eat-comment/>
     <item name="up" type="id"/>
     <integer name="abc_config_activityDefaultDur">220</integer>
     <integer name="abc_config_activityShortDur">150</integer>
@@ -1402,6 +1408,32 @@ Don\'t be scared, we only need an email, a password, a pseudo and your birth dat
         <item name="android:scaleType">center</item>
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.maps.android/android-maps-utils/0.3.4/res/values/values.xml -->
+    <eat-comment/>
+    <style name="Bubble.TextAppearance.Dark" parent="android:TextAppearance.Medium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#ff7f7f7f</item>
+    </style>
+    <style name="Bubble.TextAppearance.Light" parent="Bubble.TextAppearance.Dark">
+        <item name="android:textColor">#ffeeeeee</item>
+    </style>
+    <style name="ClusterIcon.TextAppearance" parent="android:TextAppearance">
+        <item name="android:textColor">#ffeeeeee</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values/themes.xml -->
+    <eat-comment/>
+    <style name="CustomActionBarTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <item name="actionBarStyle">@style/MyActionBar</item>
+    </style>
+    <style name="MyActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/pelmelActionBar</item>
+        <item name="background">@color/pelmelActionBar</item>
+    </style>
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
+    <eat-comment/>
     <style name="Platform.AppCompat" parent="android:Theme">
         <item name="android:windowNoTitle">true</item>
 

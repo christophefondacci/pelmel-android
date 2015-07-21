@@ -101,6 +101,7 @@ MERGED from com.google.android.gms:play-services-base:7.5.0:18:5
 MERGED from com.android.support:support-v4:22.0.0:20:5
 MERGED from com.android.support:appcompat-v7:22.0.0:20:5
 MERGED from com.android.support:support-v4:22.0.0:20:5
+MERGED from com.google.maps.android:android-maps-utils:0.3.4:5:5
 	android:targetSdkVersion
 		ADDED from AndroidManifest.xml:9:9
 		INJECTED from AndroidManifest.xml:0:0
@@ -270,6 +271,7 @@ MERGED from com.google.android.gms:play-services-base:7.5.0:20:5
 MERGED from com.android.support:support-v4:22.0.0:22:5
 MERGED from com.android.support:appcompat-v7:22.0.0:22:5
 MERGED from com.android.support:support-v4:22.0.0:22:5
+MERGED from com.google.maps.android:android-maps-utils:0.3.4:7:5
 	android:label
 		ADDED from AndroidManifest.xml:35:9
 	android:allowBackup
@@ -279,7 +281,7 @@ MERGED from com.android.support:support-v4:22.0.0:22:5
 	android:theme
 		ADDED from AndroidManifest.xml:36:9
 	android:name
-		ADDED from AndroidManifest.xml:36:41
+		ADDED from AndroidManifest.xml:36:53
 activity#com.nextep.pelmel.activities.TabBarActivity
 ADDED from AndroidManifest.xml:37:9
 	android:name
@@ -288,40 +290,30 @@ activity#com.nextep.pelmel.activities.ListPlacesActivity
 ADDED from AndroidManifest.xml:39:9
 	android:label
 		ADDED from AndroidManifest.xml:41:13
-	android:theme
-		ADDED from AndroidManifest.xml:39:19
 	android:name
 		ADDED from AndroidManifest.xml:40:13
 activity#com.nextep.pelmel.activities.OverviewActivity
 ADDED from AndroidManifest.xml:43:9
-	android:theme
-		ADDED from AndroidManifest.xml:43:19
 	android:name
 		ADDED from AndroidManifest.xml:44:13
 activity#com.nextep.pelmel.activities.MapActivity
 ADDED from AndroidManifest.xml:46:9
-	android:theme
-		ADDED from AndroidManifest.xml:46:19
 	android:name
-		ADDED from AndroidManifest.xml:46:64
+		ADDED from AndroidManifest.xml:46:19
 meta-data#com.google.android.maps.v2.API_KEY
-ADDED from AndroidManifest.xml:46:114
+ADDED from AndroidManifest.xml:46:69
 	android:name
 		ADDED from AndroidManifest.xml:47:13
 	android:value
 		ADDED from AndroidManifest.xml:48:13
 activity#com.nextep.pelmel.activities.AccountActivity
 ADDED from AndroidManifest.xml:50:9
-	android:theme
-		ADDED from AndroidManifest.xml:50:19
 	android:name
-		ADDED from AndroidManifest.xml:50:64
+		ADDED from AndroidManifest.xml:50:19
 activity#com.nextep.pelmel.activities.PhotosManagerActivity
 ADDED from AndroidManifest.xml:51:9
-	android:theme
-		ADDED from AndroidManifest.xml:51:19
 	android:name
-		ADDED from AndroidManifest.xml:51:64
+		ADDED from AndroidManifest.xml:51:19
 activity#com.nextep.pelmel.activities.LoginActivity
 ADDED from AndroidManifest.xml:52:9
 	android:name
@@ -338,26 +330,20 @@ ADDED from AndroidManifest.xml:55:17
 		ADDED from AndroidManifest.xml:55:27
 activity#com.nextep.pelmel.activities.ListEventsActivity
 ADDED from AndroidManifest.xml:57:9
-	android:theme
-		ADDED from AndroidManifest.xml:57:19
 	android:name
-		ADDED from AndroidManifest.xml:57:65
+		ADDED from AndroidManifest.xml:57:19
 activity#com.nextep.pelmel.activities.ChatActivity
 ADDED from AndroidManifest.xml:58:9
-	android:theme
-		ADDED from AndroidManifest.xml:58:19
 	android:name
-		ADDED from AndroidManifest.xml:58:64
+		ADDED from AndroidManifest.xml:58:19
 activity#com.nextep.pelmel.activities.TextActivity
 ADDED from AndroidManifest.xml:59:9
 	android:name
 		ADDED from AndroidManifest.xml:59:19
 activity#com.nextep.pelmel.activities.MainActionBarActivity
 ADDED from AndroidManifest.xml:60:9
-	android:theme
-		ADDED from AndroidManifest.xml:60:19
 	android:name
-		ADDED from AndroidManifest.xml:60:64
+		ADDED from AndroidManifest.xml:60:19
 activity#com.google.android.gms.ads.AdActivity
 ADDED from com.google.android.gms:play-services-ads:7.5.0:26:9
 	android:configChanges

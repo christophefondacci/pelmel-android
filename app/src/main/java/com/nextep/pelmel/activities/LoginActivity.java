@@ -148,8 +148,8 @@ public class LoginActivity extends Activity implements OnClickListener,
 		PelMelApplication.getUserService().saveLastLoginInfo();
 
 		// Starting the tab
-		final Intent placesIntent = new Intent(this, ListPlacesActivity.class); // TabBarActivity.class);
-		startActivity(placesIntent);
+		final Intent mapIntent = new Intent(this, MapActivity.class); // TabBarActivity.class);
+		startActivity(mapIntent);
 	}
 
 	@Override
@@ -178,8 +178,8 @@ public class LoginActivity extends Activity implements OnClickListener,
 		PelMelApplication.getUserService().saveLastLoginInfo();
 
 		// Starting the tab
-		final Intent placesIntent = new Intent(this, ListPlacesActivity.class); // TabBarActivity.class);
-		startActivity(placesIntent);
+		final Intent mapIntent = new Intent(this, MapActivity.class); // TabBarActivity.class);
+		startActivity(mapIntent);
 	}
 
 	@Override
