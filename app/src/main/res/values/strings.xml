@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="action_settings">Settings</string>
+    <string name="age_minutes">minutes</string>
+    <string name="age_hours">hours</string>
+    <string name="age_days">days</string>
+    <string name="app_name">PelMel Guide</string>
+    <string name="cancel">Cancel</string>
+    <string name="chat_hint">Enter your message here</string>
+    <string name="chat_info_msg">Tap on a conversation to show all messages and reply. Tap here to refresh.</string>
+    <string name="chat_send">Send</string>
+    <string name="chat_send_fail_title">Failed to send message</string>
+    <string name="chat_send_fail">PelMel failed to send your message, please try again and check your network connection.</string>
+    <string name="distance.feet">{0} feet</string>
+    <string name="distance.miles">{0} miles</string>
+    <string name="distance.meters">{0} meters</string>
+    <string name="distance.kilometers">{0} km</string>
+    <string name="dummy">Sample text</string>
+    <string name="event_place_title">Takes place at</string>
+    <string name="eventType">Event</string>
+    <string name="googlePlay.SERVICE_MISSING">You need to install Google Play Services from the Google Play Store</string>
+    <string name="googlePlay.SERVICE_VERSION_UPDATE_REQUIRED">You need to update Google Play Services from the Google Play Store</string>
+    <string name="googleServicesUnavailable">You need to update or install Google Play Services</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="insiders_title">They were in</string>
+    <string name="likers_title">They like</string>
+    <string name="liked_places_title">He goes to</string>
+    <string name="liked_users_title">He likes</string>
+    <string name="locationProviderUnavailable">Cannot get your position, you may need to activate location services.</string>
+    <string name="loginIntroLabel">Login</string>
+    <string name="loginWaitMsg">Logging in&#8230;</string>
+    <string name="loginButtonLabel">Login</string>
+    <string name="loginEmailPlaceholder">E-mail address</string>
+    <string name="loginPasswordPlaceholder">Password</string>
+    <string name="loginPasswordConfirmPlaceholder">Confirm password</string>
+    <string name="loginHint">Login to find all places around you</string>
+    <string name="logout">Logout</string>
+    <string name="month.january">January</string>
+    <string name="month.february">February</string>
+    <string name="month.march">March</string>
+    <string name="month.april">April</string>
+    <string name="month.may">May</string>
+    <string name="month.june">June</string>
+    <string name="month.july">July</string>
+    <string name="month.august">August</string>
+    <string name="month.september">September</string>
+    <string name="month.october">October</string>
+    <string name="month.november">November</string>
+    <string name="month.december">December</string>
+    <string name="ok">OK</string>
+    <string name="placeType.bar">Bar</string>
+    <string name="placeType.sauna">Bathhouse</string>
+    <string name="placeType.restaurant">Restaurant</string>
+    <string name="placeType.club">Club</string>
+    <string name="placeType.sexclub">Sex Club</string>
+    <string name="placeType.sexshop">Shop</string>
+    <string name="placeType.asso">Association</string>
+    <string name="placeType.hotel">Hotel</string>
+    <string name="placeType.other">Other</string>
+    <string name="profileName">Nickname</string>
+    <string name="profileInformation">Informations</string>
+    <string name="profileBirthday">Birth date : </string>
+    <string name="profileHeight">Height : </string>
+    <string name="profileHeightVal">167 cm / 5\'6\'\'</string>
+    <string name="profileWeight">Weight : </string>
+    <string name="profileWeightVal">72 kg / 160 lbs</string>
+    <string name="profileDescriptionLabel">Description</string>
+    <string name="profileAddButton">Add description</string>
+    <string name="profilePhotoButton">Manage photos</string>
+    <string name="profileSave">Save</string>
+    <string name="profileTags">Define yourself</string>
+    <string name="photoRemoveButton">Delete</string>
+    <string name="photoTopAddButton">Add</string>
+    <string name="photoTopRemoveButton">Remove</string>
+    <string name="photoUploadFailed">Failed to upload the photo, check your connection or connect to wifi and try again</string>
+    <string name="registerIntroLabel">Register</string>
+    <string name="registerButtonLabel">Register</string>
+    <string name="registerEmptyValueError">All fields should be filled</string>
+    <string name="registerFailed">Registration failed, the email you used may already be in use.</string>
+    <string name="registerIntroHint">Register freely in one click by filling this 4 fields</string>
+<!--     <string name="registerIntroHint">To operate our services, we need to uniquely identify you in our network. Tap here to find out why.</string> -->
+    <string name="registerPasswordError">Passwords don\'t match</string>
+    <string name="registerPseudoHint">Nickname</string>
+    <string name="registerTermsHint">By registering you agree to our terms of use. Click here to read them.</string>
+    <string name="retrievingData">Retrieving data&#8230;</string>
+    <string name="retry">Retry</string>
+    <string name="save_wait_message">Saving profile</string>
+    <string name="selectPhotoTitle">Photo source</string>
+    <string name="selectPhotoMessage">Which source do you want to use to upload a photo ?</string>
+    <string name="selectPhotoCamera">Camera</string>
+    <string name="selectPhotoGallery">Gallery</string>
+    <string name="search_button_label">Search</string>
+    <string name="search_placeholder">Search a city or venue</string>
+    <string name="search_extend_label">No gay venues found, you can search again in a larger zone :</string>
+    <string name="search_no_localization">Could not get your position. Please check that localization services are enabled in your Android settings.</string>
+    <string name="search_no_google_services">Google Services are not installed or are too old, please install or update Google Services from the play store.</string>
+    <string name="sort_label">Sort by :</string>
+    <string name="sort_popular">Popular</string>
+    <string name="sort_nearby">Nearby</string>
+    <string name="sort_alpha">Name</string>
+    <string name="tabPlaceList">Places</string>
+    <string name="tabMap">Map</string>
+    <string name="tabEvents">Events</string>
+    <string name="tabMessages">Chat</string>
+    <string name="tabSettings">Settings</string>
+
+    <string name="tag.BEAR">Bear</string>
+    <string name="tag.BEARD">Bearded</string>
+    <string name="tag.BI">Bi</string>
+    <string name="tag.BLACK">Black</string>
+    <string name="tag.BLOND">Blond</string>
+    <string name="tag.CHUBBY">Chubby</string>
+    <string name="tag.COUPLE">Couple</string>
+    <string name="tag.CRUISING">Cruising</string>
+    <string name="tag.DADDY">Daddy</string>
+    <string name="tag.HAIRY">Hairy</string>
+    <string name="tag.HARDCORE">Hardcore</string>
+    <string name="tag.HUGEDICK">Big dick</string>
+    <string name="tag.LEATHER">Leather</string>
+    <string name="tag.MILITARY">Uniform</string>
+    <string name="tag.MUSCLE">Muscle</string>
+    <string name="tag.PIERCING">Piercing</string>
+    <string name="tag.TATTOO">Tattoo</string>
+    <string name="tag.TWINK">Twink</string>
+    <string name="tapToEdit">Tap to edit</string>
+    <string name="upload_wait_message">Uploading image</string>
+    <string name="upcoming_events_title">Upcoming events</string>
+    <string name="user_last_seen">Last seen @ %1$s %2$s %3$s ago</string>
+    <string name="userPhoto">User photo</string>
+    <string name="waitTitle">Please wait</string>
+    <string name="whyText"><![CDATA[First of all, our content may not be suitable for children so we need everybody to confirm their age.<br><br>
+
+Then, we may use your localization when you are near a place so that we can expose to other users the number of persons in a given place. For this purpose we need to uniquely identify you.<br><br>
+
+Don\'t be scared, we only need an email, a password, a pseudo and your birth date. Your email is only used as a unique identifier internally to our services and will never be exposed to anyone. We encourage you to never use your personal info as your pseudo (like your name) but to instead use anything which cannot personally identify yourself.]]></string>
+    <string name="termsText"><![CDATA[These Terms of Use will apply to the use of the Service. Please read these Terms of Use carefully so that you know what your rights and obligations are when using the Service. The acceptance of these Terms of Use constitutes a valid and binding agreement between \'FGP Digital LLC\' (the COMPANY) and you (the USER) for the use of the Service. If you make any use of the Service you agree to be bound by these terms and conditions. You must be 18 years of age or older to use this service and must be registered as a member. If we discover that you are not over 18, we reserve our right to suspend and remove you account without any notice.<br><br>
+    
+    <b>Article 1</b><br>
+The email address of the user is only used as a unique login identifier and is never exposed to anyone. The COMPANY may use it to communicate important information to the USER.<br><br>
+
+    <b>Article 2</b><br>
+You (the USER) are the sole owner of all rights in the materials posted or uploaded by you (including all related copyrights) or that you have the absolute right to license their use as provided in this section. While you will retain ownership of the copyright in the materials posted or uploaded by you, you agree that all materials posted or uploaded by you shall become part of a database, and that the Company will own the compilation copyright in that database. In addition, you hereby grant the Company a perpetual, worldwide, irrevocable license to use, reproduce, modify, publish, publicly perform, publicly display and distribute such materials, and portions of such materials and any derivative works created from such materials, in print, electronic and other media, by any means now known or developed in the future. We may sublicense all of our rights and licenses or assign them to third parties. Neither the Company nor any third party using the materials in accordance with this section will be obligated to pay you any royalties or other compensation for use of the materials.<br><br>
+
+    <b>Article 3</b><br>
+The USER agrees that all image he uploaded, every line of text he wrote, every action he did using the service may be visible to all other users of this service.<br><br>
+
+    <b>Article 4</b><br>
+The USER agrees and acknowledges that the content he posts by means of the Service may be used by other Users. The COMPANY cannot guarantee that other Users will use this content in accordance with these Terms of Use and/or applicable legislation. The COMPANY is not responsible for the submissions or actions of other Users and therefore accepts no liability for any actions of other Users which are in violation of these Terms of Use, the applicable legislation and/or which are otherwise unlawful.<br><br>
+
+    <b>Article 5</b><br>
+The USER is entitled to terminate the Agreement at any time by discontinuing the use of the Service and/or by terminating the Account by sending an email to christophe@pelmelguide.com which will completely remove the account.<br><br>
+
+    <b>Article 6</b><br>
+The USER agrees to post proper information regarding the content he contributes. If the COMPANY detect that a USER posts erroneous information regarding a place, we may limit the service or we may suspend the account without notice.<br><br>
+
+    <b>Article 7</b><br>
+This application, including all software, functions, materials, and information is provided “as is” without warranties of any kind, either express or implied. The COMPANY disclaims all warranties, express or implied, including, but not limited to, warranties of quiet enjoyment and non-infringement and implied warranties of merchantability, fitness for a particular purpose, non-infringement, title, quiet enjoyment, merchantability of computer programs, data accuracy, system integration, and informational Content. The Company does not warrant or make any representations regarding the operation of this application, the use, validity, accuracy or reliability of, or the results of the use of the materials on this Site or any other sites linked to this Site. The materials of this Site may be out of date, and the Company makes no commitment to update the materials at this Site. The Company does not and cannot guarantee or warrant that the files available for downloading from this Site, if any, will be free from infection, viruses, worms, Trojan horses, or other code that manifest contaminating or destructive properties. The Company does not warrant that this Site, software, materials, products, or services will be uninterrupted or error-free or that any defects in this Site, software, materials, products, or services will be corrected.<br><br>
+
+    <b>Article 8</b><br>
+In no event will the COMPANY, its suppliers or other third parties mentioned at or in this Site be liable for any damages, including, without limitation direct, indirect, special, incidental, or consequential damages, damages resulting from lost profits, lost data or business interruption arising out of relating to the use, inability to use, or resulting from the use of this application, any web sites linked to this Site, the materials, software or other information contained in any or all such sites, whether based on warranty, contracts, statutes, regulations, tort (including but not limited to, negligence) or any other legal theory and whether or not advised of the possibility of such damages. If your use of the materials or information from this Site results in the need for servicing, repair or correction of equipment or data, you assume all costs thereof.<br><br>
+
+    <b>Article 9</b><br>
+The COMPANY may revise this Agreement at any time without notice by updating this posting. By using this Site you agree to be bound by any such revisions and should therefore periodically visit this Site and page to determine the then current Terms of Access and Use conditions of use to which you are bound.]]></string>
+
+
+    
+</resources>

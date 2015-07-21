@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dip" >
+ 
+    <!--  ListRow Left sied Thumbnail image -->
+ 
+    <!-- Title Of Song-->
+ 
+    <!-- Artist Name -->
+ 
+    <!-- Rightend Duration -->
+ 
+     <!-- Rightend Arrow -->
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="@dimen/photo_button_width"
+        android:layout_height="wrap_content"
+        android:text="@string/photoTopAddButton" />
+
+
+
+    <Button
+        android:id="@+id/removeButton"
+        android:layout_width="@dimen/photo_button_width"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="@string/photoTopRemoveButton" />
+ 
+</RelativeLayout><!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/layout/list_row_addremove.xml -->

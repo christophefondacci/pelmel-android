@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values-fr/values.xml -->
+    <eat-comment/>
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"Revenir à l\'accueil"</string>
+    <string msgid="1397052879051804371" name="abc_action_bar_home_description_format">"%1$s, %2$s"</string>
+    <string msgid="6623331958280229229" name="abc_action_bar_home_subtitle_description_format">"%1$s, %2$s, %3$s"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"Revenir en haut de la page"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"Plus d\'options"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"OK"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"Tout afficher"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"Sélectionner une application"</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"Effacer la requête"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"Requête de recherche"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"Rechercher"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"Envoyer la requête"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"Recherche vocale"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Partager avec"</string>
+    <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"Partager avec %s"</string>
+    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Réduire"</string>
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values-fr/strings.xml -->
+    <eat-comment/>
+    <string name="action_settings">Compte</string>
+    <string name="age_days">jours</string>
+    <string name="age_hours">heures</string>
+    <string name="age_minutes">minutes</string>
+    <string name="app_name">PelMel Guide</string>
+    <string name="cancel">Annuler</string>
+    <string name="chat_hint">Entrez votre message ici</string>
+    <string name="chat_info_msg">Touchez une conversation pour voir tous les messages et réponses. Touchez ici pour mettre à jour.</string>
+    <string name="chat_send">Envoyer</string>
+    <string name="chat_send_fail">PelMel n\'a pas pu envoyer votre message, vérifiez votre connexion puis essayez à nouveau.</string>
+    <string name="chat_send_fail_title">Echec de l\'envoi du message</string>
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/res/values-fr/common_strings.xml -->
+    <eat-comment/>
+    <string msgid="6428604800157361567" name="common_android_wear_notification_needs_update_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> nécessite une mise à jour de l\'application Android Wear."</string>
+    <string msgid="2453027084525739603" name="common_android_wear_update_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> ne fonctionnera pas tant que vous n\'aurez pas mis à jour l\'application Android Wear."</string>
+    <string msgid="1366439133145190222" name="common_android_wear_update_title">"Mettre à jour Android Wear"</string>
+    <string msgid="6534628256897874213" name="common_google_play_services_api_unavailable_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> nécessite un ou plusieurs services Google Play qui ne sont pas disponibles actuellement. Veuillez contacter le développeur pour obtenir de l\'aide."</string>
+    <string msgid="4181637455539816337" name="common_google_play_services_enable_button">"Activer services Google Play"</string>
+    <string msgid="4896236883690196080" name="common_google_play_services_enable_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> ne fonctionnera pas tant que vous n\'aurez pas activé les services Google Play."</string>
+    <string msgid="529078775174559253" name="common_google_play_services_enable_title">"Activer les services Google Play"</string>
+    <string msgid="2443362625939284971" name="common_google_play_services_error_notification_requested_by_msg">"Notification issue de l\'application \"<ns1:g id="APP_NAME">%1$s</ns1:g>\""</string>
+    <string msgid="8515591849428043265" name="common_google_play_services_install_button">"Installer services Google Play"</string>
+    <string msgid="8836325110837822534" name="common_google_play_services_install_text_phone">"<ns1:g id="APP_NAME">%1$s</ns1:g> ne fonctionnera pas sans les services Google Play, qui ne sont pas installés sur votre téléphone."</string>
+    <string msgid="542176290824754127" name="common_google_play_services_install_text_tablet">"<ns1:g id="APP_NAME">%1$s</ns1:g> ne fonctionnera pas sans les services Google Play, qui ne sont pas installés sur votre tablette."</string>
+    <string msgid="26645092511305524" name="common_google_play_services_install_title">"Installer les services Google Play"</string>
+    <string msgid="4983316348021735578" name="common_google_play_services_invalid_account_text">"Le compte indiqué n\'existe pas sur cet appareil. Veuillez sélectionner un autre compte."</string>
+    <string msgid="1066672360770936753" name="common_google_play_services_invalid_account_title">"Compte erroné"</string>
+    <string msgid="2583358409598976717" name="common_google_play_services_needs_enabling_title">"Une application demande l\'activation des services Google Play."</string>
+    <string msgid="9038847255613537209" name="common_google_play_services_network_error_text">"Vous devez disposer d\'une connexion de données pour utiliser les services Google Play."</string>
+    <string msgid="3827284619958211114" name="common_google_play_services_network_error_title">"Erreur réseau"</string>
+    <string msgid="1388129345631079938" name="common_google_play_services_notification_needs_update_title">"Une application demande la mise à jour des services Google Play."</string>
+    <string msgid="1852570676146674985" name="common_google_play_services_notification_ticker">"Erreur liée aux services Google Play"</string>
+    <string msgid="5194079840165204725" name="common_google_play_services_sign_in_failed_text">"Erreur lors de la connexion au compte indiqué. Veuillez en sélectionner un autre."</string>
+    <string msgid="8164948898147532159" name="common_google_play_services_sign_in_failed_title">"Échec de la connexion"</string>
+    <string msgid="4762332809710093730" name="common_google_play_services_unknown_issue">"Problème inconnu avec les services Google Play."</string>
+    <string msgid="7682982632307307938" name="common_google_play_services_unsupported_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> dépend des services Google Play, qui ne sont pas compatibles avec votre appareil. Veuillez contacter le fabricant pour obtenir de l\'aide."</string>
+    <string msgid="6334768798839376943" name="common_google_play_services_unsupported_title">"Services Google Play"</string>
+    <string msgid="8932944190611227642" name="common_google_play_services_update_button">"Mettre à jour"</string>
+    <string msgid="5709479369299147668" name="common_google_play_services_update_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> ne fonctionnera pas tant que vous n\'aurez pas mis à jour les services Google Play."</string>
+    <string msgid="6006316683626838685" name="common_google_play_services_update_title">"Mettre à jour les services Google Play"</string>
+    <string msgid="2201289642219771610" name="common_google_play_services_updating_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> ne fonctionnera pas sans les services Google Play, qui sont en cours de mise à jour."</string>
+    <string msgid="815008177440683245" name="common_google_play_services_updating_title">"Mise à jour des services Google Play"</string>
+    <string msgid="411506735369601515" name="common_open_on_phone">"Ouvrir sur le téléphone"</string>
+    <string msgid="9071884888741449141" name="common_signin_button_text">"Connexion"</string>
+    <string msgid="2429381841831957106" name="common_signin_button_text_long">"Se connecter avec Google"</string>
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values-fr/strings.xml -->
+    <eat-comment/>
+    <string name="distance.feet">{0} pieds</string>
+    <string name="distance.kilometers">{0} km</string>
+    <string name="distance.meters">{0} mètres</string>
+    <string name="distance.miles">{0} miles</string>
+    <string name="eventType">Evènement</string>
+    <string name="event_place_title">Aura lieu à</string>
+    <string name="googleServicesUnavailable">Vous devez installer ou mettre à jour Google Play Services</string>
+    <string name="insiders_title">Ils étaient là</string>
+    <string name="liked_places_title">Il y va</string>
+    <string name="liked_users_title">Il aime</string>
+    <string name="likers_title">Ils aiment</string>
+    <string name="locationProviderUnavailable">Impossible d\'obtenir votre position, vous devrez peut-être activer les services de localisation.</string>
+    <string name="loginButtonLabel">Login</string>
+    <string name="loginEmailPlaceholder">Adresse E-mail</string>
+    <string name="loginHint">Connectez-vous pour trouver les lieux autour de vous</string>
+    <string name="loginIntroLabel">Login</string>
+    <string name="loginPasswordConfirmPlaceholder">Confirmation</string>
+    <string name="loginPasswordPlaceholder">Mot de passe</string>
+    <string name="loginWaitMsg">Connexion…</string>
+    <string name="logout">Déconnexion</string>
+    <string name="month.april">Avril</string>
+    <string name="month.august">Août</string>
+    <string name="month.december">Décembre</string>
+    <string name="month.february">Février</string>
+    <string name="month.january">Janvier</string>
+    <string name="month.july">Juillet</string>
+    <string name="month.june">Juin</string>
+    <string name="month.march">Mars</string>
+    <string name="month.may">Mai</string>
+    <string name="month.november">Novembre</string>
+    <string name="month.october">Octobre</string>
+    <string name="month.september">Septembre</string>
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/res/values-fr/values.xml -->
+    <eat-comment/>
+    <string msgid="8327680881775995150" name="mr_media_route_button_content_description">"Caster"</string>
+    <string msgid="7553005460920830010" name="mr_media_route_chooser_searching">"Recherche d\'appareils en cours…"</string>
+    <string msgid="7106830097177242655" name="mr_media_route_chooser_title">"Connecter à l\'appareil"</string>
+    <string msgid="109793632378378069" name="mr_media_route_controller_disconnect">"Déconnecter"</string>
+    <string msgid="8315773974194466049" name="mr_media_route_controller_pause">"Pause"</string>
+    <string msgid="5214423499524760404" name="mr_media_route_controller_play">"Lecture"</string>
+    <string msgid="379358765881274425" name="mr_media_route_controller_settings_description">"Paramètres de l\'itinéraire"</string>
+    <string msgid="5398645111664294430" name="mr_media_route_controller_stop">"Arrêter la diffusion"</string>
+    <string msgid="5441529851481176817" name="mr_system_route_name">"Système"</string>
+    <string msgid="7498112907524977311" name="mr_user_route_category_name">"Appareils"</string>
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values-fr/strings.xml -->
+    <eat-comment/>
+    <string name="ok">OK</string>
+    <string name="photoRemoveButton">Supprimer</string>
+    <string name="photoTopAddButton">Ajouter</string>
+    <string name="photoTopRemoveButton">Supprimer</string>
+    <string name="photoUploadFailed">Impossible d\'uploader la photo, vérifiez votre connexion ou connectez-vous à un wifi puis essayez à nouveau</string>
+    <string name="profileAddButton">Ajouter une description</string>
+    <string name="profileBirthday">Date de naissance : </string>
+    <string name="profileDescriptionLabel">Description</string>
+    <string name="profileHeight">Taille : </string>
+    <string name="profileHeightVal">167 cm / 5\'6\'\'</string>
+    <string name="profileInformation">Informations</string>
+    <string name="profileName">Surnom</string>
+    <string name="profilePhotoButton">Gérer les photos</string>
+    <string name="profileSave">Sauver</string>
+    <string name="profileTags">Définissez vous</string>
+    <string name="profileWeight">Poids : </string>
+    <string name="profileWeightVal">72 kg / 160 lbs</string>
+    <string name="registerButtonLabel">S\'inscrire</string>
+    <string name="registerEmptyValueError">Tous les champs doivent être renseignés</string>
+    <string name="registerFailed">L\'inscription a échoué, l\'email que vous avez entré est peut être déjà utilisée.</string>
+    <string name="registerIntroHint">Inscrivez-vous gratuitement en 1 clic en renseignant ces 4 champs</string>
+    <string name="registerIntroLabel">Inscription</string>
+    <string name="registerPasswordError">Les mots de passe ne sont pas identiques</string>
+    <string name="registerPseudoHint">Pseudo</string>
+    <string name="registerTermsHint">En vous inscrivant vous acceptez nos règles d\'utilisations. Touchez pour les voir.</string>
+    <string name="retrievingData">Récupération des données…</string>
+    <string name="retry">Réessayer</string>
+    <string name="save_wait_message">Enregistrement du profil</string>
+    <string name="search_button_label">Recherche</string>
+    <string name="search_extend_label">Aucun lieu gay trouvé dans les environs, vous pouvez chercher à nouveau dans un rayon plus grand :</string>
+    <string name="search_no_google_services">L\'application \'Google Services\' n\'est pas installée ou est trop ancienne, veuillez l\'installer ou la mettre à jour depuis Google Play Store.</string>
+    <string name="search_no_localization">Impossible d\'accéder à votre localisation. Veuillez vérifier que les services de localisation sont activés dans vos préférences Android.</string>
+    <string name="search_placeholder">Cherchez une ville ou un lieu</string>
+    <string name="selectPhotoCamera">Appareil photo</string>
+    <string name="selectPhotoGallery">Gallerie</string>
+    <string name="selectPhotoMessage">Depuis quelle source voulez vous choisir la photo à uploader ?</string>
+    <string name="selectPhotoTitle">Source de la photo</string>
+    <string name="sort_alpha">Nom</string>
+    <string name="sort_label">Trier par :</string>
+    <string name="sort_nearby">Dist.</string>
+    <string name="sort_popular">Popul.</string>
+    <string name="tabEvents">Soirées</string>
+    <string name="tabMap">Carte</string>
+    <string name="tabMessages">Chat</string>
+    <string name="tabPlaceList">Lieux</string>
+    <string name="tabSettings">Compte</string>
+    <string name="tag.BEAR">Bear</string>
+    <string name="tag.BEARD">Barbu</string>
+    <string name="tag.BI">Bi</string>
+    <string name="tag.BLACK">Black</string>
+    <string name="tag.BLOND">Blond</string>
+    <string name="tag.CHUBBY">Chubby</string>
+    <string name="tag.COUPLE">Couple</string>
+    <string name="tag.CRUISING">Cruising</string>
+    <string name="tag.DADDY">Daddy</string>
+    <string name="tag.HAIRY">Poilu</string>
+    <string name="tag.HARDCORE">Hardcore</string>
+    <string name="tag.HUGEDICK">Grosse queue</string>
+    <string name="tag.LEATHER">Cuir</string>
+    <string name="tag.MILITARY">Uniforme</string>
+    <string name="tag.MUSCLE">Musclé</string>
+    <string name="tag.PIERCING">Piercing</string>
+    <string name="tag.TATTOO">Tattoo</string>
+    <string name="tag.TWINK">Minet</string>
+    <string name="tapToEdit">Changer</string>
+    <string name="upcoming_events_title">Evènements à venir</string>
+    <string name="upload_wait_message">Envoi de la photo</string>
+    <string name="userPhoto">Photo de l\'utilisateur</string>
+    <string name="user_last_seen">Vu @ %1$s il y a %2$s %3$s</string>
+    <string name="waitTitle">Veuillez patienter</string>
+    <string name="whyText"><![CDATA[    Tout d\'abord, notre contenu n\'est pas aproprié pour des enfants donc nous avons besoin que tout le monde certifie son âge.<br>
+	<br>
+    Ensuite, nous pouvons utiliser votre localisation lorsque vous êtes à proximité d\'un lieu pour que nous puissions indiquer aux utilisateurs le nombre de personnes dans un lieu donné. Pour cette raison, et pour que nos comptes soient justes, nous avons besoin de vous identifier de manière unique.<br>
+	<br>
+    N\'ayez crainte, nous avons simplement besoin d\'un email, un mot de passe, un pseudo et votre date de naissance. Votre email sert uniquement en tant qu\'identifiant unique interne à nos services et n\'est jamais exposé à qui que ce soit. Nous vous encourageons à ne jamais utiliser vos informations personnelles dans votre pseudo (comme votre nom) mais d\'utiliser des données qui ne permettent jamais de vous identifier personnellement.]]>
+	</string>
+</resources>

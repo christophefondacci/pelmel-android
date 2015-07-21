@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <color name="lightRed">#ffd0d0</color>
+	<color name="darkRed">#ed6767</color>
+	<color name="darkGray">#5d5d5d</color>
+	<color name="darkerGray">#a8a8a8</color>
+	<color name="lightGray">#e2e2e2</color>
+    <color name="lighterGray">#ffffff</color>
+	<color name="turkish_rose">#B57281</color>
+	<color name="darkOrange">#c5790c</color>
+	<color name="type.bar">#ff8000</color>
+	<color name="type.asso">#c8c90b</color>
+	<color name="type.club">#9f177b</color>
+	<color name="type.sauna">#4856ff</color>
+	<color name="type.sexclub">#ff0000</color>
+	<color name="type.sexshop">#4db748</color>
+	<color name="type.restaurant">#a5c21a</color>
+	<color name="type.hotel">#3dabff</color>
+	<color name="white">#ffffff</color>
+	<color name="pelmel">#f48020</color>
+</resources>

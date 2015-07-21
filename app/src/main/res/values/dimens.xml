@@ -1,0 +1,30 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="chat_margin">10dp</dimen>
+    <dimen name="chat_msg_date_size">10dp</dimen>
+    <dimen name="login_padding">5dp</dimen>
+    <dimen name="login_button_width">100dp</dimen>
+    <dimen name="profile_label_size">150dp</dimen>
+    <dimen name="profile_section_distance">25dp</dimen>
+    <dimen name="profile_section_small_distance">15dp</dimen>
+    <dimen name="profile_tags_height">800dp</dimen>
+    <dimen name="profile_desc_height">100dp</dimen>
+    <dimen name="photo_button_width">120dp</dimen>
+    <dimen name="title_font_size">20dp</dimen>
+    <dimen name="list_title_padding">5dp</dimen>
+    <dimen name="list_gradient_height">40dp</dimen>
+    <dimen name="list_padding_bottom">2dp</dimen>
+    <dimen name="header_title_padding">4dp</dimen>
+
+    
+    <dimen name="profile_margin_left">5dp</dimen>
+    <dimen name="profile_margin_top">5dp</dimen>
+    <dimen name="profile_photo_height">50dp</dimen>
+    <dimen name="profile_label_col_width">50dp</dimen>
+    
+    <dimen name="spinner_row_text_padding">5dp</dimen>
+
+</resources>

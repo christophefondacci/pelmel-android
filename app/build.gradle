@@ -1,0 +1,28 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "com.nextep.pelmel"
+        minSdkVersion 10
+        targetSdkVersion 14
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.google.code.gson:gson:2.2.2'
+    compile 'com.google.android.gms:play-services:7.5.0'
+    compile 'com.android.support:appcompat-v7:18.0.0'
+    compile files('libs/httpmime-4.2.5.jar')
+    compile files('libs/universal-image-loader-1.8.6.jar')
+    compile files('libs/web-json-0.0.1-SNAPSHOT.jar')
+}

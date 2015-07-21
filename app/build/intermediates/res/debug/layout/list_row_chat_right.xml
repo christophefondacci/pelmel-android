@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dip" >
+
+    <!-- ListRow Left sied Thumbnail image -->
+
+
+ 	<RelativeLayout 
+ 	    android:id="@+id/chat_layout"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_margin="0dp"
+	    android:layout_toLeftOf="@+id/thumbnail"
+	    >
+
+	    <ImageView
+	        android:id="@+id/bg_bubble"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_margin="0dp"
+	        android:layout_toRightOf="@+id/thumbnail"
+	        android:layout_alignParentTop="true"
+	        android:layout_alignBottom="@+id/chat_message"
+	        android:background="#10000000"
+	        android:scaleType="fitXY"
+	        android:src="@drawable/bubble_gradient_right" />
+	
+	    <TextView
+	        android:id="@+id/chat_message"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_margin="@dimen/chat_margin"
+	        android:paddingBottom="10dp"
+	        android:text="TextView" />
+
+	</RelativeLayout>
+	
+	<LinearLayout
+	    android:id="@+id/thumbnail"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentRight="true"
+	    android:layout_alignTop="@+id/chat_layout"
+	    android:layout_marginRight="5dip"
+	    android:background="@drawable/image_bg"
+	    android:gravity="bottom"
+	    android:padding="3dip" >
+
+        <ImageView
+            android:id="@+id/chat_image"
+            android:layout_width="50dip"
+            android:layout_height="50dip" />
+    </LinearLayout>
+
+	<TextView
+	    android:id="@+id/msgDate"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentTop="true"
+	    android:layout_alignRight="@+id/chat_layout"
+	    android:layout_marginRight="18dp"
+	    android:gravity="right"
+	    android:text="TextView"
+	    android:textSize="@dimen/chat_msg_date_size" />
+    
+</RelativeLayout><!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/layout/list_row_chat_right.xml -->
