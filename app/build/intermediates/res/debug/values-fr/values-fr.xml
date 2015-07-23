@@ -67,6 +67,8 @@
     <string msgid="2429381841831957106" name="common_signin_button_text_long">"Se connecter avec Google"</string>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values-fr/strings.xml -->
     <eat-comment/>
+    <string name="counter_likes">{0}  Aiment ça</string>
+    <string name="counter_likes_singular">{0} Aime ça</string>
     <string name="distance.feet">{0} pieds</string>
     <string name="distance.kilometers">{0} km</string>
     <string name="distance.meters">{0} mètres</string>
@@ -150,10 +152,14 @@
     <string name="selectPhotoGallery">Gallerie</string>
     <string name="selectPhotoMessage">Depuis quelle source voulez vous choisir la photo à uploader ?</string>
     <string name="selectPhotoTitle">Source de la photo</string>
+    <string name="snippet_context_subtitle">{0} mecs à proximité</string>
+    <string name="snippet_context_title">{0} évènements à venir / {1} lieux</string>
+    <string name="snippet_distance_intro">snapshot</string>
     <string name="sort_alpha">Nom</string>
     <string name="sort_label">Trier par :</string>
     <string name="sort_nearby">Dist.</string>
     <string name="sort_popular">Popul.</string>
+    <string name="tabDeals">Promos</string>
     <string name="tabEvents">Soirées</string>
     <string name="tabMap">Carte</string>
     <string name="tabMessages">Chat</string>

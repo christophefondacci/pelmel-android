@@ -10,9 +10,9 @@ import com.nextep.json.model.impl.JsonManyToOneMessageList;
 import com.nextep.json.model.impl.JsonMessagingStatistic;
 import com.nextep.json.model.impl.JsonNearbyPlacesResponse;
 import com.nextep.json.model.impl.JsonOneToOneMessageList;
-import com.nextep.json.model.impl.JsonPlace;
 import com.nextep.json.model.impl.JsonUser;
 import com.nextep.pelmel.PelMelApplication;
+import com.nextep.pelmel.gson.GsonHelper;
 import com.nextep.pelmel.model.User;
 
 import java.io.InputStream;
@@ -39,7 +39,7 @@ public class WebService {
 	Gson gson;
 
 	public WebService() {
-		gson = new Gson();
+		gson = GsonHelper.getGson();
 	}
 
 	public InputStream sendRequest(URL url) throws Exception {
@@ -83,7 +83,7 @@ public class WebService {
 		return user;
 	}
 
-	public List<JsonPlace> getPlaces(double latitude, double longitude,
+	public JsonNearbyPlacesResponse getPlaces(double latitude, double longitude,
 									 String token, String parentKey, Integer radius, String searchText) {
 		try {
 			// querying places
@@ -105,7 +105,7 @@ public class WebService {
 						new TypeToken<JsonNearbyPlacesResponse>() {
 						}.getType());
 				if (response != null) {
-					return response.getPlaces();
+					return response;
 				}
 			}
 

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:background="#272a2e">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="Medium Text"
+        android:id="@+id/titleLabel"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="9dp"
+        android:layout_toLeftOf="@+id/distanceLabel"
+        android:layout_marginRight="8dp"
+        android:textColor="@color/white"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:text="Small Text"
+        android:textColor="#969696"
+        android:id="@+id/distanceIntroLabel"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="15dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:text="Small Text"
+        android:textColor="#969696"
+        android:id="@+id/distanceLabel"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@id/titleLabel"
+        android:layout_marginRight="15dp"/>
+
+    <ImageView
+        android:layout_width="@dimen/placeTypeIconSize"
+        android:layout_height="@dimen/placeTypeIconSize"
+        android:id="@+id/subtitleIcon"
+        android:layout_below="@+id/titleLabel"
+        android:layout_marginTop="1.5dp"
+        android:layout_alignLeft="@+id/titleLabel"
+        android:src="@drawable/snp_icon_bar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Bar"
+        android:id="@+id/subtitleLabel"
+        android:textColor="#ffd54f"
+        android:textSize="14sp"
+        android:gravity="center_vertical"
+        android:layout_toRightOf="@+id/subtitleIcon"
+        android:layout_alignTop="@id/subtitleIcon"
+        android:layout_alignBottom="@id/subtitleIcon"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@+id/hoursBadgeTitleLabel"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="OPEN"
+        android:textColor="#72FF00"
+        android:textSize="13sp"
+        android:id="@+id/hoursBadgeTitleLabel"
+        android:layout_alignTop="@+id/subtitleLabel"
+        android:layout_alignRight="@+id/distanceLabel" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="2hrs left"
+        android:textColor="#72FF00"
+        android:textSize="13sp"
+        android:id="@+id/hoursBadgeSubtitleLabel"
+        android:layout_below="@id/hoursBadgeTitleLabel"
+        android:layout_alignRight="@+id/distanceLabel" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/hoursBadgeSubtitleLabel"
+        android:layout_alignLeft="@+id/titleLabel"
+        android:layout_marginTop="3dp">
+
+    </LinearLayout>
+</RelativeLayout>

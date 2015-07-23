@@ -40,4 +40,8 @@ public interface Place extends CalObject {
 
 	void addInsider(User insider);
 
+	String getCityName();
+
+	void setCityName(String cityName);
+
 }

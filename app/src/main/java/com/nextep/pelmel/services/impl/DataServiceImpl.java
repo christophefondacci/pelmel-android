@@ -1,21 +1,12 @@
 package com.nextep.pelmel.services.impl;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.nextep.json.model.IJsonLightEvent;
+import com.nextep.json.model.IJsonLightPlace;
+import com.nextep.json.model.IJsonLightUser;
 import com.nextep.json.model.impl.JsonDescription;
 import com.nextep.json.model.impl.JsonEvent;
 import com.nextep.json.model.impl.JsonLightEvent;
@@ -23,12 +14,14 @@ import com.nextep.json.model.impl.JsonLightPlace;
 import com.nextep.json.model.impl.JsonLightUser;
 import com.nextep.json.model.impl.JsonLikeInfo;
 import com.nextep.json.model.impl.JsonMedia;
-import com.nextep.json.model.impl.JsonOverviewElement;
+import com.nextep.json.model.impl.JsonNearbyPlacesResponse;
 import com.nextep.json.model.impl.JsonPlace;
+import com.nextep.json.model.impl.JsonPlaceOverview;
 import com.nextep.json.model.impl.JsonUser;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.cache.model.Cache;
 import com.nextep.pelmel.cache.model.impl.MemorySizedTTLCacheImpl;
+import com.nextep.pelmel.helpers.ContextHolder;
 import com.nextep.pelmel.listeners.LikeCallback;
 import com.nextep.pelmel.listeners.OverviewListener;
 import com.nextep.pelmel.model.CalObject;
@@ -45,6 +38,17 @@ import com.nextep.pelmel.services.DataService;
 import com.nextep.pelmel.services.TagService;
 import com.nextep.pelmel.services.UserService;
 import com.nextep.pelmel.services.WebService;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DataServiceImpl implements DataService {
 
@@ -83,7 +87,7 @@ public class DataServiceImpl implements DataService {
 		place.setLikeCount(json.getLikesCount());
 		place.setName(json.getName());
 		place.setType(json.getType());
-
+		place.setCityName(json.getCity());
 		// Building tag list
 		final List<Tag> tags = new ArrayList<Tag>();
 		for (final String tagCode : json.getTags()) {
@@ -114,7 +118,7 @@ public class DataServiceImpl implements DataService {
 	}
 
 	@Override
-	public Place getPlaceFromLightJson(JsonLightPlace json) {
+	public Place getPlaceFromLightJson(IJsonLightPlace json) {
 		if (json != null) {
 			final String key = json.getKey();
 			Place place = placeCache.get(key);
@@ -216,17 +220,19 @@ public class DataServiceImpl implements DataService {
 	}
 
 	@Override
-	public User getUserFromLightJson(JsonLightUser json) {
+	public User getUserFromLightJson(IJsonLightUser json) {
 		final String key = json.getKey();
 		final User user = getUser(key);
 		user.setName(json.getPseudo());
 		user.setOnline(json.isOnline());
 
 		// Getting thumb
-		final JsonMedia jsonMedia = json.getThumb();
-		if (user.getImages().isEmpty()) {
-			final Image thumb = getImageFromJson(jsonMedia);
-			user.addImage(thumb);
+		if(json instanceof JsonLightUser) {
+			final JsonMedia jsonMedia = ((JsonLightUser)json).getThumb();
+			if (user.getImages().isEmpty()) {
+				final Image thumb = getImageFromJson(jsonMedia);
+				user.addImage(thumb);
+			}
 		}
 
 		// Returning our user
@@ -286,7 +292,7 @@ public class DataServiceImpl implements DataService {
 		if (json.getRawDistance() > 0) {
 			event.setDistance(json.getRawDistance());
 		}
-		final JsonLightPlace jsonPlace = json.getPlace();
+		final IJsonLightPlace jsonPlace = json.getPlace();
 		if (jsonPlace != null) {
 			final Place p = getPlaceFromLightJson(jsonPlace);
 			event.setPlace(p);
@@ -315,7 +321,7 @@ public class DataServiceImpl implements DataService {
 	}
 
 	@Override
-	public Place getPlaceFromJsonOverview(JsonOverviewElement json) {
+	public Place getPlaceFromJsonOverview(JsonPlaceOverview json) {
 		if (json == null) {
 			return null;
 		}
@@ -370,9 +376,10 @@ public class DataServiceImpl implements DataService {
 	public List<Place> listNearbyPlaces(User currentUser, double latitude,
 			double longitude, String parentKey, String searchText,
 			Integer radius) {
-		final List<JsonPlace> jsonPlaces = webService.getPlaces(latitude,
+		final JsonNearbyPlacesResponse jsonResponse = webService.getPlaces(latitude,
 				longitude, currentUser.getToken(), parentKey, radius,
 				searchText);
+		final List<JsonPlace> jsonPlaces = jsonResponse.getPlaces();
 		if (jsonPlaces != null) {
 			final List<Place> places = new ArrayList<Place>(jsonPlaces.size());
 			for (final JsonPlace json : jsonPlaces) {
@@ -383,6 +390,26 @@ public class DataServiceImpl implements DataService {
 					places.add(place);
 				}
 			}
+
+			// Browsing users
+			final List<JsonLightUser> jsonUsers = jsonResponse.getNearbyUsers();
+			final List<User> users = new ArrayList<>(jsonUsers.size());
+			for(final JsonLightUser jsonUser : jsonUsers) {
+				final User user = getUserFromLightJson(jsonUser);
+				users.add(user);
+			}
+
+			// Browsing events
+			final List<JsonLightEvent> jsonEvents = jsonResponse.getNearbyEvents();
+			final List<Event> events = new ArrayList<>(jsonEvents.size());
+			for(JsonLightEvent jsonEvent : jsonEvents) {
+				final Event event = getEventFromLightJson(jsonEvent);
+				events.add(event);
+			}
+			// Assigning to our global context
+			ContextHolder.places = places;
+			ContextHolder.users = users;
+			ContextHolder.events = events;
 			return places;
 		} else {
 			return Collections.emptyList();
@@ -424,8 +451,8 @@ public class DataServiceImpl implements DataService {
 
 			if (object instanceof Place) {
 				// Loading a place
-				final JsonOverviewElement json = webService.getOverviewData(
-						JsonOverviewElement.class, object.getKey(),
+				final JsonPlaceOverview json = webService.getOverviewData(
+						JsonPlaceOverview.class, object.getKey(),
 						loc.getLatitude(), loc.getLongitude(),
 						currentUser.getToken());
 				if (json != null) {

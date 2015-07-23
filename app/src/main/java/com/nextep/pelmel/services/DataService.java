@@ -1,14 +1,12 @@
 package com.nextep.pelmel.services;
 
-import java.util.List;
-
 import com.nextep.json.model.IJsonLightEvent;
+import com.nextep.json.model.IJsonLightPlace;
+import com.nextep.json.model.IJsonLightUser;
 import com.nextep.json.model.impl.JsonEvent;
-import com.nextep.json.model.impl.JsonLightPlace;
-import com.nextep.json.model.impl.JsonLightUser;
 import com.nextep.json.model.impl.JsonMedia;
-import com.nextep.json.model.impl.JsonOverviewElement;
 import com.nextep.json.model.impl.JsonPlace;
+import com.nextep.json.model.impl.JsonPlaceOverview;
 import com.nextep.json.model.impl.JsonUser;
 import com.nextep.pelmel.listeners.LikeCallback;
 import com.nextep.pelmel.listeners.OverviewListener;
@@ -18,17 +16,19 @@ import com.nextep.pelmel.model.Image;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.User;
 
+import java.util.List;
+
 public interface DataService {
 
-	Place getPlaceFromJsonOverview(JsonOverviewElement json);
+	Place getPlaceFromJsonOverview(JsonPlaceOverview json);
 
 	Place getPlaceFromJson(JsonPlace json);
 
-	Place getPlaceFromLightJson(JsonLightPlace json);
+	Place getPlaceFromLightJson(IJsonLightPlace json);
 
 	User getUserFromJson(JsonUser json);
 
-	User getUserFromLightJson(JsonLightUser json);
+	User getUserFromLightJson(IJsonLightUser json);
 
 	Event getEventFromJson(JsonEvent json);
 

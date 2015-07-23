@@ -1,11 +1,16 @@
 package com.nextep.pelmel.activities;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.content.res.Resources;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -25,48 +30,70 @@ import com.nextep.pelmel.helpers.GeoUtils;
 import com.nextep.pelmel.listeners.UserListener;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.User;
+import com.nextep.pelmel.model.support.SnippetContainerSupport;
+import com.nextep.pelmel.providers.impl.ContextSnippetInfoProvider;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MapActivity extends MainActionBarActivity implements UserListener,
+public class MapActivity extends Fragment implements UserListener,
 		OnInfoWindowClickListener {
 
 	private static final String TAG_MAP = "MAP";
 	private Map<Marker, Place> placeMarkersMap;
 	private GoogleMap map;
 	private List<Place> cachedPlaces;
+	private SnippetContainerSupport snippetContainerSupport;
 
 	@Override
-	protected void onCreate(Bundle arg0) {
-		super.onCreate(arg0);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		final View view = inflater.inflate(R.layout.activity_map,container);
+
 		placeMarkersMap = new HashMap<Marker, Place>();
-		setContentView(R.layout.activity_map);
 
 		// Initializing map and zooming to current location
-		final Location loc = getLocalizationService().getLocation();
-		map = ((SupportMapFragment) getSupportFragmentManager()
-				.findFragmentById(R.id.map)).getMap();
+		final Location loc = PelMelApplication.getLocalizationService().getLocation();
+		SupportMapFragment mapFragment = (SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.map);
+		if(mapFragment == null) {
+			mapFragment = new SupportMapFragment();
+			FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+			transaction.add(R.id.mapContainer,mapFragment).addToBackStack(null).commit();
+		}
+		map = mapFragment.getMap();
 		map.setMyLocationEnabled(true);
 		map.setOnInfoWindowClickListener(this);
+
 		// Setting bounds on user location
-		final LatLng latlng = new LatLng(loc.getLatitude(), loc.getLongitude());
-		final CameraUpdate upd = CameraUpdateFactory.newLatLngZoom(latlng, 14);
-		map.animateCamera(upd);
-		PelMelApplication.getUserService().getCurrentUser(this);
+//		final LatLng latlng = new LatLng(loc.getLatitude(), loc.getLongitude());
+//		final CameraUpdate upd = CameraUpdateFactory.newLatLngZoom(latlng, 14);
+//		map.animateCamera(upd);
+//		PelMelApplication.getUserService().getCurrentUser(this);
+
+		return view;
 	}
 
 	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		super.onWindowFocusChanged(hasFocus);
-		if (hasFocus) {
-			PelMelApplication.setCurrentTab(PelMelConstants.TAB_MAP);
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		try {
+			snippetContainerSupport = (SnippetContainerSupport)activity;
+		} catch(ClassCastException e) {
+			throw new ClassCastException(activity.toString() + " must implement SnippetContainerSupport");
 		}
 	}
 
+
+	//	@Override
+//	public void onWindowFocusChanged(boolean hasFocus) {
+//		super.onWindowFocusChanged(hasFocus);
+//		if (hasFocus) {
+//			PelMelApplication.setCurrentTab(PelMelConstants.TAB_MAP);
+//		}
+//	}
+
 	@Override
-	protected void onResume() {
+	public void onResume() {
 		super.onResume();
 		if (map != null) {
 
@@ -77,7 +104,7 @@ public class MapActivity extends MainActionBarActivity implements UserListener,
 
 	@Override
 	public void userInfoAvailable(final User user) {
-		final Location loc = getLocalizationService().getLocation();
+		final Location loc = PelMelApplication.getLocalizationService().getLocation();
 		AsyncTask<Void, Void, List<Place>> asyncTask = new AsyncTask<Void, Void, List<Place>>() {
 			@Override
 			protected List<Place> doInBackground(Void... params) {
@@ -155,6 +182,7 @@ public class MapActivity extends MainActionBarActivity implements UserListener,
 						map.animateCamera(upd);
 					}
 				}
+				snippetContainerSupport.showSnippetFor(new ContextSnippetInfoProvider(),false,false);
 			}
 
 		}.execute();
@@ -167,10 +195,10 @@ public class MapActivity extends MainActionBarActivity implements UserListener,
 
 	@Override
 	public void onInfoWindowClick(Marker marker) {
-		final Place p = placeMarkersMap.get(marker);
-		final Intent intent = new Intent(this, OverviewActivity.class);
-		PelMelApplication.setOverviewObject(p);
-		startActivity(intent);
-		overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+//		final Place p = placeMarkersMap.get(marker);
+//		final Intent intent = new Intent(this, OverviewActivity.class);
+//		PelMelApplication.setOverviewObject(p);
+//		startActivity(intent);
+//		overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 	}
 }

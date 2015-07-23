@@ -15,6 +15,7 @@ import com.nextep.pelmel.providers.OverviewProvider;
 import com.nextep.pelmel.providers.impl.EventOverviewProvider;
 import com.nextep.pelmel.providers.impl.PlaceOverviewProvider;
 import com.nextep.pelmel.providers.impl.UserOverviewProvider;
+import com.nextep.pelmel.services.ConversionService;
 import com.nextep.pelmel.services.DataService;
 import com.nextep.pelmel.services.ImageService;
 import com.nextep.pelmel.services.LocalizationService;
@@ -23,6 +24,7 @@ import com.nextep.pelmel.services.TagService;
 import com.nextep.pelmel.services.UIService;
 import com.nextep.pelmel.services.UserService;
 import com.nextep.pelmel.services.WebService;
+import com.nextep.pelmel.services.impl.ConversionServiceImpl;
 import com.nextep.pelmel.services.impl.DataServiceImpl;
 import com.nextep.pelmel.services.impl.ImageServiceImpl;
 import com.nextep.pelmel.services.impl.LocalizationServiceImpl;
@@ -48,6 +50,7 @@ public class PelMelApplication extends Application implements
 	private MessageService messageService;
 	private LocalizationService localizationService;
 	private LocationManager locationManager;
+	private ConversionService conversionService;
 
 	private Object overviewObject;
 	private int tabIndex = 0;
@@ -91,6 +94,7 @@ public class PelMelApplication extends Application implements
 		userService = new UserServiceImpl();
 		uiService = new UIServiceImpl();
 		messageService = new MessageServiceImpl();
+		conversionService = new ConversionServiceImpl();
 		localizationService = new LocalizationServiceImpl();
 
 		((UserServiceImpl) userService).setWebService(webService);
@@ -145,6 +149,8 @@ public class PelMelApplication extends Application implements
 	public static LocalizationService getLocalizationService() {
 		return instance.localizationService;
 	}
+
+	public static ConversionService getConversionService() {return instance.conversionService;}
 
 	public static void setOverviewObject(Object overviewObject) {
 		instance.overviewObject = overviewObject;

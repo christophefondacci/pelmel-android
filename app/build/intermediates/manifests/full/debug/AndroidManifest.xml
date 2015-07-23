@@ -5,7 +5,7 @@
     android:versionName="1.5" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="12"
         android:targetSdkVersion="14" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -30,6 +30,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <android:uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
@@ -69,7 +70,10 @@
         <activity android:name="com.nextep.pelmel.activities.ChatActivity" />
         <activity android:name="com.nextep.pelmel.activities.TextActivity" />
         <activity android:name="com.nextep.pelmel.activities.MainActionBarActivity" />
-
+        <activity
+            android:name="com.nextep.pelmel.activities.MainActivity"
+            android:label="@string/title_activity_main" >
+        </activity>
         <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"

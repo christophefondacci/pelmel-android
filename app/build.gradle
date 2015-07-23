@@ -1,12 +1,16 @@
 apply plugin: 'com.android.application'
 
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
 
     defaultConfig {
         applicationId "com.nextep.pelmel"
-        minSdkVersion 14
+        minSdkVersion 12
         targetSdkVersion 14
     }
 
@@ -21,9 +25,11 @@ android {
 dependencies {
     compile 'com.google.code.gson:gson:2.2.2'
     compile 'com.google.android.gms:play-services:7.5.0'
+    compile 'neXtep:web-json:0.0.1-SNAPSHOT'
     compile 'com.android.support:appcompat-v7:18.0.0'
     compile 'com.google.maps.android:android-maps-utils:0.3.4'
+    compile 'io.gsonfire:gson-fire:1.2.0'
+    compile 'com.sothree.slidinguppanel:library:3.1.0'
     compile files('libs/httpmime-4.2.5.jar')
     compile files('libs/universal-image-loader-1.8.6.jar')
-    compile files('libs/web-json-0.0.1-SNAPSHOT.jar')
 }

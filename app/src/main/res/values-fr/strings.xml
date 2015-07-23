@@ -12,6 +12,8 @@
     <string name="chat_send">Envoyer</string>
     <string name="chat_send_fail_title">Echec de l\'envoi du message</string>
     <string name="chat_send_fail">PelMel n\'a pas pu envoyer votre message, vérifiez votre connexion puis essayez à nouveau.</string>
+    <string name="counter_likes">{0}  Aiment ça</string>
+    <string name="counter_likes_singular">{0} Aime ça</string>
     <string name="distance.feet">{0} pieds</string>
     <string name="distance.miles">{0} miles</string>
     <string name="distance.meters">{0} mètres</string>
@@ -70,13 +72,15 @@
     <string name="search_extend_label">Aucun lieu gay trouvé dans les environs, vous pouvez chercher à nouveau dans un rayon plus grand :</string>
     <string name="search_no_localization">Impossible d\'accéder à votre localisation. Veuillez vérifier que les services de localisation sont activés dans vos préférences Android.</string>
     <string name="search_no_google_services">L\'application \'Google Services\' n\'est pas installée ou est trop ancienne, veuillez l\'installer ou la mettre à jour depuis Google Play Store.</string>
- 
+    <string name="snippet_context_title">{0} évènements à venir / {1} lieux</string>
+    <string name="snippet_context_subtitle">{0} mecs à proximité</string>
     <string name="sort_label">Trier par :</string>
     <string name="sort_popular">Popul.</string>
     <string name="sort_nearby">Dist.</string>
     <string name="sort_alpha">Nom</string>
     <string name="tabPlaceList">Lieux</string>
     <string name="tabMap">Carte</string>
+    <string name="tabDeals">Promos</string>
     <string name="tabEvents">Soirées</string>
     <string name="tabMessages">Chat</string>
     <string name="tabSettings">Compte</string>
@@ -122,4 +126,5 @@
     <string name="month.october">Octobre</string>
     <string name="month.november">Novembre</string>
     <string name="month.december">Décembre</string>
+    <string name="snippet_distance_intro">snapshot</string>
 </resources>

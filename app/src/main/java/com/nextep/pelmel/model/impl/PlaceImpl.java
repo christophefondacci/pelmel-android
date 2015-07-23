@@ -1,17 +1,18 @@
 package com.nextep.pelmel.model.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.model.base.AbstractCalObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PlaceImpl extends AbstractCalObject implements Place {
 
 	private String type;
 	private String address;
+	private String cityName;
 	private final List<Event> events = new ArrayList<Event>();
 	private final List<User> likers = new ArrayList<User>();
 	private final List<User> insiders = new ArrayList<User>();
@@ -82,5 +83,15 @@ public class PlaceImpl extends AbstractCalObject implements Place {
 	@Override
 	public void addInsider(User insider) {
 		this.insiders.add(insider);
+	}
+
+	@Override
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
+	@Override
+	public String getCityName() {
+		return cityName;
 	}
 }
