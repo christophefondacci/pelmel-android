@@ -66,7 +66,7 @@ public class SnippetListAdapter extends BaseAdapter {
 
     private View getSnippetConvertView(View convertView) {
         SnippetViewHolder viewHolder;
-        if (convertView == null) {
+        if (convertView == null || convertView.getTag() == null) {
             convertView = LayoutInflater.from(context).inflate(
                     R.layout.list_row_snippet_main, null);
             viewHolder = new SnippetViewHolder();

@@ -11,6 +11,8 @@ import com.nextep.pelmel.model.Image;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
 
 import java.text.MessageFormat;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by cfondacci on 21/07/15.
@@ -95,4 +97,10 @@ public class ContextSnippetInfoProvider implements SnippetInfoProvider {
         String distance = PelMelApplication.getConversionService().getDistanceStringForMiles((double)ContextHolder.radius);
         return distance;
     }
+
+    @Override
+    public List<String> getAddressComponents() {
+        return Collections.emptyList();
+    }
+
 }

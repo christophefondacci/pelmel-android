@@ -10,8 +10,8 @@ android {
 
     defaultConfig {
         applicationId "com.nextep.pelmel"
-        minSdkVersion 12
-        targetSdkVersion 14
+        minSdkVersion 16
+        targetSdkVersion 16
     }
 
     buildTypes {

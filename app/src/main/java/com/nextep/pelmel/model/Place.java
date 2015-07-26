@@ -1,5 +1,6 @@
 package com.nextep.pelmel.model;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface Place extends CalObject {
@@ -38,10 +39,17 @@ public interface Place extends CalObject {
 
 	void setInsiders(List<User> insiders);
 
+	int getInsidersCount();
+	void setInsidersCount(int count);
 	void addInsider(User insider);
 
 	String getCityName();
 
 	void setCityName(String cityName);
 
+	Collection<RecurringEvent> getRecurringEvents();
+
+	void setRecurringEvents(Collection<RecurringEvent> recurringEvents);
+
+	void addRecurringEvent(RecurringEvent recurringEvent);
 }

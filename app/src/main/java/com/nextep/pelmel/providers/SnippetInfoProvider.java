@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Image;
 
+import java.util.List;
+
 /**
  * Definition of the interface that can provide information which fills the Snippet list view.
  *
@@ -83,5 +85,7 @@ public interface SnippetInfoProvider {
     String getHoursBadgeSubtitle();
     String getDistanceIntroText();
     String getDistanceText();
+
+    List<String> getAddressComponents();
 
 }

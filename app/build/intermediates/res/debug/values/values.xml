@@ -248,6 +248,7 @@
     <dimen name="profile_section_distance">25dp</dimen>
     <dimen name="profile_section_small_distance">15dp</dimen>
     <dimen name="profile_tags_height">800dp</dimen>
+    <dimen name="snippet_gallery_height">160dp</dimen>
     <dimen name="snippet_height">120dp</dimen>
     <dimen name="snippet_parallax">125dp</dimen>
     <dimen name="spinner_row_text_padding">5dp</dimen>
@@ -313,6 +314,11 @@
     <string name="auth_google_play_services_client_google_display_name">Google</string>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="calendar.daily">Daily</string>
+    <string name="calendar.repeat.first">First</string>
+    <string name="calendar.repeat.fourth">Fourth</string>
+    <string name="calendar.repeat.second">Second</string>
+    <string name="calendar.repeat.third">Third</string>
     <string name="cancel">Cancel</string>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.5.0/res/values/cast_strings.xml -->
     <eat-comment/>
@@ -362,6 +368,8 @@
     <string name="common_signin_button_text_long">Sign in with Google</string>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="counter_event_in">{0} will attend</string>
+    <string name="counter_event_in_singular">{0} will attend</string>
     <string name="counter_likes">{0} Like It</string>
     <string name="counter_likes_singular">{0} Likes It</string>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.5.0/res/values/admob_strings.xml -->
@@ -378,6 +386,9 @@
     <string name="dummy">Sample text</string>
     <string name="eventType">Event</string>
     <string name="event_place_title">Takes place at</string>
+    <string name="event_type_happyhour">HAPPY HOUR</string>
+    <string name="event_type_opening">OPENING TIME</string>
+    <string name="event_type_themenight">THEME NIGHT</string>
     <string name="googlePlay.SERVICE_MISSING">You need to install Google Play Services from the Google Play Store</string>
     <string name="googlePlay.SERVICE_VERSION_UPDATE_REQUIRED">You need to update Google Play Services from the Google Play Store</string>
     <string name="googleServicesUnavailable">You need to update or install Google Play Services</string>
@@ -463,6 +474,10 @@
     <string name="search_no_google_services">Google Services are not installed or are too old, please install or update Google Services from the play store.</string>
     <string name="search_no_localization">Could not get your position. Please check that localization services are enabled in your Android settings.</string>
     <string name="search_placeholder">Search a city or venue</string>
+    <string name="section_general_info">General Information</string>
+    <string name="section_title_happyhours">Happy Hours</string>
+    <string name="section_title_openinghours">Opening Hours</string>
+    <string name="section_title_themenights">Theme Nights</string>
     <string name="selectPhotoCamera">Camera</string>
     <string name="selectPhotoGallery">Gallery</string>
     <string name="selectPhotoMessage">Which source do you want to use to upload a photo ?</string>

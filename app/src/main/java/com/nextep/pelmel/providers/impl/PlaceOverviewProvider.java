@@ -1,7 +1,5 @@
 package com.nextep.pelmel.providers.impl;
 
-import java.util.Locale;
-
 import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -19,6 +17,8 @@ import com.nextep.pelmel.dialogs.SelectImageDialogFragment;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.providers.ThumbsBoxProvider;
 import com.nextep.pelmel.providers.base.AbstractCalOverviewProvider;
+
+import java.util.Locale;
 
 public class PlaceOverviewProvider extends AbstractCalOverviewProvider {
 

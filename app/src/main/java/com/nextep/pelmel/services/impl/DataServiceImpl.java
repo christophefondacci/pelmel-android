@@ -9,6 +9,7 @@ import com.nextep.json.model.IJsonLightPlace;
 import com.nextep.json.model.IJsonLightUser;
 import com.nextep.json.model.impl.JsonDescription;
 import com.nextep.json.model.impl.JsonEvent;
+import com.nextep.json.model.impl.JsonHour;
 import com.nextep.json.model.impl.JsonLightEvent;
 import com.nextep.json.model.impl.JsonLightPlace;
 import com.nextep.json.model.impl.JsonLightUser;
@@ -17,6 +18,7 @@ import com.nextep.json.model.impl.JsonMedia;
 import com.nextep.json.model.impl.JsonNearbyPlacesResponse;
 import com.nextep.json.model.impl.JsonPlace;
 import com.nextep.json.model.impl.JsonPlaceOverview;
+import com.nextep.json.model.impl.JsonSpecialEvent;
 import com.nextep.json.model.impl.JsonUser;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.cache.model.Cache;
@@ -26,13 +28,17 @@ import com.nextep.pelmel.listeners.LikeCallback;
 import com.nextep.pelmel.listeners.OverviewListener;
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Event;
+import com.nextep.pelmel.model.EventType;
 import com.nextep.pelmel.model.Image;
 import com.nextep.pelmel.model.Place;
+import com.nextep.pelmel.model.RecurrencyType;
+import com.nextep.pelmel.model.RecurringEvent;
 import com.nextep.pelmel.model.Tag;
 import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.model.impl.EventImpl;
 import com.nextep.pelmel.model.impl.ImageImpl;
 import com.nextep.pelmel.model.impl.PlaceImpl;
+import com.nextep.pelmel.model.impl.RecurringEventImpl;
 import com.nextep.pelmel.model.impl.UserImpl;
 import com.nextep.pelmel.services.DataService;
 import com.nextep.pelmel.services.TagService;
@@ -45,6 +51,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -72,12 +79,12 @@ public class DataServiceImpl implements DataService {
 
 	@Override
 	public Place getPlaceFromJson(JsonPlace json) {
-		Place place = placeCache.get(json.getItemKey());
+		Place place = placeCache.get(json.getKey());
 		if (place == null) {
 			place = new PlaceImpl();
-			placeCache.put(json.getItemKey(), place);
+			placeCache.put(json.getKey(), place);
 		}
-		place.setKey(json.getItemKey());
+		place.setKey(json.getKey());
 		place.setAddress(json.getAddress());
 		place.setDescription(json.getDescription());
 		place.setDistance(json.getRawDistance());
@@ -85,6 +92,7 @@ public class DataServiceImpl implements DataService {
 		place.setLatitude(json.getLat());
 		place.setLongitude(json.getLng());
 		place.setLikeCount(json.getLikesCount());
+		place.setInsidersCount(json.getUsersCount());
 		place.setName(json.getName());
 		place.setType(json.getType());
 		place.setCityName(json.getCity());
@@ -114,9 +122,47 @@ public class DataServiceImpl implements DataService {
 			place.setImages(images);
 		}
 
+		// Building recurring events
+		for(JsonSpecialEvent jsonSpecial :json.getSpecials()) {
+			final RecurringEvent event = getRecurringEventFromJsonSpecial(jsonSpecial);
+			event.setPlace(place);
+//			place.addRecurringEvent(event);
+		}
 		return place;
 	}
 
+	private RecurringEvent getRecurringEventFromJsonSpecial(JsonSpecialEvent special) {
+
+		// Getting instance from cache or creating it
+		RecurringEvent re = (RecurringEvent)eventCache.get(special.getKey());
+		if(re == null) {
+			re = new RecurringEventImpl();
+			eventCache.put(special.getKey(), re);
+		}
+
+		// Filling object from JSON info
+		re.setName(special.getName());
+		re.setDescription(special.getDescription());
+		re.setStartDate(new Date(special.getNextStart() * 1000));
+		re.setEndDate(new Date(special.getNextEnd() * 1000));
+		re.setLikeCount(special.getParticipants());
+		try {
+			re.setEventType(EventType.valueOf(special.getType()));
+		} catch(IllegalArgumentException | NullPointerException e) {
+			re.setEventType(EventType.HAPPY_HOUR);
+			Log.w(LOG_TAG,"Invalid event type for recurring event " + special.getKey() + ": " + e.getMessage(),e);
+		}
+		Image calImage = getImageFromJson(special.getThumb());
+		if(calImage!=null) {
+			// Removing thumb
+			if (!re.getImages().isEmpty()) {
+				re.getImages().remove(0);
+			}
+			// Replacing
+			re.getImages().add(0, calImage);
+		}
+		return re;
+	}
 	@Override
 	public Place getPlaceFromLightJson(IJsonLightPlace json) {
 		if (json != null) {
@@ -369,9 +415,62 @@ public class DataServiceImpl implements DataService {
 		}
 		place.setEvents(events);
 
+		// Building hours
+		final List<RecurringEvent> hours = new ArrayList<>();
+		for(final JsonHour jsonHour : json.getHours()) {
+			final RecurringEvent hour = getRecurringEventFromJsonHour(jsonHour);
+			hours.add(hour);
+		}
+		place.setRecurringEvents(hours);
 		return place;
 	}
 
+	private RecurringEvent getRecurringEventFromJsonHour(JsonHour jsonHour) {
+		final RecurringEvent event = new RecurringEventImpl();
+		try {
+			event.setEventType(EventType.valueOf(jsonHour.getType()));
+		} catch(IllegalArgumentException | NullPointerException e ) {
+			Log.e(LOG_TAG,"Unknown event type '" + jsonHour.getType() + "'",e);
+			event.setEventType(EventType.THEME);
+		}
+		event.setKey(jsonHour.getKey());
+		event.setStartHour(jsonHour.getStartHour());
+		event.setStartMinute(jsonHour.getStartMinute());
+		event.setEndMinute(jsonHour.getEndMinute());
+		event.setEndHour(jsonHour.getEndHour());
+		event.setMonday(jsonHour.isMonday());
+		event.setTuesday(jsonHour.isTuesday());
+		event.setWednesday(jsonHour.isWednesday());
+		event.setThursday(jsonHour.isThursday());
+		event.setFriday(jsonHour.isFriday());
+		event.setSaturday(jsonHour.isSaturday());
+		event.setSunday(jsonHour.isSunday());
+		RecurrencyType type = RecurrencyType.EVERY;
+		if(jsonHour.getRecurrency() != null) {
+			switch (jsonHour.getRecurrency()) {
+				default:
+				case 0:
+					type = RecurrencyType.EVERY;
+					break;
+				case 1:
+					type = RecurrencyType.FIRST;
+					break;
+				case 2:
+					type = RecurrencyType.SECOND;
+					break;
+				case 3:
+					type = RecurrencyType.THIRD;
+					break;
+				case 4:
+					type = RecurrencyType.FOURTH;
+					break;
+
+			}
+			event.setRecurrencyType(type);
+		}
+		event.setDescription(jsonHour.getDescription());
+		return event;
+	}
 	@Override
 	public List<Place> listNearbyPlaces(User currentUser, double latitude,
 			double longitude, String parentKey, String searchText,
@@ -382,12 +481,30 @@ public class DataServiceImpl implements DataService {
 		final List<JsonPlace> jsonPlaces = jsonResponse.getPlaces();
 		if (jsonPlaces != null) {
 			final List<Place> places = new ArrayList<Place>(jsonPlaces.size());
+			final List<Event> deals = new ArrayList<Event>();
+			final List<Event> themes = new ArrayList<Event>();
+
+			// Processing places
 			for (final JsonPlace json : jsonPlaces) {
 				final Place place = getPlaceFromJson(json);
 				if (place.getLatitude() != null && place.getLatitude() != 0
 						&& place.getLongitude() != null
 						&& place.getLongitude() != 0) {
 					places.add(place);
+
+					// Filling recurring events structures
+					for(RecurringEvent e : place.getRecurringEvents()) {
+						switch(e.getEventType()) {
+							case THEME:
+								themes.add(e);
+								break;
+							case HAPPY_HOUR:
+								deals.add(e);
+								break;
+							default:
+								break;
+						}
+					}
 				}
 			}
 
@@ -406,10 +523,26 @@ public class DataServiceImpl implements DataService {
 				final Event event = getEventFromLightJson(jsonEvent);
 				events.add(event);
 			}
+			events.addAll(themes);
+
+			// Sorting events
+			Collections.sort(events, new Comparator<Event>() {
+						@Override
+						public int compare(Event lhs, Event rhs) {
+							return lhs.getStartDate().compareTo(rhs.getStartDate());
+						}
+					});
+			Collections.sort(deals, new Comparator<Event>() {
+				@Override
+				public int compare(Event lhs, Event rhs) {
+					return lhs.getStartDate().compareTo(rhs.getStartDate());
+				}
+			});
 			// Assigning to our global context
 			ContextHolder.places = places;
 			ContextHolder.users = users;
 			ContextHolder.events = events;
+			ContextHolder.deals = deals;
 			return places;
 		} else {
 			return Collections.emptyList();

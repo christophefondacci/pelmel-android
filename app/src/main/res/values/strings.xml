@@ -6,12 +6,19 @@
     <string name="age_hours">hours</string>
     <string name="age_days">days</string>
     <string name="app_name">PelMel Guide</string>
+    <string name="calendar.daily">Daily</string>
+    <string name="calendar.repeat.first">First</string>
+    <string name="calendar.repeat.second">Second</string>
+    <string name="calendar.repeat.third">Third</string>
+    <string name="calendar.repeat.fourth">Fourth</string>
     <string name="cancel">Cancel</string>
     <string name="chat_hint">Enter your message here</string>
     <string name="chat_info_msg">Tap on a conversation to show all messages and reply. Tap here to refresh.</string>
     <string name="chat_send">Send</string>
     <string name="chat_send_fail_title">Failed to send message</string>
     <string name="chat_send_fail">PelMel failed to send your message, please try again and check your network connection.</string>
+    <string name="counter_event_in">{0} will attend</string>
+    <string name="counter_event_in_singular">{0} will attend</string>
     <string name="counter_likes">{0} Like It</string>
     <string name="counter_likes_singular">{0} Likes It</string>
     <string name="distance.feet">{0} feet</string>
@@ -20,6 +27,9 @@
     <string name="distance.kilometers">{0} km</string>
     <string name="dummy">Sample text</string>
     <string name="event_place_title">Takes place at</string>
+    <string name="event_type_happyhour">HAPPY HOUR</string>
+    <string name="event_type_opening">OPENING TIME</string>
+    <string name="event_type_themenight">THEME NIGHT</string>
     <string name="eventType">Event</string>
     <string name="googlePlay.SERVICE_MISSING">You need to install Google Play Services from the Google Play Store</string>
     <string name="googlePlay.SERVICE_VERSION_UPDATE_REQUIRED">You need to update Google Play Services from the Google Play Store</string>
@@ -88,15 +98,19 @@
     <string name="retrievingData">Retrieving data&#8230;</string>
     <string name="retry">Retry</string>
     <string name="save_wait_message">Saving profile</string>
-    <string name="selectPhotoTitle">Photo source</string>
-    <string name="selectPhotoMessage">Which source do you want to use to upload a photo ?</string>
-    <string name="selectPhotoCamera">Camera</string>
-    <string name="selectPhotoGallery">Gallery</string>
     <string name="search_button_label">Search</string>
     <string name="search_placeholder">Search a city or venue</string>
     <string name="search_extend_label">No gay venues found, you can search again in a larger zone :</string>
     <string name="search_no_localization">Could not get your position. Please check that localization services are enabled in your Android settings.</string>
     <string name="search_no_google_services">Google Services are not installed or are too old, please install or update Google Services from the play store.</string>
+    <string name="section_general_info">General Information</string>
+    <string name="section_title_happyhours">Happy Hours</string>
+    <string name="section_title_openinghours">Opening Hours</string>
+    <string name="section_title_themenights">Theme Nights</string>
+    <string name="selectPhotoTitle">Photo source</string>
+    <string name="selectPhotoMessage">Which source do you want to use to upload a photo ?</string>
+    <string name="selectPhotoCamera">Camera</string>
+    <string name="selectPhotoGallery">Gallery</string>
     <string name="snippet_context_title">{0} upcoming events / {1} hangouts</string>
     <string name="snippet_context_subtitle">{0} guys nearby</string>
     <string name="sort_label">Sort by :</string>
@@ -169,6 +183,7 @@ In no event will the COMPANY, its suppliers or other third parties mentioned at 
 The COMPANY may revise this Agreement at any time without notice by updating this posting. By using this Site you agree to be bound by any such revisions and should therefore periodically visit this Site and page to determine the then current Terms of Access and Use conditions of use to which you are bound.]]></string>
     <string name="title_activity_main">MainActivity</string>
     <string name="snippet_distance_intro">snapshot</string>
+
 
 
 </resources>

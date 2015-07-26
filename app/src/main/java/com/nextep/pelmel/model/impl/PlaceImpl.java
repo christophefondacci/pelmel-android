@@ -2,10 +2,12 @@ package com.nextep.pelmel.model.impl;
 
 import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.Place;
+import com.nextep.pelmel.model.RecurringEvent;
 import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.model.base.AbstractCalObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class PlaceImpl extends AbstractCalObject implements Place {
@@ -13,9 +15,11 @@ public class PlaceImpl extends AbstractCalObject implements Place {
 	private String type;
 	private String address;
 	private String cityName;
+	private int insidersCount;
 	private final List<Event> events = new ArrayList<Event>();
 	private final List<User> likers = new ArrayList<User>();
 	private final List<User> insiders = new ArrayList<User>();
+	private Collection<RecurringEvent> recurringEvents = new ArrayList<>();
 
 	@Override
 	public String getType() {
@@ -93,5 +97,29 @@ public class PlaceImpl extends AbstractCalObject implements Place {
 	@Override
 	public String getCityName() {
 		return cityName;
+	}
+
+	public void setRecurringEvents(Collection<RecurringEvent> recurringEvents) {
+		this.recurringEvents = recurringEvents;
+	}
+
+	@Override
+	public Collection<RecurringEvent> getRecurringEvents() {
+		return recurringEvents;
+	}
+
+	@Override
+	public void addRecurringEvent(RecurringEvent recurringEvent) {
+		recurringEvents.add(recurringEvent);
+	}
+
+	@Override
+	public int getInsidersCount() {
+		return insidersCount;
+	}
+
+	@Override
+	public void setInsidersCount(int insidersCount) {
+		this.insidersCount = insidersCount;
 	}
 }

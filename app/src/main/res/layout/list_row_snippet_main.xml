@@ -62,6 +62,7 @@
         android:layout_alignTop="@id/subtitleIcon"
         android:layout_alignBottom="@id/subtitleIcon"
         android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_toLeftOf="@+id/hoursBadgeTitleLabel"/>
 
     <TextView

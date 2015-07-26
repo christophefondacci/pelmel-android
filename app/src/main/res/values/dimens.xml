@@ -26,6 +26,7 @@
     <dimen name="profile_label_col_width">50dp</dimen>
     
     <dimen name="snippet_parallax">125dp</dimen>
+    <dimen name="snippet_gallery_height">160dp</dimen>
     <dimen name="snippet_height">120dp</dimen>
     <dimen name="spinner_row_text_padding">5dp</dimen>
     <dimen name="placeTypeIconSize">17dp</dimen>

@@ -14,6 +14,7 @@ public final class ContextHolder {
     public static List<Place> places = Collections.emptyList();
     public static List<User> users = Collections.emptyList();
     public static List<Event> events = Collections.emptyList();
+    public static List<Event> deals = Collections.emptyList();
     public static int radius = 50;
 
     private ContextHolder() {}

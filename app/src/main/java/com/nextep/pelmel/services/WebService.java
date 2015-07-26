@@ -33,7 +33,7 @@ public class WebService {
 	private static final String EVENTS_LIST_ACTION = "/mobileEvents";
 	private static final String MESSAGES_LIST_ACTION = "/mobileMyMessages";
 	private static final String CONVERSATION_LIST_ACTION = "/mobileMyMessagesReply";
-	private static final String PLACES_OVERVIEW_ACTION = "/mobileOverview";
+	private static final String PLACES_OVERVIEW_ACTION = "/api/place";
 	private static final String LIKE_ACTION = "/mobileIlike";
 
 	Gson gson;

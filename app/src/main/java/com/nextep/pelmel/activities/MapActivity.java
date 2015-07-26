@@ -178,8 +178,11 @@ public class MapActivity extends Fragment implements UserListener,
 						final CameraUpdate upd = CameraUpdateFactory.newLatLngBounds(userZoomBounds,0);
 						map.animateCamera(upd);
 					} else {
-						final CameraUpdate upd = CameraUpdateFactory.newLatLngBounds(zoomFitBoundsBuilder.build(),30);
-						map.animateCamera(upd);
+						LatLngBounds bounds = zoomFitBoundsBuilder.build();
+						if(places.size()>2) {
+							final CameraUpdate upd = CameraUpdateFactory.newLatLngBounds(bounds, 30);
+							map.animateCamera(upd);
+						}
 					}
 				}
 				snippetContainerSupport.showSnippetFor(new ContextSnippetInfoProvider(),false,false);

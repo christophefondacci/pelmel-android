@@ -36,4 +36,12 @@ public interface UIService {
 	 * @return the label resource
 	 */
 	int getLabelForPlaceType(String placeType);
+
+	/**
+	 * Provides the resource id of the icon for this place type
+	 *
+	 * @param placeType the place type code
+	 * @return the drawable resource ID
+	 */
+	int getIconForPlaceType(String placeType);
 }

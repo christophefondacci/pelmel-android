@@ -1,10 +1,12 @@
 package com.nextep.pelmel.activities;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.model.support.SnippetChildSupport;
 import com.nextep.pelmel.model.support.SnippetContainerSupport;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
@@ -15,6 +17,8 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
     private static final int SNIPPET_HEIGHT = 110;
 
     private int snippetHeight;
+    private SnippetChildSupport snippetChildSupport;
+    private boolean snippetOpened = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,27 +42,26 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
         SnippetListFragment snippetFragment = (SnippetListFragment)getSupportFragmentManager().findFragmentByTag(TAG_SNIPPET);
         final SlidingUpPanelLayout slidingLayout = (SlidingUpPanelLayout) findViewById(R.id.slidingPanel);
         if(snippetFragment == null) {
-
-            // Positioning snippet container
-//            View snippetView = findViewById(R.id.pelmelSnippetContainer);
-//            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)snippetView.getLayoutParams();
-//            snippetHeight = snippetView.getHeight();
-//            params.height=snippetHeight;
-//            if(!isOpen) {
-//                params.topMargin = snippetView.getHeight()-(int)(110f*getResources().getDisplayMetrics().density);
-//            } else {
-//                params.topMargin = 0;
-//            }
-//            snippetView.requestLayout();
-
             snippetFragment = new SnippetListFragment();
             snippetFragment.setInfoProvider(provider);
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.add(R.id.pelmelSnippetContainer,snippetFragment,TAG_SNIPPET).addToBackStack(null).commit();
-            getSupportFragmentManager().executePendingTransactions();
-            slidingLayout.setScrollableView(snippetFragment.getListView());
+        } else {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+
+            snippetFragment = new SnippetListFragment();
+            snippetFragment.setInfoProvider(provider);
+            transaction.replace(R.id.pelmelSnippetContainer, snippetFragment,TAG_SNIPPET );
+            transaction.addToBackStack(null);
+            transaction.commit();
         }
+        getSupportFragmentManager().executePendingTransactions();
+        slidingLayout.setScrollableView(snippetFragment.getListView());
         slidingLayout.setPanelHeight(snippetHeight);
+        notifySnippetOpenState();
     }
 
     @Override
@@ -77,14 +80,29 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
 
     @Override
     public void onPanelCollapsed(View view) {
-
+        setSnippetOpened(false);
     }
 
     @Override
     public void onPanelExpanded(View view) {
-
+        setSnippetOpened(true);
     }
 
+    private void setSnippetOpened(boolean opened) {
+        if(opened != snippetOpened) {
+            snippetOpened = opened;
+            notifySnippetOpenState();
+        }
+    }
+
+    /**
+     * Notifies the current snippet adapter that the snippet is opened
+     */
+    private void notifySnippetOpenState() {
+        if (snippetChildSupport != null) {
+            snippetChildSupport.onSnippetOpened(snippetOpened);
+        }
+    }
     @Override
     public void onPanelAnchored(View view) {
 
@@ -93,6 +111,17 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
     @Override
     public void onPanelHidden(View view) {
 
+    }
+
+    @Override
+    public void setSnippetChild(SnippetChildSupport childSupport) {
+        this.snippetChildSupport=childSupport;
+        notifySnippetOpenState();
+    }
+
+    @Override
+    public boolean isSnippetOpened() {
+        return snippetOpened;
     }
 
     //    @Override

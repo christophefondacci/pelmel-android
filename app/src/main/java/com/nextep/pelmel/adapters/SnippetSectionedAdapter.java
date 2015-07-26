@@ -5,47 +5,141 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.helpers.ContextHolder;
 import com.nextep.pelmel.helpers.Strings;
 import com.nextep.pelmel.views.SnippetTabsViewHolder;
 
 /**
  * Created by cfondacci on 22/07/15.
  */
-public class SnippetSectionedAdapter extends SectionedAdapter {
+public class SnippetSectionedAdapter extends SectionedAdapter implements View.OnClickListener {
+    public static final String SECTION_GALLERY  = "gallery";
     public static final String SECTION_SNIPPET  = "snippet";
     public static final String SECTION_PLACES   = "places";
+    public static final String SECTION_ADDRESS  = "address";
+    public static final String SECTION_OPENING  = "OPENING";
+    public static final String SECTION_HAPPY    = "HAPPY_HOUR";
+    public static final String SECTION_THEME    = "THEME";
     private LayoutInflater layoutInflater;
 
+    private enum Tab { EVENTS, DEALS, PLACES }
+    private Tab currentTab;
+    private SnippetTabsViewHolder tabsViewHolder;
+    private Context context;
+
     public SnippetSectionedAdapter(Context context) {
+        this.context = context;
         layoutInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        currentTab = Tab.PLACES;
     }
     @Override
     protected View getHeaderView(String caption, int index, View convertView, ViewGroup parent) {
         switch(caption) {
             case SECTION_PLACES:
-                SnippetTabsViewHolder viewHolder;
 //                if(convertView == null) {
                     convertView = layoutInflater.inflate(R.layout.section_tabs_snippet, parent, false);
 //                }
 //                if(convertView.getTag() == null) {
-                    viewHolder = new SnippetTabsViewHolder();
-                    viewHolder.eventsButton = (Button)convertView.findViewById(R.id.eventsButton);
-                    viewHolder.dealsButton = (Button)convertView.findViewById(R.id.dealsButton);
-                    viewHolder.placesButton = (Button)convertView.findViewById(R.id.placesButton);
-                    convertView.setTag(viewHolder);
+                    tabsViewHolder = new SnippetTabsViewHolder();
+                    tabsViewHolder.eventsButton = (Button)convertView.findViewById(R.id.eventsButton);
+                    tabsViewHolder.dealsButton = (Button)convertView.findViewById(R.id.dealsButton);
+                    tabsViewHolder.placesButton = (Button)convertView.findViewById(R.id.placesButton);
+                    tabsViewHolder.eventsButton.setTag(Tab.EVENTS);
+                    tabsViewHolder.dealsButton.setTag(Tab.DEALS);
+                    tabsViewHolder.placesButton.setTag(Tab.PLACES);
+                    tabsViewHolder.eventsButton.setOnClickListener(this);
+                    tabsViewHolder.dealsButton.setOnClickListener(this);
+                    tabsViewHolder.placesButton.setOnClickListener(this);
+                    convertView.setTag(tabsViewHolder);
 //                } else {
-//                    viewHolder = (SnippetTabsViewHolder)convertView.getTag();
+//                    tabsViewHolder = (SnippetTabsViewHolder)convertView.getTag();
 //                }
-                viewHolder.eventsButton.setText(Strings.getText(R.string.tabEvents));
-                viewHolder.eventsButton.setBackgroundResource(R.drawable.bg_tab_enabled);
-                viewHolder.dealsButton.setText(Strings.getText(R.string.tabDeals));
-                viewHolder.placesButton.setText(Strings.getText(R.string.tabPlaceList));
+                tabsViewHolder.eventsButton.setText(Strings.getText(R.string.tabEvents));
+                tabsViewHolder.eventsButton.setBackgroundResource(R.drawable.bg_tab_enabled);
+                tabsViewHolder.dealsButton.setText(Strings.getText(R.string.tabDeals));
+                tabsViewHolder.placesButton.setText(Strings.getText(R.string.tabPlaceList));
+                refreshTab();
                 return convertView;
+            case SECTION_ADDRESS: {
+                if (convertView == null) {
+                    convertView = layoutInflater.inflate(R.layout.section_title, parent, false);
+                }
+                final TextView textView = (TextView) convertView.findViewById(R.id.sectionTitleLabel);
+                textView.setText(Strings.getText(R.string.section_general_info));
+                return convertView;
+            }
+            case SECTION_OPENING:
+            case SECTION_HAPPY:
+            case SECTION_THEME: {
+                if (convertView == null || convertView.getTag() == null) {
+                    convertView = layoutInflater.inflate(R.layout.section_subtitle, parent, false);
+                    final TextView textView = (TextView) convertView.findViewById(R.id.sectionTitleLabel);
+                    convertView.setTag(textView);
+                }
+                final TextView textView = (TextView)convertView.getTag();
+                // Spacer view
+                switch(caption) {
+                    case SECTION_OPENING:
+                        textView.setText(Strings.getText(R.string.section_title_openinghours));
+                        break;
+                    case SECTION_HAPPY:
+                        textView.setText(Strings.getText(R.string.section_title_happyhours));
+                        break;
+                    case SECTION_THEME:
+                        textView.setText(Strings.getText(R.string.section_title_themenights));
+                        break;
+                }
+                return convertView;
+            }
+
         }
         return layoutInflater.inflate(R.layout.list_row_empty,parent,false);
+    }
+
+    @Override
+    public void onClick(View v) {
+        final Tab newTab = (Tab)v.getTag();
+        if(newTab != currentTab) {
+            currentTab = (Tab) v.getTag();
+            switch (currentTab) {
+                case EVENTS:
+                    replaceSection(SECTION_PLACES, new SnippetEventsListAdapter(context, ContextHolder.events));
+                    break;
+                case DEALS:
+                    replaceSection(SECTION_PLACES, new SnippetEventsListAdapter(context, ContextHolder.deals));
+                    break;
+                case PLACES:
+                    replaceSection(SECTION_PLACES, new SnippetPlacesListAdapter(context, ContextHolder.places));
+                    break;
+            }
+            refreshTab();
+        }
+    }
+
+    private void refreshTab() {
+        int eventsRes = R.drawable.bg_tab_disabled;
+        int dealsRes = R.drawable.bg_tab_disabled;
+        int placesRes = R.drawable.bg_tab_disabled;
+        switch(currentTab) {
+            case EVENTS:
+                eventsRes = R.drawable.bg_tab_enabled;
+                break;
+            case DEALS:
+                dealsRes = R.drawable.bg_tab_enabled;
+                break;
+            case PLACES:
+                placesRes = R.drawable.bg_tab_enabled;
+                break;
+        }
+        if(tabsViewHolder != null) {
+            tabsViewHolder.eventsButton.setBackgroundResource(eventsRes);
+            tabsViewHolder.dealsButton.setBackgroundResource(dealsRes);
+            tabsViewHolder.placesButton.setBackgroundResource(placesRes);
+        }
     }
 }
 
