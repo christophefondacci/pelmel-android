@@ -14,6 +14,8 @@ import android.widget.ListView;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
 import com.nextep.pelmel.adapters.SnippetAddressInfoAdapter;
+import com.nextep.pelmel.adapters.SnippetDescriptionListAdapter;
+import com.nextep.pelmel.adapters.SnippetEventsListAdapter;
 import com.nextep.pelmel.adapters.SnippetGalleryAdapter;
 import com.nextep.pelmel.adapters.SnippetHoursInfoAdapter;
 import com.nextep.pelmel.adapters.SnippetListAdapter;
@@ -24,6 +26,7 @@ import com.nextep.pelmel.listeners.OverviewListener;
 import com.nextep.pelmel.listeners.UserListener;
 import com.nextep.pelmel.listview.ExpandableListItem;
 import com.nextep.pelmel.model.CalObject;
+import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.EventType;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.RecurringEvent;
@@ -53,6 +56,9 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
     @Override
     public void onResume() {
         super.onResume();
+        if(snippetContainerSupport != null) {
+            snippetContainerSupport.setSnippetChild(this);
+        }
     }
 
     @Override
@@ -66,11 +72,7 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
         super.onViewCreated(view, savedInstanceState);
         PelMelApplication.getUserService().getCurrentUser(this);
         getListView().setDividerHeight(0);
-//        getListView().setClipToPadding(false);
-//        Rect frame = new Rect();
-//        getListView().getWindowVisibleDisplayFrame(frame);
-//        getListView().setPadding(0,frame.height()-110,0,0);
-//        getListView().setOnTouchListener(this);
+        snippetContainerSupport.setSnippetChild(this);
     }
 
     @Override
@@ -78,11 +80,11 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
         super.onAttach(activity);
         try {
             snippetContainerSupport = (SnippetContainerSupport)activity;
-            snippetContainerSupport.setSnippetChild(this);
         } catch(ClassCastException e) {
             throw new IllegalStateException("Parent of SnippetListFragment must be a snippetContainerSupport");
         }
     }
+
 
     @Override
     public void userInfoAvailable(final User user) {
@@ -114,6 +116,7 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
             adapter.addSection(SnippetSectionedAdapter.SECTION_PLACES, new SnippetPlacesListAdapter(this.getActivity(), ContextHolder.places));
         } else {
             adapter.addSection(SnippetSectionedAdapter.SECTION_ADDRESS, new SnippetAddressInfoAdapter(this.getActivity(), infoProvider));
+
             if(infoProvider.getItem() instanceof  Place) {
                 // Hashing by hour type, because we are categorizing
                 final Map<EventType,List<RecurringEvent>> typedEventsMap = PelMelApplication.getConversionService().buildTypedHoursMap((Place)infoProvider.getItem());
@@ -122,17 +125,25 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
                 for(EventType eventType : EventType.values()) {
                     final List<RecurringEvent> events = typedEventsMap.get(eventType);
                     // Have we got any entry?
-                    if(events != null && !events.isEmpty()) {
+                    if(events != null && !events.isEmpty() && eventType != EventType.THEME) {
                         // If so we add the corresponding hours section
                         adapter.addSection(eventType.name(),new SnippetHoursInfoAdapter(this.getActivity(), events));
                     }
                 }
             }
 
+            // Building events list
+            final List<Event> events = infoProvider.getEvents();
+            if(events != null && !events.isEmpty()) {
+                adapter.addSection(SnippetSectionedAdapter.SECTION_EVENTS,new SnippetEventsListAdapter(this.getActivity(),events));
+            }
+
+            // Appending description section
+            adapter.addSection(SnippetSectionedAdapter.SECTION_DESCRIPTION,new SnippetDescriptionListAdapter(this.getActivity(),infoProvider));
+
         }
         getListView().setAdapter(adapter);
         getListView().setOnItemClickListener(this);
-//        setListShown(true);
     }
 
     @Override
@@ -145,7 +156,7 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
         final Object obj = adapter.getItem(position);
         if(obj instanceof Place) {
             SnippetInfoProvider provider = new PlaceInfoProvider((Place)obj);
-            snippetContainerSupport.showSnippetFor(provider,true,false);
+            snippetContainerSupport.showSnippetFor(provider, true, false);
         }
     }
 
@@ -223,5 +234,10 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
     @Override
     public void overviewDataAvailable(CalObject object) {
         updateData();
+    }
+
+    @Override
+    public View getScrollableView() {
+        return getListView();
     }
 }

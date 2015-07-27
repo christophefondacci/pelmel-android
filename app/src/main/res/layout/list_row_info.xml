@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
+                android:layout_height="20dp"
                 android:background="#272A2E">
 
     <ImageView
@@ -19,6 +19,7 @@
         android:text="Medium Text"
         android:textColor="#ababac"
         android:textStyle="italic"
+        android:textSize="14sp"
         android:id="@+id/infoLabel"
         android:gravity="center_vertical"
         android:layout_alignParentTop="true"

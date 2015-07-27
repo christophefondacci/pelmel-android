@@ -7,6 +7,7 @@ import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
 import com.nextep.pelmel.helpers.ContextHolder;
 import com.nextep.pelmel.model.CalObject;
+import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.Image;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
 
@@ -103,4 +104,8 @@ public class ContextSnippetInfoProvider implements SnippetInfoProvider {
         return Collections.emptyList();
     }
 
+    @Override
+    public List<Event> getEvents() {
+        return null;
+    }
 }

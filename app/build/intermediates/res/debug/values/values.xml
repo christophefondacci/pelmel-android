@@ -474,6 +474,7 @@
     <string name="search_no_google_services">Google Services are not installed or are too old, please install or update Google Services from the play store.</string>
     <string name="search_no_localization">Could not get your position. Please check that localization services are enabled in your Android settings.</string>
     <string name="search_placeholder">Search a city or venue</string>
+    <string name="section_events">Upcoming events</string>
     <string name="section_general_info">General Information</string>
     <string name="section_title_happyhours">Happy Hours</string>
     <string name="section_title_openinghours">Opening Hours</string>

@@ -78,6 +78,10 @@ public class SnippetPlacesListAdapter extends BaseAdapter {
                     .findViewById(R.id.locationIcon);
             viewHolder.locationLabel= (TextView) convertView
                     .findViewById(R.id.locationLabel);
+            Strings.setFontFamily(viewHolder.countLabel);
+            Strings.setFontFamily(viewHolder.dateLabel);
+            Strings.setFontFamily(viewHolder.titleLabel);
+            Strings.setFontFamily(viewHolder.locationLabel);
             convertView.setTag(viewHolder);
         }
         return convertView;

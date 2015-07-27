@@ -5,11 +5,16 @@ import android.graphics.BitmapFactory;
 
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.model.CalObject;
+import com.nextep.pelmel.model.Event;
+import com.nextep.pelmel.model.EventType;
 import com.nextep.pelmel.model.Image;
 import com.nextep.pelmel.model.Place;
+import com.nextep.pelmel.model.RecurringEvent;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -122,5 +127,27 @@ public class PlaceInfoProvider implements SnippetInfoProvider {
     @Override
     public List<String> getAddressComponents() {
         return addressComponents;
+    }
+
+    @Override
+    public List<Event> getEvents() {
+        List<Event> events = new ArrayList<>();
+
+        // Adding Theme nights events
+        for (RecurringEvent e : place.getRecurringEvents()) {
+            if(e.getEventType() == EventType.THEME) {
+                if(e.getStartDate() !=null) {
+                    events.add(e);
+                }
+            }
+        }
+        events.addAll(place.getEvents());
+        Collections.sort(events, new Comparator<Event>() {
+            @Override
+            public int compare(Event lhs, Event rhs) {
+                return lhs.getStartDate().compareTo(rhs.getStartDate());
+            }
+        });
+        return events;
     }
 }

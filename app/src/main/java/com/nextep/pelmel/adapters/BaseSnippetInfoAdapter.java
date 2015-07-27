@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.helpers.Strings;
 
 /**
  * Created by cfondacci on 25/07/15.
@@ -61,6 +62,8 @@ public abstract class BaseSnippetInfoAdapter extends BaseAdapter {
         viewHolder.infoLabel.setText(infoText);
         viewHolder.infoLabel.setTextColor(context.getResources().getColor(R.color.white));
         viewHolder.infoImage.setImageBitmap(infoImage);
+
+        Strings.setFontFamily(viewHolder.infoLabel);
         return convertView;
     }
 

@@ -23,6 +23,8 @@ public class SnippetSectionedAdapter extends SectionedAdapter implements View.On
     public static final String SECTION_OPENING  = "OPENING";
     public static final String SECTION_HAPPY    = "HAPPY_HOUR";
     public static final String SECTION_THEME    = "THEME";
+    public static final String SECTION_EVENTS    = "events";
+    public static final String SECTION_DESCRIPTION="description";
     private LayoutInflater layoutInflater;
 
     private enum Tab { EVENTS, DEALS, PLACES }
@@ -64,14 +66,10 @@ public class SnippetSectionedAdapter extends SectionedAdapter implements View.On
                 tabsViewHolder.placesButton.setText(Strings.getText(R.string.tabPlaceList));
                 refreshTab();
                 return convertView;
-            case SECTION_ADDRESS: {
-                if (convertView == null) {
-                    convertView = layoutInflater.inflate(R.layout.section_title, parent, false);
-                }
-                final TextView textView = (TextView) convertView.findViewById(R.id.sectionTitleLabel);
-                textView.setText(Strings.getText(R.string.section_general_info));
-                return convertView;
-            }
+            case SECTION_ADDRESS:
+                return getSectionTitleConvertView(convertView,parent,R.string.section_general_info);
+            case SECTION_EVENTS:
+                return getSectionTitleConvertView(convertView,parent,R.string.section_events);
             case SECTION_OPENING:
             case SECTION_HAPPY:
             case SECTION_THEME: {
@@ -100,6 +98,15 @@ public class SnippetSectionedAdapter extends SectionedAdapter implements View.On
         return layoutInflater.inflate(R.layout.list_row_empty,parent,false);
     }
 
+    private View getSectionTitleConvertView(View convertView, ViewGroup parent, int titleResource) {
+        if (convertView == null || convertView.getTag() == null) {
+            convertView = layoutInflater.inflate(R.layout.section_title, parent, false);
+            convertView.setTag(convertView.findViewById(R.id.sectionTitleLabel));
+        }
+        final TextView textView = (TextView) convertView.getTag();
+        textView.setText(Strings.getText(titleResource));
+        return convertView;
+    }
     @Override
     public void onClick(View v) {
         final Tab newTab = (Tab)v.getTag();

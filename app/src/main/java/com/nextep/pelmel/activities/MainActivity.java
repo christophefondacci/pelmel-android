@@ -31,6 +31,8 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
 
         slidingLayout.setPanelSlideListener(this);
         slidingLayout.setParalaxOffset(getResources().getDimensionPixelSize(R.dimen.snippet_parallax));
+        slidingLayout.setScrollableView(snippetView);
+//        slidingLayout.setPanelHeight(0);
 //        slidingLayout.setOverlayed(true);
 
     }
@@ -59,7 +61,7 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
             transaction.commit();
         }
         getSupportFragmentManager().executePendingTransactions();
-        slidingLayout.setScrollableView(snippetFragment.getListView());
+
         slidingLayout.setPanelHeight(snippetHeight);
         notifySnippetOpenState();
     }
@@ -116,6 +118,8 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
     @Override
     public void setSnippetChild(SnippetChildSupport childSupport) {
         this.snippetChildSupport=childSupport;
+        final SlidingUpPanelLayout slidingLayout = (SlidingUpPanelLayout) findViewById(R.id.slidingPanel);
+        slidingLayout.setScrollableView(childSupport.getScrollableView());
         notifySnippetOpenState();
     }
 

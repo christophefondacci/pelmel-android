@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.helpers.Strings;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
 import com.nextep.pelmel.views.SnippetViewHolder;
 
@@ -84,6 +85,13 @@ public class SnippetListAdapter extends BaseAdapter {
                     .findViewById(R.id.hoursBadgeTitleLabel);
             viewHolder.hoursBadgeSubtitleLabel= (TextView) convertView
                     .findViewById(R.id.hoursBadgeSubtitleLabel);
+
+            Strings.setFontFamily(viewHolder.titleLabel);
+            Strings.setFontFamily(viewHolder.subtitleLabel);
+            Strings.setFontFamily(viewHolder.distanceIntroLabel);
+            Strings.setFontFamily(viewHolder.distanceLabel);
+            Strings.setFontFamily(viewHolder.hoursBadgeTitleLabel);
+            Strings.setFontFamily(viewHolder.hoursBadgeSubtitleLabel);
             convertView.setTag(viewHolder);
         }
         return convertView;

@@ -4,7 +4,7 @@
                                                  android:layout_width="match_parent"
                                                  android:layout_height="match_parent"
                                                  android:id="@+id/slidingPanel"
-                                                 android:gravity="bottom">
+                                                 android:gravity="bottom" app:umanoPanelHeight="0dp">
     <fragment
         android:id="@+id/pelmelMap"
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
     <LinearLayout android:orientation="horizontal"
         android:id="@+id/pelmelSnippetContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="match_parent"  android:background="#272a2e"
         />
 
 </com.sothree.slidinguppanel.SlidingUpPanelLayout>

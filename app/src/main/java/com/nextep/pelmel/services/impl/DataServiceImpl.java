@@ -126,7 +126,7 @@ public class DataServiceImpl implements DataService {
 		for(JsonSpecialEvent jsonSpecial :json.getSpecials()) {
 			final RecurringEvent event = getRecurringEventFromJsonSpecial(jsonSpecial);
 			event.setPlace(place);
-//			place.addRecurringEvent(event);
+			place.addRecurringEvent(event);
 		}
 		return place;
 	}
@@ -141,6 +141,7 @@ public class DataServiceImpl implements DataService {
 		}
 
 		// Filling object from JSON info
+		re.setKey(special.getKey());
 		re.setName(special.getName());
 		re.setDescription(special.getDescription());
 		re.setStartDate(new Date(special.getNextStart() * 1000));
@@ -419,6 +420,7 @@ public class DataServiceImpl implements DataService {
 		final List<RecurringEvent> hours = new ArrayList<>();
 		for(final JsonHour jsonHour : json.getHours()) {
 			final RecurringEvent hour = getRecurringEventFromJsonHour(jsonHour);
+			hour.setPlace(place);
 			hours.add(hour);
 		}
 		place.setRecurringEvents(hours);
@@ -426,7 +428,12 @@ public class DataServiceImpl implements DataService {
 	}
 
 	private RecurringEvent getRecurringEventFromJsonHour(JsonHour jsonHour) {
-		final RecurringEvent event = new RecurringEventImpl();
+		// Getting instance from cache or creating it
+		RecurringEvent event = (RecurringEvent)eventCache.get(jsonHour.getKey());
+		if(event == null) {
+			event = new RecurringEventImpl();
+			eventCache.put(jsonHour.getKey(), event);
+		}
 		try {
 			event.setEventType(EventType.valueOf(jsonHour.getType()));
 		} catch(IllegalArgumentException | NullPointerException e ) {

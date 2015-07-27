@@ -1,5 +1,8 @@
 package com.nextep.pelmel.helpers;
 
+import android.graphics.Typeface;
+import android.widget.TextView;
+
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
 import com.nextep.pelmel.model.CalObject;
@@ -18,6 +21,7 @@ import java.util.Locale;
 public final class Strings {
     private static  DateFormat eventDayFormat =  new SimpleDateFormat("EEE");
     private static  DateFormat eventTimeFormat =  DateFormat.getTimeInstance(DateFormat.SHORT);
+    private static Typeface typeface;
 
     private Strings() {
     }
@@ -90,5 +94,14 @@ public final class Strings {
             return obj.getName();
         }
         return null;
+    }
+
+    public static void setFontFamily(TextView textView) {
+        if(typeface == null) {
+            synchronized (Strings.class) {
+                typeface = Typeface.createFromAsset(PelMelApplication.getInstance().getAssets(),"OpenSans-Regular.ttf");
+            }
+        }
+        textView.setTypeface(typeface);
     }
 }
