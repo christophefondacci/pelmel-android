@@ -383,7 +383,8 @@ public class DataServiceImpl implements DataService {
 		place.setName(json.getName());
 		place.setType(json.getType());
 		place.setLikeCount(json.getLikes());
-
+		place.setLiked(json.isLiked());
+		place.setReviewsCount(json.getCommentsCount());
 		// Building tag list
 		final List<Tag> tags = new ArrayList<Tag>();
 		for (final String tagCode : json.getTags()) {
@@ -741,5 +742,53 @@ public class DataServiceImpl implements DataService {
 
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+
+	@Override
+	public CalObject getCalObject(String itemKey, final OverviewListener listener) {
+		CalObject obj = null;
+		boolean loadRequested = false;
+		// Checking every cache and instantiating proper object based on key type
+		if(itemKey.startsWith(Place.CAL_TYPE)) {
+			// Place ?
+			obj = placeCache.get(itemKey);
+			if(obj == null) {
+				obj = new PlaceImpl();
+				obj.setKey(itemKey);
+				placeCache.put(itemKey, (Place) obj);
+				loadRequested = true;
+			}
+		} else if(itemKey.startsWith(User.CAL_TYPE)) {
+			// User ?
+			obj = userCache.get(itemKey);
+			if(obj == null) {
+				obj = new UserImpl();
+				obj.setKey(itemKey);
+				userCache.put(itemKey, (User) obj);
+				loadRequested = true;
+			}
+		} else if(itemKey.startsWith(Event.CAL_TYPE)) {
+			// Event ?
+			obj = eventCache.get(itemKey);
+			if(obj == null) {
+				obj = new EventImpl();
+				obj.setKey(itemKey);
+				eventCache.put(itemKey,(Event)obj);
+				loadRequested = true;
+			}
+		}
+		if(loadRequested) {
+			final CalObject finalObj = obj;
+			new AsyncTask<Void, Void, Void>() {
+				@Override
+				protected Void doInBackground(Void... params) {
+					final User user = userService.getLoggedUser();
+					getOverviewData(user, finalObj, listener);
+					return null;
+				}
+			}.execute();
+		}
+
+		return obj;
 	}
 }

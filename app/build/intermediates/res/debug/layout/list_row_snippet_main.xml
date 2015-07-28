@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent" android:background="#272a2e">
+    android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="115dp" android:background="#272a2e">
 
     <TextView
         android:layout_width="wrap_content"
@@ -51,18 +51,17 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="21dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_height="wrap_content"
         android:text="Bar"
         android:id="@+id/subtitleLabel"
         android:textColor="#ffd54f"
         android:textSize="14sp"
         android:gravity="center_vertical"
         android:layout_toRightOf="@+id/subtitleIcon"
-        android:layout_alignTop="@id/subtitleIcon"
-        android:layout_alignBottom="@id/subtitleIcon"
+        android:layout_below="@id/titleLabel"
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
+        android:layout_marginTop="1dp"
         android:layout_toLeftOf="@+id/hoursBadgeTitleLabel"/>
 
     <TextView
@@ -90,9 +89,15 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@+id/hoursBadgeSubtitleLabel"
+        android:layout_below="@id/subtitleIcon"
         android:layout_alignLeft="@+id/titleLabel"
-        android:layout_marginTop="3dp">
-
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/countersContainerView">
     </LinearLayout>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dip"
+        android:layout_below="@id/countersContainerView"
+        />
 </RelativeLayout><!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/layout/list_row_snippet_main.xml -->

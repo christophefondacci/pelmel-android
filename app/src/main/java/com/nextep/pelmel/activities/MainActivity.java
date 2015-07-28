@@ -14,7 +14,7 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 public class MainActivity extends MainActionBarActivity implements SnippetContainerSupport, SlidingUpPanelLayout.PanelSlideListener {
 
     private static final String TAG_SNIPPET = "snippet";
-    private static final int SNIPPET_HEIGHT = 110;
+    private static final int SNIPPET_HEIGHT = 115;
 
     private int snippetHeight;
     private SnippetChildSupport snippetChildSupport;
@@ -68,6 +68,8 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
 
     @Override
     public boolean openSnippet() {
+        final SlidingUpPanelLayout slidingLayout = (SlidingUpPanelLayout) findViewById(R.id.slidingPanel);
+        slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
 //        SlidingUpPanelLayout slidingLayout = (SlidingUpPanelLayout) findViewById(R.id.slidingPanel);
 //        View mapView = findViewById(R.id.pelmelMap);
 //        slidingLayout.setPanelHeight(mapView.getHeight());

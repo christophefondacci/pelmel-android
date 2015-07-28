@@ -2,6 +2,11 @@
 <resources>
 
     <string name="action_settings">Settings</string>
+    <string name="action_checkin">Check In</string>
+    <string name="action_comment">Comment</string>
+    <string name="action_chat">Chat</string>
+    <string name="action_like">Like</string>
+    <string name="action_unlike">Unlike</string>
     <string name="age_minutes">minutes</string>
     <string name="age_hours">hours</string>
     <string name="age_days">days</string>
@@ -21,6 +26,23 @@
     <string name="counter_event_in_singular">{0} will attend</string>
     <string name="counter_likes">{0} Like It</string>
     <string name="counter_likes_singular">{0} Likes It</string>
+
+    <string name="counter_arehere">{0} are here</string>
+    <string name="counter_arehere_singular">{0} is here</string>
+    <string name="counter_arein">{0} will attend</string>
+    <string name="counter_arein_singular">{0} will attend</string>
+    <string name="counter_chat">Chat</string>
+    <string name="counter_comments">{0} Comments</string>
+    <string name="counter_comments_singular">{0} Comment</string>
+    <string name="counter_likes_user">{0} Like Him</string>
+    <string name="counter_likes_user_singular">{0} Likes Him</string>
+
+    <string name="counter_network">My Network</string>
+    <string name="counter_network_accept">Respond</string>
+    <string name="counter_network_add">Add</string>
+    <string name="counter_network_cancel">Cancel</string>
+    <string name="counter_network_friends">Friends</string>
+
     <string name="distance.feet">{0} feet</string>
     <string name="distance.miles">{0} miles</string>
     <string name="distance.meters">{0} meters</string>
@@ -34,6 +56,12 @@
     <string name="googlePlay.SERVICE_MISSING">You need to install Google Play Services from the Google Play Store</string>
     <string name="googlePlay.SERVICE_VERSION_UPDATE_REQUIRED">You need to update Google Play Services from the Google Play Store</string>
     <string name="googleServicesUnavailable">You need to update or install Google Play Services</string>
+
+    <string name="hours_open">OPEN</string>
+    <string name="hours_open_in">Opens in {0}</string>
+    <string name="hours_open_leftHours">{0} left</string>
+    <string name="hours_closed">CLOSED</string>
+
     <string name="hello_world">Hello world!</string>
     <string name="insiders_title">They were in</string>
     <string name="likers_title">They like</string>
@@ -144,6 +172,13 @@
     <string name="tag.TATTOO">Tattoo</string>
     <string name="tag.TWINK">Twink</string>
     <string name="tapToEdit">Tap to edit</string>
+
+    <string name="time_days">days</string>
+    <string name="time_formatter">{0} ago</string>
+    <string name="time_formatter_future">In {0}</string>
+    <string name="time_hours">hrs</string>
+    <string name="time_minutes">min</string>
+
     <string name="upload_wait_message">Uploading image</string>
     <string name="upcoming_events_title">Upcoming events</string>
     <string name="user_last_seen">Last seen @ %1$s %2$s %3$s ago</string>

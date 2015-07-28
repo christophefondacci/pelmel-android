@@ -5,6 +5,7 @@ import java.util.List;
 
 public interface User extends CalObject {
 
+	String CAL_TYPE = "USER";
 	Date getBirthDate();
 
 	void setBirthDate(Date birthDate);

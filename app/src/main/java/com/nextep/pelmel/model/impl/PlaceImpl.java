@@ -16,6 +16,8 @@ public class PlaceImpl extends AbstractCalObject implements Place {
 	private String address;
 	private String cityName;
 	private int insidersCount;
+	private int reviewsCount;
+	private boolean liked;
 	private final List<Event> events = new ArrayList<Event>();
 	private final List<User> likers = new ArrayList<User>();
 	private final List<User> insiders = new ArrayList<User>();
@@ -121,5 +123,25 @@ public class PlaceImpl extends AbstractCalObject implements Place {
 	@Override
 	public void setInsidersCount(int insidersCount) {
 		this.insidersCount = insidersCount;
+	}
+
+	@Override
+	public void setLiked(boolean liked) {
+		this.liked = liked;
+	}
+
+	@Override
+	public boolean isLiked() {
+		return liked;
+	}
+
+	@Override
+	public void setReviewsCount(int reviewsCount) {
+		this.reviewsCount = reviewsCount;
+	}
+
+	@Override
+	public int getReviewsCount() {
+		return reviewsCount;
 	}
 }

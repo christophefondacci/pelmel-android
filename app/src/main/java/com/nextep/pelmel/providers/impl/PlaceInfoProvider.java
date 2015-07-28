@@ -1,29 +1,39 @@
 package com.nextep.pelmel.providers.impl;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.View;
 
 import com.nextep.pelmel.PelMelApplication;
+import com.nextep.pelmel.R;
+import com.nextep.pelmel.helpers.Strings;
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Event;
+import com.nextep.pelmel.model.EventStartState;
 import com.nextep.pelmel.model.EventType;
 import com.nextep.pelmel.model.Image;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.RecurringEvent;
+import com.nextep.pelmel.providers.CountersProvider;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by cfondacci on 23/07/15.
  */
-public class PlaceInfoProvider implements SnippetInfoProvider {
+public class PlaceInfoProvider implements SnippetInfoProvider, CountersProvider {
 
     private Place place;
     private List<String> addressComponents;
+    private RecurringEvent openingsEvent;
     public PlaceInfoProvider(Place place) {
         this.place = place;
         configureAddress();
@@ -40,6 +50,11 @@ public class PlaceInfoProvider implements SnippetInfoProvider {
                     addressComponents.add(currentComponent);
                     currentComponent = "";
                 }
+            }
+        }
+        for(RecurringEvent event : place.getRecurringEvents()) {
+            if(event.getEventType() == EventType.OPENING) {
+                openingsEvent = event;
             }
         }
     }
@@ -80,7 +95,7 @@ public class PlaceInfoProvider implements SnippetInfoProvider {
 
     @Override
     public int getReviewsCount() {
-        return 0;
+        return place.getReviewsCount();
     }
 
     @Override
@@ -105,11 +120,73 @@ public class PlaceInfoProvider implements SnippetInfoProvider {
 
     @Override
     public String getHoursBadgeTitle() {
-        return null;
+
+        final EventStartState state = PelMelApplication.getConversionService().getEventStartState(openingsEvent);
+        switch(state) {
+            case CURRENT:
+                return Strings.getText(R.string.hours_open);
+            case SOON:
+                return Strings.getText(R.string.hours_closed);
+            default:
+                return null;
+        }
     }
 
     @Override
+    public int getHoursColor() {
+        final EventStartState state = PelMelApplication.getConversionService().getEventStartState(openingsEvent);
+        final Resources resources = PelMelApplication.getInstance().getResources();
+        switch(state) {
+            case CURRENT:
+                return resources.getColor(R.color.hours_open);
+            case SOON:
+                return resources.getColor(R.color.hours_closed);
+            case PAST:
+            default:
+                return resources.getColor(R.color.transparent);
+        }
+    }
+
+    private String getDeltaString(Date date) {
+        long delta = (date.getTime()-System.currentTimeMillis())/1000;
+
+        if(delta < 60) {
+            delta = 60;
+        }
+        long value;
+        if(delta < 3600 || delta > 999999999) {
+            // Display in minutes
+            value = delta / 60;
+            String minStr = Strings.getText(R.string.time_minutes);
+            return value + " " + minStr;
+        } else if(delta < 86400) {
+            // Display in hours
+            value = delta / 3600;
+            String hourStr = Strings.getText(R.string.time_hours);
+            return value + " " + hourStr;
+        } else {
+            // Display in days
+            value = delta / 86400;
+            String dayStr =Strings.getText(R.string.time_days);
+            return value + " " + dayStr;
+        }
+    }
+    @Override
     public String getHoursBadgeSubtitle() {
+        final EventStartState state = PelMelApplication.getConversionService().getEventStartState(openingsEvent);
+        switch(state) {
+            case CURRENT: {
+                String timeDelta = getDeltaString(openingsEvent.getEndDate());
+                String timeTemplate = Strings.getText(R.string.hours_open_leftHours);
+                return MessageFormat.format(timeTemplate,timeDelta);
+            }
+            case SOON: {
+                String timeDelta = getDeltaString(openingsEvent.getStartDate());
+                String timeTemplate = Strings.getText(R.string.hours_open_in);
+                return MessageFormat.format(timeTemplate,timeDelta);
+            }
+
+        }
         return null;
     }
 
@@ -149,5 +226,105 @@ public class PlaceInfoProvider implements SnippetInfoProvider {
             }
         });
         return events;
+    }
+
+    @Override
+    public boolean hasCustomSnippetView() {
+        return false;
+    }
+
+    @Override
+    public void createCustomSnippetView(Context context, View parent) {
+        throw new UnsupportedOperationException("No custom view for places");
+    }
+
+    @Override
+    public void refreshCustomSnippetView(Context context, View parent) {
+        throw new UnsupportedOperationException("No custom view for places");
+    }
+
+    @Override
+    public CountersProvider getCountersProvider() {
+        return this;
+    }
+
+    private boolean isCheckinEnabled(CalObject object) {
+        return PelMelApplication.getLocalizationService().isCheckinEnabled(object);
+    }
+    @Override
+    public String getCounterLabelAtIndex(int index) {
+        switch(index) {
+            case COUNTER_LIKE:
+                return Strings.getCountedText(R.string.counter_likes_singular,R.string.counter_likes,place.getLikeCount()).toString();
+            case COUNTER_CHECKIN:
+                if(isCheckinEnabled(place)) {
+                    return Strings.getCountedText(R.string.counter_arehere_singular,R.string.counter_arehere,place.getInsidersCount()).toString();
+                } else {
+                    return null;
+                }
+
+            case COUNTER_CHAT:
+                //TODO: implement counter support
+                return Strings.getCountedText(R.string.counter_comments_singular,R.string.counter_comments,place.getReviewsCount()).toString();
+        }
+        return null;
+    }
+
+    @Override
+    public String getCounterActionLabelAtIndex(int index) {
+        int res = 0;
+        switch(index) {
+            case COUNTER_LIKE:
+                if(place.isLiked()) {
+                    res = R.string.action_unlike;
+                } else {
+                    res = R.string.action_like;
+                }
+                break;
+            case COUNTER_CHECKIN:
+                res = R.string.action_checkin;
+                break;
+            case COUNTER_CHAT:
+                res = R.string.action_comment;
+        }
+        if(res!=0) {
+            return Strings.getText(res);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean isCounterSelectedAtIndex(int index) {
+        switch(index) {
+            case COUNTER_LIKE:
+                return place.isLiked();
+            case COUNTER_CHECKIN:
+                return PelMelApplication.getUserService().isCheckedInAt(place);
+            default:
+                return false;
+        }
+    }
+
+    @Override
+    public void executeCounterActionAtIndex(int index) {
+
+    }
+
+    @Override
+    public CalObject getCounterObject() {
+        return null;
+    }
+
+    @Override
+    public Bitmap getCounterImageAtIndex(int index) {
+        switch(index) {
+            case COUNTER_LIKE:
+                return BitmapFactory.decodeResource(PelMelApplication.getInstance().getResources(),R.drawable.snp_icon_like_white);
+            case COUNTER_CHECKIN:
+                return BitmapFactory.decodeResource(PelMelApplication.getInstance().getResources(),R.drawable.ovv_icon_check_white);
+            case COUNTER_CHAT:
+                return BitmapFactory.decodeResource(PelMelApplication.getInstance().getResources(),R.drawable.snp_icon_chat);
+        }
+        return null;
     }
 }

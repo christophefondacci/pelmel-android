@@ -3,6 +3,11 @@ package com.nextep.pelmel.services.impl;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.PelMelConstants;
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.model.CalObject;
+import com.nextep.pelmel.model.Place;
+import com.nextep.pelmel.providers.SnippetInfoProvider;
+import com.nextep.pelmel.providers.impl.ContextSnippetInfoProvider;
+import com.nextep.pelmel.providers.impl.PlaceInfoProvider;
 import com.nextep.pelmel.services.UIService;
 import com.nextep.pelmel.views.BadgeView;
 
@@ -108,5 +113,15 @@ public class UIServiceImpl implements UIService {
                 return R.drawable.snp_icon_bar;
         }
 
+    }
+
+    @Override
+    public SnippetInfoProvider buildInfoProviderFor(CalObject object) {
+        if(object instanceof Place) {
+            return new PlaceInfoProvider((Place)object);
+        } else if(object ==null) {
+            return new ContextSnippetInfoProvider();
+        }
+        throw new IllegalArgumentException("Unsupported object for infoProvider builder: " + object.getClass().getName());
     }
 }

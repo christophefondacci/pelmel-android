@@ -3,6 +3,7 @@ package com.nextep.pelmel.services;
 import android.location.Location;
 import android.support.v4.app.FragmentActivity;
 
+import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Localized;
 
 import java.util.Locale;
@@ -58,4 +59,11 @@ public interface LocalizationService {
 	 * @return the error code raised by the google services check
 	 */
 	int getGoogleServicesErrorCode();
+
+	/**
+	 * Informs whether checkin should be enabled for that object
+	 * @param object the object to check (typically a place or an event)
+	 * @return <code>true</code> if checkin is enabled, else <code>false</code>
+	 */
+	boolean isCheckinEnabled(CalObject object);
 }

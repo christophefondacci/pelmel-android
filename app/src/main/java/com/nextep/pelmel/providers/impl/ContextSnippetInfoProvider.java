@@ -1,7 +1,9 @@
 package com.nextep.pelmel.providers.impl;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.View;
 
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
@@ -9,6 +11,7 @@ import com.nextep.pelmel.helpers.ContextHolder;
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.Image;
+import com.nextep.pelmel.providers.CountersProvider;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
 
 import java.text.MessageFormat;
@@ -107,5 +110,30 @@ public class ContextSnippetInfoProvider implements SnippetInfoProvider {
     @Override
     public List<Event> getEvents() {
         return null;
+    }
+
+    @Override
+    public boolean hasCustomSnippetView() {
+        return true;
+    }
+
+    @Override
+    public void createCustomSnippetView(Context context, View parent) {
+
+    }
+
+    @Override
+    public void refreshCustomSnippetView(Context context, View parent) {
+
+    }
+
+    @Override
+    public CountersProvider getCountersProvider() {
+        return null;
+    }
+
+    @Override
+    public int getHoursColor() {
+        return 0;
     }
 }

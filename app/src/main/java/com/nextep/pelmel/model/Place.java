@@ -5,6 +5,8 @@ import java.util.List;
 
 public interface Place extends CalObject {
 
+	String CAL_TYPE = "PLAC";
+
 	String PLACE_TYPE_ASSOCIATION = "asso";
 	String PLACE_TYPE_BAR = "bar";
 	String PLACE_TYPE_CLUB = "club";
@@ -35,6 +37,8 @@ public interface Place extends CalObject {
 
 	void addLiker(User user);
 
+	boolean isLiked();
+	void setLiked(boolean liked);
 	List<User> getInsiders();
 
 	void setInsiders(List<User> insiders);
@@ -43,6 +47,8 @@ public interface Place extends CalObject {
 	void setInsidersCount(int count);
 	void addInsider(User insider);
 
+	int getReviewsCount();
+	void setReviewsCount(int reviewsCount);
 	String getCityName();
 
 	void setCityName(String cityName);

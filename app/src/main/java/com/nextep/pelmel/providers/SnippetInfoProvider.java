@@ -1,6 +1,8 @@
 package com.nextep.pelmel.providers;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.view.View;
 
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Event;
@@ -107,6 +109,12 @@ public interface SnippetInfoProvider {
     String getHoursBadgeTitle();
 
     /**
+     * Provides the color of the hours badge information
+     * @return the color for hours information
+     */
+    int getHoursColor();
+
+    /**
      * Intro text for the distance information
      * @return the distance intro text
      */
@@ -132,4 +140,11 @@ public interface SnippetInfoProvider {
      */
     List<Event> getEvents();
 
+    boolean hasCustomSnippetView();
+
+    void createCustomSnippetView(Context context, View parent);
+
+    void refreshCustomSnippetView(Context context, View parent);
+
+    CountersProvider getCountersProvider();
 }

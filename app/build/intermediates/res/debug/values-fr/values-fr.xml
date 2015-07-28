@@ -20,7 +20,12 @@
     <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Réduire"</string>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values-fr/strings.xml -->
     <eat-comment/>
+    <string name="action_chat">Chater</string>
+    <string name="action_checkin">Check In</string>
+    <string name="action_comment">Commenter</string>
+    <string name="action_like">J\'aime</string>
     <string name="action_settings">Compte</string>
+    <string name="action_unlike">J\'aime plus</string>
     <string name="age_days">jours</string>
     <string name="age_hours">heures</string>
     <string name="age_minutes">minutes</string>
@@ -72,10 +77,24 @@
     <string msgid="2429381841831957106" name="common_signin_button_text_long">"Se connecter avec Google"</string>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values-fr/strings.xml -->
     <eat-comment/>
+    <string name="counter_arehere">{0} y sont</string>
+    <string name="counter_arehere_singular">{0} y est</string>
+    <string name="counter_arein">{0} y seront</string>
+    <string name="counter_arein_singular">{0} y seront</string>
+    <string name="counter_chat">Chat</string>
+    <string name="counter_comments">{0} Commentaires</string>
+    <string name="counter_comments_singular">{0} Commentaires</string>
     <string name="counter_event_in">{0} y seront</string>
     <string name="counter_event_in_singular">{0} y sera</string>
-    <string name="counter_likes">{0}  Aiment ça</string>
+    <string name="counter_likes">{0} Aiment ça</string>
     <string name="counter_likes_singular">{0} Aime ça</string>
+    <string name="counter_likes_user">{0} l\'aiment</string>
+    <string name="counter_likes_user_singular">{0} l\'aime</string>
+    <string name="counter_network">My Network</string>
+    <string name="counter_network_accept">Respond</string>
+    <string name="counter_network_add">Add</string>
+    <string name="counter_network_cancel">Cancel</string>
+    <string name="counter_network_friends">Friends</string>
     <string name="distance.feet">{0} pieds</string>
     <string name="distance.kilometers">{0} km</string>
     <string name="distance.meters">{0} mètres</string>
@@ -86,6 +105,10 @@
     <string name="event_type_opening">HEURE D\'OUVERTURE</string>
     <string name="event_type_themenight">SOIRÉE</string>
     <string name="googleServicesUnavailable">Vous devez installer ou mettre à jour Google Play Services</string>
+    <string name="hours_closed">FERMÉ</string>
+    <string name="hours_open">OUVERT</string>
+    <string name="hours_open_in">Ouvre dans {0}</string>
+    <string name="hours_open_leftHours">Reste {0}</string>
     <string name="insiders_title">Ils étaient là</string>
     <string name="liked_places_title">Il y va</string>
     <string name="liked_users_title">Il aime</string>
@@ -199,6 +222,11 @@
     <string name="tag.TATTOO">Tattoo</string>
     <string name="tag.TWINK">Minet</string>
     <string name="tapToEdit">Changer</string>
+    <string name="time_days">jours</string>
+    <string name="time_formatter">il y a {0} ago</string>
+    <string name="time_formatter_future">Dans {0}</string>
+    <string name="time_hours">h</string>
+    <string name="time_minutes">min</string>
     <string name="upcoming_events_title">Evènements à venir</string>
     <string name="upload_wait_message">Envoi de la photo</string>
     <string name="userPhoto">Photo de l\'utilisateur</string>

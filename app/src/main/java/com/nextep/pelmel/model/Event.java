@@ -5,6 +5,7 @@ import java.util.List;
 
 public interface Event extends CalObject {
 
+	String CAL_TYPE = "EVNT";
 	Date getStartDate();
 
 	void setStartDate(Date startDate);

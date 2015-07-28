@@ -1,5 +1,7 @@
 package com.nextep.pelmel.services;
 
+import com.nextep.pelmel.model.CalObject;
+import com.nextep.pelmel.providers.SnippetInfoProvider;
 import com.nextep.pelmel.views.BadgeView;
 
 public interface UIService {
@@ -44,4 +46,13 @@ public interface UIService {
 	 * @return the drawable resource ID
 	 */
 	int getIconForPlaceType(String placeType);
+
+	/**
+	 * Builds a new info provider object for the given CAL Object
+	 *
+	 * @param object the CalObject to build an info provider for
+	 * @return the provider of snippet information
+	 */
+	SnippetInfoProvider buildInfoProviderFor(CalObject object);
+
 }

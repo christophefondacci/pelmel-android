@@ -2,18 +2,11 @@
 <items version="2" >
 
     <item
-        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.5.0/jars/classes.jar"
+        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/libs/internal_impl-22.0.0.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="272bc5d7063f24bc3a33ea1d318cde8f31f5ec4c">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-0c7d79c46fa2d9ee2b97a54dd80105468bc5eece.jar" />
-    </item>
-    <item
-        jar="/Users/cfondacci/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/gson-2.3.1-f6987ad1ee0264d6f298eab54b5e404a8f47bc17.jar" />
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-8c5f8504cb06e6f5c6f9df0d7f919df670194953.jar" />
     </item>
     <item
         jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/jars/classes.jar"
@@ -37,11 +30,11 @@
         <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-bdfcfc71ff2108d2c4b41d22c5e4871e49e90720.jar" />
     </item>
     <item
-        jar="/Users/cfondacci/Documents/pelmelguide/app/libs/universal-image-loader-1.8.6.jar"
+        jar="/Users/cfondacci/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="09995ba681982ca129af798c9eb21e79c4bffa45">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/universal-image-loader-1.8.6-ee4e7e77e2123637fa8b89373cf4fefdb11feae2.jar" />
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/gson-2.3.1-f6987ad1ee0264d6f298eab54b5e404a8f47bc17.jar" />
     </item>
     <item
         jar="/Users/cfondacci/Dev/android/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
@@ -51,102 +44,11 @@
         <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-47f4a3c8ce3c235c17ec1f02b25ba1f870cc4fcb.jar" />
     </item>
     <item
-        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.5.0/jars/classes.jar"
+        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.sothree.slidinguppanel/library/3.1.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="69dd177337ead693c408c8dddc9546bb6f1244fa">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-21eac5fb2dafd2cf58522ea9f681934667843e7b.jar" />
-    </item>
-    <item
-        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="68c140702c7242d914655bcb3164d9e8c45b84cb">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-d6a88517057a65130dba6dec9d3b5a65cbec519e.jar" />
-    </item>
-    <item
-        jar="/Users/cfondacci/Documents/pelmelguide/app/libs/httpmime-4.2.5.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="01a9f7db192fd647f2ed7ad980d8bc1c2caafc81">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/httpmime-4.2.5-d4139ec9ce9b48697bf47b60c39e2d849fbfd9ad.jar" />
-    </item>
-    <item
-        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="ba207be21987c11b37d9f8faa08ed6e722569f30">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-7ae79894c4c16eee5512e6d0e736f7846c190a78.jar" />
-    </item>
-    <item
-        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="f02127a85abd52a2cd526d4c2409f21969f80ee8">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-17c0113d847d0289de24d219eeed7ba4cf703a79.jar" />
-    </item>
-    <item
-        jar="/Users/cfondacci/.gradle/caches/modules-2/files-2.1/io.gsonfire/gson-fire/1.2.0/163be3f3194596182d296de423d06a3d0579d1f3/gson-fire-1.2.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="163be3f3194596182d296de423d06a3d0579d1f3">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/gson-fire-1.2.0-b3bbfec0f279b7c835d0ad9e7cb034e7ae716206.jar" />
-    </item>
-    <item
-        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.maps.android/android-maps-utils/0.3.4/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="cf251baf39f5c5138224b67b4106eb6331abbd13">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-770f45cb51b51a6539fd5bf96114fee4c5079370.jar" />
-    </item>
-    <item
-        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="d405025c600055237c171a0bbabaa49d69696573">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-07f6c83afcd780e2e660d583a931e1cb9089cb97.jar" />
-    </item>
-    <item
-        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="6440e5e5cfe368f9bff3c537fb8988048069cb33">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-219d148415e97a709f8b612d444f30ddca28c7fe.jar" />
-    </item>
-    <item
-        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-fb0ed3fc8a5e176a8166c3ef849c332ed34a02c0.jar" />
-    </item>
-    <item
-        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="02bac2dc792d78241077861566f2c82da955e7fa">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-1a71351c7e50ce58d4f4f0748c86401bcd321bd1.jar" />
-    </item>
-    <item
-        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a78183f30e769a98ab4820794f597763088d3065">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-e74732a8769a7bff6198fc5b7ebfe036e3834a5a.jar" />
-    </item>
-    <item
-        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/libs/internal_impl-22.0.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-8c5f8504cb06e6f5c6f9df0d7f919df670194953.jar" />
-    </item>
-    <item
-        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="6836d188602ec5382d1967c58b00960eb8ff8773">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-436c1ef3e8a6967eb79c7d3773f304815381c101.jar" />
+        sha1="26ca23abecf828670a87f976420f0ff17c5d6830">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-84b1197e7ac13708a631bc68db7f076d16d1970b.jar" />
     </item>
     <item
         jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.5.0/jars/classes.jar"
@@ -156,39 +58,25 @@
         <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-d84727f7306f7603b9e77165419116ce76a33f32.jar" />
     </item>
     <item
-        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/jars/libs/internal_impl-22.0.0.jar"
+        jar="/Users/cfondacci/.gradle/caches/modules-2/files-2.1/io.gsonfire/gson-fire/1.2.0/163be3f3194596182d296de423d06a3d0579d1f3/gson-fire-1.2.0.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="ba3df4eb0a630d7de294f0e48d3f9267d279b784">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-7ea89a567420f1547854c1ad938cabbf45e08dd5.jar" />
+        sha1="163be3f3194596182d296de423d06a3d0579d1f3">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/gson-fire-1.2.0-b3bbfec0f279b7c835d0ad9e7cb034e7ae716206.jar" />
     </item>
     <item
-        jar="/Users/cfondacci/.m2/repository/nextep/web-json/0.0.1-SNAPSHOT/web-json-0.0.1-SNAPSHOT.jar"
+        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.5.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="08e85005298a513e0d5fee806c8f623606dcb293">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/web-json-0.0.1-SNAPSHOT-d1a3988f5e561ca657c60e873f2def675c75aee0.jar" />
+        sha1="f02127a85abd52a2cd526d4c2409f21969f80ee8">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-17c0113d847d0289de24d219eeed7ba4cf703a79.jar" />
     </item>
     <item
-        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/jars/classes.jar"
+        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.5.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-318925ccc6a963468a12b762e1cb2d0b73b808d8.jar" />
-    </item>
-    <item
-        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.sothree.slidinguppanel/library/3.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="26ca23abecf828670a87f976420f0ff17c5d6830">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-84b1197e7ac13708a631bc68db7f076d16d1970b.jar" />
-    </item>
-    <item
-        jar="/Users/cfondacci/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/library-2.4.0-f60ab530b4877501db5774383807a9a2b7a1ae43.jar" />
+        sha1="ba207be21987c11b37d9f8faa08ed6e722569f30">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-7ae79894c4c16eee5512e6d0e736f7846c190a78.jar" />
     </item>
     <item
         jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.5.0/jars/classes.jar"
@@ -198,18 +86,18 @@
         <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-59f6c13732295a535731b8c1651fa2a03a99626f.jar" />
     </item>
     <item
-        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.5.0/jars/classes.jar"
+        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="06a42becc33232ec0ee125161da68c1829c9f8fd">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-02fc41b8e2fc14327e53aa789b2d6ad4fe3d6b9e.jar" />
+        sha1="a78183f30e769a98ab4820794f597763088d3065">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-e74732a8769a7bff6198fc5b7ebfe036e3834a5a.jar" />
     </item>
     <item
-        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/7.5.0/jars/classes.jar"
+        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.5.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="63ec6e9f4fe5482a7447d0f3091b8e543a02554c">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-557ca14f2d086086ba8501887f69c5fed1004d50.jar" />
+        sha1="68c140702c7242d914655bcb3164d9e8c45b84cb">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-d6a88517057a65130dba6dec9d3b5a65cbec519e.jar" />
     </item>
     <item
         jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.5.0/jars/classes.jar"
@@ -219,11 +107,18 @@
         <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-94178a54a09e928d35fec04f435b5efe0407c9a9.jar" />
     </item>
     <item
-        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.5.0/jars/classes.jar"
+        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.5.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="8d736fefa22d896e84a268354b3ed48a42663150">
-        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-191434553953e2f9ab1b498db9687442122d273f.jar" />
+        sha1="06a42becc33232ec0ee125161da68c1829c9f8fd">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-02fc41b8e2fc14327e53aa789b2d6ad4fe3d6b9e.jar" />
+    </item>
+    <item
+        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="6440e5e5cfe368f9bff3c537fb8988048069cb33">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-219d148415e97a709f8b612d444f30ddca28c7fe.jar" />
     </item>
     <item
         jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.5.0/jars/classes.jar"
@@ -233,11 +128,116 @@
         <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-e309f8b4a11fbad3347b9b8330f0338ece519522.jar" />
     </item>
     <item
+        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d405025c600055237c171a0bbabaa49d69696573">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-07f6c83afcd780e2e660d583a931e1cb9089cb97.jar" />
+    </item>
+    <item
+        jar="/Users/cfondacci/Documents/pelmelguide/app/libs/universal-image-loader-1.8.6.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="09995ba681982ca129af798c9eb21e79c4bffa45">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/universal-image-loader-1.8.6-ee4e7e77e2123637fa8b89373cf4fefdb11feae2.jar" />
+    </item>
+    <item
+        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="272bc5d7063f24bc3a33ea1d318cde8f31f5ec4c">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-0c7d79c46fa2d9ee2b97a54dd80105468bc5eece.jar" />
+    </item>
+    <item
+        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-318925ccc6a963468a12b762e1cb2d0b73b808d8.jar" />
+    </item>
+    <item
         jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.5.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="29ebc7e04d877062317c8cc0e68b20f0c1fcda66">
         <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-3f1bd0d8f5c00a4f3406530dea5225737e523295.jar" />
+    </item>
+    <item
+        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="02bac2dc792d78241077861566f2c82da955e7fa">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-1a71351c7e50ce58d4f4f0748c86401bcd321bd1.jar" />
+    </item>
+    <item
+        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="69dd177337ead693c408c8dddc9546bb6f1244fa">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-21eac5fb2dafd2cf58522ea9f681934667843e7b.jar" />
+    </item>
+    <item
+        jar="/Users/cfondacci/Documents/pelmelguide/app/libs/httpmime-4.2.5.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="01a9f7db192fd647f2ed7ad980d8bc1c2caafc81">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/httpmime-4.2.5-d4139ec9ce9b48697bf47b60c39e2d849fbfd9ad.jar" />
+    </item>
+    <item
+        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="63ec6e9f4fe5482a7447d0f3091b8e543a02554c">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-557ca14f2d086086ba8501887f69c5fed1004d50.jar" />
+    </item>
+    <item
+        jar="/Users/cfondacci/.m2/repository/nextep/web-json/0.0.1-SNAPSHOT/web-json-0.0.1-SNAPSHOT.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3ec640fb36463fe56f9a5b2b097d69ef26466285">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/web-json-0.0.1-SNAPSHOT-d1a3988f5e561ca657c60e873f2def675c75aee0.jar" />
+    </item>
+    <item
+        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="8d736fefa22d896e84a268354b3ed48a42663150">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-191434553953e2f9ab1b498db9687442122d273f.jar" />
+    </item>
+    <item
+        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="6836d188602ec5382d1967c58b00960eb8ff8773">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-436c1ef3e8a6967eb79c7d3773f304815381c101.jar" />
+    </item>
+    <item
+        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/jars/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ba3df4eb0a630d7de294f0e48d3f9267d279b784">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-7ea89a567420f1547854c1ad938cabbf45e08dd5.jar" />
+    </item>
+    <item
+        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.maps.android/android-maps-utils/0.3.4/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="cf251baf39f5c5138224b67b4106eb6331abbd13">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-770f45cb51b51a6539fd5bf96114fee4c5079370.jar" />
+    </item>
+    <item
+        jar="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/classes-fb0ed3fc8a5e176a8166c3ef849c332ed34a02c0.jar" />
+    </item>
+    <item
+        jar="/Users/cfondacci/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/pre-dexed/debug/library-2.4.0-f60ab530b4877501db5774383807a9a2b7a1ae43.jar" />
     </item>
 
 </items>

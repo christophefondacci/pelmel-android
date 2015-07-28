@@ -1,5 +1,7 @@
 package com.nextep.pelmel.services;
 
+import com.nextep.pelmel.model.Event;
+import com.nextep.pelmel.model.EventStartState;
 import com.nextep.pelmel.model.EventType;
 import com.nextep.pelmel.model.Localized;
 import com.nextep.pelmel.model.Place;
@@ -52,4 +54,11 @@ public interface ConversionService {
      * @return a recurrency label like "Mon.,Tue.-Fri. 8am-8pm"
      */
     String getRecurringEventLabel(RecurringEvent event);
+
+    /**
+     * Computes the start state of the given event
+     * @param event the Event to compute the state for
+     * @return the EventStartState of this Event
+     */
+    EventStartState getEventStartState(Event event);
 }

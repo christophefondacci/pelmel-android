@@ -31,14 +31,16 @@ import com.nextep.pelmel.listeners.UserListener;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.model.support.SnippetContainerSupport;
+import com.nextep.pelmel.providers.SnippetInfoProvider;
 import com.nextep.pelmel.providers.impl.ContextSnippetInfoProvider;
+import com.nextep.pelmel.services.ConversionService;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class MapActivity extends Fragment implements UserListener,
-		OnInfoWindowClickListener {
+		OnInfoWindowClickListener,GoogleMap.OnMarkerClickListener {
 
 	private static final String TAG_MAP = "MAP";
 	private Map<Marker, Place> placeMarkersMap;
@@ -63,7 +65,7 @@ public class MapActivity extends Fragment implements UserListener,
 		map = mapFragment.getMap();
 		map.setMyLocationEnabled(true);
 		map.setOnInfoWindowClickListener(this);
-
+		map.setOnMarkerClickListener(this);
 		// Setting bounds on user location
 //		final LatLng latlng = new LatLng(loc.getLatitude(), loc.getLongitude());
 //		final CameraUpdate upd = CameraUpdateFactory.newLatLngZoom(latlng, 14);
@@ -132,6 +134,7 @@ public class MapActivity extends Fragment implements UserListener,
 					final LatLngBounds.Builder zoomFitBoundsBuilder = new LatLngBounds.Builder();
 
 					// Processing places
+					final ConversionService conversionService = PelMelApplication.getConversionService();
 					final Resources res = PelMelApplication.getInstance()
 							.getResources();
 					for (final Place p : places) {
@@ -162,9 +165,12 @@ public class MapActivity extends Fragment implements UserListener,
 									.fromResource(markerCode);
 							final LatLng markerPos = new LatLng(p.getLatitude(),
 									p.getLongitude());
+
+							final double distance = conversionService.getDistanceTo(p);
+							final String distStr = conversionService.getDistanceStringForMiles(distance);
 							final Marker marker = map.addMarker(new MarkerOptions()
 									.position(markerPos).icon(bitmapDesc)
-									.title(p.getName()).snippet(p.getDistanceLabel()));
+									.title(p.getName()).snippet(distStr));
 							placeMarkersMap.put(marker, p);
 
 							// Zoom management
@@ -198,10 +204,18 @@ public class MapActivity extends Fragment implements UserListener,
 
 	@Override
 	public void onInfoWindowClick(Marker marker) {
-//		final Place p = placeMarkersMap.get(marker);
+		snippetContainerSupport.openSnippet();
 //		final Intent intent = new Intent(this, OverviewActivity.class);
 //		PelMelApplication.setOverviewObject(p);
 //		startActivity(intent);
 //		overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+	}
+
+	@Override
+	public boolean onMarkerClick(Marker marker) {
+		final Place p = placeMarkersMap.get(marker);
+		final SnippetInfoProvider infoProvider = PelMelApplication.getUiService().buildInfoProviderFor(p);
+		snippetContainerSupport.showSnippetFor(infoProvider,false,false);
+		return false;
 	}
 }

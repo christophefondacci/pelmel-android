@@ -1,21 +1,5 @@
 package com.nextep.pelmel.services.impl;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.util.HashSet;
-import java.util.Set;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.StringBody;
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
@@ -31,10 +15,27 @@ import com.nextep.pelmel.R;
 import com.nextep.pelmel.activities.LoginActivity;
 import com.nextep.pelmel.listeners.UserListener;
 import com.nextep.pelmel.listeners.UserRegisterListener;
+import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.services.DataService;
 import com.nextep.pelmel.services.UserService;
 import com.nextep.pelmel.services.WebService;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.HashSet;
+import java.util.Set;
 
 public class UserServiceImpl implements UserService {
 
@@ -274,5 +275,15 @@ public class UserServiceImpl implements UserService {
 		final SharedPreferences.Editor editor = prefs.edit();
 		editor.putInt(PelMelConstants.PREF_SEARCH_RADIUS, radius);
 		editor.commit();
+	}
+
+	@Override
+	public User getLoggedUser() {
+		return currentUser;
+	}
+
+	@Override
+	public boolean isCheckedInAt(Place place) {
+		return currentUser.getLastLocation() != null && currentUser.getLastLocation().getKey().equals(place.getKey()) && (System.currentTimeMillis()-currentUser.getLastLocationTime().getTime())<PelMelConstants.CHECKIN_TIMEOUT_MILLISECS;
 	}
 }

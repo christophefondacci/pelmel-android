@@ -14,8 +14,13 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.nextep.pelmel.PelMelApplication;
+import com.nextep.pelmel.PelMelConstants;
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.model.CalObject;
+import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.Localized;
+import com.nextep.pelmel.model.Place;
+import com.nextep.pelmel.services.ConversionService;
 import com.nextep.pelmel.services.LocalizationService;
 
 import java.text.MessageFormat;
@@ -242,5 +247,23 @@ public class LocalizationServiceImpl implements LocalizationService,
 				.getString(currentTemplate);
 		return MessageFormat.format(templateString,
 				String.valueOf(currentValue));
+	}
+
+	@Override
+	public boolean isCheckinEnabled(CalObject object) {
+		final ConversionService conversionService = PelMelApplication.getConversionService();
+
+		if(object instanceof Place) {
+			return conversionService.getDistanceTo(object) <= PelMelConstants.CHECKIN_DISTANCE;
+		} else if(object instanceof Event) {
+			// If it is an event, checkin is enabled if the event is started and not yet over
+			Event event = (Event)object;
+			if(event.getStartDate()!= null && event.getStartDate().getTime()<System.currentTimeMillis() && event.getEndDate()!=null && event.getEndDate().getTime()>System.currentTimeMillis()) {
+				// And if we are close enough to the place of this event
+				return isCheckinEnabled(event.getPlace());
+			}
+		}
+		return false;
+
 	}
 }

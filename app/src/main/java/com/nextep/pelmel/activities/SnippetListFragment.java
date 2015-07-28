@@ -34,6 +34,7 @@ import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.model.support.SnippetChildSupport;
 import com.nextep.pelmel.model.support.SnippetContainerSupport;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
+import com.nextep.pelmel.providers.impl.ContextSnippetInfoProvider;
 import com.nextep.pelmel.providers.impl.PlaceInfoProvider;
 
 import java.util.List;
@@ -43,6 +44,9 @@ import java.util.Map;
  * Created by cfondacci on 21/07/15.
  */
 public class SnippetListFragment extends ListFragment implements UserListener, AdapterView.OnItemClickListener, SnippetChildSupport, OverviewListener {
+
+    private static final String BUNDLE_STATE_ITEM_KEY = "itemKey";
+    private static final String BUNDLE_STATE_NULL_OBJ = "null";
 
     private SnippetInfoProvider infoProvider;
     private SnippetSectionedAdapter adapter;
@@ -88,6 +92,9 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
 
     @Override
     public void userInfoAvailable(final User user) {
+        if(infoProvider == null) {
+            return;
+        }
         if (infoProvider.getItem() != null) {
 
             new AsyncTask<Void,Void,Void>() {
@@ -108,10 +115,10 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
     }
     private void updateData() {
         adapter = new SnippetSectionedAdapter(this.getActivity());
-        if (infoProvider.getItem() != null) {
-            adapter.insertSection(0, SnippetSectionedAdapter.SECTION_GALLERY, new SnippetGalleryAdapter(this.getActivity(), snippetContainerSupport.isSnippetOpened(), infoProvider.getItem()));
-        }
         adapter.addSection(SnippetSectionedAdapter.SECTION_SNIPPET, new SnippetListAdapter(this.getActivity(), infoProvider));
+        if (infoProvider.getItem() != null) {
+            adapter.addSection( SnippetSectionedAdapter.SECTION_GALLERY, new SnippetGalleryAdapter(this.getActivity(), true /*snippetContainerSupport.isSnippetOpened()*/, infoProvider.getItem()));
+        }
         if(infoProvider.getItem() == null) {
             adapter.addSection(SnippetSectionedAdapter.SECTION_PLACES, new SnippetPlacesListAdapter(this.getActivity(), ContextHolder.places));
         } else {
@@ -180,7 +187,7 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
 
                 }
                 if(listItem.getContentView()!=null) {
-                    toggleAnimation(listItem, fromHeight, toHeight, true);
+//                    toggleAnimation(listItem, fromHeight, toHeight, true);
                 }
 //                if (snippetOpened) {
 //                    ((ExpandingListView) getListView()).expandItem(1);
@@ -239,5 +246,32 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
     @Override
     public View getScrollableView() {
         return getListView();
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if(infoProvider != null) {
+            if (infoProvider.getItem() == null) {
+                outState.putString(BUNDLE_STATE_ITEM_KEY, BUNDLE_STATE_NULL_OBJ);
+            } else {
+                outState.putString(BUNDLE_STATE_ITEM_KEY, infoProvider.getItem().getKey());
+            }
+        }
+    }
+
+    @Override
+    public void onViewStateRestored(Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        if(savedInstanceState != null) {
+            final String itemKey = savedInstanceState.getString(BUNDLE_STATE_ITEM_KEY);
+            if (itemKey.equals(BUNDLE_STATE_NULL_OBJ)) {
+                infoProvider = new ContextSnippetInfoProvider();
+            } else {
+                CalObject obj = PelMelApplication.getDataService().getCalObject(itemKey, this);
+                infoProvider = PelMelApplication.getUiService().buildInfoProviderFor(obj);
+            }
+        }
     }
 }

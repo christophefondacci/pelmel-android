@@ -1,6 +1,7 @@
 package com.nextep.pelmel.views;
 
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -14,5 +15,22 @@ public class SnippetViewHolder {
     public TextView distanceLabel;
     public TextView hoursBadgeTitleLabel;
     public TextView hoursBadgeSubtitleLabel;
+    public LinearLayout countersContainerView;
+
+    public TextView likeActionLabel;
+    public TextView likeTitleLabel;
+    public ImageView likeIcon;
+    public LinearLayout likeIconContainerView;
+
+    public TextView checkinActionLabel;
+    public TextView checkinTitleLabel;
+    public ImageView checkinIcon;
+    public LinearLayout checkinIconContainerView;
+
+    public TextView chatActionLabel;
+    public TextView chatTitleLabel;
+    public ImageView chatIcon;
+    public LinearLayout chatIconContainerView;
+
 
 }

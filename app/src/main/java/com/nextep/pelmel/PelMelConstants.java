@@ -27,4 +27,8 @@ public interface PelMelConstants {
 
 	double MAP_USERLOCATION_RADIUS = 1000;
 	int MAP_MINIMUM_PLACES_FOR_ZOOM = 3;
+
+
+	double CHECKIN_DISTANCE = 1.0f;
+	int CHECKIN_TIMEOUT_MILLISECS = 10800000;
 }

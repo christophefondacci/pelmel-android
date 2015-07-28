@@ -7,6 +7,8 @@ import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
 import com.nextep.pelmel.helpers.GeoUtils;
 import com.nextep.pelmel.helpers.Strings;
+import com.nextep.pelmel.model.Event;
+import com.nextep.pelmel.model.EventStartState;
 import com.nextep.pelmel.model.EventType;
 import com.nextep.pelmel.model.Localized;
 import com.nextep.pelmel.model.Place;
@@ -210,5 +212,26 @@ public class ConversionServiceImpl implements ConversionService {
         final String localizedTime = localizedTimeFormat.format(startTime);
         
         return localizedTime;
+    }
+
+    @Override
+    public EventStartState getEventStartState(Event event) {
+        if(event !=null) {
+            if (event.getStartDate() != null && event.getEndDate() != null) {
+                final long startTime = event.getStartDate().getTime();
+                final long endTime = event.getEndDate().getTime();
+
+                if (startTime > System.currentTimeMillis()) {
+                    return EventStartState.SOON;
+                } else if (endTime > System.currentTimeMillis()) {
+                    return EventStartState.CURRENT;
+                } else {
+                    return EventStartState.PAST;
+                }
+            }
+            return EventStartState.PAST;
+        } else {
+            return EventStartState.UNAVAILABLE;
+        }
     }
 }
