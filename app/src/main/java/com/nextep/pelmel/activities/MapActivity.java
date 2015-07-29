@@ -2,6 +2,7 @@ package com.nextep.pelmel.activities;
 
 import android.app.Activity;
 import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,13 +12,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -27,6 +29,7 @@ import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.PelMelConstants;
 import com.nextep.pelmel.R;
 import com.nextep.pelmel.helpers.GeoUtils;
+import com.nextep.pelmel.helpers.Utils;
 import com.nextep.pelmel.listeners.UserListener;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.User;
@@ -137,6 +140,7 @@ public class MapActivity extends Fragment implements UserListener,
 					final ConversionService conversionService = PelMelApplication.getConversionService();
 					final Resources res = PelMelApplication.getInstance()
 							.getResources();
+					LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
 					for (final Place p : places) {
 						int markerCode;
 						if (p != null) {
@@ -161,17 +165,29 @@ public class MapActivity extends Fragment implements UserListener,
 							} else {
 								markerCode = R.drawable.marker_bar;
 							}
-							final BitmapDescriptor bitmapDesc = BitmapDescriptorFactory
-									.fromResource(markerCode);
+
+							// Inflating marker
+							final View markerView = layoutInflater.inflate(R.layout.map_marker,null);
+							final ImageView markerImage = (ImageView)markerView.findViewById(R.id.markerImage);
+							final TextView markerBadge = (TextView)markerView.findViewById(R.id.badgeLabel);
+							markerImage.setImageBitmap(BitmapFactory.decodeResource(res,markerCode));
+							markerBadge.setText(String.valueOf(p.getInsidersCount()));
+							if(p.getInsidersCount()==0) {
+								markerBadge.setVisibility(View.INVISIBLE);
+							}
+
+//							final BitmapDescriptor bitmapDesc = BitmapDescriptorFactory
+//									.fromResource(markerCode);
 							final LatLng markerPos = new LatLng(p.getLatitude(),
 									p.getLongitude());
 
 							final double distance = conversionService.getDistanceTo(p);
 							final String distStr = conversionService.getDistanceStringForMiles(distance);
 							final Marker marker = map.addMarker(new MarkerOptions()
-									.position(markerPos).icon(bitmapDesc)
+									.position(markerPos).icon(BitmapDescriptorFactory.fromBitmap(Utils.createDrawableFromView(getActivity(),markerView)))
 									.title(p.getName()).snippet(distStr));
 							placeMarkersMap.put(marker, p);
+
 
 							// Zoom management
 							if(userZoomBounds.contains(markerPos)) {
