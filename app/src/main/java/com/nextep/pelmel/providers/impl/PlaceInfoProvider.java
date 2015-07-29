@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.view.View;
+import android.widget.LinearLayout;
 
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
@@ -198,7 +198,11 @@ public class PlaceInfoProvider implements SnippetInfoProvider, CountersProvider 
     @Override
     public String getDistanceText() {
         double distance = PelMelApplication.getConversionService().getDistanceTo(place);
-        return PelMelApplication.getConversionService().getDistanceStringForMiles(distance);
+        if(distance == 0) {
+            return null;
+        } else {
+            return PelMelApplication.getConversionService().getDistanceStringForMiles(distance);
+        }
     }
 
     @Override
@@ -234,18 +238,57 @@ public class PlaceInfoProvider implements SnippetInfoProvider, CountersProvider 
     }
 
     @Override
-    public void createCustomSnippetView(Context context, View parent) {
+    public void createCustomSnippetView(Context context, LinearLayout parent) {
         throw new UnsupportedOperationException("No custom view for places");
     }
 
     @Override
-    public void refreshCustomSnippetView(Context context, View parent) {
+    public void refreshCustomSnippetView(Context context, LinearLayout parent) {
         throw new UnsupportedOperationException("No custom view for places");
     }
 
     @Override
     public CountersProvider getCountersProvider() {
         return this;
+    }
+
+    @Override
+    public int getThumbListsRowCount() {
+        int thumbRows = 0;
+        if(place.getLikers()!=null && !place.getLikers().isEmpty()) {
+            thumbRows++;
+        }
+        if(place.getInsiders()!=null && !place.getInsiders().isEmpty()) {
+            thumbRows++;
+        }
+        return thumbRows;
+    }
+
+    @Override
+    public List<CalObject> getThumbListObjects(int row) {
+        if(row == 0 && place.getLikers() != null && !place.getLikers().isEmpty()) {
+            return (List)place.getLikers();
+        } else {
+            return (List)place.getInsiders();
+        }
+    }
+
+    @Override
+    public String getThumbListSectionTitle(int row) {
+        if(row == 0 && place.getLikers() != null && !place.getLikers().isEmpty()) {
+            return Strings.getCountedText(R.string.thumbs_section_like_singular,R.string.thumbs_section_like,place.getLikeCount()).toString();
+        } else {
+            return Strings.getCountedText(R.string.thumbs_section_checkedin_singular,R.string.thumbs_section_checkedin,place.getInsidersCount()).toString();
+        }
+    }
+
+    @Override
+    public Bitmap getThumbListSectionIcon(int row) {
+        if(row == 0 && place.getLikers() != null && !place.getLikers().isEmpty()) {
+            return BitmapFactory.decodeResource(PelMelApplication.getInstance().getResources(),R.drawable.snp_icon_like_white);
+        } else {
+            return BitmapFactory.decodeResource(PelMelApplication.getInstance().getResources(),R.drawable.ovv_icon_check_white);
+        }
     }
 
     private boolean isCheckinEnabled(CalObject object) {
@@ -264,7 +307,6 @@ public class PlaceInfoProvider implements SnippetInfoProvider, CountersProvider 
                 }
 
             case COUNTER_CHAT:
-                //TODO: implement counter support
                 return Strings.getCountedText(R.string.counter_comments_singular,R.string.counter_comments,place.getReviewsCount()).toString();
         }
         return null;

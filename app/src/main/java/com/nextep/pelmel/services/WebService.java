@@ -13,6 +13,8 @@ import com.nextep.json.model.impl.JsonOneToOneMessageList;
 import com.nextep.json.model.impl.JsonUser;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.gson.GsonHelper;
+import com.nextep.pelmel.model.Event;
+import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.User;
 
 import java.io.InputStream;
@@ -34,6 +36,8 @@ public class WebService {
 	private static final String MESSAGES_LIST_ACTION = "/mobileMyMessages";
 	private static final String CONVERSATION_LIST_ACTION = "/mobileMyMessagesReply";
 	private static final String PLACES_OVERVIEW_ACTION = "/api/place";
+	private static final String USERS_OVERVIEW_ACTION = "/api/user";
+	private static final String EVENTS_OVERVIEW_ACTION = "/api/event";
 	private static final String LIKE_ACTION = "/mobileIlike";
 
 	Gson gson;
@@ -149,9 +153,17 @@ public class WebService {
 	public <T> T getOverviewData(Class<T> returnType, String key,
 								 double latitude, double longitude, String token) {
 		try {
+			String actionUrl = null;
+			if(key.startsWith(Place.CAL_TYPE)) {
+				actionUrl = PLACES_OVERVIEW_ACTION;
+			} else if(key.startsWith(User.CAL_TYPE)) {
+				actionUrl = USERS_OVERVIEW_ACTION;
+			} else if(key.startsWith(Event.CAL_TYPE)) {
+				actionUrl = EVENTS_OVERVIEW_ACTION;
+			}
 			// querying places
 			final InputStream inputStream = sendRequest(new URL(BASE_URL
-					+ PLACES_OVERVIEW_ACTION + "?id=" + key + "&lat="
+					+ actionUrl + "?id=" + key + "&lat="
 					+ latitude + "&lng=" + longitude + "&nxtpUserToken="
 					+ token));
 

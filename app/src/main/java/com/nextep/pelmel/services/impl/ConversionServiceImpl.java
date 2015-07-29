@@ -79,8 +79,12 @@ public class ConversionServiceImpl implements ConversionService {
         final LocalizationService locService = PelMelApplication.getLocalizationService();
         final Location loc = locService.getLocation();
 
-        double dist = GeoUtils.distance(loc.getLatitude(),loc.getLongitude(),localized.getLatitude(),localized.getLongitude());
-        return dist;
+        if(localized.getLatitude() == null || localized.getLongitude() == null) {
+            return 0;
+        } else {
+            double dist = GeoUtils.distance(loc.getLatitude(), loc.getLongitude(), localized.getLatitude(), localized.getLongitude());
+            return dist;
+        }
 //        if(localized instanceof Place) {
 //            return ((Place)localized).getDistance();
 //        }

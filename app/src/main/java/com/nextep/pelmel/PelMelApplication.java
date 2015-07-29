@@ -11,6 +11,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.User;
+import com.nextep.pelmel.model.support.SnippetContainerSupport;
 import com.nextep.pelmel.providers.OverviewProvider;
 import com.nextep.pelmel.providers.impl.EventOverviewProvider;
 import com.nextep.pelmel.providers.impl.PlaceOverviewProvider;
@@ -51,6 +52,7 @@ public class PelMelApplication extends Application implements
 	private LocalizationService localizationService;
 	private LocationManager locationManager;
 	private ConversionService conversionService;
+	private SnippetContainerSupport snippetContainerSupport;
 
 	private Object overviewObject;
 	private int tabIndex = 0;
@@ -151,7 +153,12 @@ public class PelMelApplication extends Application implements
 	}
 
 	public static ConversionService getConversionService() {return instance.conversionService;}
-
+	public static SnippetContainerSupport getSnippetContainerSupport() {
+		return instance.snippetContainerSupport;
+	}
+	public static void setSnippetContainerSupport(SnippetContainerSupport snippetContainerSupport) {
+		instance.snippetContainerSupport = snippetContainerSupport;
+	}
 	public static void setOverviewObject(Object overviewObject) {
 		instance.overviewObject = overviewObject;
 	}

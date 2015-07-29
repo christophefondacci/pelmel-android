@@ -2,7 +2,7 @@ package com.nextep.pelmel.providers;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.view.View;
+import android.widget.LinearLayout;
 
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Event;
@@ -142,9 +142,21 @@ public interface SnippetInfoProvider {
 
     boolean hasCustomSnippetView();
 
-    void createCustomSnippetView(Context context, View parent);
+    void createCustomSnippetView(Context context, LinearLayout parent);
 
-    void refreshCustomSnippetView(Context context, View parent);
+    void refreshCustomSnippetView(Context context, LinearLayout parent);
 
     CountersProvider getCountersProvider();
+
+    /**
+     * Returns the number of rows of thumb lists that this provider should display. Each row will generate
+     * a call to the section title, section image, and list of objects
+     *
+     * @return the number of rows of thumbs list
+     */
+    int getThumbListsRowCount();
+
+    List<CalObject> getThumbListObjects(int row);
+    String getThumbListSectionTitle(int row);
+    Bitmap getThumbListSectionIcon(int row);
 }

@@ -21,6 +21,7 @@ import com.nextep.pelmel.adapters.SnippetHoursInfoAdapter;
 import com.nextep.pelmel.adapters.SnippetListAdapter;
 import com.nextep.pelmel.adapters.SnippetPlacesListAdapter;
 import com.nextep.pelmel.adapters.SnippetSectionedAdapter;
+import com.nextep.pelmel.adapters.SnippetThumbsListAdapter;
 import com.nextep.pelmel.helpers.ContextHolder;
 import com.nextep.pelmel.listeners.OverviewListener;
 import com.nextep.pelmel.listeners.UserListener;
@@ -76,6 +77,7 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
         super.onViewCreated(view, savedInstanceState);
         PelMelApplication.getUserService().getCurrentUser(this);
         getListView().setDividerHeight(0);
+
         snippetContainerSupport.setSnippetChild(this);
     }
 
@@ -122,8 +124,12 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
         if(infoProvider.getItem() == null) {
             adapter.addSection(SnippetSectionedAdapter.SECTION_PLACES, new SnippetPlacesListAdapter(this.getActivity(), ContextHolder.places));
         } else {
+            // Thumbs section
+            adapter.addSection(SnippetSectionedAdapter.SECTION_THUMBS,new SnippetThumbsListAdapter(this.getActivity(),infoProvider));
+            // Address section
             adapter.addSection(SnippetSectionedAdapter.SECTION_ADDRESS, new SnippetAddressInfoAdapter(this.getActivity(), infoProvider));
 
+            // Hours section
             if(infoProvider.getItem() instanceof  Place) {
                 // Hashing by hour type, because we are categorizing
                 final Map<EventType,List<RecurringEvent>> typedEventsMap = PelMelApplication.getConversionService().buildTypedHoursMap((Place)infoProvider.getItem());
@@ -240,6 +246,7 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
 
     @Override
     public void overviewDataAvailable(CalObject object) {
+        infoProvider = PelMelApplication.getUiService().buildInfoProviderFor(object);
         updateData();
     }
 

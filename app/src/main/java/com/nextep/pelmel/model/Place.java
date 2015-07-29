@@ -37,8 +37,7 @@ public interface Place extends CalObject {
 
 	void addLiker(User user);
 
-	boolean isLiked();
-	void setLiked(boolean liked);
+
 	List<User> getInsiders();
 
 	void setInsiders(List<User> insiders);

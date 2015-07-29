@@ -28,6 +28,10 @@
     <dimen name="snippet_parallax">125dp</dimen>
     <dimen name="snippet_gallery_height">160dp</dimen>
     <dimen name="snippet_height">125dp</dimen>
+
+    <dimen name="thumbs_default_size">40dp</dimen>
+    <dimen name="thumbs_overview_size">58dp</dimen>
+
     <dimen name="spinner_row_text_padding">5dp</dimen>
     <dimen name="placeTypeIconSize">17dp</dimen>
 

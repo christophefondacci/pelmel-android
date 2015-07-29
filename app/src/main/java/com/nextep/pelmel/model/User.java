@@ -45,4 +45,10 @@ public interface User extends CalObject {
 	void setDescriptionKey(String descriptionKey);
 
 	String getDescriptionKey();
+
+	String getCityName();
+	void setCityName(String cityName);
+
+	double getRawDistanceMiles();
+	void setRawDistanceMiles(double miles);
 }

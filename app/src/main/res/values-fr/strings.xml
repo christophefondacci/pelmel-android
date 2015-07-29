@@ -147,6 +147,12 @@
     <string name="tag.TWINK">Minet</string>
     <string name="tapToEdit">Changer</string>
 
+    <string name="thumbs_section_like">Ils Aiment</string>
+    <string name="thumbs_section_like_singular">Il Aime</string>
+    <string name="thumbs_section_checkedin">Actuellement Là (check in)</string>
+    <string name="thumbs_section_checkedin_singular">Actuellement Là (check in)</string>
+
+
     <string name="time_days">jours</string>
     <string name="time_formatter">il y a {0} ago</string>
     <string name="time_formatter_future">Dans {0}</string>

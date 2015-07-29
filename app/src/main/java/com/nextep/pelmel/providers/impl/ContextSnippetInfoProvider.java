@@ -4,15 +4,19 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
 
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.adapters.CALObjectThumbAdapter;
 import com.nextep.pelmel.helpers.ContextHolder;
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.Image;
 import com.nextep.pelmel.providers.CountersProvider;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
+import com.nextep.pelmel.views.HorizontalListView;
 
 import java.text.MessageFormat;
 import java.util.Collections;
@@ -21,8 +25,9 @@ import java.util.List;
 /**
  * Created by cfondacci on 21/07/15.
  */
-public class ContextSnippetInfoProvider implements SnippetInfoProvider {
+public class ContextSnippetInfoProvider implements SnippetInfoProvider, AdapterView.OnItemClickListener {
 
+    private HorizontalListView horizontalListView;
 
     @Override
     public CalObject getItem() {
@@ -43,7 +48,7 @@ public class ContextSnippetInfoProvider implements SnippetInfoProvider {
 
     @Override
     public Bitmap getSubtitleIcon() {
-        return BitmapFactory.decodeResource(PelMelApplication.getInstance().getResources(),R.drawable.snp_icon_event);
+        return BitmapFactory.decodeResource(PelMelApplication.getInstance().getResources(), R.drawable.snp_icon_event);
     }
 
     @Override
@@ -98,7 +103,7 @@ public class ContextSnippetInfoProvider implements SnippetInfoProvider {
 
     @Override
     public String getDistanceText() {
-        String distance = PelMelApplication.getConversionService().getDistanceStringForMiles((double)ContextHolder.radius);
+        String distance = PelMelApplication.getConversionService().getDistanceStringForMiles((double) ContextHolder.radius);
         return distance;
     }
 
@@ -118,13 +123,16 @@ public class ContextSnippetInfoProvider implements SnippetInfoProvider {
     }
 
     @Override
-    public void createCustomSnippetView(Context context, View parent) {
-
+    public void createCustomSnippetView(Context context, LinearLayout parent) {
+        horizontalListView = new HorizontalListView(context,null);
+        horizontalListView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+        parent.addView(horizontalListView);
+        horizontalListView.setOnItemClickListener(this);
     }
 
     @Override
-    public void refreshCustomSnippetView(Context context, View parent) {
-
+    public void refreshCustomSnippetView(Context context, LinearLayout parent) {
+        horizontalListView.setAdapter(new CALObjectThumbAdapter(context,(List)ContextHolder.users));
     }
 
     @Override
@@ -133,7 +141,34 @@ public class ContextSnippetInfoProvider implements SnippetInfoProvider {
     }
 
     @Override
+    public int getThumbListsRowCount() {
+        return 0;
+    }
+
+    @Override
+    public List<CalObject> getThumbListObjects(int row) {
+        return null;
+    }
+
+    @Override
+    public String getThumbListSectionTitle(int row) {
+        return null;
+    }
+
+    @Override
+    public Bitmap getThumbListSectionIcon(int row) {
+        return null;
+    }
+
+    @Override
     public int getHoursColor() {
         return 0;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        final CalObject object = (CalObject)horizontalListView.getAdapter().getItem(position);
+
+        PelMelApplication.getSnippetContainerSupport().showSnippetFor(object,true,false);
     }
 }

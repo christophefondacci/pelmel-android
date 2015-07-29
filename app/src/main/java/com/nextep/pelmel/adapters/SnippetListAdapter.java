@@ -117,6 +117,8 @@ public class SnippetListAdapter extends BaseAdapter {
                 viewHolder.chatTitleLabel = (TextView)countersView.findViewById(R.id.chatLabel);
                 viewHolder.chatIcon = (ImageView)countersView.findViewById(R.id.chatIcon);
 
+            } else {
+                infoProvider.createCustomSnippetView(context,viewHolder.countersContainerView);
             }
             convertView.setTag(viewHolder);
         }
@@ -166,6 +168,8 @@ public class SnippetListAdapter extends BaseAdapter {
             } else {
                 viewHolder.chatIconContainerView.setBackgroundResource(R.drawable.bg_counter);
             }
+        } else {
+            infoProvider.refreshCustomSnippetView(context,viewHolder.countersContainerView);
         }
     }
 }

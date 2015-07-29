@@ -1,8 +1,5 @@
 package com.nextep.pelmel.views;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Rect;
@@ -14,6 +11,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.Scroller;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class HorizontalListView extends AdapterView<ListAdapter> {
 
@@ -32,6 +32,11 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
 	private OnItemClickListener mOnItemClicked;
 	private OnItemLongClickListener mOnItemLongClicked;
 	private boolean mDataChanged = false;
+
+
+	private float downXpos = 0;
+	private float downYpos = 0;
+	private boolean touchcaptured = false;
 
 	public HorizontalListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -370,4 +375,27 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
 		}
 	};
 
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		switch(event.getAction()) {
+			case MotionEvent.ACTION_DOWN:
+				downXpos = event.getX();
+				downYpos = event.getY();
+				touchcaptured = false;
+				break;
+			case MotionEvent.ACTION_UP:
+				requestDisallowInterceptTouchEvent(false);
+				break;
+			case MotionEvent.ACTION_MOVE:
+				float xdisplacement = Math.abs(event.getX() - downXpos);
+				float ydisplacement = Math.abs(event.getY() - downYpos);
+				if( !touchcaptured && xdisplacement > ydisplacement && xdisplacement > 2) {
+					requestDisallowInterceptTouchEvent(true);
+					touchcaptured = true;
+				}
+				break;
+		}
+		super.onTouchEvent(event);
+		return true;
+	}
 }

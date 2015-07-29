@@ -42,6 +42,9 @@ import java.util.List;
  */
 public class ExpandingListView extends ListView {
 
+//    private int mTouchSlop;
+//    private float mTouchStartY;
+//    private boolean mIsScrolling;
     private boolean mShouldRemoveObserver = false;
 
     private List<View> mViewsToDraw = new ArrayList<View>();
@@ -65,6 +68,9 @@ public class ExpandingListView extends ListView {
 
     private void init() {
         setOnItemClickListener(mItemClickListener);
+        // Added for touch management
+//        ViewConfiguration vc = ViewConfiguration.get(getContext());
+//        mTouchSlop = vc.getScaledTouchSlop();
     }
 
     /**
@@ -581,4 +587,53 @@ public class ExpandingListView extends ListView {
 
         return ObjectAnimator.ofPropertyValuesHolder(view, translationTop, translationBottom);
     }
+
+
+//    @Override
+//    public boolean onInterceptTouchEvent(MotionEvent ev) {
+//        final int action = MotionEventCompat.getActionMasked(ev);
+//
+//        if(action == MotionEvent.ACTION_DOWN) {
+//            mTouchStartY = ev.getY();
+//        }
+//        // Always handle the case of the touch gesture being complete.
+//        if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
+//            // Release the scroll.
+//            mIsScrolling = false;
+//            return false; // Do not intercept touch event, let the child handle it
+//        }
+//        switch (action) {
+//            case MotionEvent.ACTION_MOVE: {
+//                if (mIsScrolling) {
+//                    // We're currently scrolling, so yes, intercept the
+//                    // touch event!
+//                    return true;
+//                }
+//
+//                // If the user has dragged her finger horizontally more than
+//                // the touch slop, start the scroll
+//
+//                // left as an exercise for the reader
+//                final int yDiff = calculateDistanceY(ev);
+//
+//                // Touch slop should be calculated using ViewConfiguration
+//                // constants.
+//                if (yDiff > mTouchSlop) {
+//                    // Start scrolling!
+//                    mIsScrolling = true;
+//                    return true;
+//                }
+//                break;
+//            }
+//
+//        }
+//
+//
+//        // In general, we don't want to intercept touch events. They should be
+//        // handled by the child view.
+//        return false;
+//    }
+//    private int calculateDistanceY(MotionEvent ev) {
+//        return Math.abs((int)(ev.getY()-mTouchStartY));
+//    }
 }

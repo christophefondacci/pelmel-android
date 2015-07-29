@@ -1,11 +1,11 @@
 package com.nextep.pelmel.model.base;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Image;
 import com.nextep.pelmel.model.Tag;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractCalObject implements CalObject {
 
@@ -19,6 +19,7 @@ public abstract class AbstractCalObject implements CalObject {
 	private double distance;
 	private String distanceLabel;
 	private boolean overviewDataLoaded = false;
+	private boolean liked;
 	private List<Tag> tags = new ArrayList<Tag>();
 
 	@Override
@@ -157,5 +158,25 @@ public abstract class AbstractCalObject implements CalObject {
 			return images.get(0);
 		}
 		return null;
+	}
+
+	@Override
+	public void setThumb(Image thumb) {
+		// Removing thumb
+		if (!images.isEmpty()) {
+			images.remove(0);
+		}
+		// Replacing
+		images.add(0, thumb);
+	}
+
+	@Override
+	public void setLiked(boolean liked) {
+		this.liked = liked;
+	}
+
+	@Override
+	public boolean isLiked() {
+		return liked;
 	}
 }

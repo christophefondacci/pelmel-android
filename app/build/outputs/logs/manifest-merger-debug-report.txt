@@ -104,6 +104,7 @@ MERGED from com.android.support:support-v4:22.0.0:20:5
 MERGED from com.google.maps.android:android-maps-utils:0.3.4:5:5
 MERGED from com.sothree.slidinguppanel:library:3.1.0:7:5
 MERGED from com.android.support:support-v4:22.0.0:20:5
+MERGED from com.makeramen:roundedimageview:2.1.2:7:5
 	android:targetSdkVersion
 		ADDED from AndroidManifest.xml:9:9
 		INJECTED from AndroidManifest.xml:0:0

@@ -1,12 +1,12 @@
 package com.nextep.pelmel.model.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.model.base.AbstractCalObject;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class UserImpl extends AbstractCalObject implements User {
 
@@ -14,12 +14,14 @@ public class UserImpl extends AbstractCalObject implements User {
 	private boolean online;
 	private Place lastLocation;
 	private Date lastLocationTime;
+	private double rawDistanceMiles;
 	private final List<Place> likedPlaces = new ArrayList<Place>();
 	private final List<User> likedUsers = new ArrayList<User>();
 	private int heightInCm = 170;
 	private int weightInKg = 70;
 	private String token;
 	private String descriptionKey;
+	private String cityName;
 
 	@Override
 	public Date getBirthDate() {
@@ -121,5 +123,25 @@ public class UserImpl extends AbstractCalObject implements User {
 	@Override
 	public void setDescriptionKey(String descriptionKey) {
 		this.descriptionKey = descriptionKey;
+	}
+
+	@Override
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
+	@Override
+	public String getCityName() {
+		return cityName;
+	}
+
+	@Override
+	public void setRawDistanceMiles(double rawDistanceMiles) {
+		this.rawDistanceMiles = rawDistanceMiles;
+	}
+
+	@Override
+	public double getRawDistanceMiles() {
+		return rawDistanceMiles;
 	}
 }

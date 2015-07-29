@@ -5,7 +5,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
+import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.support.SnippetChildSupport;
 import com.nextep.pelmel.model.support.SnippetContainerSupport;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
@@ -32,6 +34,8 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
         slidingLayout.setPanelSlideListener(this);
         slidingLayout.setParalaxOffset(getResources().getDimensionPixelSize(R.dimen.snippet_parallax));
         slidingLayout.setScrollableView(snippetView);
+
+        PelMelApplication.setSnippetContainerSupport(this);
 //        slidingLayout.setPanelHeight(0);
 //        slidingLayout.setOverlayed(true);
 
@@ -47,7 +51,7 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
             snippetFragment = new SnippetListFragment();
             snippetFragment.setInfoProvider(provider);
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.add(R.id.pelmelSnippetContainer,snippetFragment,TAG_SNIPPET).addToBackStack(null).commit();
+            transaction.add(R.id.pelmelSnippetContainer,snippetFragment,TAG_SNIPPET).commit();
         } else {
             FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -63,6 +67,9 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
         getSupportFragmentManager().executePendingTransactions();
 
         slidingLayout.setPanelHeight(snippetHeight);
+        if(isOpen) {
+            slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+        }
         notifySnippetOpenState();
     }
 
@@ -128,6 +135,12 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
     @Override
     public boolean isSnippetOpened() {
         return snippetOpened;
+    }
+
+    @Override
+    public void showSnippetFor(CalObject object, boolean isOpen, boolean isRoot) {
+        final SnippetInfoProvider infoProvider = PelMelApplication.getUiService().buildInfoProviderFor(object);
+        showSnippetFor(infoProvider,isOpen,isRoot);
     }
 
     //    @Override

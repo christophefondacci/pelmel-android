@@ -89,6 +89,9 @@
     <string name="month.november">November</string>
     <string name="month.december">December</string>
     <string name="ok">OK</string>
+    <string name="offline">Offline</string>
+    <string name="online">Available</string>
+
     <string name="placeType.bar">Bar</string>
     <string name="placeType.sauna">Bathhouse</string>
     <string name="placeType.restaurant">Restaurant</string>
@@ -172,6 +175,16 @@
     <string name="tag.TATTOO">Tattoo</string>
     <string name="tag.TWINK">Twink</string>
     <string name="tapToEdit">Tap to edit</string>
+
+
+    <string name="thumbs_section_like">They Like</string>
+    <string name="thumbs_section_like_singular">He Likes</string>
+    <string name="thumbs_section_liked_places">Hangouts he likes</string>
+    <string name="thumbs_section_liked_places_singular">Hangout he likes</string>
+    <string name="thumbs_section_liked_users">Users he likes</string>
+    <string name="thumbs_section_liked_users_singular">User he likes</string>
+    <string name="thumbs_section_checkedin">Checked In</string>
+    <string name="thumbs_section_checkedin_singular">Checked In</string>
 
     <string name="time_days">days</string>
     <string name="time_formatter">{0} ago</string>

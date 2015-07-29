@@ -25,6 +25,8 @@ public class SnippetSectionedAdapter extends SectionedAdapter implements View.On
     public static final String SECTION_THEME    = "THEME";
     public static final String SECTION_EVENTS    = "events";
     public static final String SECTION_DESCRIPTION="description";
+    public static final String SECTION_THUMBS   ="thumbs";
+
     private LayoutInflater layoutInflater;
 
     private enum Tab { EVENTS, DEALS, PLACES }

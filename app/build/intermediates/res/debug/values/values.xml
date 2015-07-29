@@ -33,6 +33,11 @@
     <color name="background_floating_material_light">#ffeeeeee</color>
     <color name="background_material_dark">#ff303030</color>
     <color name="background_material_light">#ffeeeeee</color>
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="black">#000000</color>
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
+    <eat-comment/>
     <color name="bright_foreground_disabled_material_dark">#80ffffff</color>
     <color name="bright_foreground_disabled_material_light">#80000000</color>
     <color name="bright_foreground_inverse_material_dark">@color/bright_foreground_material_light</color>
@@ -88,6 +93,8 @@
     <color name="material_deep_teal_500">#ff009688</color>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values/colors.xml -->
     <eat-comment/>
+    <color name="offline">#ffffff</color>
+    <color name="online">#70ff01</color>
     <color name="pelmel">#f48020</color>
     <color name="pelmelActionBar">#eb7500</color>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
@@ -159,6 +166,7 @@
     <declare-styleable name="MenuView"><attr name="android:itemTextAppearance"/><attr name="android:horizontalDivider"/><attr name="android:verticalDivider"/><attr name="android:headerBackground"/><attr name="android:itemBackground"/><attr name="android:windowAnimationStyle"/><attr name="android:itemIconDisabledAlpha"/><attr format="boolean" name="preserveIconSpacing"/></declare-styleable>
     <declare-styleable name="PopupWindow"><attr format="boolean" name="overlapAnchor"/><attr name="android:popupBackground"/></declare-styleable>
     <declare-styleable name="PopupWindowBackgroundState"><attr format="boolean" name="state_above_anchor"/></declare-styleable>
+    <declare-styleable name="RoundedImageView"><attr format="dimension" name="riv_corner_radius"/><attr format="dimension" name="riv_corner_radius_top_left"/><attr format="dimension" name="riv_corner_radius_top_right"/><attr format="dimension" name="riv_corner_radius_bottom_left"/><attr format="dimension" name="riv_corner_radius_bottom_right"/><attr format="dimension" name="riv_border_width"/><attr format="color" name="riv_border_color"/><attr format="boolean" name="riv_mutate_background"/><attr format="boolean" name="riv_oval"/><attr name="android:scaleType"/><attr name="riv_tile_mode"><enum name="clamp" value="0"/><enum name="repeat" value="1"/><enum name="mirror" value="2"/></attr><attr name="riv_tile_mode_x"><enum name="clamp" value="0"/><enum name="repeat" value="1"/><enum name="mirror" value="2"/></attr><attr name="riv_tile_mode_y"><enum name="clamp" value="0"/><enum name="repeat" value="1"/><enum name="mirror" value="2"/></attr></declare-styleable>
     <declare-styleable name="SearchView"><attr format="reference" name="layout"/><attr format="boolean" name="iconifiedByDefault"/><attr name="android:maxWidth"/><attr format="string" name="queryHint"/><attr name="android:imeOptions"/><attr name="android:inputType"/><attr format="reference" name="closeIcon"/><attr format="reference" name="goIcon"/><attr format="reference" name="searchIcon"/><attr format="reference" name="voiceIcon"/><attr format="reference" name="commitIcon"/><attr format="reference" name="suggestionRowLayout"/><attr format="reference" name="queryBackground"/><attr format="reference" name="submitBackground"/><attr name="android:focusable"/></declare-styleable>
     <declare-styleable name="SlidingUpPanelLayout"><attr format="dimension" name="umanoPanelHeight"/><attr format="dimension" name="umanoShadowHeight"/><attr format="dimension" name="umanoParalaxOffset"/><attr format="color" name="umanoFadeColor"/><attr format="integer" name="umanoFlingVelocity"/><attr format="reference" name="umanoDragView"/><attr format="reference" name="umanoScrollableView"/><attr format="boolean" name="umanoOverlay"/><attr format="boolean" name="umanoClipPanel"/><attr format="float" name="umanoAnchorPoint"/><attr format="enum" name="umanoInitialState"><enum name="expanded" value="0"/><enum name="collapsed" value="1"/><enum name="anchored" value="2"/><enum name="hidden" value="3"/></attr></declare-styleable>
     <declare-styleable name="Spinner"><attr format="reference" name="prompt"/><attr format="enum" name="spinnerMode"><enum name="dialog" value="0"/><enum name="dropdown" value="1"/></attr><attr name="android:dropDownSelector"/><attr name="android:popupBackground"/><attr name="android:dropDownVerticalOffset"/><attr name="android:dropDownHorizontalOffset"/><attr name="android:dropDownWidth"/><attr format="reference" name="popupPromptView"/><attr name="android:gravity"/><attr format="boolean" name="disableChildrenWhenDisabled"/><attr name="android:background"/></declare-styleable>
@@ -256,6 +264,8 @@
     <dimen name="snippet_height">125dp</dimen>
     <dimen name="snippet_parallax">125dp</dimen>
     <dimen name="spinner_row_text_padding">5dp</dimen>
+    <dimen name="thumbs_default_size">40dp</dimen>
+    <dimen name="thumbs_overview_size">58dp</dimen>
     <dimen name="title_font_size">20dp</dimen>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
     <eat-comment/>
@@ -400,6 +410,9 @@
     <string name="create_calendar_message">Allow Ad to create a calendar event?</string>
     <string name="create_calendar_title">Create calendar event</string>
     <string name="decline">Decline</string>
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.makeramen/roundedimageview/2.1.2/res/values/values.xml -->
+    <eat-comment/>
+    <string name="define_roundedimageview"/>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="distance.feet">{0} feet</string>
@@ -421,6 +434,19 @@
     <string name="hours_open_in">Opens in {0}</string>
     <string name="hours_open_leftHours">{0} left</string>
     <string name="insiders_title">They were in</string>
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.makeramen/roundedimageview/2.1.2/res/values/values.xml -->
+    <eat-comment/>
+    <string name="library_roundedimageview_author">Vince Mi</string>
+    <string name="library_roundedimageview_authorWebsite">https://github.com/vinc3m1</string>
+    <string name="library_roundedimageview_isOpenSource">true</string>
+    <string name="library_roundedimageview_libraryDescription">A fast ImageView (and Drawable) that supports rounded corners (and ovals or circles) based on the original example from Romain Guy.</string>
+    <string name="library_roundedimageview_libraryName">RoundedImageView</string>
+    <string name="library_roundedimageview_libraryVersion">1.3.0</string>
+    <string name="library_roundedimageview_libraryWebsite">https://github.com/vinc3m1/RoundedImageView</string>
+    <string name="library_roundedimageview_licenseId">apache_2_0</string>
+    <string name="library_roundedimageview_repositoryLink">https://github.com/vinc3m1/RoundedImageView.git</string>
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
     <string name="liked_places_title">He goes to</string>
     <string name="liked_users_title">He likes</string>
     <string name="likers_title">They like</string>
@@ -459,7 +485,9 @@
     <string name="mr_user_route_category_name">Devices</string>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="offline">Offline</string>
     <string name="ok">OK</string>
+    <string name="online">Available</string>
     <string name="photoRemoveButton">Delete</string>
     <string name="photoTopAddButton">Add</string>
     <string name="photoTopRemoveButton">Remove</string>
@@ -576,6 +604,14 @@ In no event will the COMPANY, its suppliers or other third parties mentioned at 
 
     <b>Article 9</b><br>
 The COMPANY may revise this Agreement at any time without notice by updating this posting. By using this Site you agree to be bound by any such revisions and should therefore periodically visit this Site and page to determine the then current Terms of Access and Use conditions of use to which you are bound.]]></string>
+    <string name="thumbs_section_checkedin">Checked In</string>
+    <string name="thumbs_section_checkedin_singular">Checked In</string>
+    <string name="thumbs_section_like">They Like</string>
+    <string name="thumbs_section_like_singular">He Likes</string>
+    <string name="thumbs_section_liked_places">Hangouts he likes</string>
+    <string name="thumbs_section_liked_places_singular">Hangout he likes</string>
+    <string name="thumbs_section_liked_users">Users he likes</string>
+    <string name="thumbs_section_liked_users_singular">User he likes</string>
     <string name="time_days">days</string>
     <string name="time_formatter">{0} ago</string>
     <string name="time_formatter_future">In {0}</string>

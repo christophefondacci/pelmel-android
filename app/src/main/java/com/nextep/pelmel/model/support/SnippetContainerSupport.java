@@ -1,5 +1,6 @@
 package com.nextep.pelmel.model.support;
 
+import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
 
 /**
@@ -8,6 +9,7 @@ import com.nextep.pelmel.providers.SnippetInfoProvider;
 public interface SnippetContainerSupport {
 
     void showSnippetFor(SnippetInfoProvider provider, boolean isOpen, boolean isRoot);
+    void showSnippetFor(CalObject object, boolean isOpen, boolean isRoot);
 
     boolean openSnippet();
 

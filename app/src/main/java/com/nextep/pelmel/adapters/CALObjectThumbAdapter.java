@@ -1,32 +1,36 @@
 package com.nextep.pelmel.adapters;
 
-import java.util.List;
-
 import android.content.Context;
-import android.content.Intent;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
-import com.nextep.pelmel.activities.OverviewActivity;
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Image;
 import com.nextep.pelmel.model.User;
 
-public class CALObjectThumbAdapter extends BaseAdapter {
+import java.util.List;
+
+public class CALObjectThumbAdapter extends BaseAdapter implements AdapterView.OnItemClickListener {
 
 	private final Context context;
 	private final List<CalObject> calObjects;
-
+	private final int resSize;
 	public CALObjectThumbAdapter(Context context, List<CalObject> objects) {
+		this(context,objects,R.dimen.thumbs_default_size);
+	}
+	public CALObjectThumbAdapter(Context context, List<CalObject> objects, int resSize) {
 		this.context = context;
 		this.calObjects = objects;
+		this.resSize = resSize;
 	}
 
 	@Override
@@ -54,11 +58,35 @@ public class CALObjectThumbAdapter extends BaseAdapter {
 					R.layout.layout_user, null);
 
 			// Registering widgets into holder object
-			viewHolder.thumbImageView = (ImageView) convertView
+			viewHolder.thumbImageView = (RoundedImageView) convertView
 					.findViewById(R.id.thumb_img);
+
+			// Adjusting layout parameters
+			Resources resources = PelMelApplication.getInstance().getResources();
+			final float size =  resources.getDimension(resSize);
+
+			// Sizing image
+			LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams)viewHolder.thumbImageView.getLayoutParams();
+			layoutParams.width = (int)size;
+			layoutParams.height = (int)size;
+			viewHolder.thumbImageView.setLayoutParams(layoutParams);
+
+			// Adjusting radius
+			final CalObject obj = (CalObject)getItem(position);
+			if(obj instanceof User) {
+				viewHolder.thumbImageView.setCornerRadius(size / 2);
+			} else {
+				viewHolder.thumbImageView.setCornerRadius(0);
+			}
+
+			// Sizing label
 			viewHolder.title = (TextView) convertView.findViewById(R.id.pseudo);
-			viewHolder.onlineStatusView = (ImageView) convertView
-					.findViewById(R.id.online_status);
+			layoutParams = (LinearLayout.LayoutParams)viewHolder.title.getLayoutParams();
+			layoutParams.width = (int)size+10;
+			viewHolder.title.setLayoutParams(layoutParams);
+
+			// Applying layout
+			convertView.requestLayout();
 
 			convertView.setTag(viewHolder);
 		} else {
@@ -96,36 +124,40 @@ public class CALObjectThumbAdapter extends BaseAdapter {
 			// Handling online / offline status for users
 			if (object instanceof User) {
 				if (((User) object).isOnline()) {
-					viewHolder.onlineStatusView
-							.setImageResource(R.drawable.online);
+					viewHolder.thumbImageView.setBorderColor(PelMelApplication.getInstance().getResources().getColor(R.color.online));
 				} else {
-					viewHolder.onlineStatusView.setImageBitmap(null); // R.drawable.offline);
+					viewHolder.thumbImageView.setBorderColor(PelMelApplication.getInstance().getResources().getColor(R.color.offline));
 				}
 			} else {
-				viewHolder.onlineStatusView.setImageBitmap(null);
+//				viewHolder.onlineStatusView.setImageBitmap(null);
 			}
 
 			// Handling tap events
-			viewHolder.thumbImageView.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					final Intent intent = new Intent(context,
-							OverviewActivity.class);
-					PelMelApplication.setOverviewObject(object);
-					context.startActivity(intent);
-					// context.overridePendingTransition(R.anim.push_left_in,
-					// R.anim.push_left_out);
-				}
-			});
+//			viewHolder.thumbImageView.setOnClickListener(new OnClickListener() {
+//
+//				@Override
+//				public void onClick(View v) {
+//					final Intent intent = new Intent(context,
+//							OverviewActivity.class);
+//					PelMelApplication.setOverviewObject(object);
+//					context.startActivity(intent);
+//					// context.overridePendingTransition(R.anim.push_left_in,
+//					// R.anim.push_left_out);
+//				}
+//			});
 		}
 
 		return convertView;
 	}
 
 	private class ViewHolder {
-		ImageView thumbImageView;
+		RoundedImageView thumbImageView;
 		TextView title;
-		ImageView onlineStatusView;
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		final CalObject obj = calObjects.get(position);
+		PelMelApplication.getSnippetContainerSupport().showSnippetFor(obj,false,false);
 	}
 }

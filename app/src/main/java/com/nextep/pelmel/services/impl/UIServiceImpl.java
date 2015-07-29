@@ -5,9 +5,11 @@ import com.nextep.pelmel.PelMelConstants;
 import com.nextep.pelmel.R;
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Place;
+import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
 import com.nextep.pelmel.providers.impl.ContextSnippetInfoProvider;
 import com.nextep.pelmel.providers.impl.PlaceInfoProvider;
+import com.nextep.pelmel.providers.impl.UserInfoProvider;
 import com.nextep.pelmel.services.UIService;
 import com.nextep.pelmel.views.BadgeView;
 
@@ -118,7 +120,9 @@ public class UIServiceImpl implements UIService {
     @Override
     public SnippetInfoProvider buildInfoProviderFor(CalObject object) {
         if(object instanceof Place) {
-            return new PlaceInfoProvider((Place)object);
+            return new PlaceInfoProvider((Place) object);
+        } else if(object instanceof User) {
+            return new UserInfoProvider((User)object);
         } else if(object ==null) {
             return new ContextSnippetInfoProvider();
         }

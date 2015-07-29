@@ -37,4 +37,7 @@ public interface CalObject extends Keyed, Localized {
 	void removeTag(Tag tag);
 
 	Image getThumb();
+	void setThumb(Image thumb);
+	boolean isLiked();
+	void setLiked(boolean liked);
 }
