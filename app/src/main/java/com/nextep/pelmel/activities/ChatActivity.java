@@ -1,9 +1,5 @@
 package com.nextep.pelmel.activities;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -27,6 +23,10 @@ import com.nextep.pelmel.model.ChatMessage;
 import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.services.MessageService;
 import com.nextep.pelmel.services.UserService;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class ChatActivity extends MainActionBarActivity implements
 		UserListener, OnItemClickListener, MessageCallback {
@@ -64,6 +64,7 @@ public class ChatActivity extends MainActionBarActivity implements
 
 		listView = (ListView) findViewById(R.id.chat_list);
 		listView.setOnItemClickListener(this);
+		listView.setDividerHeight(0);
 
 		userService = PelMelApplication.getUserService();
 		// Getting user, notifying us when ready

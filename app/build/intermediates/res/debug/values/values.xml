@@ -97,6 +97,7 @@
     <color name="online">#70ff01</color>
     <color name="pelmel">#f48020</color>
     <color name="pelmelActionBar">#eb7500</color>
+    <color name="pelmelBackground">#272a2e</color>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
     <eat-comment/>
     <color name="primary_dark_material_dark">#ff000000</color>

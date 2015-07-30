@@ -1,64 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="5dip" >
+    android:padding="5dip" android:background="@color/pelmelBackground" >
 
     <!-- ListRow Left sied Thumbnail image -->
 
-    <LinearLayout
-        android:id="@+id/thumbnail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginRight="5dip"
-        android:background="@drawable/image_bg"
-        android:baselineAligned="false"
-        android:padding="3dip" >
 
-        <ImageView
-            android:id="@+id/chat_image"
-            android:layout_width="50dip"
-            android:layout_height="50dip" />
-    </LinearLayout>
 
-	<RelativeLayout 
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_margin="0dp"
-	    >
-
-    <ImageView
-        android:id="@+id/bg_bubble"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/chat_message"
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/chat_image"
+        android:layout_width="50dip"
+        android:layout_height="50dip"
+        android:layout_marginTop="18dp"
         android:layout_alignParentTop="true"
-        android:layout_margin="0dp"
-        android:layout_toRightOf="@+id/thumbnail"
-        android:background="#10000000"
-        android:scaleType="fitXY"
-        android:src="@drawable/bubble_gradient_left" />
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/no_photo_profile_small"
+        app:riv_corner_radius="25dp"
+        app:riv_border_width="1dp"
+        app:riv_border_color="#ffffff"
+        />
+
+
+
 
     <TextView
         android:id="@+id/chat_message"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/chat_margin"
-        android:paddingBottom="@dimen/chat_margin"
-        android:text="TextView" />
-
+        android:layout_marginRight="68dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="28dp"
+        android:padding="@dimen/chat_margin"
+        android:layout_toRightOf="@id/chat_image"
+        android:background="@drawable/bg_message"
+        android:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView" />
     <TextView
         android:id="@+id/msgDate"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="17dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="18dp"
-        android:gravity="right"
+        android:layout_marginRight="68dp"
+        android:layout_marginTop="8dp"
+        android:layout_alignLeft="@id/chat_message"
+        android:gravity="left"
+        android:textColor="#EC7700"
         android:text="TextView"
         android:textSize="@dimen/chat_msg_date_size" />
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/chat_message"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:textColor="@color/white"
+        android:textSize="9sp"
+        android:id="@+id/usernameLabel"
+        android:layout_below="@+id/chat_image"
+        android:layout_alignLeft="@id/chat_image"
+        android:layout_alignRight="@id/chat_image"
+        android:layout_marginLeft="-5dp"
+        android:layout_marginRight="-5dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"/>
 
-	</RelativeLayout>
-</LinearLayout>
+    <ImageView
+        android:layout_width="10dp"
+        android:layout_height="26dp"
+        android:id="@+id/bubbleTailImage"
+        android:layout_toLeftOf="@id/chat_message"
+        android:layout_alignTop="@id/chat_message"
+        android:layout_marginRight="-9dp"
+        android:src="@drawable/chat_bubble_left"/>
+
+
+</RelativeLayout>

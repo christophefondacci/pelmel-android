@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="115dp" android:background="#272a2e">
+    android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="115dp" android:background="@color/pelmelBackground">
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/thumbImage"

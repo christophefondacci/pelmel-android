@@ -93,8 +93,7 @@ public class MessageAdapter extends ArrayAdapter<ChatMessage> {
                         .findViewById(R.id.chat_message);
                 viewHolder.imageView = (ImageView) convertView
                         .findViewById(R.id.chat_image);
-                viewHolder.bubbleView = (ImageView) convertView
-                        .findViewById(R.id.bg_bubble);
+
 
             } else {
                 if (otherUserKey == null) {
@@ -150,7 +149,6 @@ public class MessageAdapter extends ArrayAdapter<ChatMessage> {
         TextView textView;
         TextView dateView;
         ImageView imageView;
-        ImageView bubbleView;
     }
 
 }
