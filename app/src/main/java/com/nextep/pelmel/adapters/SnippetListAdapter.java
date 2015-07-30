@@ -12,7 +12,9 @@ import android.widget.TextView;
 
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.activities.Refreshable;
 import com.nextep.pelmel.helpers.Strings;
+import com.nextep.pelmel.model.Image;
 import com.nextep.pelmel.providers.CountersProvider;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
 import com.nextep.pelmel.views.SnippetViewHolder;
@@ -28,8 +30,11 @@ public class SnippetListAdapter extends BaseAdapter {
     private SnippetInfoProvider infoProvider;
     private Context context;
     private LayoutInflater layoutInflater;
-    public SnippetListAdapter(Context context, SnippetInfoProvider provider) {
+    private Refreshable refreshable;
+
+    public SnippetListAdapter(Context context, Refreshable refreshable, SnippetInfoProvider provider) {
         this.context = context;
+        this.refreshable = refreshable;
         this.infoProvider = provider;
         this.layoutInflater =  LayoutInflater.from(context);
     }
@@ -77,6 +82,7 @@ public class SnippetListAdapter extends BaseAdapter {
             convertView = layoutInflater.inflate(
                     R.layout.list_row_snippet_main, null);
             viewHolder = new SnippetViewHolder();
+            viewHolder.thumbImage = (ImageView) convertView.findViewById(R.id.thumbImage);
             viewHolder.titleLabel= (TextView) convertView
                     .findViewById(R.id.titleLabel);
             viewHolder.subtitleLabel= (TextView) convertView
@@ -128,6 +134,14 @@ public class SnippetListAdapter extends BaseAdapter {
     private void configureSnippetView(View convertView) {
         // Retrieving holder for our UI widgets
         SnippetViewHolder viewHolder = (SnippetViewHolder) convertView.getTag();
+
+
+        final Image thumb = infoProvider.getItem() != null ? infoProvider.getItem().getThumb() : null;
+        if(thumb!=null) {
+            PelMelApplication.getImageService().displayImage(thumb,true,viewHolder.thumbImage);
+        } else {
+            viewHolder.thumbImage.setImageBitmap(null);
+        }
         viewHolder.titleLabel.setText(infoProvider.getTitle());
         viewHolder.subtitleLabel.setText(infoProvider.getSubtitle());
         viewHolder.subtitleIcon.setImageBitmap(infoProvider.getSubtitleIcon());
@@ -152,6 +166,29 @@ public class SnippetListAdapter extends BaseAdapter {
             viewHolder.checkinActionLabel.setText(countersProvider.getCounterActionLabelAtIndex(CountersProvider.COUNTER_CHECKIN));
             viewHolder.chatActionLabel.setText(countersProvider.getCounterActionLabelAtIndex(CountersProvider.COUNTER_CHAT));
 
+            viewHolder.likeIconContainerView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    countersProvider.executeCounterActionAtIndex(context,refreshable,CountersProvider.COUNTER_LIKE);
+                }
+            });
+
+            // Handling visibility
+            int likeVisibility = countersProvider.hasCounter(CountersProvider.COUNTER_LIKE) ? View.VISIBLE : View.INVISIBLE;
+            viewHolder.likeIcon.setVisibility(likeVisibility);
+            viewHolder.likeActionLabel.setVisibility(likeVisibility);
+            viewHolder.likeIconContainerView.setVisibility(likeVisibility);
+
+            int checkinVisibility = countersProvider.hasCounter(CountersProvider.COUNTER_CHECKIN) ? View.VISIBLE : View.INVISIBLE;
+            viewHolder.checkinIcon.setVisibility(checkinVisibility);
+            viewHolder.checkinActionLabel.setVisibility(checkinVisibility);
+            viewHolder.checkinIconContainerView.setVisibility(checkinVisibility);
+
+            int chatVisibility = countersProvider.hasCounter(CountersProvider.COUNTER_CHAT) ? View.VISIBLE : View.INVISIBLE;
+            viewHolder.chatIcon.setVisibility(chatVisibility);
+            viewHolder.chatActionLabel.setVisibility(chatVisibility);
+            viewHolder.chatIconContainerView.setVisibility(chatVisibility);
+
             Resources resources = PelMelApplication.getInstance().getResources();
             if(countersProvider.isCounterSelectedAtIndex(CountersProvider.COUNTER_LIKE)) {
                 viewHolder.likeIconContainerView.setBackgroundResource(R.drawable.bg_counter_selected);
@@ -169,7 +206,7 @@ public class SnippetListAdapter extends BaseAdapter {
                 viewHolder.chatIconContainerView.setBackgroundResource(R.drawable.bg_counter);
             }
         } else {
-            infoProvider.refreshCustomSnippetView(context,viewHolder.countersContainerView);
+            infoProvider.refreshCustomSnippetView(context, viewHolder.countersContainerView);
         }
     }
 }

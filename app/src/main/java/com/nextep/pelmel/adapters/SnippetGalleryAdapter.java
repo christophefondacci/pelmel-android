@@ -34,7 +34,11 @@ public class SnippetGalleryAdapter extends BaseAdapter {
     }
     @Override
     public int getCount() {
-        return isOpen ? 1 : 0;
+        if(isOpen && !calObject.getImages().isEmpty()) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     @Override

@@ -1,7 +1,9 @@
 package com.nextep.pelmel.providers;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 
+import com.nextep.pelmel.activities.Refreshable;
 import com.nextep.pelmel.model.CalObject;
 
 /**
@@ -18,6 +20,12 @@ public interface CountersProvider {
      */
     String getCounterLabelAtIndex(int index);
 
+    /**
+     * Is there a counter here?
+     * @param index index of the counter
+     * @return <code>true</code> to display a counter, else <code>false</code>
+     */
+    boolean hasCounter(int index);
     /**
      * Provides the label of the counter action, if any
      * @param index index of the counter
@@ -36,7 +44,7 @@ public interface CountersProvider {
      * Executes the action for the given counter
      * @param index the index of the counter
      */
-    void executeCounterActionAtIndex( int index);
+    void executeCounterActionAtIndex( Context context, Refreshable refreshable, int index);
 
     /**
      * Provides the object that the counters relates to

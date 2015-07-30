@@ -63,6 +63,7 @@
     <string name="likers_title">Ils aiment</string>
     <string name="liked_places_title">Il y va</string>
     <string name="liked_users_title">Il aime</string>
+    <string name="loadingWaitMsg">Chargment&#8230;</string>
     <string name="locationProviderUnavailable">Impossible d\'obtenir votre position, vous devrez peut-être activer les services de localisation.</string>
     <string name="loginIntroLabel">Login</string>
     <string name="loginWaitMsg">Connexion&#8230;</string>

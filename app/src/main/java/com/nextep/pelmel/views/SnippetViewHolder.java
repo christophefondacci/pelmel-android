@@ -8,6 +8,7 @@ import android.widget.TextView;
  * Created by cfondacci on 21/07/15.
  */
 public class SnippetViewHolder {
+    public ImageView thumbImage;
     public TextView titleLabel;
     public TextView subtitleLabel;
     public ImageView subtitleIcon;

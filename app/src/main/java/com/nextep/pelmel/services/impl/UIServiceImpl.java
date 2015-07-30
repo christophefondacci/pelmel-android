@@ -1,5 +1,9 @@
 package com.nextep.pelmel.services.impl;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.PelMelConstants;
 import com.nextep.pelmel.R;
@@ -127,5 +131,17 @@ public class UIServiceImpl implements UIService {
             return new ContextSnippetInfoProvider();
         }
         throw new IllegalArgumentException("Unsupported object for infoProvider builder: " + object.getClass().getName());
+    }
+
+    @Override
+    public void showInfoMessage(Context context, int resTitle, int resMessage) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(resMessage).setTitle(resTitle).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
     }
 }

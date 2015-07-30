@@ -8,13 +8,16 @@ import android.widget.LinearLayout;
 
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.activities.Refreshable;
 import com.nextep.pelmel.helpers.Strings;
+import com.nextep.pelmel.model.Action;
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.Image;
 import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.providers.CountersProvider;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
+import com.nextep.pelmel.services.ActionManager;
 import com.nextep.pelmel.services.ConversionService;
 
 import java.util.Collections;
@@ -229,8 +232,24 @@ public class UserInfoProvider implements SnippetInfoProvider, CountersProvider {
     }
 
     @Override
-    public void executeCounterActionAtIndex(int index) {
-
+    public void executeCounterActionAtIndex(final Context context, final Refreshable refreshable, int index) {
+        ActionManager mgr = PelMelApplication.getActionManager();
+        final boolean selected = isCounterSelectedAtIndex(index);
+        switch(index) {
+            case COUNTER_LIKE:
+                mgr.executeAction(selected ? Action.UNLIKE : Action.LIKE, user, new ActionManager.ActionCallback() {
+                    @Override
+                    public void actionCompleted(boolean isSucess, Object result) {
+                        if(!selected) {
+                            PelMelApplication.getUiService().showInfoMessage(context, R.string.alert_like_success_title, R.string.alert_like_user_success);
+                        } else {
+                            PelMelApplication.getUiService().showInfoMessage(context, R.string.alert_unlike_success_title, R.string.alert_unlike_user_success);
+                        }
+                    refreshable.updateData();
+                    }
+                });
+                break;
+        }
     }
 
     @Override
@@ -249,5 +268,10 @@ public class UserInfoProvider implements SnippetInfoProvider, CountersProvider {
                 return BitmapFactory.decodeResource(PelMelApplication.getInstance().getResources(),R.drawable.snp_icon_chat);
         }
         return null;
+    }
+
+    @Override
+    public boolean hasCounter(int index) {
+        return index != COUNTER_CHECKIN;
     }
 }

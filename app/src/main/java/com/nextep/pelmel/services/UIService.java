@@ -1,5 +1,7 @@
 package com.nextep.pelmel.services;
 
+import android.content.Context;
+
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
 import com.nextep.pelmel.views.BadgeView;
@@ -54,5 +56,13 @@ public interface UIService {
 	 * @return the provider of snippet information
 	 */
 	SnippetInfoProvider buildInfoProviderFor(CalObject object);
+
+	/**
+	 * Displays a simple info message with a OK button
+	 * @param context the Context
+	 * @param resTitle the resource for the message title
+	 * @param resMessage the resource for the message contents
+	 */
+	void showInfoMessage(Context context, int resTitle, int resMessage);
 
 }

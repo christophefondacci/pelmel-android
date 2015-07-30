@@ -44,7 +44,7 @@ import java.util.Map;
 /**
  * Created by cfondacci on 21/07/15.
  */
-public class SnippetListFragment extends ListFragment implements UserListener, AdapterView.OnItemClickListener, SnippetChildSupport, OverviewListener {
+public class SnippetListFragment extends ListFragment implements UserListener, AdapterView.OnItemClickListener, SnippetChildSupport, OverviewListener, Refreshable {
 
     private static final String BUNDLE_STATE_ITEM_KEY = "itemKey";
     private static final String BUNDLE_STATE_NULL_OBJ = "null";
@@ -115,9 +115,11 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
         }
         updateData();
     }
-    private void updateData() {
+
+    @Override
+    public void updateData() {
         adapter = new SnippetSectionedAdapter(this.getActivity());
-        adapter.addSection(SnippetSectionedAdapter.SECTION_SNIPPET, new SnippetListAdapter(this.getActivity(), infoProvider));
+        adapter.addSection(SnippetSectionedAdapter.SECTION_SNIPPET, new SnippetListAdapter(this.getActivity(), this, infoProvider));
         if (infoProvider.getItem() != null) {
             adapter.addSection( SnippetSectionedAdapter.SECTION_GALLERY, new SnippetGalleryAdapter(this.getActivity(), true /*snippetContainerSupport.isSnippetOpened()*/, infoProvider.getItem()));
         }

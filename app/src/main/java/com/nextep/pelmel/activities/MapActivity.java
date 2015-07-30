@@ -1,6 +1,7 @@
 package com.nextep.pelmel.activities;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.location.Location;
@@ -50,6 +51,8 @@ public class MapActivity extends Fragment implements UserListener,
 	private GoogleMap map;
 	private List<Place> cachedPlaces;
 	private SnippetContainerSupport snippetContainerSupport;
+	private boolean forceRefresh;
+	private ProgressDialog progressDialog;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,6 +72,18 @@ public class MapActivity extends Fragment implements UserListener,
 		map.setMyLocationEnabled(true);
 		map.setOnInfoWindowClickListener(this);
 		map.setOnMarkerClickListener(this);
+
+		// Wiring action buttons
+		final ImageView refreshAction = (ImageView)view.findViewById(R.id.refreshButton);
+		refreshAction.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				forceRefresh = true;
+				showProgress();
+				PelMelApplication.getUserService().reconnect(MapActivity.this);
+			}
+		});
+
 		// Setting bounds on user location
 //		final LatLng latlng = new LatLng(loc.getLatitude(), loc.getLongitude());
 //		final CameraUpdate upd = CameraUpdateFactory.newLatLngZoom(latlng, 14);
@@ -88,7 +103,14 @@ public class MapActivity extends Fragment implements UserListener,
 		}
 	}
 
-
+	private void showProgress() {
+		progressDialog = new ProgressDialog(this.getActivity());
+		progressDialog.setCancelable(false);
+		progressDialog.setMessage(getString(R.string.loadingWaitMsg));
+		progressDialog.setTitle(getString(R.string.waitTitle));
+		progressDialog.setIndeterminate(true);
+		progressDialog.show();
+	}
 	//	@Override
 //	public void onWindowFocusChanged(boolean hasFocus) {
 //		super.onWindowFocusChanged(hasFocus);
@@ -103,6 +125,7 @@ public class MapActivity extends Fragment implements UserListener,
 		if (map != null) {
 
 			Log.d(TAG_MAP, "Refreshing markers");
+			showProgress();
 			PelMelApplication.getUserService().getCurrentUser(this);
 		}
 	}
@@ -115,7 +138,7 @@ public class MapActivity extends Fragment implements UserListener,
 			protected List<Place> doInBackground(Void... params) {
 				final List<Place> places = PelMelApplication.getDataService()
 						.getNearbyPlaces(user, loc.getLatitude(), loc.getLongitude(),
-								null, null, null, false);
+								null, null, null, forceRefresh);
 				return places;
 			}
 
@@ -202,12 +225,19 @@ public class MapActivity extends Fragment implements UserListener,
 					} else {
 						LatLngBounds bounds = zoomFitBoundsBuilder.build();
 						if(places.size()>2) {
-							final CameraUpdate upd = CameraUpdateFactory.newLatLngBounds(bounds, 30);
-							map.animateCamera(upd);
+							try {
+								final CameraUpdate upd = CameraUpdateFactory.newLatLngBounds(bounds, 30);
+								map.animateCamera(upd);
+							} catch(IllegalStateException e) {
+								Log.e(TAG_MAP,"Unable to adjust camera: " + e.getMessage(),e);
+							}
 						}
 					}
 				}
 				snippetContainerSupport.showSnippetFor(new ContextSnippetInfoProvider(),false,false);
+				if(progressDialog != null) {
+					progressDialog.dismiss();
+				}
 			}
 
 		}.execute();

@@ -10,6 +10,14 @@
     <string name="age_minutes">minutes</string>
     <string name="age_hours">hours</string>
     <string name="age_days">days</string>
+
+    <string name="alert_like_user_success">The user has been notified that you like him.</string>
+    <string name="alert_like_place_success">You are now part of the users who like this place.</string>
+    <string name="alert_like_success_title">You like!</string>
+    <string name="alert_unlike_user_success">Your like has been removed.</string>
+    <string name="alert_unlike_place_success">You are no longer part of the users who like this place.</string>
+    <string name="alert_unlike_success_title">Like cancelled!</string>
+
     <string name="app_name">PelMel Guide</string>
     <string name="calendar.daily">Daily</string>
     <string name="calendar.repeat.first">First</string>
@@ -64,6 +72,7 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="insiders_title">They were in</string>
+    <string name="loadingWaitMsg">Loading&#8230;</string>
     <string name="likers_title">They like</string>
     <string name="liked_places_title">He goes to</string>
     <string name="liked_users_title">He likes</string>

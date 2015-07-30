@@ -16,6 +16,7 @@ import com.nextep.pelmel.providers.OverviewProvider;
 import com.nextep.pelmel.providers.impl.EventOverviewProvider;
 import com.nextep.pelmel.providers.impl.PlaceOverviewProvider;
 import com.nextep.pelmel.providers.impl.UserOverviewProvider;
+import com.nextep.pelmel.services.ActionManager;
 import com.nextep.pelmel.services.ConversionService;
 import com.nextep.pelmel.services.DataService;
 import com.nextep.pelmel.services.ImageService;
@@ -25,6 +26,7 @@ import com.nextep.pelmel.services.TagService;
 import com.nextep.pelmel.services.UIService;
 import com.nextep.pelmel.services.UserService;
 import com.nextep.pelmel.services.WebService;
+import com.nextep.pelmel.services.impl.ActionManagerImpl;
 import com.nextep.pelmel.services.impl.ConversionServiceImpl;
 import com.nextep.pelmel.services.impl.DataServiceImpl;
 import com.nextep.pelmel.services.impl.ImageServiceImpl;
@@ -48,6 +50,7 @@ public class PelMelApplication extends Application implements
 	private TagService tagService;
 	private UserService userService;
 	private UIService uiService;
+	private ActionManager actionManager;
 	private MessageService messageService;
 	private LocalizationService localizationService;
 	private LocationManager locationManager;
@@ -98,6 +101,7 @@ public class PelMelApplication extends Application implements
 		messageService = new MessageServiceImpl();
 		conversionService = new ConversionServiceImpl();
 		localizationService = new LocalizationServiceImpl();
+		actionManager = new ActionManagerImpl();
 
 		((UserServiceImpl) userService).setWebService(webService);
 		((MessageServiceImpl) messageService).setDataService(dataService);
@@ -146,6 +150,9 @@ public class PelMelApplication extends Application implements
 
 	public static MessageService getMessageService() {
 		return instance.messageService;
+	}
+	public static ActionManager getActionManager() {
+		return instance.actionManager;
 	}
 
 	public static LocalizationService getLocalizationService() {

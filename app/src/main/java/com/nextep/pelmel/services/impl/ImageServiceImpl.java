@@ -78,37 +78,39 @@ public class ImageServiceImpl implements ImageService {
 	public void displayImage(final Image image, final boolean isThumb,
 			ImageView imageView) {
 		// Immediately displaying thumb if available
-		if (!isThumb && image.isThumbLoaded()) {
+		if (!isThumb && image != null && image.isThumbLoaded()) {
 			imageView.setImageBitmap(image.getThumb());
 		}
 
 		// And loading full image
-		imageLoader.displayImage(
-				isThumb ? image.getThumbUrl() : image.getUrl(), imageView,
-				new ImageLoadingListener() {
+		if(image!=null) {
+			imageLoader.displayImage(
+					isThumb ? image.getThumbUrl() : image.getUrl(), imageView,
+					new ImageLoadingListener() {
 
-					@Override
-					public void onLoadingStarted(String arg0, View arg1) {
-					}
-
-					@Override
-					public void onLoadingFailed(String arg0, View arg1,
-							FailReason arg2) {
-					}
-
-					@Override
-					public void onLoadingComplete(String arg0, View arg1,
-							Bitmap arg2) {
-						if (isThumb) {
-							image.setThumbLoaded(true);
-							image.setThumb(arg2);
+						@Override
+						public void onLoadingStarted(String arg0, View arg1) {
 						}
-					}
 
-					@Override
-					public void onLoadingCancelled(String arg0, View arg1) {
-					}
-				});
+						@Override
+						public void onLoadingFailed(String arg0, View arg1,
+													FailReason arg2) {
+						}
+
+						@Override
+						public void onLoadingComplete(String arg0, View arg1,
+													  Bitmap arg2) {
+							if (isThumb) {
+								image.setThumbLoaded(true);
+								image.setThumb(arg2);
+							}
+						}
+
+						@Override
+						public void onLoadingCancelled(String arg0, View arg1) {
+						}
+					});
+		}
 		// final Bitmap bitmap = isThumb ? image.getThumb() :
 		// image.getFullImage();
 		//

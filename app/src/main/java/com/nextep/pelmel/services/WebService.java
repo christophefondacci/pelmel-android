@@ -191,11 +191,17 @@ public class WebService {
 	}
 
 	public JsonLikeInfo like(User user, String parentKey) {
+		return like(user,parentKey,true);
+	}
+	public JsonLikeInfo unlike(User user, String parentKey) {
+			return like(user,parentKey,false);
+	}
+	public JsonLikeInfo like(User user, String parentKey, boolean isLiked) {
 		try {
 			// querying places
 			final InputStream inputStream = sendRequest(new URL(BASE_URL
 					+ LIKE_ACTION + "?id=" + parentKey + "&nxtpUserToken="
-					+ user.getToken()));
+					+ user.getToken() + "&type=" + (isLiked ? "1" : "-1")));
 
 			// If we got something
 			if (inputStream != null) {
