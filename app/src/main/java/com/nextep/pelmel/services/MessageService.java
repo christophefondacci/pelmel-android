@@ -8,15 +8,18 @@ import com.nextep.pelmel.model.User;
 
 public interface MessageService {
 
+	interface OnNewMessageListener {
+		void onNewMessages();
+	}
 	/**
 	 * Retrieves latest messages of the given user from server.
 	 * 
 	 * @param currentUser
 	 *            the current {@link User}
-	 * @return a list of messages
+	 * @return <code>true</code> when new messages are available, else <code>false</code>
 	 */
-	List<ChatMessage> listMessages(User currentUser, double latitude,
-			double longitude);
+	boolean listMessages(User currentUser, double latitude,
+			double longitude, OnNewMessageListener listener);
 
 	/**
 	 * Retrieves the conversation between current user and the other given user
@@ -45,8 +48,8 @@ public interface MessageService {
 	 * @param message
 	 *            the message to send
 	 * @param callback
-	 *            the {@link MessageCallback} object to send notifications to
+	 *            the {@link com.nextep.pelmel.services.MessageService.OnNewMessageListener} object to send notifications to
 	 */
 	void sendMessage(User currentUser, String otherUserKey, String message,
-			MessageCallback callback);
+			OnNewMessageListener callback);
 }

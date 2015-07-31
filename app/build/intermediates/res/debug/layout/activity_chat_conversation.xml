@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:id="@+id/chatTextBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/pelmelActionBar">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="8dp"
+            android:id="@+id/chat_add_photo"
+            android:src="@drawable/chat_btn_addphoto"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minLines="1"
+            android:maxLines="5"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text=""
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_chat_text"
+            android:layout_toLeftOf="@+id/chat_send_button"
+            android:layout_toRightOf="@id/chat_add_photo"
+            android:id="@+id/chatText"
+            android:layout_gravity="center_horizontal"/>
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_below="@+id/chatText"
+            android:layout_marginTop="5dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/chatText"
+            android:padding="7dp"
+            android:text="SEND"
+            android:textSize="18dp"
+            android:textColor="@color/white"
+            android:id="@+id/chat_send_button"/>
+
+    </RelativeLayout>
+
+
+    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/chat_list"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:descendantFocusability="afterDescendants"
+              android:layout_alignParentTop="true"
+              android:layout_above="@id/chatTextBar"
+              android:background="@color/pelmelBackground"
+        >
+    </ListView>
+
+</RelativeLayout><!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/layout/activity_chat_conversation.xml -->

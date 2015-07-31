@@ -68,6 +68,7 @@
         </activity>
         <activity android:name="com.nextep.pelmel.activities.ListEventsActivity" />
         <activity android:name="com.nextep.pelmel.activities.ChatActivity" />
+        <activity android:name="com.nextep.pelmel.activities.ChatConversationActivity" />
         <activity android:name="com.nextep.pelmel.activities.TextActivity" />
         <activity android:name="com.nextep.pelmel.activities.MainActionBarActivity" />
         <activity

@@ -223,13 +223,13 @@ public class WebService {
 	}
 
 	public JsonManyToOneMessageList getMessages(User user, double latitude,
-												double longitude) {
+												double longitude, int maxMessageId) {
 		try {
 			// querying places
 			final InputStream inputStream = sendRequest(new URL(BASE_URL
 					+ MESSAGES_LIST_ACTION + "?nxtpUserToken="
 					+ user.getToken() + "&lat=" + latitude + "&lng="
-					+ longitude));
+					+ longitude + "&fromMessageId=" + maxMessageId));
 
 			// If we got something
 			if (inputStream != null) {

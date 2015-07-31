@@ -34,4 +34,5 @@ public interface MessageCallback {
 	 *            the {@link ChatMessage} which failed
 	 */
 	void messageSentFailed(ChatMessage message);
+
 }

@@ -351,20 +351,24 @@ activity#com.nextep.pelmel.activities.ChatActivity
 ADDED from AndroidManifest.xml:67:9
 	android:name
 		ADDED from AndroidManifest.xml:67:19
-activity#com.nextep.pelmel.activities.TextActivity
+activity#com.nextep.pelmel.activities.ChatConversationActivity
 ADDED from AndroidManifest.xml:68:9
 	android:name
 		ADDED from AndroidManifest.xml:68:19
-activity#com.nextep.pelmel.activities.MainActionBarActivity
+activity#com.nextep.pelmel.activities.TextActivity
 ADDED from AndroidManifest.xml:69:9
 	android:name
 		ADDED from AndroidManifest.xml:69:19
-activity#com.nextep.pelmel.activities.MainActivity
+activity#com.nextep.pelmel.activities.MainActionBarActivity
 ADDED from AndroidManifest.xml:70:9
-	android:label
-		ADDED from AndroidManifest.xml:72:13
 	android:name
-		ADDED from AndroidManifest.xml:71:13
+		ADDED from AndroidManifest.xml:70:19
+activity#com.nextep.pelmel.activities.MainActivity
+ADDED from AndroidManifest.xml:71:9
+	android:label
+		ADDED from AndroidManifest.xml:73:13
+	android:name
+		ADDED from AndroidManifest.xml:72:13
 activity#com.google.android.gms.ads.AdActivity
 ADDED from com.google.android.gms:play-services-ads:7.5.0:26:9
 	android:configChanges
