@@ -109,6 +109,7 @@ public class MessageAdapter extends RealmBaseAdapter<Message> {
             viewHolder.dateView.setText(DATE_FORMATTER.format(msg.getMessageDate()));
             final String thumbUrl = msg.getFrom().getImageThumbUrl();
             viewHolder.imageView.setImageResource(R.drawable.no_photo_profile_small);
+            viewHolder.nicknameText.setText(msg.getFrom().getUsername());
             if (thumbUrl != null) {
                 ImageLoader.getInstance().displayImage(thumbUrl,viewHolder.imageView);
 //                PelMelApplication.getImageService().displayImage(thumb, true,

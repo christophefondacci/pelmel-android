@@ -249,6 +249,9 @@ public class UserInfoProvider implements SnippetInfoProvider, CountersProvider {
                     }
                 });
                 break;
+            case COUNTER_CHAT:
+                mgr.executeAction(Action.CHAT,user);
+                break;
         }
     }
 

@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.nextep.json.model.impl.JsonLikeInfo;
 import com.nextep.pelmel.PelMelApplication;
+import com.nextep.pelmel.activities.ChatConversationActivity;
 import com.nextep.pelmel.model.Action;
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Event;
@@ -27,6 +28,7 @@ public class ActionManagerImpl implements ActionManager {
     private WebService webService;
     public ActionManagerImpl() {
         registerLikeAction();
+        registerChatAction();
         webService = new WebService();
     }
     @Override
@@ -135,5 +137,18 @@ public class ActionManagerImpl implements ActionManager {
             }
         };
         return cmd;
+    }
+
+    private void registerChatAction() {
+        final ActionCommand cmd = new ActionCommand() {
+            @Override
+            public Object execute(Object parameter) {
+                ChatConversationActivity chatFragment = new ChatConversationActivity();
+                chatFragment.setOtherUserKey(((CalObject)parameter).getKey());
+                PelMelApplication.getSnippetContainerSupport().showSnippetForFragment(chatFragment,true,false);
+                return null;
+            }
+        };
+        commandsActionMap.put(Action.CHAT,cmd);
     }
 }

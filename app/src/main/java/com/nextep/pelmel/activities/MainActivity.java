@@ -37,6 +37,10 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
         slidingLayout.setScrollableView(snippetView);
 
         PelMelApplication.setSnippetContainerSupport(this);
+
+        getSupportActionBar().setIcon(R.drawable.pelmel_icon);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 //        slidingLayout.setPanelHeight(0);
 //        slidingLayout.setOverlayed(true);
 

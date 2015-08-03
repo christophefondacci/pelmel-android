@@ -172,6 +172,18 @@ public class SnippetListAdapter extends BaseAdapter {
                     countersProvider.executeCounterActionAtIndex(context,refreshable,CountersProvider.COUNTER_LIKE);
                 }
             });
+            viewHolder.checkinIconContainerView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    countersProvider.executeCounterActionAtIndex(context,refreshable,CountersProvider.COUNTER_CHECKIN);
+                }
+            });
+            viewHolder.chatIconContainerView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    countersProvider.executeCounterActionAtIndex(context,refreshable,CountersProvider.COUNTER_CHAT);
+                }
+            });
 
             // Handling visibility
             int likeVisibility = countersProvider.hasCounter(CountersProvider.COUNTER_LIKE) ? View.VISIBLE : View.INVISIBLE;
