@@ -1,6 +1,7 @@
 package com.nextep.pelmel.activities;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -45,22 +46,27 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
 
     @Override
     public void showSnippetFor(SnippetInfoProvider provider, boolean isOpen, boolean isRoot) {
-        SnippetListFragment snippetFragment = (SnippetListFragment)getSupportFragmentManager().findFragmentByTag(TAG_SNIPPET);
+        final SnippetListFragment snippetFragment = new SnippetListFragment();
+        snippetFragment.setInfoProvider(provider);
+        showSnippetForFragment(snippetFragment, isOpen, isRoot);
+
+    }
+
+    @Override
+    public void showSnippetForFragment(Fragment fragment, boolean isOpen, boolean isRoot) {
+
+
+        Fragment snippetFragment = getSupportFragmentManager().findFragmentByTag(TAG_SNIPPET);
         final SlidingUpPanelLayout slidingLayout = (SlidingUpPanelLayout) findViewById(R.id.slidingPanel);
         if(snippetFragment == null) {
-            snippetFragment = new SnippetListFragment();
-            snippetFragment.setInfoProvider(provider);
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.add(R.id.pelmelSnippetContainer,snippetFragment,TAG_SNIPPET).commit();
+            transaction.add(R.id.pelmelSnippetContainer,fragment,TAG_SNIPPET).commit();
         } else {
             FragmentManager fragmentManager = getSupportFragmentManager();
 
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
-
-            snippetFragment = new SnippetListFragment();
-            snippetFragment.setInfoProvider(provider);
-            transaction.replace(R.id.pelmelSnippetContainer, snippetFragment,TAG_SNIPPET );
+            transaction.replace(R.id.pelmelSnippetContainer, fragment,TAG_SNIPPET );
             transaction.addToBackStack(null);
             transaction.commit();
         }
@@ -77,9 +83,14 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
     public boolean openSnippet() {
         final SlidingUpPanelLayout slidingLayout = (SlidingUpPanelLayout) findViewById(R.id.slidingPanel);
         slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
-//        SlidingUpPanelLayout slidingLayout = (SlidingUpPanelLayout) findViewById(R.id.slidingPanel);
-//        View mapView = findViewById(R.id.pelmelMap);
-//        slidingLayout.setPanelHeight(mapView.getHeight());
+
+        return true;
+    }
+
+    @Override
+    public boolean minimizeSnippet() {
+        final SlidingUpPanelLayout slidingLayout = (SlidingUpPanelLayout) findViewById(R.id.slidingPanel);
+        slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
 
         return true;
     }

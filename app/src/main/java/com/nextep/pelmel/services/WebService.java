@@ -28,7 +28,7 @@ public class WebService {
 
 	public static final String LOG_TAG = "WebService";
 	public static final String BASE_URL = "http://www.pelmelguide.com";
-	//public static final String BASE_URL = "http://192.168.1.25";
+//	public static final String BASE_URL = "http://127.0.0.1";
 	//private static final String BASE_URL = "http://www.pelmelguide.com";
 	private static final String LOGIN_ACTION = "/mobileLogin";
 	private static final String PLACES_LIST_ACTION = "/mapPlaces";

@@ -1,12 +1,14 @@
 package com.nextep.pelmel.activities;
 
+import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -17,11 +19,14 @@ import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
 import com.nextep.pelmel.adapters.MessageAdapter;
 import com.nextep.pelmel.listeners.MessageCallback;
+import com.nextep.pelmel.listeners.OverviewListener;
 import com.nextep.pelmel.listeners.UserListener;
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.ChatMessage;
 import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.model.db.Message;
+import com.nextep.pelmel.model.support.SnippetChildSupport;
+import com.nextep.pelmel.model.support.SnippetContainerSupport;
 import com.nextep.pelmel.services.MessageService;
 import com.nextep.pelmel.services.UserService;
 
@@ -32,44 +37,40 @@ import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
-public class ChatConversationActivity extends MainActionBarActivity implements
-		UserListener, OnItemClickListener, MessageCallback, MessageService.OnNewMessageListener {
+public class ChatConversationActivity extends Fragment implements
+		UserListener, OnItemClickListener, MessageCallback, SnippetChildSupport, MessageService.OnNewMessageListener {
 
 	public static final String CHAT_WITH_USER_KEY = "userKey";
 
 	private ListView listView;
 	private View sendButton;
 	private EditText chatTextView;
-	private ProgressDialog progressDialog;
 	private UserService userService;
-	private boolean isOneToOneChat = false;
 	private String otherUserKey;
 	private User currentUser;
 	private List<ChatMessage> messages = Collections.emptyList();
+	private SnippetContainerSupport snippetContainerSupport;
+
+	public void setOtherUserKey(String otherUserKey) {
+		this.otherUserKey = otherUserKey;
+	}
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-		final Intent intent = getIntent();
-		if (intent != null) {
-			if (intent.getExtras() != null) {
-				otherUserKey = (String) intent.getExtras().get(
-						CHAT_WITH_USER_KEY);
-			}
-		}
-		setContentView(R.layout.activity_chat_conversation);
+		// Inflating view layout
+		final View view = inflater.inflate(R.layout.activity_chat_conversation,container,false);
 
 		// Configuring list view
-		listView = (ListView) findViewById(R.id.chat_list);
+		listView = (ListView) view.findViewById(R.id.chat_list);
 		listView.setOnItemClickListener(this);
 		listView.setDividerHeight(0);
 
 		// Configuring text editor
-		chatTextView = (EditText)findViewById(R.id.chatText);
+		chatTextView = (EditText)view.findViewById(R.id.chatText);
 
 		// Configuring send action
-		sendButton = findViewById(R.id.chat_send_button);
+		sendButton = view.findViewById(R.id.chat_send_button);
 		sendButton.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -93,17 +94,11 @@ public class ChatConversationActivity extends MainActionBarActivity implements
 		// Getting user, notifying us when ready
 		userService.getCurrentUser(this);
 
-		getWindow().setSoftInputMode(
+		getActivity().getWindow().setSoftInputMode(
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+		snippetContainerSupport.setSnippetChild(this);
 
-	}
-
-	@Override
-	protected void onDestroy() {
-		if (progressDialog != null && progressDialog.isShowing()) {
-			progressDialog.dismiss();
-		}
-		super.onDestroy();
+		return view;
 	}
 
 	@Override
@@ -114,7 +109,7 @@ public class ChatConversationActivity extends MainActionBarActivity implements
 
 	private void updateData() {
 		final User currentUser = PelMelApplication.getUserService().getLoggedUser();
-		Realm realm = Realm.getInstance(this, currentUser.getKey());
+		Realm realm = Realm.getInstance(this.getActivity(), currentUser.getKey());
 		RealmQuery<Message> query = realm.where(Message.class);
 		query.beginGroup();
 		query.equalTo("from.itemKey", currentUser.getKey());
@@ -129,7 +124,7 @@ public class ChatConversationActivity extends MainActionBarActivity implements
 
 		final RealmResults<Message> messages = query.findAllSorted("messageDate", true);
 
-		final MessageAdapter adapter=  new MessageAdapter(this,messages,currentUser,otherUserKey,this);
+		final MessageAdapter adapter=  new MessageAdapter(this.getActivity(),messages,currentUser,otherUserKey,this);
 		listView.setAdapter(adapter);
 		listView.setSelection(messages.size() - 1);
 	}
@@ -143,17 +138,19 @@ public class ChatConversationActivity extends MainActionBarActivity implements
 			long id) {
 		final Message msg = (Message) listView.getAdapter().getItem(
 				position);
-		if (msg != null) {
 				// If tapped, then we jump to overview of this user
-			final CalObject obj = PelMelApplication.getDataService().getCalObject(msg.getFrom().getItemKey(),null);
-				final Intent intent = new Intent(this, OverviewActivity.class);
-				PelMelApplication.setOverviewObject(user);
-				startActivity(intent);
-		} else {
-			// Refreshing display
-			progressDialog.show();
-			userService.getCurrentUser(this);
-		}
+			final CalObject obj = PelMelApplication.getDataService().getCalObject(msg.getFrom().getItemKey(), new OverviewListener() {
+				@Override
+				public Activity getContext() {
+					return ChatConversationActivity.this.getActivity();
+				}
+
+				@Override
+				public void overviewDataAvailable(CalObject object) {
+					snippetContainerSupport.showSnippetFor(object, true, false);
+				}
+			});
+
 	}
 
 	@Override
@@ -167,7 +164,7 @@ public class ChatConversationActivity extends MainActionBarActivity implements
 
 	@Override
 	public void messageSentFailed(final ChatMessage message) {
-		new AlertDialog.Builder(this)
+		new AlertDialog.Builder(this.getActivity())
 				.setTitle(getText(R.string.chat_send_fail_title))
 				.setMessage(getText(R.string.chat_send_fail))
 				.setPositiveButton(getText(R.string.ok),
@@ -196,7 +193,7 @@ public class ChatConversationActivity extends MainActionBarActivity implements
 
 	@Override
 	public void onNewMessages() {
-		runOnUiThread(new Runnable() {
+		getActivity().runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				updateData();
@@ -204,5 +201,31 @@ public class ChatConversationActivity extends MainActionBarActivity implements
 		});
 
 	}
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		try {
+			snippetContainerSupport = (SnippetContainerSupport)activity;
+		} catch(ClassCastException e) {
+			throw new IllegalStateException("Parent of SnippetListFragment must be a snippetContainerSupport");
+		}
+	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		if(snippetContainerSupport != null) {
+			snippetContainerSupport.setSnippetChild(this);
+		}
+	}
+
+	@Override
+	public void onSnippetOpened(boolean snippetOpened) {
+
+	}
+
+	@Override
+	public View getScrollableView() {
+		return listView;
+	}
 }

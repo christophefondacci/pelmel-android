@@ -648,13 +648,15 @@ public class DataServiceImpl implements DataService {
 
                 // Notifying callback on UI thread
                 final CalObject o = loadedObj;
-                listener.getContext().runOnUiThread(new Runnable() {
+                if(listener != null) {
+                    listener.getContext().runOnUiThread(new Runnable() {
 
-                    @Override
-                    public void run() {
-                        listener.overviewDataAvailable(o);
-                    }
-                });
+                        @Override
+                        public void run() {
+                            listener.overviewDataAvailable(o);
+                        }
+                    });
+                }
             }
         }
     }

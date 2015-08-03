@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" 
     xmlns:pelmel="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/menu_places" android:icon="@drawable/tab_place" android:title="@string/tabPlaceList" pelmel:showAsAction="always|withText"></item>
     <item android:id="@+id/menu_map" android:icon="@drawable/tab_location" android:title="@string/tabMap" pelmel:showAsAction="always|withText"></item>
-    <item android:id="@+id/menu_events" android:icon="@drawable/tab_calendar" android:title="@string/tabEvents" pelmel:showAsAction="always|withText"></item>
-    <item android:id="@+id/menu_chat" android:icon="@drawable/tab_chat" android:title="@string/tabMessages" pelmel:showAsAction="always|withText"></item>
-    <item android:id="@+id/menu_settings" android:icon="@drawable/tab_settings" android:title="@string/tabSettings" pelmel:showAsAction="always|withText"></item>
+    <item android:id="@+id/menu_chat" android:icon="@drawable/snp_icon_chat" android:title="@string/tabMessages" pelmel:showAsAction="always|withText"></item>
+    <item android:id="@+id/menu_settings" android:icon="@drawable/mnu_icon_settings" android:title="@string/tabSettings" pelmel:showAsAction="always|withText"></item>
 </menu><!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/menu/pelmel_menu.xml -->

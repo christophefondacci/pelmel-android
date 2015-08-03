@@ -103,7 +103,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@id/subtitleIcon"
-        android:layout_alignLeft="@+id/titleLabel"
+        android:layout_alignLeft="@+id/thumbImage"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="5dp"
         android:id="@+id/countersContainerView">

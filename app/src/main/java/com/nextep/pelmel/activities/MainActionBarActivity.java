@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.providers.impl.ContextSnippetInfoProvider;
 import com.nextep.pelmel.services.LocalizationService;
 
 public class MainActionBarActivity extends ActionBarActivity {
@@ -36,27 +37,26 @@ public class MainActionBarActivity extends ActionBarActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.menu_places:
-			final Intent intentPlaceList = new Intent(this,
-					ListPlacesActivity.class);
-			intentPlaceList.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-			startActivity(intentPlaceList);
-			return true;
+//		case R.id.menu_places:
+//			final Intent intentPlaceList = new Intent(this,
+//					ListPlacesActivity.class);
+//			intentPlaceList.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//			startActivity(intentPlaceList);
+//			return true;
 		case R.id.menu_map:
-			final Intent intentMap = new Intent(this, MapActivity.class);
-			intentMap.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-			startActivity(intentMap);
+			ContextSnippetInfoProvider provider = new ContextSnippetInfoProvider();
+			PelMelApplication.getSnippetContainerSupport().showSnippetFor(provider,false,true);
+			PelMelApplication.getSnippetContainerSupport().minimizeSnippet();
 			return true;
-		case R.id.menu_events:
-			final Intent intentEventList = new Intent(this,
-					ListEventsActivity.class);
-			intentEventList.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-			startActivity(intentEventList);
-			return true;
+//		case R.id.menu_events:
+//			final Intent intentEventList = new Intent(this,
+//					ListEventsActivity.class);
+//			intentEventList.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//			startActivity(intentEventList);
+//			return true;
 		case R.id.menu_chat:
-			final Intent intentChat = new Intent(this, ChatActivity.class);
-			intentChat.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-			startActivity(intentChat);
+			final ChatActivity chatFragment = new ChatActivity();
+			PelMelApplication.getSnippetContainerSupport().showSnippetForFragment(chatFragment, true, false);
 			return true;
 		case R.id.menu_settings:
 			final Intent intentAccount = new Intent(this, AccountActivity.class);
