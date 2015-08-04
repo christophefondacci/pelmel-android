@@ -2325,11 +2325,12 @@ containing a value of this type.
         public static final int match_parent=0x7f0c0035;
         public static final int media_route_control_frame=0x7f0c0106;
         public static final int media_route_list=0x7f0c0102;
-        public static final int menu_chat=0x7f0c0119;
-        public static final int menu_map=0x7f0c0118;
+        public static final int menu_chat=0x7f0c011a;
+        public static final int menu_export=0x7f0c0118;
+        public static final int menu_map=0x7f0c0119;
         public static final int menu_save=0x7f0c0115;
         public static final int menu_save_text=0x7f0c0116;
-        public static final int menu_settings=0x7f0c011a;
+        public static final int menu_settings=0x7f0c011b;
         public static final int middle=0x7f0c0018;
         public static final int mirror=0x7f0c0024;
         public static final int monochrome=0x7f0c003c;

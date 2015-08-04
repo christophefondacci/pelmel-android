@@ -43,6 +43,9 @@ public class MainActionBarActivity extends ActionBarActivity {
 //			intentPlaceList.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 //			startActivity(intentPlaceList);
 //			return true;
+		case R.id.menu_export:
+			PelMelApplication.getDataService().exportDatabase(this);
+			return true;
 		case R.id.menu_map:
 			ContextSnippetInfoProvider provider = new ContextSnippetInfoProvider();
 			PelMelApplication.getSnippetContainerSupport().showSnippetFor(provider,false,true);

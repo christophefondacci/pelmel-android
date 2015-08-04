@@ -149,10 +149,15 @@ public class ActionManagerImpl implements ActionManager {
     private void registerChatAction() {
         final ActionCommand cmd = new ActionCommand() {
             @Override
-            public Object execute(Object parameter) {
-                ChatConversationActivity chatFragment = new ChatConversationActivity();
-                chatFragment.setOtherUserKey(((CalObject)parameter).getKey());
-                PelMelApplication.getSnippetContainerSupport().showSnippetForFragment(chatFragment,true,false);
+            public Object execute(final Object parameter) {
+                uiThreadHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        ChatConversationActivity chatFragment = new ChatConversationActivity();
+                        chatFragment.setOtherUserKey(((CalObject) parameter).getKey());
+                        PelMelApplication.getSnippetContainerSupport().showSnippetForFragment(chatFragment, true, false);
+                    }
+                });
                 return null;
             }
         };

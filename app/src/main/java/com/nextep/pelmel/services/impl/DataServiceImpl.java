@@ -1,6 +1,9 @@
 package com.nextep.pelmel.services.impl;
 
+import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -45,6 +48,7 @@ import com.nextep.pelmel.services.TagService;
 import com.nextep.pelmel.services.UserService;
 import com.nextep.pelmel.services.WebService;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -56,6 +60,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import io.realm.Realm;
 
 public class DataServiceImpl implements DataService {
 
@@ -819,5 +825,40 @@ public class DataServiceImpl implements DataService {
         }
 
         return obj;
+    }
+
+
+    public void exportDatabase(Context context) {
+
+        // init realm
+        Realm realm = Realm.getInstance(context, PelMelApplication.getUserService().getLoggedUser().getKey());
+
+        File exportRealmFile = null;
+        try {
+            // get or create an "export.realm" file
+            exportRealmFile = new File(context.getExternalCacheDir(), "export.realm");
+
+            // if "export.realm" already exists, delete
+            exportRealmFile.delete();
+
+            // copy current realm to "export.realm"
+            realm.writeCopyTo(exportRealmFile);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        realm.close();
+
+        // init email intent and add export.realm as attachment
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("plain/text");
+        intent.putExtra(Intent.EXTRA_EMAIL, "cfondacci@gmail.com");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Realm File");
+        intent.putExtra(Intent.EXTRA_TEXT, "Realm file");
+        Uri u = Uri.fromFile(exportRealmFile);
+        intent.putExtra(Intent.EXTRA_STREAM, u);
+
+        // start email intent
+        context.startActivity(Intent.createChooser(intent, "YOUR CHOOSER TITLE"));
     }
 }

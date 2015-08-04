@@ -838,11 +838,12 @@ int id markerImage 0x7f0c0101
 int id match_parent 0x7f0c0035
 int id media_route_control_frame 0x7f0c0106
 int id media_route_list 0x7f0c0102
-int id menu_chat 0x7f0c0119
-int id menu_map 0x7f0c0118
+int id menu_chat 0x7f0c011a
+int id menu_export 0x7f0c0118
+int id menu_map 0x7f0c0119
 int id menu_save 0x7f0c0115
 int id menu_save_text 0x7f0c0116
-int id menu_settings 0x7f0c011a
+int id menu_settings 0x7f0c011b
 int id middle 0x7f0c0018
 int id mirror 0x7f0c0024
 int id monochrome 0x7f0c003c

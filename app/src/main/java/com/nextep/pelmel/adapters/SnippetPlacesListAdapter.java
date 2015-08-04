@@ -84,6 +84,9 @@ public class SnippetPlacesListAdapter extends BaseAdapter {
             Strings.setFontFamily(viewHolder.dateLabel);
             Strings.setFontFamily(viewHolder.titleLabel);
             Strings.setFontFamily(viewHolder.locationLabel);
+
+            viewHolder.titleLabel.setHorizontallyScrolling(true);
+            viewHolder.dateLabel.setHorizontallyScrolling(true);
             convertView.setTag(viewHolder);
         }
         return convertView;

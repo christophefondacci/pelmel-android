@@ -92,7 +92,6 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
     public boolean openSnippet() {
         final SlidingUpPanelLayout slidingLayout = (SlidingUpPanelLayout) findViewById(R.id.slidingPanel);
         slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
-
         return true;
     }
 

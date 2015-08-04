@@ -1,5 +1,7 @@
 package com.nextep.pelmel.services;
 
+import android.content.Context;
+
 import com.nextep.json.model.IJsonLightEvent;
 import com.nextep.json.model.IJsonLightPlace;
 import com.nextep.json.model.IJsonLightUser;
@@ -132,5 +134,7 @@ public interface DataService {
      * @return the CalObject, might be a very light object with only the item key set
      */
     CalObject getCalObject(String itemKey, OverviewListener listener);
+
+    void exportDatabase(Context context);
 
 }

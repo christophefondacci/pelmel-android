@@ -111,7 +111,7 @@ public class MessageServiceImpl implements MessageService {
 					query.or();
 				}
 				query.equalTo("messageKey", key);
-				isFirst = true;
+				isFirst = false;
 			}
 			// Executing search
 			RealmResults<Message> results = query.findAll();
@@ -153,7 +153,7 @@ public class MessageServiceImpl implements MessageService {
 				fromRecipient.getMessages().add(message);
 				message.setFrom(fromRecipient);
 				MessageRecipient groupRecipient = null;
-				if (jsonMessage.getRecipientsGroupKey() != null) {
+				if (jsonMessage.getRecipientsGroupKey() != null && !"".equals(jsonMessage.getRecipientsGroupKey())) {
 					groupRecipient = groupsMap.get(jsonMessage.getRecipientsGroupKey());
 					message.setReplyTo(groupRecipient);
 				}
