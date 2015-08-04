@@ -3,6 +3,7 @@
 
     <string name="action_settings">Compte</string>
     <string name="action_checkin">Check In</string>
+    <string name="action_checkout">Check Out</string>
     <string name="action_comment">Commenter</string>
     <string name="action_chat">Chater</string>
     <string name="action_like">J\'aime</string>
@@ -10,6 +11,19 @@
     <string name="age_minutes">minutes</string>
     <string name="age_hours">heures</string>
     <string name="age_days">jours</string>
+
+    <string name="alert_checkin_success_title">Vous vous êtes localisé!</string>
+    <string name="alert_checkin_success">Votre présence est désormais visible par les autres utilisateurs. Vous pouvez faire un \'checkout\' pour ne plus partager cette information.</string>
+    <string name="alert_checkout_success_title">Vous avez terminé votre localisation!</string>
+    <string name="alert_checkout_success">Vous avez supprimer votre localisation de {0}, plus personne ne voit votre localisation! Aucun utilisateur ne peut désormais voir que vous avez été ici.</string>
+    <string name="alert_like_user_success">Cet utilisateur a été notifié de votre like.</string>
+    <string name="alert_like_place_success">Vous faites désormais partie des utilisateurs qui aiment ce lieu.</string>
+    <string name="alert_like_success_title">Vous aimez !</string>
+    <string name="alert_unlike_user_success">Votre n\'aimez plus.</string>
+    <string name="alert_unlike_place_success">Vous ne faites plus partie des utilisateurs qui aiment ce lieu.</string>
+    <string name="alert_unlike_success_title">Vous n\'aimez plus !</string>
+
+
     <string name="app_name">PelMel Guide</string>
     <string name="calendar.daily">Tous les jours</string>
     <string name="calendar.repeat.first">Les 1ers</string>
@@ -22,6 +36,7 @@
     <string name="chat_send">Envoyer</string>
     <string name="chat_send_fail_title">Echec de l\'envoi du message</string>
     <string name="chat_send_fail">PelMel n\'a pas pu envoyer votre message, vérifiez votre connexion puis essayez à nouveau.</string>
+    <string name="checkins_list_title">Check in ci-dessous</string>
     <string name="counter_event_in">{0} y seront</string>
     <string name="counter_event_in_singular">{0} y sera</string>
     <string name="counter_likes">{0} Aiment ça</string>
@@ -107,6 +122,7 @@
     <string name="search_extend_label">Aucun lieu gay trouvé dans les environs, vous pouvez chercher à nouveau dans un rayon plus grand :</string>
     <string name="search_no_localization">Impossible d\'accéder à votre localisation. Veuillez vérifier que les services de localisation sont activés dans vos préférences Android.</string>
     <string name="search_no_google_services">L\'application \'Google Services\' n\'est pas installée ou est trop ancienne, veuillez l\'installer ou la mettre à jour depuis Google Play Store.</string>
+    <string name="section_current_checkin">A indiqué se trouver actuellment à</string>
     <string name="section_events">Évènements à venir</string>
     <string name="section_general_info">Informations Générales</string>
     <string name="section_title_happyhours">Happy Hours</string>

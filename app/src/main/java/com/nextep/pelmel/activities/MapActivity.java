@@ -22,16 +22,19 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.VisibleRegion;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.PelMelConstants;
 import com.nextep.pelmel.R;
 import com.nextep.pelmel.helpers.GeoUtils;
 import com.nextep.pelmel.helpers.Utils;
 import com.nextep.pelmel.listeners.UserListener;
+import com.nextep.pelmel.model.Action;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.model.support.SnippetContainerSupport;
@@ -48,17 +51,21 @@ public class MapActivity extends Fragment implements UserListener,
 
 	private static final String TAG_MAP = "MAP";
 	private Map<Marker, Place> placeMarkersMap;
+	private Map<String,Marker> markersKeyMap;
 	private GoogleMap map;
 	private List<Place> cachedPlaces;
 	private SnippetContainerSupport snippetContainerSupport;
 	private boolean forceRefresh;
 	private ProgressDialog progressDialog;
-
+	private boolean isLoaded = false;
+	private LayoutInflater layoutInflater;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final View view = inflater.inflate(R.layout.activity_map,container);
 
+		layoutInflater = inflater;
 		placeMarkersMap = new HashMap<Marker, Place>();
+		markersKeyMap = new HashMap<>();
 
 		// Initializing map and zooming to current location
 		final Location loc = PelMelApplication.getLocalizationService().getLocation();
@@ -81,6 +88,14 @@ public class MapActivity extends Fragment implements UserListener,
 				forceRefresh = true;
 				showProgress();
 				PelMelApplication.getUserService().reconnect(MapActivity.this);
+			}
+		});
+
+		final ImageView checkinAction = (ImageView)view.findViewById(R.id.checkinButton);
+		checkinAction.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				PelMelApplication.getActionManager().executeAction(Action.CHECKIN,null);
 			}
 		});
 
@@ -133,12 +148,33 @@ public class MapActivity extends Fragment implements UserListener,
 	@Override
 	public void userInfoAvailable(final User user) {
 		final Location loc = PelMelApplication.getLocalizationService().getLocation();
+		final LatLng myPos = new LatLng(loc.getLatitude(), loc.getLongitude()); //map.getMyLocation().getLatitude(),map.getMyLocation().getLongitude());
+		final VisibleRegion region = map.getProjection().getVisibleRegion();
+		final CameraPosition cameraPosition = map.getCameraPosition();
 		AsyncTask<Void, Void, List<Place>> asyncTask = new AsyncTask<Void, Void, List<Place>>() {
 			@Override
 			protected List<Place> doInBackground(Void... params) {
+
+//				final ConversionService
+				double lat = 0;
+				double lng = 0;
+				Integer radius = null;
+				if(region.latLngBounds.contains(myPos) || ! isLoaded) {
+					lat = loc.getLatitude();
+					lng = loc.getLongitude();
+					radius = null;
+				} else {
+					lat = cameraPosition.target.latitude;
+					lng = cameraPosition.target.longitude;
+
+					double boundLat = region.latLngBounds.northeast.latitude;
+					double boundLng = region.latLngBounds.northeast.longitude;
+					radius = (int)GeoUtils.distance(lat,lng,boundLat,boundLng);
+				}
 				final List<Place> places = PelMelApplication.getDataService()
-						.getNearbyPlaces(user, loc.getLatitude(), loc.getLongitude(),
-								null, null, null, forceRefresh);
+						.getNearbyPlaces(user, lat, lng,
+								null, null, radius, forceRefresh);
+				isLoaded = true;
 				return places;
 			}
 
@@ -161,57 +197,11 @@ public class MapActivity extends Fragment implements UserListener,
 
 					// Processing places
 					final ConversionService conversionService = PelMelApplication.getConversionService();
-					final Resources res = PelMelApplication.getInstance()
-							.getResources();
-					LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+
 					for (final Place p : places) {
-						int markerCode;
 						if (p != null) {
-							if (Place.PLACE_TYPE_BAR.equals(p.getType())) {
-								markerCode = R.drawable.marker_bar;
-							} else if (Place.PLACE_TYPE_ASSOCIATION.equals(p.getType())) {
-								markerCode = R.drawable.marker_asso;
-							} else if (Place.PLACE_TYPE_CLUB.equals(p.getType())) {
-								markerCode = R.drawable.marker_club;
-							} else if (Place.PLACE_TYPE_RESTAURANT.equals(p.getType())) {
-								markerCode = R.drawable.marker_restaurant;
-							} else if (Place.PLACE_TYPE_SAUNA.equals(p.getType())) {
-								markerCode = R.drawable.marker_sauna;
-							} else if (Place.PLACE_TYPE_SEXCLUB.equals(p.getType())) {
-								markerCode = R.drawable.marker_sexclub;
-							} else if (Place.PLACE_TYPE_SHOP.equals(p.getType())) {
-								markerCode = R.drawable.marker_sexshop;
-							} else if (Place.PLACE_TYPE_HOTEL.equals(p.getType())) {
-								markerCode = R.drawable.marker_hotel;
-							} else if (Place.PLACE_TYPE_OUTDOORS.equals(p.getType())) {
-								markerCode = R.drawable.marker_outdoor;
-							} else {
-								markerCode = R.drawable.marker_bar;
-							}
-
-							// Inflating marker
-							final View markerView = layoutInflater.inflate(R.layout.map_marker,null);
-							final ImageView markerImage = (ImageView)markerView.findViewById(R.id.markerImage);
-							final TextView markerBadge = (TextView)markerView.findViewById(R.id.badgeLabel);
-							markerImage.setImageBitmap(BitmapFactory.decodeResource(res,markerCode));
-							markerBadge.setText(String.valueOf(p.getInsidersCount()));
-							if(p.getInsidersCount()==0) {
-								markerBadge.setVisibility(View.INVISIBLE);
-							}
-
-//							final BitmapDescriptor bitmapDesc = BitmapDescriptorFactory
-//									.fromResource(markerCode);
-							final LatLng markerPos = new LatLng(p.getLatitude(),
-									p.getLongitude());
-
-							final double distance = conversionService.getDistanceTo(p);
-							final String distStr = conversionService.getDistanceStringForMiles(distance);
-							final Marker marker = map.addMarker(new MarkerOptions()
-									.position(markerPos).icon(BitmapDescriptorFactory.fromBitmap(Utils.createDrawableFromView(getActivity(),markerView)))
-									.title(p.getName()).snippet(distStr));
-							placeMarkersMap.put(marker, p);
-
-
+							final Marker marker = buildMarkerFor(p);
+							final LatLng markerPos = marker.getPosition();
 							// Zoom management
 							if(userZoomBounds.contains(markerPos)) {
 								placesInUserZoom++;
@@ -243,6 +233,57 @@ public class MapActivity extends Fragment implements UserListener,
 		}.execute();
 	}
 
+	private Marker buildMarkerFor(Place p) {
+		final Resources res = PelMelApplication.getInstance()
+				.getResources();
+
+		int markerCode;
+		if (Place.PLACE_TYPE_BAR.equals(p.getType())) {
+			markerCode = R.drawable.marker_bar;
+		} else if (Place.PLACE_TYPE_ASSOCIATION.equals(p.getType())) {
+			markerCode = R.drawable.marker_asso;
+		} else if (Place.PLACE_TYPE_CLUB.equals(p.getType())) {
+			markerCode = R.drawable.marker_club;
+		} else if (Place.PLACE_TYPE_RESTAURANT.equals(p.getType())) {
+			markerCode = R.drawable.marker_restaurant;
+		} else if (Place.PLACE_TYPE_SAUNA.equals(p.getType())) {
+			markerCode = R.drawable.marker_sauna;
+		} else if (Place.PLACE_TYPE_SEXCLUB.equals(p.getType())) {
+			markerCode = R.drawable.marker_sexclub;
+		} else if (Place.PLACE_TYPE_SHOP.equals(p.getType())) {
+			markerCode = R.drawable.marker_sexshop;
+		} else if (Place.PLACE_TYPE_HOTEL.equals(p.getType())) {
+			markerCode = R.drawable.marker_hotel;
+		} else if (Place.PLACE_TYPE_OUTDOORS.equals(p.getType())) {
+			markerCode = R.drawable.marker_outdoor;
+		} else {
+			markerCode = R.drawable.marker_bar;
+		}
+
+		// Inflating marker
+		final View markerView = layoutInflater.inflate(R.layout.map_marker,null);
+		final ImageView markerImage = (ImageView)markerView.findViewById(R.id.markerImage);
+		final TextView markerBadge = (TextView)markerView.findViewById(R.id.badgeLabel);
+		markerImage.setImageBitmap(BitmapFactory.decodeResource(res,markerCode));
+		markerBadge.setText(String.valueOf(p.getInsidersCount()));
+		if(p.getInsidersCount()==0) {
+			markerBadge.setVisibility(View.INVISIBLE);
+		}
+
+//							final BitmapDescriptor bitmapDesc = BitmapDescriptorFactory
+//									.fromResource(markerCode);
+		final LatLng markerPos = new LatLng(p.getLatitude(),
+				p.getLongitude());
+
+		final double distance = PelMelApplication.getConversionService().getDistanceTo(p);
+		final String distStr = PelMelApplication.getConversionService().getDistanceStringForMiles(distance);
+		final Marker marker = map.addMarker(new MarkerOptions()
+				.position(markerPos).icon(BitmapDescriptorFactory.fromBitmap(Utils.createDrawableFromView(getActivity(),markerView)))
+				.title(p.getName()).snippet(distStr));
+		placeMarkersMap.put(marker, p);
+		markersKeyMap.put(p.getKey(),marker);
+		return marker;
+	}
 	@Override
 	public void userInfoUnavailable() {
 		// Nothing to do
@@ -263,5 +304,12 @@ public class MapActivity extends Fragment implements UserListener,
 		final SnippetInfoProvider infoProvider = PelMelApplication.getUiService().buildInfoProviderFor(p);
 		snippetContainerSupport.showSnippetFor(infoProvider,false,false);
 		return false;
+	}
+
+	public void refreshMarkerFor(Place place) {
+		final Marker m = markersKeyMap.get(place.getKey());
+		m.remove();
+		final Marker marker = buildMarkerFor(place);
+
 	}
 }

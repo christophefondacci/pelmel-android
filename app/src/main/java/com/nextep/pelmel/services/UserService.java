@@ -7,6 +7,11 @@ import com.nextep.pelmel.model.User;
 
 public interface UserService {
 
+    interface CheckInCallback {
+        void didCheckIn(User user, Place place, Place previousLocation);
+        void didCheckOut(User user, Place fromPlace);
+        void checkInFailed(Place place, String reason);
+    }
     void getCurrentUser(UserListener listener);
 
     /**
@@ -83,8 +88,25 @@ public interface UserService {
 
     /**
      * Returns whether the current user is currently checked in at the given place
+     *
      * @param place the Place to check
      * @return <code>true</code> when current user is checked in at that place, else <code>false</code>
      */
     boolean isCheckedInAt(Place place);
+
+    /**
+     * Checks the current user in the given place. The user will be automatically checked out from any
+     * previous location
+     * @param place the place to check the user in
+     * @param callback the callback for checkin process notification
+     */
+    void checkIn(Place place,CheckInCallback callback);
+
+    /**
+     * Checks the current user out the given place.
+     *
+     * @param place the place where the user should be checked out from
+     * @param callback the callback that should be called when action is complete
+     */
+    void checkOut(Place place, CheckInCallback callback);
 }

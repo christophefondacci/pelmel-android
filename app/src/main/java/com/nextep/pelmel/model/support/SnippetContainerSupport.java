@@ -2,6 +2,7 @@ package com.nextep.pelmel.model.support;
 
 import android.support.v4.app.Fragment;
 
+import com.nextep.pelmel.activities.MapActivity;
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
 
@@ -21,6 +22,19 @@ public interface SnippetContainerSupport {
      * @param isRoot whether this fragment should be placed at the root of snippet navigation
      */
     void showSnippetForFragment(Fragment fragment, boolean isOpen, boolean isRoot);
+
+    /**
+     * Shows the given fragment as a modal dialog
+     *
+     * @param fragment the fragment to display
+     */
+    void showDialog(Fragment fragment);
+
+    /**
+     * Dismisses any dialog currently displayed. Does nothing if no dialog is currently shown to the
+     * user
+     */
+    void dismissDialog();
 
     boolean openSnippet();
     boolean minimizeSnippet();
@@ -45,4 +59,11 @@ public interface SnippetContainerSupport {
      * @param childSupport
      */
     void setSnippetChild(SnippetChildSupport childSupport);
+
+    /**
+     * Exposes access to the main map fragment
+     *
+     * @return the Map fragment (mainly for marker interactions)
+     */
+    MapActivity getMapFragment();
 }

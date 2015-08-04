@@ -25,10 +25,12 @@ public class SnippetPlacesListAdapter extends BaseAdapter {
 
     private Context context;
     private List<Place> places;
+    private LayoutInflater layoutInflater;
 
     public SnippetPlacesListAdapter(Context context, List<Place> places) {
         this.context = context;
         this.places = places;
+        layoutInflater = LayoutInflater.from(context);
     }
     @Override
     public int getCount() {
@@ -61,7 +63,7 @@ public class SnippetPlacesListAdapter extends BaseAdapter {
     private View getSnippetConvertView(View convertView) {
         SnippetPlaceViewHolder viewHolder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(
+            convertView = layoutInflater.inflate(
                     R.layout.list_row_cal_object, null);
             viewHolder = new SnippetPlaceViewHolder();
             viewHolder.image= (ImageView) convertView

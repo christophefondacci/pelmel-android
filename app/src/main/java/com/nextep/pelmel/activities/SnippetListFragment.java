@@ -14,6 +14,7 @@ import android.widget.ListView;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
 import com.nextep.pelmel.adapters.SnippetAddressInfoAdapter;
+import com.nextep.pelmel.adapters.SnippetCheckinAdapter;
 import com.nextep.pelmel.adapters.SnippetDescriptionListAdapter;
 import com.nextep.pelmel.adapters.SnippetEventsListAdapter;
 import com.nextep.pelmel.adapters.SnippetGalleryAdapter;
@@ -128,6 +129,13 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
         } else {
             // Thumbs section
             adapter.addSection(SnippetSectionedAdapter.SECTION_THUMBS,new SnippetThumbsListAdapter(this.getActivity(),infoProvider));
+
+            // Checkin section
+            if(infoProvider.getItem() instanceof  User) {
+                final User user = (User) infoProvider.getItem();
+                adapter.addSection(SnippetSectionedAdapter.SECTION_CHECKIN,new SnippetCheckinAdapter(this.getActivity(),user));
+            }
+
             // Address section
             adapter.addSection(SnippetSectionedAdapter.SECTION_ADDRESS, new SnippetAddressInfoAdapter(this.getActivity(), infoProvider));
 

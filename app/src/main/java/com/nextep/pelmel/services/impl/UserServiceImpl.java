@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.nextep.json.model.impl.JsonCheckinResponse;
 import com.nextep.json.model.impl.JsonUser;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.PelMelConstants;
@@ -34,6 +35,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -285,5 +287,60 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean isCheckedInAt(Place place) {
 		return currentUser.getLastLocation() != null && currentUser.getLastLocation().getKey().equals(place.getKey()) && (System.currentTimeMillis()-currentUser.getLastLocationTime().getTime())<PelMelConstants.CHECKIN_TIMEOUT_MILLISECS;
+	}
+
+	@Override
+	public void checkIn(Place place, CheckInCallback callback) {
+		checkInOrOut(place,callback,false);
+	}
+
+	private void checkInOrOut(final Place place, CheckInCallback callback, boolean checkout) {
+		final Location loc = PelMelApplication.getLocalizationService()
+				.getLocation();
+
+		// Invoking checkin webservice
+		JsonCheckinResponse response = webService.checkInOrOut(currentUser, place, loc.getLatitude(), loc.getLongitude(), checkout);
+
+		if(response == null) {
+			if(callback != null) {
+				callback.checkInFailed(place,"Checkin failed");
+			}
+		}
+		final Place lastLocation = currentUser.getLastLocation();
+		if(lastLocation != null && lastLocation.getKey().equals(response.getPreviousPlaceKey())) {
+			currentUser.getLastLocation().setOverviewDataLoaded(false);
+			currentUser.getLastLocation().setInsidersCount(response.getPreviousPlaceUsersCount());
+		}
+		if(place.getKey().equals(response.getNewPlaceKey())) {
+			place.setOverviewDataLoaded(false);
+			place.setInsidersCount(response.getNewPlaceUsersCount());
+		}
+
+		// Adjusting last user location
+		if(!checkout) {
+			currentUser.setLastLocation(place);
+		} else {
+			currentUser.setLastLocation(null);
+		}
+		currentUser.setLastLocationTime(new Date());
+
+		PelMelApplication.getUiService().executeOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				PelMelApplication.getSnippetContainerSupport().getMapFragment().refreshMarkerFor(place);
+			}
+		});
+
+		if(callback != null) {
+			if(checkout) {
+				callback.didCheckOut(currentUser,place);
+			} else {
+				callback.didCheckIn(currentUser, place, lastLocation);
+			}
+		}
+	}
+
+	public void checkOut(Place place, CheckInCallback callback) {
+		checkInOrOut(place,callback,true);
 	}
 }

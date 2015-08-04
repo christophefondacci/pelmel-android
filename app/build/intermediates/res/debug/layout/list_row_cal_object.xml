@@ -42,7 +42,7 @@
         android:id="@+id/dateLabel"
         android:layout_alignTop="@+id/separatorImage"
         android:layout_toRightOf="@+id/separatorImage"
-        android:layout_marginLeft="38dp"
+        android:layout_marginLeft="20dp"
         android:textSize="18sp"
         android:textColor="#F4D400"
         android:layout_alignParentRight="true"/>

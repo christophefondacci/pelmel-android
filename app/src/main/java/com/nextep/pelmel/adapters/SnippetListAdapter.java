@@ -190,16 +190,19 @@ public class SnippetListAdapter extends BaseAdapter {
             viewHolder.likeIcon.setVisibility(likeVisibility);
             viewHolder.likeActionLabel.setVisibility(likeVisibility);
             viewHolder.likeIconContainerView.setVisibility(likeVisibility);
+            viewHolder.likeTitleLabel.setVisibility(likeVisibility);
 
             int checkinVisibility = countersProvider.hasCounter(CountersProvider.COUNTER_CHECKIN) ? View.VISIBLE : View.INVISIBLE;
             viewHolder.checkinIcon.setVisibility(checkinVisibility);
             viewHolder.checkinActionLabel.setVisibility(checkinVisibility);
             viewHolder.checkinIconContainerView.setVisibility(checkinVisibility);
+            viewHolder.checkinTitleLabel.setVisibility(checkinVisibility);
 
             int chatVisibility = countersProvider.hasCounter(CountersProvider.COUNTER_CHAT) ? View.VISIBLE : View.INVISIBLE;
             viewHolder.chatIcon.setVisibility(chatVisibility);
             viewHolder.chatActionLabel.setVisibility(chatVisibility);
             viewHolder.chatIconContainerView.setVisibility(chatVisibility);
+            viewHolder.chatTitleLabel.setVisibility(chatVisibility);
 
             Resources resources = PelMelApplication.getInstance().getResources();
             if(countersProvider.isCounterSelectedAtIndex(CountersProvider.COUNTER_LIKE)) {

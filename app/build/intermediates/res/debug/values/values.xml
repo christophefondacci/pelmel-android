@@ -114,6 +114,11 @@
     <color name="secondary_text_default_material_light">#8a000000</color>
     <color name="secondary_text_disabled_material_dark">#36ffffff</color>
     <color name="secondary_text_disabled_material_light">#24000000</color>
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="shade">#00000088</color>
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
+    <eat-comment/>
     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values/colors.xml -->
@@ -320,6 +325,7 @@
     <eat-comment/>
     <string name="action_chat">Chat</string>
     <string name="action_checkin">Check In</string>
+    <string name="action_checkout">Check Out</string>
     <string name="action_comment">Comment</string>
     <string name="action_like">Like</string>
     <string name="action_settings">Settings</string>
@@ -327,6 +333,10 @@
     <string name="age_days">days</string>
     <string name="age_hours">hours</string>
     <string name="age_minutes">minutes</string>
+    <string name="alert_checkin_success">You are now checked in, other users will be able to see that you are here. You can do a \'check out\' to stop sharing that information. If you forget to check out, you will be automatically checked out after some time.</string>
+    <string name="alert_checkin_success_title">Checked In!</string>
+    <string name="alert_checkout_success">You checked out from {0}, other users can no longer see that you are here. Nobody can see that you have been here from now on.</string>
+    <string name="alert_checkout_success_title">Checked Out!</string>
     <string name="alert_like_place_success">You are now part of the users who like this place.</string>
     <string name="alert_like_success_title">You like!</string>
     <string name="alert_like_user_success">The user has been notified that you like him.</string>
@@ -358,6 +368,7 @@
     <string name="chat_send">Send</string>
     <string name="chat_send_fail">PelMel failed to send your message, please try again and check your network connection.</string>
     <string name="chat_send_fail_title">Failed to send message</string>
+    <string name="checkins_list_title">Check in below</string>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/res/values/common_strings.xml -->
     <eat-comment/>
     <string name="common_android_wear_notification_needs_update_text"><ns1:g id="app_name">%1$s</ns1:g> requires an update to the Android Wear app.</string>
@@ -537,6 +548,7 @@
     <string name="search_no_google_services">Google Services are not installed or are too old, please install or update Google Services from the play store.</string>
     <string name="search_no_localization">Could not get your position. Please check that localization services are enabled in your Android settings.</string>
     <string name="search_placeholder">Search a city or venue</string>
+    <string name="section_current_checkin">Currently checked in at</string>
     <string name="section_events">Upcoming events</string>
     <string name="section_general_info">General Information</string>
     <string name="section_title_happyhours">Happy Hours</string>

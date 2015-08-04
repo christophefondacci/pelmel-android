@@ -64,5 +64,8 @@ public interface UIService {
 	 * @param resMessage the resource for the message contents
 	 */
 	void showInfoMessage(Context context, int resTitle, int resMessage);
+	void showInfoMessage(Context context, int resTitle, int resMessage, String argument);
+
+	void executeOnUiThread(Runnable task);
 
 }

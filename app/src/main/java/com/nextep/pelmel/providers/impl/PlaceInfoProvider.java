@@ -56,7 +56,7 @@ public class PlaceInfoProvider implements SnippetInfoProvider, CountersProvider 
             }
         }
         for(RecurringEvent event : place.getRecurringEvents()) {
-            if(event.getEventType() == EventType.OPENING) {
+            if(event.getEventType() == EventType.OPENING && (openingsEvent==null || openingsEvent.getStartDate().getTime()>event.getStartDate().getTime())) {
                 openingsEvent = event;
             }
         }
@@ -288,14 +288,17 @@ public class PlaceInfoProvider implements SnippetInfoProvider, CountersProvider 
     @Override
     public Bitmap getThumbListSectionIcon(int row) {
         if(row == 0 && place.getLikers() != null && !place.getLikers().isEmpty()) {
-            return BitmapFactory.decodeResource(PelMelApplication.getInstance().getResources(),R.drawable.snp_icon_like_white);
+            return BitmapFactory.decodeResource(PelMelApplication.getInstance().getResources(), R.drawable.snp_icon_like_white);
         } else {
-            return BitmapFactory.decodeResource(PelMelApplication.getInstance().getResources(),R.drawable.ovv_icon_check_white);
+            return BitmapFactory.decodeResource(PelMelApplication.getInstance().getResources(), R.drawable.ovv_icon_check_white);
         }
     }
 
     private boolean isCheckinEnabled(CalObject object) {
         return PelMelApplication.getLocalizationService().isCheckinEnabled(object);
+    }
+    private boolean isCheckedIn() {
+        return PelMelApplication.getUserService().isCheckedInAt(place);
     }
     @Override
     public String getCounterLabelAtIndex(int index) {
@@ -303,12 +306,7 @@ public class PlaceInfoProvider implements SnippetInfoProvider, CountersProvider 
             case COUNTER_LIKE:
                 return Strings.getCountedText(R.string.counter_likes_singular,R.string.counter_likes,place.getLikeCount()).toString();
             case COUNTER_CHECKIN:
-                if(isCheckinEnabled(place)) {
-                    return Strings.getCountedText(R.string.counter_arehere_singular,R.string.counter_arehere,place.getInsidersCount()).toString();
-                } else {
-                    return null;
-                }
-
+                return Strings.getCountedText(R.string.counter_arehere_singular,R.string.counter_arehere,place.getInsidersCount()).toString();
             case COUNTER_CHAT:
                 return Strings.getCountedText(R.string.counter_comments_singular,R.string.counter_comments,place.getReviewsCount()).toString();
         }
@@ -327,7 +325,11 @@ public class PlaceInfoProvider implements SnippetInfoProvider, CountersProvider 
                 }
                 break;
             case COUNTER_CHECKIN:
-                res = R.string.action_checkin;
+                if(isCheckedIn()) {
+                    res = R.string.action_checkout;
+                } else {
+                    res = R.string.action_checkin;
+                }
                 break;
             case COUNTER_CHAT:
                 res = R.string.action_comment;
@@ -344,7 +346,7 @@ public class PlaceInfoProvider implements SnippetInfoProvider, CountersProvider 
             case COUNTER_LIKE:
                 return place.isLiked();
             case COUNTER_CHECKIN:
-                return PelMelApplication.getUserService().isCheckedInAt(place);
+                return isCheckedIn();
             default:
                 return false;
         }
@@ -365,9 +367,28 @@ public class PlaceInfoProvider implements SnippetInfoProvider, CountersProvider 
                             PelMelApplication.getUiService().showInfoMessage(context, R.string.alert_unlike_success_title, R.string.alert_unlike_place_success);
                         }
                         refreshable.updateData();
+
                     }
                 });
                 break;
+            case COUNTER_CHECKIN:
+                if (isCheckedIn()) {
+                    mgr.executeAction(Action.CHECKOUT, place, new ActionManager.ActionCallback() {
+                        @Override
+                        public void actionCompleted(boolean isSucess, Object result) {
+                            PelMelApplication.getUiService().showInfoMessage(context, R.string.alert_checkout_success_title, R.string.alert_checkout_success,place.getName());
+                            refreshable.updateData();
+                        }
+                    });
+                } else {
+                    mgr.executeAction(Action.CHECKIN, place, new ActionManager.ActionCallback() {
+                        @Override
+                        public void actionCompleted(boolean isSucess, Object result) {
+                            PelMelApplication.getUiService().showInfoMessage(context, R.string.alert_checkin_success_title, R.string.alert_checkin_success);
+                            refreshable.updateData();
+                        }
+                    });
+                }
         }
     }
     @Override
@@ -391,7 +412,7 @@ public class PlaceInfoProvider implements SnippetInfoProvider, CountersProvider 
     @Override
     public boolean hasCounter(int index) {
         if(index == COUNTER_CHECKIN) {
-            return PelMelApplication.getLocalizationService().isCheckinEnabled(place);
+            return isCheckinEnabled(place) || isCheckedIn();
         }
         return true;
     }

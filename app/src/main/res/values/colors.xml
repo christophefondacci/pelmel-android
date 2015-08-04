@@ -25,6 +25,7 @@
 	<color name="hours_closed">#ffbb56</color>
 	<color name="counterBackground">#31363a</color>
 	<color name="transparent">#00000000</color>
+	<color name="shade">#00000088</color>
 	<color name="online">#70ff01</color>
 	<color name="offline">#ffffff</color>
 </resources>

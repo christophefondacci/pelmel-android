@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
@@ -17,11 +18,13 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 public class MainActivity extends MainActionBarActivity implements SnippetContainerSupport, SlidingUpPanelLayout.PanelSlideListener {
 
     private static final String TAG_SNIPPET = "snippet";
+    private static final String TAG_DIALOG = "dialog";
     private static final int SNIPPET_HEIGHT = 115;
 
     private int snippetHeight;
     private SnippetChildSupport snippetChildSupport;
     private boolean snippetOpened = false;
+    private MapActivity mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,8 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
         getSupportActionBar().setIcon(R.drawable.pelmel_icon);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        mapFragment = (MapActivity)getSupportFragmentManager().findFragmentById(R.id.pelmelMap);
 //        slidingLayout.setPanelHeight(0);
 //        slidingLayout.setOverlayed(true);
 
@@ -157,6 +162,48 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
         final SnippetInfoProvider infoProvider = PelMelApplication.getUiService().buildInfoProviderFor(object);
         showSnippetFor(infoProvider,isOpen,isRoot);
     }
+
+    @Override
+    public void showDialog(Fragment fragment) {
+
+        final FragmentManager mgr = getSupportFragmentManager();
+        final FragmentTransaction transaction = mgr.beginTransaction();
+        Fragment dialogFragment = getSupportFragmentManager().findFragmentByTag(TAG_DIALOG);
+        if(dialogFragment!=null) {
+            transaction.remove(dialogFragment);
+        }
+
+        final View dialogShade = findViewById(R.id.dialogShade);
+        dialogShade.setVisibility(View.VISIBLE);
+
+        final RelativeLayout dialogContainer = (RelativeLayout) findViewById(R.id.dialogContainer);
+//        transaction.setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out);
+        transaction.add(R.id.dialogContainer, fragment, TAG_DIALOG);
+        transaction.addToBackStack(null);
+        transaction.commit();
+
+
+    }
+
+    @Override
+    public void dismissDialog() {
+        final FragmentManager mgr = getSupportFragmentManager();
+        final FragmentTransaction transaction = mgr.beginTransaction();
+        Fragment dialogFragment = getSupportFragmentManager().findFragmentByTag(TAG_DIALOG);
+        if(dialogFragment!=null) {
+            transaction.remove(dialogFragment);
+        }
+        final View dialogShade = findViewById(R.id.dialogShade);
+        dialogShade.setVisibility(View.INVISIBLE);
+        transaction.commit();
+
+    }
+
+    @Override
+    public MapActivity getMapFragment() {
+        return mapFragment;
+    }
+
 
     //    @Override
 //    public boolean onChildTouch(View v, MotionEvent e) {

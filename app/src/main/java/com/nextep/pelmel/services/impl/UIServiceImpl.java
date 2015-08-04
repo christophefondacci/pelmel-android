@@ -3,6 +3,8 @@ package com.nextep.pelmel.services.impl;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Handler;
+import android.os.Looper;
 
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.PelMelConstants;
@@ -21,6 +23,7 @@ public class UIServiceImpl implements UIService {
 
     private BadgeView badgeView;
     private int unreadMessages = 0;
+    private Handler uiThreadHandler = new Handler(Looper.getMainLooper());
 
     @Override
     public void setUnreadMessagesCount(int msgCount) {
@@ -143,5 +146,22 @@ public class UIServiceImpl implements UIService {
             }
         });
         builder.create().show();
+    }
+    @Override
+    public void showInfoMessage(Context context, int resTitle, int resMessage, String arg) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final String msg = PelMelApplication.getInstance().getResources().getString(resMessage,arg);
+        builder.setMessage(msg).setTitle(resTitle).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
+
+    @Override
+    public void executeOnUiThread(Runnable task) {
+        uiThreadHandler.post(task);
     }
 }

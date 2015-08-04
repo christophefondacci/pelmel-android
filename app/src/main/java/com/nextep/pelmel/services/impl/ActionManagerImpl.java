@@ -1,11 +1,14 @@
 package com.nextep.pelmel.services.impl;
 
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import com.nextep.json.model.impl.JsonLikeInfo;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.activities.ChatConversationActivity;
+import com.nextep.pelmel.activities.ListCheckinsFragment;
 import com.nextep.pelmel.model.Action;
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Event;
@@ -26,9 +29,13 @@ public class ActionManagerImpl implements ActionManager {
     private static final String LOG_TAG = "ACTION_MGR";
     private Map<Action,ActionCommand> commandsActionMap = new HashMap<>();
     private WebService webService;
+    private Handler uiThreadHandler = new Handler(Looper.getMainLooper());
+
     public ActionManagerImpl() {
         registerLikeAction();
         registerChatAction();
+        registerCheckinAction();
+        registerCheckoutAction();
         webService = new WebService();
     }
     @Override
@@ -150,5 +157,48 @@ public class ActionManagerImpl implements ActionManager {
             }
         };
         commandsActionMap.put(Action.CHAT,cmd);
+    }
+
+    private void registerCheckinAction() {
+        final ActionCommand cmd = new ActionCommand() {
+            @Override
+            public Object execute(Object parameter) {
+                // If no object passed for checkin we display the selection dialog
+                if(parameter == null) {
+                    final ListCheckinsFragment checkinsFragment = new ListCheckinsFragment();
+                    uiThreadHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            PelMelApplication.getSnippetContainerSupport().showDialog(checkinsFragment);
+                        }
+                    });
+
+                } else {
+                    PelMelApplication.getUserService().checkIn((Place)parameter,null);
+                }
+                return parameter;
+            }
+        };
+        commandsActionMap.put(Action.CHECKIN,cmd);
+    }
+    private void registerCheckoutAction() {
+        final ActionCommand cmd = new ActionCommand() {
+            @Override
+            public Object execute(Object parameter) {
+
+                // If no object passed for checkin we display the selection dialog
+                Place place = null;
+
+                // If place is omitted we checkout from current place
+                if(parameter == null) {
+                    place = PelMelApplication.getUserService().getLoggedUser().getLastLocation();
+                } else {
+                    place = (Place)parameter;
+                }
+                PelMelApplication.getUserService().checkOut(place,null);
+                return parameter;
+            }
+        };
+        commandsActionMap.put(Action.CHECKOUT,cmd);
     }
 }
