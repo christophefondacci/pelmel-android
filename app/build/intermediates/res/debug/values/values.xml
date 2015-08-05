@@ -508,9 +508,11 @@
     <string name="ok">OK</string>
     <string name="online">Available</string>
     <string name="photoRemoveButton">Delete</string>
+    <string name="photoRemovedSuccess">Photo removed successfully!</string>
     <string name="photoTopAddButton">Add</string>
     <string name="photoTopRemoveButton">Remove</string>
     <string name="photoUploadFailed">Failed to upload the photo, check your connection or connect to wifi and try again</string>
+    <string name="photoUploadSuccess">Photo uploaded successfully!</string>
     <string name="placeType.asso">Association</string>
     <string name="placeType.bar">Bar</string>
     <string name="placeType.club">Club</string>
@@ -521,13 +523,17 @@
     <string name="placeType.sexclub">Sex Club</string>
     <string name="placeType.sexshop">Shop</string>
     <string name="profileAddButton">Add description</string>
-    <string name="profileBirthday">Birth date : </string>
+    <string name="profileAddPhoto">Add a photo</string>
+    <string name="profileBirthday">Birth date</string>
+    <string name="profileDescriptionHint">Edit your description</string>
     <string name="profileDescriptionLabel">Description</string>
     <string name="profileHeight">Height : </string>
     <string name="profileHeightVal">167 cm / 5\'6\'\'</string>
     <string name="profileInformation">Informations</string>
     <string name="profileName">Nickname</string>
+    <string name="profilePhoto">Profile photo</string>
     <string name="profilePhotoButton">Manage photos</string>
+    <string name="profilePhotoDeleting">Deleting photo...</string>
     <string name="profileSave">Save</string>
     <string name="profileTags">Define yourself</string>
     <string name="profileWeight">Weight : </string>
@@ -551,8 +557,11 @@
     <string name="section_current_checkin">Currently checked in at</string>
     <string name="section_events">Upcoming events</string>
     <string name="section_general_info">General Information</string>
+    <string name="section_title_descriptions">Description</string>
     <string name="section_title_happyhours">Happy Hours</string>
     <string name="section_title_openinghours">Opening Hours</string>
+    <string name="section_title_photos">Photos</string>
+    <string name="section_title_tags">Tag yourself</string>
     <string name="section_title_themenights">Theme Nights</string>
     <string name="selectPhotoCamera">Camera</string>
     <string name="selectPhotoGallery">Gallery</string>
@@ -1984,5 +1993,10 @@ Don\'t be scared, we only need an email, a password, a pseudo and your birth dat
         <item name="android:focusable">true</item>
         <item name="android:contentDescription">@string/mr_media_route_button_content_description</item>
         <item name="externalRouteEnabledDrawable">@drawable/mr_ic_media_route_mono_dark</item>
+    </style>
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="mySpinnerItemStyle" parent="@style/Widget.AppCompat.Light.DropDownItem.Spinner">
+        <item name="android:textColor">@color/white</item>
     </style>
 </resources>

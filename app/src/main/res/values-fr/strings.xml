@@ -91,20 +91,28 @@
     <string name="ok">OK</string>
     <string name="profileName">Surnom</string>
     <string name="profileInformation">Informations</string>
-    <string name="profileBirthday">Date de naissance : </string>
+    <string name="profileBirthday">Date de naissance</string>
     <string name="profileHeight">Taille : </string>
     <string name="profileHeightVal">167 cm / 5\'6\'\'</string>
     <string name="profileWeight">Poids : </string>
     <string name="profileWeightVal">72 kg / 160 lbs</string>
     <string name="profileDescriptionLabel">Description</string>
+    <string name="profileDescriptionHint">Editez votre description</string>
     <string name="profileAddButton">Ajouter une description</string>
+
+    <string name="profileAddPhoto">Ajouter une photo</string>
+    <string name="profilePhoto">Photo du profil</string>
     <string name="profilePhotoButton">Gérer les photos</string>
+    <string name="profilePhotoDeleting">Suppression de la photo...</string>
+
     <string name="profileSave">Sauver</string>
     <string name="profileTags">Définissez vous</string>
     <string name="photoRemoveButton">Supprimer</string>
     <string name="photoTopAddButton">Ajouter</string>
     <string name="photoTopRemoveButton">Supprimer</string>
+    <string name="photoRemovedSuccess">Photo supprimée avec succès !</string>
     <string name="photoUploadFailed">Impossible d\'uploader la photo, vérifiez votre connexion ou connectez-vous à un wifi puis essayez à nouveau</string>
+    <string name="photoUploadSuccess">Téléchargement de la photo réussi !</string>
     <string name="registerIntroLabel">Inscription</string>
     <string name="registerButtonLabel">S\'inscrire</string>
     <string name="registerEmptyValueError">Tous les champs doivent être renseignés</string>
@@ -125,8 +133,11 @@
     <string name="section_current_checkin">A indiqué se trouver actuellment à</string>
     <string name="section_events">Évènements à venir</string>
     <string name="section_general_info">Informations Générales</string>
+    <string name="section_title_descriptions">Description</string>
     <string name="section_title_happyhours">Happy Hours</string>
     <string name="section_title_openinghours">Heures d\'ouverture</string>
+    <string name="section_title_photos">Photos</string>
+    <string name="section_title_tags">Définissez vous</string>
     <string name="section_title_themenights">Soirées</string>
     <string name="selectPhotoTitle">Source de la photo</string>
     <string name="selectPhotoMessage">Depuis quelle source voulez vous choisir la photo à uploader ?</string>

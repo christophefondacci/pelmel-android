@@ -55,6 +55,7 @@
             android:value="AIzaSyCUrzVh3F9ttywWpMdtRfRUrkpLKCCGUIQ" />
         <!-- android:value="AIzaSyCrHWO2iZlLYbCM3U9UrCOYNQ6kiMmxWTQ" /> -->
         <activity android:name="com.nextep.pelmel.activities.AccountActivity" />
+        <activity android:name="com.nextep.pelmel.activities.MyProfileActivity" />
         <activity android:name="com.nextep.pelmel.activities.PhotosManagerActivity" />
         <activity android:name="com.nextep.pelmel.activities.LoginActivity" >
             <intent-filter>

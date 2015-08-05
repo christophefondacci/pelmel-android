@@ -119,20 +119,30 @@
     <string name="placeType.other">Other</string>
     <string name="profileName">Nickname</string>
     <string name="profileInformation">Informations</string>
-    <string name="profileBirthday">Birth date : </string>
+    <string name="profileBirthday">Birth date</string>
     <string name="profileHeight">Height : </string>
     <string name="profileHeightVal">167 cm / 5\'6\'\'</string>
     <string name="profileWeight">Weight : </string>
     <string name="profileWeightVal">72 kg / 160 lbs</string>
     <string name="profileDescriptionLabel">Description</string>
+    <string name="profileDescriptionHint">Edit your description</string>
+
     <string name="profileAddButton">Add description</string>
     <string name="profilePhotoButton">Manage photos</string>
+
+    <string name="profileAddPhoto">Add a photo</string>
+    <string name="profilePhoto">Profile photo</string>
+    <string name="profilePhotoDeleting">Deleting photo...</string>
+
+
     <string name="profileSave">Save</string>
     <string name="profileTags">Define yourself</string>
     <string name="photoRemoveButton">Delete</string>
     <string name="photoTopAddButton">Add</string>
     <string name="photoTopRemoveButton">Remove</string>
+    <string name="photoRemovedSuccess">Photo removed successfully!</string>
     <string name="photoUploadFailed">Failed to upload the photo, check your connection or connect to wifi and try again</string>
+    <string name="photoUploadSuccess">Photo uploaded successfully!</string>
     <string name="registerIntroLabel">Register</string>
     <string name="registerButtonLabel">Register</string>
     <string name="registerEmptyValueError">All fields should be filled</string>
@@ -153,8 +163,11 @@
     <string name="section_current_checkin">Currently checked in at</string>
     <string name="section_events">Upcoming events</string>
     <string name="section_general_info">General Information</string>
+    <string name="section_title_descriptions">Description</string>
     <string name="section_title_happyhours">Happy Hours</string>
     <string name="section_title_openinghours">Opening Hours</string>
+    <string name="section_title_photos">Photos</string>
+    <string name="section_title_tags">Tag yourself</string>
     <string name="section_title_themenights">Theme Nights</string>
     <string name="selectPhotoTitle">Photo source</string>
     <string name="selectPhotoMessage">Which source do you want to use to upload a photo ?</string>

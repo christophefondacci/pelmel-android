@@ -1,10 +1,5 @@
 package com.nextep.pelmel.activities;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -40,6 +35,11 @@ import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.services.ImageService;
 import com.nextep.pelmel.services.LocalizationService;
 import com.nextep.pelmel.services.UserService;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class AccountActivity extends ActionBarActivity implements
 		OnSeekBarChangeListener, TextWatcher, UserListener, OnClickListener {
@@ -300,7 +300,6 @@ public class AccountActivity extends ActionBarActivity implements
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_save:
-		case R.id.menu_save_text:
 
 			progressDialog = new ProgressDialog(AccountActivity.this);
 			progressDialog.setCancelable(false);

@@ -18,18 +18,28 @@ import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.User;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class WebService {
 
     public static final String LOG_TAG = "WebService";
-    public static final String BASE_URL = "http://www.pelmelguide.com";
-    //	public static final String BASE_URL = "http://127.0.0.1";
+//    public static final String BASE_URL = "http://www.pelmelguide.com";
+    public static final String BASE_URL = "http://10.0.0.2";
     //private static final String BASE_URL = "http://www.pelmelguide.com";
     private static final String LOGIN_ACTION = "/mobileLogin";
     private static final String PLACES_LIST_ACTION = "/mapPlaces";
@@ -46,6 +56,76 @@ public class WebService {
 
     public WebService() {
         gson = GsonHelper.getGson();
+    }
+
+    public InputStream postRequest(URL url, String... keyValueParams) throws Exception {
+        return postRequest(url, Arrays.asList(keyValueParams));
+    }
+    public InputStream postRequest(URL url, Map<String, String> params) throws Exception {
+        final List<String> keyValueParams = new ArrayList<>();
+        for(String key : params.keySet()) {
+            final String value = params.get(key);
+            keyValueParams.add(key);
+            keyValueParams.add(value);
+        }
+        return postRequest(url,keyValueParams);
+    }
+
+    public InputStream postRequest(URL url, List<String> params) throws Exception {
+        InputStream is = null;
+        try {
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//            conn.setReadTimeout(10000);
+//            conn.setConnectTimeout(15000);
+            conn.setRequestMethod("POST");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+
+            OutputStream os = conn.getOutputStream();
+            BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(os, "UTF-8"));
+            writer.write(getQuery(params));
+            writer.flush();
+            writer.close();
+            os.close();
+
+            conn.connect();
+
+            // Checking if we're OK status
+            if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                is = conn.getInputStream();
+            }
+        } catch(IOException e) {
+            throw new Exception("Cannot connect to PelMel server : "
+                    + e.getMessage(), e);
+        }
+        return is;
+    }
+
+    private String getQuery(List<String> params) throws UnsupportedEncodingException
+    {
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+
+        for (int i = 0 ; i < params.size(); i = i+2)
+        {
+            if (first)
+                first = false;
+            else
+                result.append("&");
+
+            final String key = params.get(i);
+            final String value = params.get(i+1);
+            if(value!=null) {
+                result.append(URLEncoder.encode(key, "UTF-8"));
+                result.append("=");
+                result.append(URLEncoder.encode(value, "UTF-8"));
+            }
+
+        }
+
+        return result.toString();
     }
 
     public InputStream sendRequest(URL url) throws Exception {
@@ -72,8 +152,8 @@ public class WebService {
     public JsonUser connect(String login, String password) {
         JsonUser user = null;
         try {
-            final InputStream is = sendRequest(new URL(BASE_URL + LOGIN_ACTION
-                    + "?email=" + login + "&password=" + password));
+
+            final InputStream is = postRequest(new URL(BASE_URL + LOGIN_ACTION), "email", login, "password", password);
             if (is != null) {
                 final InputStreamReader reader = new InputStreamReader(is);
                 user = gson.fromJson(reader, new TypeToken<JsonUser>() {
@@ -92,13 +172,22 @@ public class WebService {
     public JsonNearbyPlacesResponse getPlaces(double latitude, double longitude,
                                               String token, String parentKey, Integer radius, String searchText) {
         try {
+            final Map<String, String> params = new HashMap<>();
+            params.put("lat",String.valueOf(latitude));
+            params.put("lng",String.valueOf(longitude));
+            params.put("nxtpUserToken",token);
+            if(parentKey!=null) {
+                params.put("parentKey",parentKey);
+            }
+            if(radius != null) {
+                params.put("radius",String.valueOf(radius));
+            }
+            if(searchText!=null){
+                params.put("searchText",searchText);
+            }
             // querying places
-            final InputStream inputStream = sendRequest(new URL(BASE_URL
-                    + PLACES_LIST_ACTION + "?lat=" + latitude + "&lng="
-                    + longitude + "&nxtpUserToken=" + token
-                    + (parentKey == null ? "" : "&parentKey=" + parentKey)
-                    + (radius == null ? "" : "&radius=" + radius)
-                    + (searchText == null ? "" : "&searchText=" + searchText)));
+            final InputStream inputStream = postRequest(new URL(BASE_URL
+                    + PLACES_LIST_ACTION),params);
 
             // If we got something
             if (inputStream != null) {

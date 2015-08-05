@@ -59,6 +59,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import io.realm.Realm;
@@ -229,13 +230,24 @@ public class DataServiceImpl implements DataService {
 
         // Converting descriptions
         final StringBuilder buf = new StringBuilder();
+        JsonDescription localizedDescription = null;
+        JsonDescription lastDescription = null;
+
+        // Iterating over all description, selecting the most appropriate description
         for (final JsonDescription d : json.getDescriptions()) {
-            if (user.getDescriptionKey() == null) {
-                user.setDescriptionKey(d.getKey());
+            if(d.getLanguage().equals(Locale.getDefault().getLanguage()) || (d.getLanguage().equals("en") && localizedDescription == null)) {
+                localizedDescription = d;
             }
-            buf.append(d.getDescription() + "\n");
+            if(lastDescription == null) {
+                lastDescription = d;
+            }
         }
-        user.setDescription(buf.toString());
+        JsonDescription selectedDesc = localizedDescription !=null ? localizedDescription : lastDescription;
+        if(selectedDesc != null) {
+            user.setDescriptionKey(selectedDesc.getKey());
+            user.setDescription(selectedDesc.getDescription());
+            user.setDescriptionLanguage(selectedDesc.getLanguage());
+        }
 
         // Converting images
         final List<Image> images = new ArrayList<Image>();
@@ -734,33 +746,34 @@ public class DataServiceImpl implements DataService {
 
         params.put("description", user.getDescription());
         if (user.getDescriptionKey() != null) {
-            params.put("descritionKey", user.getDescriptionKey());
+            params.put("descriptionKey", user.getDescriptionKey());
         }
         params.put("descriptionLanguageCode", "en");
-        params.put("pseudo", user.getName());
+//        params.put("pseudo", user.getName());
         params.put("height", String.valueOf(user.getHeight()));
         params.put("weight", String.valueOf(user.getWeight()));
         params.put("lat", String.valueOf(latitude));
         params.put("lng", String.valueOf(longitude));
 
-        final StringBuilder buf = new StringBuilder();
+
+        // Building a param list because we have repeating keys (arrays) so we cannot use a map
+        final List<String> paramsList = new ArrayList<>();
+
         for (final Tag t : user.getTags()) {
-            buf.append("&tags=" + t.getCode());
+            paramsList.add("tags");
+            paramsList.add(t.getCode());
         }
 
-        final StringBuilder paramsBuf = new StringBuilder();
-        String sep = "?";
         for (final String key : params.keySet()) {
             final String value = params.get(key);
-            paramsBuf.append(sep + key + "=" + value);
-            sep = "&";
+            paramsList.add(key);
+            paramsList.add(value);
         }
-        paramsBuf.append(buf);
         InputStream inputStream = null;
         try {
-            Log.d(LOG_TAG, paramsBuf.toString());
-            inputStream = webService.sendRequest(new URL(WebService.BASE_URL
-                    + "/mobileRegister" + paramsBuf.toString()));
+            Log.d(LOG_TAG, paramsList.toString());
+            inputStream = webService.postRequest(new URL(WebService.BASE_URL
+                    + "/mobileRegister"),paramsList.toArray(new String[paramsList.size()]));
         } catch (final Exception e) {
             Log.e(LOG_TAG, "Exception while saving profile: " + e.getMessage(),
                     e);

@@ -36,6 +36,7 @@ public class SnippetSectionedAdapter extends SectionedAdapter implements View.On
     private Context context;
 
     public SnippetSectionedAdapter(Context context) {
+        super(context);
         this.context = context;
         layoutInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -103,15 +104,7 @@ public class SnippetSectionedAdapter extends SectionedAdapter implements View.On
         return layoutInflater.inflate(R.layout.list_row_empty,parent,false);
     }
 
-    private View getSectionTitleConvertView(View convertView, ViewGroup parent, int titleResource) {
-        if (convertView == null || convertView.getTag() == null) {
-            convertView = layoutInflater.inflate(R.layout.section_title, parent, false);
-            convertView.setTag(convertView.findViewById(R.id.sectionTitleLabel));
-        }
-        final TextView textView = (TextView) convertView.getTag();
-        textView.setText(Strings.getText(titleResource));
-        return convertView;
-    }
+
     @Override
     public void onClick(View v) {
         final Tab newTab = (Tab)v.getTag();

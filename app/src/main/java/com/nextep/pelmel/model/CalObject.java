@@ -18,7 +18,13 @@ public interface CalObject extends Keyed, Localized {
 
 	String getDescription();
 
-	void setDescription(String description);
+	void setDescription(String key);
+	String getDescriptionKey();
+
+	void setDescriptionKey(String Key);
+	String getDescriptionLanguage();
+
+	void setDescriptionLanguage(String language);
 
 	boolean isOverviewDataLoaded();
 

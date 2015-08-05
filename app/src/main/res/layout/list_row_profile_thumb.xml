@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/pelmelBackground"
+    >
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/thumbImage"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/no_photo"
+        android:layout_marginTop="15dp"
+        app:riv_corner_radius="32dp"
+        app:riv_border_width="2dp"
+        app:riv_border_color="#ffffff"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_marginTop="12dp"
+        android:layout_below="@id/thumbImage"
+        android:text="Medium Text"
+        android:textColor="@color/white"
+        android:id="@+id/nicknameText"
+        android:layout_centerHorizontal="true"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editButton"
+        android:src="@drawable/btn_edit_photo"
+        android:layout_toRightOf="@+id/nicknameText"
+        android:layout_alignTop="@id/nicknameText"
+        android:layout_alignBottom="@id/nicknameText"
+        android:layout_marginLeft="4dp"/>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/nicknameText"
+        />
+</RelativeLayout>

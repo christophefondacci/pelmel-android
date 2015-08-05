@@ -54,6 +54,7 @@
             android:value="AIzaSyCUrzVh3F9ttywWpMdtRfRUrkpLKCCGUIQ" />
         <!-- android:value="AIzaSyCrHWO2iZlLYbCM3U9UrCOYNQ6kiMmxWTQ" /> -->
         <activity android:name=".activities.AccountActivity" />
+        <activity android:name=".activities.MyProfileActivity" />
         <activity android:name=".activities.PhotosManagerActivity" />
         <activity android:name=".activities.LoginActivity" >
             <intent-filter>

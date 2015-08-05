@@ -47,9 +47,16 @@ public class MainActionBarActivity extends ActionBarActivity {
 			PelMelApplication.getDataService().exportDatabase(this);
 			return true;
 		case R.id.menu_map:
-			ContextSnippetInfoProvider provider = new ContextSnippetInfoProvider();
-			PelMelApplication.getSnippetContainerSupport().showSnippetFor(provider,false,true);
-			PelMelApplication.getSnippetContainerSupport().minimizeSnippet();
+			try {
+				ContextSnippetInfoProvider provider = new ContextSnippetInfoProvider();
+				PelMelApplication.getSnippetContainerSupport().showSnippetFor(provider, false, true);
+				PelMelApplication.getSnippetContainerSupport().minimizeSnippet();
+			} catch(IllegalStateException e) {
+				// We fall here if map is not our current activity
+				final Intent intent = new Intent(this,MainActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				startActivity(intent);
+			}
 			return true;
 //		case R.id.menu_events:
 //			final Intent intentEventList = new Intent(this,
@@ -62,7 +69,7 @@ public class MainActionBarActivity extends ActionBarActivity {
 			PelMelApplication.getSnippetContainerSupport().showSnippetForFragment(chatFragment, true, false);
 			return true;
 		case R.id.menu_settings:
-			final Intent intentAccount = new Intent(this, AccountActivity.class);
+			final Intent intentAccount = new Intent(this, MyProfileActivity.class);
 			intentAccount.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			startActivity(intentAccount);
 			return true;

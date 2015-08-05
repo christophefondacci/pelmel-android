@@ -1,9 +1,15 @@
 package com.nextep.pelmel.adapters;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+import com.nextep.pelmel.R;
+import com.nextep.pelmel.helpers.Strings;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,9 +23,11 @@ abstract public class SectionedAdapter extends BaseAdapter {
     private final List<Section> sections = new ArrayList<Section>();
     private final Map<String,Section> sectionsMap = new HashMap<>();
     private static int TYPE_SECTION_HEADER = 0;
+    private final LayoutInflater layoutInflater;
 
-    public SectionedAdapter() {
+    public SectionedAdapter(Context context) {
         super();
+        layoutInflater = LayoutInflater.from(context);
     }
 
     public void addSection(String caption, Adapter adapter) {
@@ -29,7 +37,7 @@ abstract public class SectionedAdapter extends BaseAdapter {
     public void insertSection(int index, String caption, Adapter adapter) {
         final Section section = new Section(caption, adapter);
         sections.add(index,section);
-        sectionsMap.put(caption,section);
+        sectionsMap.put(caption, section);
         notifyDataSetChanged();
     }
 
@@ -60,7 +68,7 @@ abstract public class SectionedAdapter extends BaseAdapter {
             sections.remove(index);
 
             // Adding new section
-            insertSection(index,caption,newAdapter);
+            insertSection(index, caption, newAdapter);
             notifyDataSetChanged();
         }
     }
@@ -102,7 +110,15 @@ abstract public class SectionedAdapter extends BaseAdapter {
 
         return (total);
     }
-
+    protected View getSectionTitleConvertView(View convertView, ViewGroup parent, int titleResource) {
+        if (convertView == null || convertView.getTag() == null) {
+            convertView = layoutInflater.inflate(R.layout.section_title, parent, false);
+            convertView.setTag(convertView.findViewById(R.id.sectionTitleLabel));
+        }
+        final TextView textView = (TextView) convertView.getTag();
+        textView.setText(Strings.getText(titleResource));
+        return convertView;
+    }
     @Override
     public int getItemViewType(int position) {
         int typeOffset = TYPE_SECTION_HEADER + 1; // start counting from here

@@ -20,7 +20,6 @@ public class UserImpl extends AbstractCalObject implements User {
 	private int heightInCm = 170;
 	private int weightInKg = 70;
 	private String token;
-	private String descriptionKey;
 	private String cityName;
 
 	@Override
@@ -113,16 +112,6 @@ public class UserImpl extends AbstractCalObject implements User {
 	@Override
 	public String getToken() {
 		return token;
-	}
-
-	@Override
-	public String getDescriptionKey() {
-		return descriptionKey;
-	}
-
-	@Override
-	public void setDescriptionKey(String descriptionKey) {
-		this.descriptionKey = descriptionKey;
 	}
 
 	@Override

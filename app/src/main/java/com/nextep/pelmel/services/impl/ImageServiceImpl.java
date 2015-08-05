@@ -51,6 +51,7 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -310,6 +311,9 @@ public class ImageServiceImpl implements ImageService {
 								}.getType());
 						final Image img = PelMelApplication.getDataService()
 								.getImageFromJson(media);
+
+						// Inserting image as new thumb
+						parent.getImages().add(0,img);
 						// Notifying callback
 						PelMelApplication.runOnMainThread(new Runnable() {
 
@@ -318,6 +322,7 @@ public class ImageServiceImpl implements ImageService {
 								callback.imageUploaded(img, parent);
 							}
 						});
+						return;
 					} catch (final JsonSyntaxException e) {
 						Log.e(TAG_IMAGE_SERVICE,
 								"Unable to parse JSON result from media upload: "
@@ -365,6 +370,13 @@ public class ImageServiceImpl implements ImageService {
 					HttpResponse response;
 					response = http.execute(post);
 					final HttpEntity entity = response.getEntity();
+
+					// Removing image in bean
+					for(Image img : new ArrayList<Image>(parent.getImages())) {
+						if(image.getKey().equals(img.getKey())) {
+							parent.getImages().remove(img);
+						}
+					}
 					if (entity != null) {
 						PelMelApplication.runOnMainThread(new Runnable() {
 

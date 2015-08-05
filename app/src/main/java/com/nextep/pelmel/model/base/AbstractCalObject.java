@@ -16,6 +16,8 @@ public abstract class AbstractCalObject implements CalObject {
 	private Double latitude;
 	private Double longitude;
 	private String description;
+	private String descriptionKey;
+	private String descriptionLanguage;
 	private double distance;
 	private String distanceLabel;
 	private boolean overviewDataLoaded = false;
@@ -178,5 +180,25 @@ public abstract class AbstractCalObject implements CalObject {
 	@Override
 	public boolean isLiked() {
 		return liked;
+	}
+
+	@Override
+	public String getDescriptionKey() {
+		return descriptionKey;
+	}
+
+	@Override
+	public void setDescriptionKey(String descriptionKey) {
+		this.descriptionKey = descriptionKey;
+	}
+
+	@Override
+	public String getDescriptionLanguage() {
+		return descriptionLanguage;
+	}
+
+	@Override
+	public void setDescriptionLanguage(String descriptionLanguage) {
+		this.descriptionLanguage = descriptionLanguage;
 	}
 }

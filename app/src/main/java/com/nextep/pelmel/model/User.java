@@ -42,10 +42,6 @@ public interface User extends CalObject {
 
 	void setToken(String token);
 
-	void setDescriptionKey(String descriptionKey);
-
-	String getDescriptionKey();
-
 	String getCityName();
 	void setCityName(String cityName);
 
