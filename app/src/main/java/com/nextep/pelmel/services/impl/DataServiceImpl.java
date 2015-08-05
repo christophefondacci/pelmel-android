@@ -741,8 +741,8 @@ public class DataServiceImpl implements DataService {
         final int year = cal.get(Calendar.YEAR);
         final int day = cal.get(Calendar.DAY_OF_MONTH);
         params.put("birthYYYY", String.valueOf(year));
-        params.put("birthMM", String.valueOf(month));
-        params.put("birthDD", String.valueOf(day));
+        params.put("birthMM", String.valueOf(month+1));
+        params.put("birthDD", String.valueOf(day+1));
 
         params.put("description", user.getDescription());
         if (user.getDescriptionKey() != null) {
