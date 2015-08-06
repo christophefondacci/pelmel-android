@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#272a2e">
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="1dp"
+        android:id="@+id/topSeparatorView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:background="#A8A7A5"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:id="@+id/descriptionLabel"
+        android:layout_below="@id/topSeparatorView"
+        android:layout_marginTop="26dp"
+        android:layout_marginBottom="26dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        />
+
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="1dp"
+        android:id="@+id/bottomSeparatorView"
+        android:layout_below="@id/descriptionLabel"
+        android:layout_centerHorizontal="true"
+        android:background="#A8A7A5"
+        />
+</RelativeLayout><!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/layout/list_row_description.xml -->

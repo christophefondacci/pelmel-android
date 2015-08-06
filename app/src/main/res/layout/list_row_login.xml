@@ -3,7 +3,7 @@
     android:id="@+id/scrollView1"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content" 
-    android:background="#ffffff">
+    android:background="@color/pelmelActionBar">
 <LinearLayout 
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -23,7 +23,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
 
         <ImageView
             android:id="@+id/imageView1"
@@ -32,7 +33,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:src="@drawable/pelmel_login_title" />
+            android:src="@drawable/log_logo" />
 
     </RelativeLayout>
 
@@ -40,16 +41,14 @@
         android:id="@+id/loginLabel"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="#e6e6e6"
-        android:textColor="#969696"
-        android:paddingRight="@dimen/header_title_padding"
+        android:textColor="@color/white"
         android:paddingTop="@dimen/header_title_padding"
         android:paddingBottom="@dimen/header_title_padding"
-        android:paddingLeft="@dimen/header_title_padding"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:text="@string/loginIntroLabel"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textSize="20dp"
+        />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -61,8 +60,9 @@
             android:id="@+id/loginIntroLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="4dp"
             android:text="@string/loginHint"
-            android:textColor="#ec7700"
+            android:textColor="@color/white"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <LinearLayout
@@ -77,7 +77,9 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/loginEmailPlaceholder"
-                android:inputType="textEmailAddress" >
+                android:inputType="textEmailAddress"
+                android:padding="7dp"
+                android:background="@drawable/bg_chat_text">
 
                 <requestFocus />
             </EditText>
@@ -90,7 +92,10 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/loginPasswordPlaceholder"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:layout_marginTop="4dp"
+            android:padding="7dp"
+            android:background="@drawable/bg_chat_text"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -99,6 +104,9 @@
 
             <TextView
                 android:id="@+id/loggingHint"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:padding="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                  />
@@ -107,7 +115,9 @@
                 android:id="@+id/loginButton"
                 android:layout_width="@dimen/login_button_width"
                 android:layout_height="wrap_content"
-                android:text="@string/loginButtonLabel" />
+                android:text="@string/loginButtonLabel"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_login_button"/>
 
         </LinearLayout>
 
@@ -117,15 +127,13 @@
         android:id="@+id/textView1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="#e6e6e6"
-        android:textColor="#969696"
-        android:paddingRight="@dimen/header_title_padding"
+        android:textColor="@color/white"
         android:paddingTop="@dimen/header_title_padding"
         android:paddingBottom="@dimen/header_title_padding"
-        android:paddingLeft="@dimen/header_title_padding"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:text="@string/registerIntroLabel"
+        android:textSize="20sp"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <LinearLayout
@@ -139,7 +147,8 @@
             android:id="@+id/registerIntroHint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#ec7700"
+            android:padding="4dp"
+            android:textColor="@color/white"
             android:text="@string/registerIntroHint"
             android:layout_marginBottom="@dimen/login_padding" />
 
@@ -149,7 +158,9 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/loginEmailPlaceholder"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:padding="7dp"
+            android:background="@drawable/bg_chat_text"/>
 
         <EditText
             android:id="@+id/registerPassword"
@@ -157,27 +168,39 @@
             android:layout_height="wrap_content"
             android:hint="@string/loginPasswordPlaceholder"
             android:ems="10"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:layout_marginTop="4dp"
+            android:padding="7dp"
+            android:background="@drawable/bg_chat_text"/>
         <EditText
             android:id="@+id/registerPasswordConfirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/loginPasswordConfirmPlaceholder"
             android:ems="10"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:padding="7dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bg_chat_text"/>
         <EditText
             android:id="@+id/registerPseudo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/registerPseudoHint"
-            android:ems="10" />
+            android:ems="10"
+            android:layout_marginTop="4dp"
+            android:padding="7dp"
+            android:background="@drawable/bg_chat_text"/>
 
         <TextView
             android:id="@+id/registerTerms"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/registerTermsHint"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:padding="4dp"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/white"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -189,6 +212,8 @@
                 android:id="@+id/registerButton"
                 android:layout_width="@dimen/login_button_width"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_login_button"
                 android:text="@string/registerButtonLabel" />
 
         </LinearLayout>

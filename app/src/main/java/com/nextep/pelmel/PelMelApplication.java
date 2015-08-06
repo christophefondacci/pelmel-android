@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.nextep.pelmel.handlers.MyLifecycleHandler;
 import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.User;
@@ -70,6 +71,7 @@ public class PelMelApplication extends Application implements
 		super.onCreate();
 		instance = this;
 		initServices();
+		registerActivityLifecycleCallbacks(new MyLifecycleHandler());
 
 		// Create global configuration and initialize ImageLoader with this
 		// configuration

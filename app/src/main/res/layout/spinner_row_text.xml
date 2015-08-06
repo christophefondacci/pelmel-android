@@ -9,7 +9,6 @@
         android:id="@+id/rowText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/dummy"
         android:textColor="#000"
         android:background="@color/spinner_selector" />
 

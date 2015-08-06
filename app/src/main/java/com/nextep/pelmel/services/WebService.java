@@ -39,8 +39,8 @@ public class WebService {
 
     public static final String LOG_TAG = "WebService";
 //    public static final String BASE_URL = "http://www.pelmelguide.com";
-    public static final String BASE_URL = "http://10.0.0.2";
-    //private static final String BASE_URL = "http://www.pelmelguide.com";
+//    public static final String BASE_URL = "http://10.0.0.2";
+    public static final String BASE_URL = "http://www.pelmelguide.com";
     private static final String LOGIN_ACTION = "/mobileLogin";
     private static final String PLACES_LIST_ACTION = "/mapPlaces";
     private static final String EVENTS_LIST_ACTION = "/mobileEvents";

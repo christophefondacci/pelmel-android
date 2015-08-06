@@ -20,6 +20,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -30,6 +31,7 @@ import com.google.android.gms.maps.model.VisibleRegion;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.PelMelConstants;
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.handlers.MyLifecycleHandler;
 import com.nextep.pelmel.helpers.GeoUtils;
 import com.nextep.pelmel.helpers.Utils;
 import com.nextep.pelmel.listeners.UserListener;
@@ -51,6 +53,7 @@ public class MapActivity extends Fragment implements UserListener,
 	private static final String TAG_MAP = "MAP";
 	private Map<Marker, Place> placeMarkersMap;
 	private Map<String,Marker> markersKeyMap;
+	private Map<String,BitmapDescriptor> markersBitmapMap;
 	private GoogleMap map;
 	private List<Place> cachedPlaces;
 	private SnippetContainerSupport snippetContainerSupport;
@@ -65,6 +68,7 @@ public class MapActivity extends Fragment implements UserListener,
 		layoutInflater = inflater;
 		placeMarkersMap = new HashMap<Marker, Place>();
 		markersKeyMap = new HashMap<>();
+		markersBitmapMap = new HashMap<>();
 
 		// Initializing map and zooming to current location
 		final Location loc = PelMelApplication.getLocalizationService().getLocation();
@@ -140,10 +144,18 @@ public class MapActivity extends Fragment implements UserListener,
 	public void onResume() {
 		super.onResume();
 		if (map != null) {
-
 			Log.d(TAG_MAP, "Refreshing markers");
 			showProgress();
 			PelMelApplication.getUserService().getCurrentUser(this);
+		}
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		if(!MyLifecycleHandler.isApplicationInForeground()) {
+			Log.d(TAG_MAP, "Clearing cache for next wake up");
+			PelMelApplication.getDataService().clearCache();
 		}
 	}
 
@@ -211,17 +223,19 @@ public class MapActivity extends Fragment implements UserListener,
 							zoomFitBoundsBuilder.include(markerPos);
 						}
 					}
-					if(placesInUserZoom>=PelMelConstants.MAP_MINIMUM_PLACES_FOR_ZOOM) {
-						final CameraUpdate upd = CameraUpdateFactory.newLatLngBounds(userZoomBounds,0);
-						map.animateCamera(upd);
-					} else {
-						LatLngBounds bounds = zoomFitBoundsBuilder.build();
-						if(places.size()>2) {
-							try {
-								final CameraUpdate upd = CameraUpdateFactory.newLatLngBounds(bounds, 30);
-								map.animateCamera(upd);
-							} catch(IllegalStateException e) {
-								Log.e(TAG_MAP,"Unable to adjust camera: " + e.getMessage(),e);
+					if(!isLoaded) {
+						if (placesInUserZoom >= PelMelConstants.MAP_MINIMUM_PLACES_FOR_ZOOM) {
+							final CameraUpdate upd = CameraUpdateFactory.newLatLngBounds(userZoomBounds, 0);
+							map.animateCamera(upd);
+						} else {
+							LatLngBounds bounds = zoomFitBoundsBuilder.build();
+							if (places.size() > 2) {
+								try {
+									final CameraUpdate upd = CameraUpdateFactory.newLatLngBounds(bounds, 30);
+									map.animateCamera(upd);
+								} catch (IllegalStateException e) {
+									Log.e(TAG_MAP, "Unable to adjust camera: " + e.getMessage(), e);
+								}
 							}
 						}
 					}
@@ -264,28 +278,45 @@ public class MapActivity extends Fragment implements UserListener,
 		}
 
 		// Inflating marker
-		final View markerView = layoutInflater.inflate(R.layout.map_marker,null);
-		final ImageView markerImage = (ImageView)markerView.findViewById(R.id.markerImage);
-		final TextView markerBadge = (TextView)markerView.findViewById(R.id.badgeLabel);
-		markerImage.setImageBitmap(BitmapFactory.decodeResource(res,markerCode));
-		markerBadge.setText(String.valueOf(p.getInsidersCount()));
-		if(p.getInsidersCount()==0) {
-			markerBadge.setVisibility(View.INVISIBLE);
-		}
+
 
 //							final BitmapDescriptor bitmapDesc = BitmapDescriptorFactory
 //									.fromResource(markerCode);
 		final LatLng markerPos = new LatLng(p.getLatitude(),
 				p.getLongitude());
-
+		final BitmapDescriptor bitmap = getMarkerBitmap(markerCode,p.getInsidersCount());
 		final double distance = PelMelApplication.getConversionService().getDistanceTo(p);
 		final String distStr = PelMelApplication.getConversionService().getDistanceStringForMiles(distance);
 		final Marker marker = map.addMarker(new MarkerOptions()
-				.position(markerPos).icon(BitmapDescriptorFactory.fromBitmap(Utils.createDrawableFromView(getActivity(),markerView)))
+				.position(markerPos).icon(bitmap)
 				.title(p.getName()).snippet(distStr));
 		placeMarkersMap.put(marker, p);
 		markersKeyMap.put(p.getKey(),marker);
 		return marker;
+	}
+
+	private String buildMarkerKey(int markerCode, int count) {
+		return String.valueOf(markerCode) + "_" + String.valueOf(count);
+	}
+	private BitmapDescriptor getMarkerBitmap(int markerCode, int count) {
+		final Resources res = PelMelApplication.getInstance().getResources();
+		final String markerKey = buildMarkerKey(markerCode, count);
+		BitmapDescriptor markerBitmap = markersBitmapMap.get(markerKey);
+		if(markerBitmap == null) {
+			final View markerView = layoutInflater.inflate(R.layout.map_marker,null);
+			final ImageView markerImage = (ImageView)markerView.findViewById(R.id.markerImage);
+			final TextView markerBadge = (TextView)markerView.findViewById(R.id.badgeLabel);
+			markerImage.setImageBitmap(BitmapFactory.decodeResource(res,markerCode));
+			markerBadge.setText(String.valueOf(count));
+			if(count==0) {
+				markerBadge.setVisibility(View.INVISIBLE);
+			}
+
+			// Building bitmap descriptor
+			markerBitmap = BitmapDescriptorFactory.fromBitmap(Utils.createDrawableFromView(getActivity(),markerView));
+			markersBitmapMap.put(markerKey,markerBitmap);
+		}
+		return markerBitmap;
 	}
 	@Override
 	public void userInfoUnavailable() {

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="#272a2e">
+    <com.nextep.pelmel.views.HorizontalListView
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:id="@+id/thumbsListView">
+
+    </com.nextep.pelmel.views.HorizontalListView>
+</LinearLayout><!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/layout/list_row_thumbs_list.xml -->

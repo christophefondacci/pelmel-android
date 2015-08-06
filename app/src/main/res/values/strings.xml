@@ -62,7 +62,6 @@
     <string name="distance.miles">{0} miles</string>
     <string name="distance.meters">{0} meters</string>
     <string name="distance.kilometers">{0} km</string>
-    <string name="dummy">Sample text</string>
     <string name="event_place_title">Takes place at</string>
     <string name="event_type_happyhour">HAPPY HOUR</string>
     <string name="event_type_opening">OPENING TIME</string>
@@ -77,14 +76,13 @@
     <string name="hours_open_leftHours">{0} left</string>
     <string name="hours_closed">CLOSED</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="insiders_title">They were in</string>
     <string name="loadingWaitMsg">Loading&#8230;</string>
     <string name="likers_title">They like</string>
     <string name="liked_places_title">He goes to</string>
     <string name="liked_users_title">He likes</string>
     <string name="locationProviderUnavailable">Cannot get your position, you may need to activate location services.</string>
-    <string name="loginIntroLabel">Login</string>
+    <string name="loginIntroLabel">LOG IN</string>
     <string name="loginWaitMsg">Logging in&#8230;</string>
     <string name="loginButtonLabel">Login</string>
     <string name="loginEmailPlaceholder">E-mail address</string>
@@ -143,7 +141,7 @@
     <string name="photoRemovedSuccess">Photo removed successfully!</string>
     <string name="photoUploadFailed">Failed to upload the photo, check your connection or connect to wifi and try again</string>
     <string name="photoUploadSuccess">Photo uploaded successfully!</string>
-    <string name="registerIntroLabel">Register</string>
+    <string name="registerIntroLabel">REGISTER</string>
     <string name="registerButtonLabel">Register</string>
     <string name="registerEmptyValueError">All fields should be filled</string>
     <string name="registerFailed">Registration failed, the email you used may already be in use.</string>
@@ -260,7 +258,6 @@ In no event will the COMPANY, its suppliers or other third parties mentioned at 
 
     <b>Article 9</b><br>
 The COMPANY may revise this Agreement at any time without notice by updating this posting. By using this Site you agree to be bound by any such revisions and should therefore periodically visit this Site and page to determine the then current Terms of Access and Use conditions of use to which you are bound.]]></string>
-    <string name="title_activity_main">MainActivity</string>
     <string name="snippet_distance_intro">snapshot</string>
 
 

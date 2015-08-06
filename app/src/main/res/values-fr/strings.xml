@@ -67,6 +67,9 @@
     <string name="event_type_opening">HEURE D\'OUVERTURE</string>
     <string name="event_type_themenight">SOIRÉE</string>
     <string name="eventType">Evènement</string>
+    <string name="googlePlay.SERVICE_MISSING">Vous devez installer les Google Play Services depuis Google Play Store</string>
+    <string name="googlePlay.SERVICE_VERSION_UPDATE_REQUIRED">Vous devez mettre à jour les Google Play Services à partir du Google Play Store</string>
+
     <string name="insiders_title">Ils étaient là</string>
     <string name="googleServicesUnavailable">Vous devez installer ou mettre à jour Google Play Services</string>
 
@@ -80,7 +83,7 @@
     <string name="liked_users_title">Il aime</string>
     <string name="loadingWaitMsg">Chargment&#8230;</string>
     <string name="locationProviderUnavailable">Impossible d\'obtenir votre position, vous devrez peut-être activer les services de localisation.</string>
-    <string name="loginIntroLabel">Login</string>
+    <string name="loginIntroLabel">CONNEXION</string>
     <string name="loginWaitMsg">Connexion&#8230;</string>
     <string name="loginButtonLabel">Login</string>
     <string name="loginEmailPlaceholder">Adresse E-mail</string>
@@ -88,7 +91,18 @@
     <string name="loginPasswordConfirmPlaceholder">Confirmation</string>
     <string name="loginHint">Connectez-vous pour trouver les lieux autour de vous</string>
     <string name="logout">Déconnexion</string>
+    <string name="offline">Hors ligne</string>
+    <string name="online">Disponible</string>
     <string name="ok">OK</string>
+    <string name="placeType.bar">Bar</string>
+    <string name="placeType.sauna">Sauna</string>
+    <string name="placeType.restaurant">Restaurant</string>
+    <string name="placeType.club">Club</string>
+    <string name="placeType.sexclub">Sex Club</string>
+    <string name="placeType.sexshop">Boutique</string>
+    <string name="placeType.asso">Association</string>
+    <string name="placeType.hotel">Hôtel</string>
+    <string name="placeType.other">Autre</string>
     <string name="profileName">Surnom</string>
     <string name="profileInformation">Informations</string>
     <string name="profileBirthday">Date de naissance</string>
@@ -113,7 +127,7 @@
     <string name="photoRemovedSuccess">Photo supprimée avec succès !</string>
     <string name="photoUploadFailed">Impossible d\'uploader la photo, vérifiez votre connexion ou connectez-vous à un wifi puis essayez à nouveau</string>
     <string name="photoUploadSuccess">Téléchargement de la photo réussi !</string>
-    <string name="registerIntroLabel">Inscription</string>
+    <string name="registerIntroLabel">INSCRIPTION</string>
     <string name="registerButtonLabel">S\'inscrire</string>
     <string name="registerEmptyValueError">Tous les champs doivent être renseignés</string>
     <string name="registerFailed">L\'inscription a échoué, l\'email que vous avez entré est peut être déjà utilisée.</string>
@@ -177,6 +191,10 @@
 
     <string name="thumbs_section_like">Ils Aiment</string>
     <string name="thumbs_section_like_singular">Il Aime</string>
+    <string name="thumbs_section_liked_places">Lieux qu\'il aime</string>
+    <string name="thumbs_section_liked_places_singular">Lieu qu\'il aime</string>
+    <string name="thumbs_section_liked_users">Utilisateurs qu\'il aime</string>
+    <string name="thumbs_section_liked_users_singular">Utilisateur qu\'il aime</string>
     <string name="thumbs_section_checkedin">Actuellement Là (check in)</string>
     <string name="thumbs_section_checkedin_singular">Actuellement Là (check in)</string>
 
@@ -211,4 +229,33 @@
     <string name="month.november">Novembre</string>
     <string name="month.december">Décembre</string>
     <string name="snippet_distance_intro">snapshot</string>
+
+        <string name="termsText"><![CDATA[These Terms of Use will apply to the use of the Service. Please read these Terms of Use carefully so that you know what your rights and obligations are when using the Service. The acceptance of these Terms of Use constitutes a valid and binding agreement between \'FGP Digital LLC\' (the COMPANY) and you (the USER) for the use of the Service. If you make any use of the Service you agree to be bound by these terms and conditions. You must be 18 years of age or older to use this service and must be registered as a member. If we discover that you are not over 18, we reserve our right to suspend and remove you account without any notice.<br><br>
+
+    <b>Article 1</b><br>
+The email address of the user is only used as a unique login identifier and is never exposed to anyone. The COMPANY may use it to communicate important information to the USER.<br><br>
+
+    <b>Article 2</b><br>
+You (the USER) are the sole owner of all rights in the materials posted or uploaded by you (including all related copyrights) or that you have the absolute right to license their use as provided in this section. While you will retain ownership of the copyright in the materials posted or uploaded by you, you agree that all materials posted or uploaded by you shall become part of a database, and that the Company will own the compilation copyright in that database. In addition, you hereby grant the Company a perpetual, worldwide, irrevocable license to use, reproduce, modify, publish, publicly perform, publicly display and distribute such materials, and portions of such materials and any derivative works created from such materials, in print, electronic and other media, by any means now known or developed in the future. We may sublicense all of our rights and licenses or assign them to third parties. Neither the Company nor any third party using the materials in accordance with this section will be obligated to pay you any royalties or other compensation for use of the materials.<br><br>
+
+    <b>Article 3</b><br>
+The USER agrees that all image he uploaded, every line of text he wrote, every action he did using the service may be visible to all other users of this service.<br><br>
+
+    <b>Article 4</b><br>
+The USER agrees and acknowledges that the content he posts by means of the Service may be used by other Users. The COMPANY cannot guarantee that other Users will use this content in accordance with these Terms of Use and/or applicable legislation. The COMPANY is not responsible for the submissions or actions of other Users and therefore accepts no liability for any actions of other Users which are in violation of these Terms of Use, the applicable legislation and/or which are otherwise unlawful.<br><br>
+
+    <b>Article 5</b><br>
+The USER is entitled to terminate the Agreement at any time by discontinuing the use of the Service and/or by terminating the Account by sending an email to christophe@pelmelguide.com which will completely remove the account.<br><br>
+
+    <b>Article 6</b><br>
+The USER agrees to post proper information regarding the content he contributes. If the COMPANY detect that a USER posts erroneous information regarding a place, we may limit the service or we may suspend the account without notice.<br><br>
+
+    <b>Article 7</b><br>
+This application, including all software, functions, materials, and information is provided “as is” without warranties of any kind, either express or implied. The COMPANY disclaims all warranties, express or implied, including, but not limited to, warranties of quiet enjoyment and non-infringement and implied warranties of merchantability, fitness for a particular purpose, non-infringement, title, quiet enjoyment, merchantability of computer programs, data accuracy, system integration, and informational Content. The Company does not warrant or make any representations regarding the operation of this application, the use, validity, accuracy or reliability of, or the results of the use of the materials on this Site or any other sites linked to this Site. The materials of this Site may be out of date, and the Company makes no commitment to update the materials at this Site. The Company does not and cannot guarantee or warrant that the files available for downloading from this Site, if any, will be free from infection, viruses, worms, Trojan horses, or other code that manifest contaminating or destructive properties. The Company does not warrant that this Site, software, materials, products, or services will be uninterrupted or error-free or that any defects in this Site, software, materials, products, or services will be corrected.<br><br>
+
+    <b>Article 8</b><br>
+In no event will the COMPANY, its suppliers or other third parties mentioned at or in this Site be liable for any damages, including, without limitation direct, indirect, special, incidental, or consequential damages, damages resulting from lost profits, lost data or business interruption arising out of relating to the use, inability to use, or resulting from the use of this application, any web sites linked to this Site, the materials, software or other information contained in any or all such sites, whether based on warranty, contracts, statutes, regulations, tort (including but not limited to, negligence) or any other legal theory and whether or not advised of the possibility of such damages. If your use of the materials or information from this Site results in the need for servicing, repair or correction of equipment or data, you assume all costs thereof.<br><br>
+
+    <b>Article 9</b><br>
+The COMPANY may revise this Agreement at any time without notice by updating this posting. By using this Site you agree to be bound by any such revisions and should therefore periodically visit this Site and page to determine the then current Terms of Access and Use conditions of use to which you are bound.]]></string>
 </resources>

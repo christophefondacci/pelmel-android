@@ -137,4 +137,6 @@ public interface DataService {
 
     void exportDatabase(Context context);
 
+    void clearCache();
+
 }

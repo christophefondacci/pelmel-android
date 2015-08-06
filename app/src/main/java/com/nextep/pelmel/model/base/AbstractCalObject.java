@@ -21,6 +21,7 @@ public abstract class AbstractCalObject implements CalObject {
 	private double distance;
 	private String distanceLabel;
 	private boolean overviewDataLoaded = false;
+	private long overviewDataLoadedTime;
 	private boolean liked;
 	private List<Tag> tags = new ArrayList<Tag>();
 
@@ -106,12 +107,14 @@ public abstract class AbstractCalObject implements CalObject {
 
 	@Override
 	public boolean isOverviewDataLoaded() {
-		return overviewDataLoaded;
+
+		return overviewDataLoaded && (System.currentTimeMillis()-overviewDataLoadedTime < 60000);
 	}
 
 	@Override
 	public void setOverviewDataLoaded(boolean overviewDataLoaded) {
 		this.overviewDataLoaded = overviewDataLoaded;
+		this.overviewDataLoadedTime = System.currentTimeMillis();
 	}
 
 	@Override

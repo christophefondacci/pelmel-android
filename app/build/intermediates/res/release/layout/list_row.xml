@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="2dip" >
+
+    <!-- ListRow Left sied Thumbnail image -->
+
+    <com.nextep.pelmel.views.VerticalTextView
+        android:id="@+id/type"
+        android:layout_width="15dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/thumbnail"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/thumbnail"
+        android:background="@color/darkOrange"
+        android:gravity="bottom|center_vertical|center_horizontal"
+        android:text="BAR"
+        android:textColor="#ffffff"
+        android:textSize="10dip"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:id="@+id/thumbnail"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/type"
+        android:background="@drawable/image_bg"
+        android:padding="3dip" >
+
+        <com.nextep.pelmel.views.ScaleImageView
+            android:id="@+id/list_image"
+            android:layout_width="fill_parent"
+            android:layout_height="100dip"
+            android:layout_weight="7.44"
+            android:scaleType="centerCrop"
+            android:src="@drawable/no_photo_landscape2" />
+
+        <ImageView
+            android:id="@+id/bgGradient"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/list_gradient_height"
+            android:layout_alignBottom="@id/list_image"
+            android:src="@drawable/gradient_alpha_gray_bg" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/list_title_padding"
+            android:layout_weight="7.44"
+            android:text="title"
+            android:textColor="#ffffff"
+            android:shadowColor="#000000"
+            android:shadowDx="1.0"
+            android:shadowDy="1.0"
+            android:shadowRadius="1.0"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:typeface="sans" 
+            android:layout_above="@+id/distance"/>
+
+        <ImageView
+            android:id="@+id/tagImage1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bear"
+            android:contentDescription="tag" />
+
+        <ImageView
+            android:id="@+id/tagImage2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/beard"
+            android:layout_toRightOf="@id/tagImage1"
+            android:contentDescription="tag" />
+
+        <ImageView
+            android:id="@+id/tagImage3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/twink" 
+            android:layout_toRightOf="@id/tagImage2"
+            android:contentDescription="tag"/>
+
+
+
+        <TextView
+            android:id="@+id/distance"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/list_image"
+            android:layout_alignLeft="@+id/list_image"
+            android:layout_marginBottom="@dimen/list_padding_bottom"
+            android:text="distance"
+            android:textColor="#ffffff"
+            android:shadowColor="#000000"
+            android:shadowDx="1.0"
+            android:shadowDy="1.0"
+            android:shadowRadius="1.0"
+            android:textSize="10sp" 
+            android:layout_marginLeft="@dimen/list_title_padding"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/list_image"
+            android:layout_alignTop="@+id/list_image"
+            android:padding="3dp"
+            android:background="#fcdcbe"
+            >
+
+            <ImageView
+                android:id="@+id/imageLike"
+                android:layout_width="23dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/like_new" />
+
+            <TextView
+                android:id="@+id/likeCounter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/imageLike"
+                android:layout_marginLeft="3dp"
+                android:gravity="center_vertical"
+                android:text="0"
+                android:textSize="20sp"
+                />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <!-- Title Of Song -->
+
+
+    <!-- Artist Name -->
+
+
+    <!-- Rightend Duration -->
+
+
+    <!-- Rightend Arrow -->
+
+</RelativeLayout><!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/layout/list_row.xml -->

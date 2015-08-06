@@ -67,10 +67,10 @@ import io.realm.Realm;
 public class DataServiceImpl implements DataService {
 
     private final static String LOG_TAG = "DataService";
-    private final Cache<Place> placeCache;
-    private final Cache<User> userCache;
-    private final Cache<Image> imageCache;
-    private final Cache<Event> eventCache;
+    private Cache<Place> placeCache;
+    private Cache<User> userCache;
+    private Cache<Image> imageCache;
+    private Cache<Event> eventCache;
     private List<Place> nearbyPlaces = null;
     private List<Event> nearbyEvents = null;
     private WebService webService;
@@ -78,12 +78,15 @@ public class DataServiceImpl implements DataService {
     private UserService userService;
 
     public DataServiceImpl() {
+        createCache();
+    }
+
+    private void createCache() {
         placeCache = new MemorySizedTTLCacheImpl<Place>(600000, 300);
         userCache = new MemorySizedTTLCacheImpl<User>(600000, 300);
         eventCache = new MemorySizedTTLCacheImpl<Event>(600000, 300);
         imageCache = new MemorySizedTTLCacheImpl<Image>(600000, 300);
     }
-
     @Override
     public Place getPlaceFromJson(JsonPlace json) {
         Place place = placeCache.get(json.getKey());
@@ -695,6 +698,11 @@ public class DataServiceImpl implements DataService {
                     null, null, radius);
         }
         return nearbyPlaces;
+    }
+
+    @Override
+    public void clearCache() {
+        nearbyPlaces = null;
     }
 
     public void setTagService(TagService tagService) {

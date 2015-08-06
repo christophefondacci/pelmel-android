@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:background="#272A2F">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="140dp"
+        android:id="@+id/bgBorderImage"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/bg_place_cell"
+        />
+
+    <ImageView
+        android:layout_width="105dp"
+        android:layout_height="105dp"
+        android:id="@+id/image"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"/>
+
+    <ImageView
+        android:layout_width="2dp"
+        android:layout_height="105dp"
+        android:id="@+id/separatorImage"
+        android:layout_alignTop="@+id/image"
+        android:layout_alignBottom="@+id/image"
+        android:layout_toRightOf="@+id/image"
+        android:layout_marginStart="20dp"
+        android:background="#434c51"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"
+        android:text="Medium Text"
+        android:id="@+id/dateLabel"
+        android:layout_alignTop="@+id/separatorImage"
+        android:layout_toRightOf="@+id/separatorImage"
+        android:layout_marginLeft="20dp"
+        android:textSize="18sp"
+        android:textColor="#F4D400"
+        android:layout_alignParentRight="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/titleLabel"
+        android:layout_below="@+id/dateLabel"
+        android:layout_alignLeft="@+id/dateLabel"
+        android:layout_alignParentRight="true"
+        android:textColor="#fff"
+        android:layout_marginTop="5.5dp"
+        android:textSize="16dp"/>
+
+    <ImageView
+        android:layout_width="17dp"
+        android:layout_height="17dp"
+        android:id="@+id/locationIcon"
+        android:layout_above="@+id/countIcon"
+        android:layout_alignLeft="@+id/titleLabel"
+        android:src="@drawable/snp_icon_marker"
+        android:layout_marginBottom="6dp"/>
+
+    <ImageView
+        android:layout_width="17dp"
+        android:layout_height="17dp"
+        android:id="@+id/countIcon"
+        android:layout_alignBottom="@+id/image"
+        android:layout_alignLeft="@+id/locationIcon"
+        android:src="@drawable/snp_icon_like_white"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:textColor="#ADACAC"
+        android:textSize="12sp"
+        android:layout_marginLeft="8dp"
+        android:id="@+id/locationLabel"
+        android:layout_alignBottom="@+id/locationIcon"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/locationIcon" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:textColor="#ADACAC"
+        android:textSize="12sp"
+        android:id="@+id/countLabel"
+        android:layout_alignBottom="@+id/countIcon"
+        android:layout_toRightOf="@+id/countIcon"
+        android:layout_marginLeft="8dp"
+        android:layout_alignParentRight="true"
+        />
+
+
+</RelativeLayout><!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/layout/list_row_cal_object.xml -->
