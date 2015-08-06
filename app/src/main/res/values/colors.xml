@@ -28,4 +28,6 @@
 	<color name="shade">#00000088</color>
 	<color name="online">#70ff01</color>
 	<color name="offline">#ffffff</color>
+	<color name="bannerInfo">#3083ea</color>
+
 </resources>

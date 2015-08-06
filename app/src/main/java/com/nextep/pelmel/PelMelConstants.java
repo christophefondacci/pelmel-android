@@ -31,4 +31,7 @@ public interface PelMelConstants {
 
 	double CHECKIN_DISTANCE = 1.0f;
 	int CHECKIN_TIMEOUT_MILLISECS = 10800000;
+
+	String INTENT_PARAM_INDEX = "index";
+	String INTENT_PARAM_CAL_KEY = "calkey";
 }

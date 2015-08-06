@@ -9,12 +9,44 @@
                                                      android:layout_height="match_parent"
                                                      android:id="@+id/slidingPanel"
                                                      android:gravity="bottom" app:umanoPanelHeight="0dp">
-        <fragment
-            android:id="@+id/pelmelMap"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            class="com.nextep.pelmel.activities.MapActivity"
+            android:layout_height="match_parent">
+            <fragment
+                android:id="@+id/pelmelMap"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                class="com.nextep.pelmel.activities.MapActivity"
             />
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bannerInfo"
+                android:id="@+id/bannerContainer"
+                android:visibility="invisible"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:textColor="@color/white"
+                    android:text="This is an info message"
+                    android:id="@+id/bannerText"
+                    />
+                <ProgressBar
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/bannerProgress"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/bannerText"
+                    android:layout_marginLeft="42dp"
+                    android:indeterminate="true"
+                    />
+            </RelativeLayout>
+        </RelativeLayout>
         <LinearLayout android:orientation="horizontal"
             android:id="@+id/pelmelSnippetContainer"
             android:layout_width="match_parent"
@@ -22,6 +54,8 @@
             />
     
     </com.sothree.slidinguppanel.SlidingUpPanelLayout>
+
+
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -29,6 +63,8 @@
         android:background="#D8000000"
         android:visibility="invisible"
         >
+
+
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"

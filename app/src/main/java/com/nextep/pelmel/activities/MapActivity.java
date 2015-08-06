@@ -1,7 +1,6 @@
 package com.nextep.pelmel.activities;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.location.Location;
@@ -56,8 +55,8 @@ public class MapActivity extends Fragment implements UserListener,
 	private List<Place> cachedPlaces;
 	private SnippetContainerSupport snippetContainerSupport;
 	private boolean forceRefresh;
-	private ProgressDialog progressDialog;
 	private boolean isLoaded = false;
+	private boolean isResuming = false;
 	private LayoutInflater layoutInflater;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -86,6 +85,7 @@ public class MapActivity extends Fragment implements UserListener,
 			@Override
 			public void onClick(View v) {
 				forceRefresh = true;
+				isLoaded = false;
 				showProgress();
 				PelMelApplication.getUserService().reconnect(MapActivity.this);
 			}
@@ -98,7 +98,6 @@ public class MapActivity extends Fragment implements UserListener,
 				PelMelApplication.getActionManager().executeAction(Action.CHECKIN,null);
 			}
 		});
-
 		// Setting bounds on user location
 //		final LatLng latlng = new LatLng(loc.getLatitude(), loc.getLongitude());
 //		final CameraUpdate upd = CameraUpdateFactory.newLatLngZoom(latlng, 14);
@@ -107,6 +106,7 @@ public class MapActivity extends Fragment implements UserListener,
 
 		return view;
 	}
+
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -119,12 +119,14 @@ public class MapActivity extends Fragment implements UserListener,
 	}
 
 	private void showProgress() {
-		progressDialog = new ProgressDialog(this.getActivity());
-		progressDialog.setCancelable(false);
-		progressDialog.setMessage(getString(R.string.loadingWaitMsg));
-		progressDialog.setTitle(getString(R.string.waitTitle));
-		progressDialog.setIndeterminate(true);
-		progressDialog.show();
+		snippetContainerSupport.showMessage(R.string.loadingWaitMsg,R.color.bannerInfo, 0);
+
+//		progressDialog = new ProgressDialog(this.getActivity());
+//		progressDialog.setCancelable(false);
+//		progressDialog.setMessage(getString(R.string.loadingWaitMsg));
+//		progressDialog.setTitle(getString(R.string.waitTitle));
+//		progressDialog.setIndeterminate(true);
+//		progressDialog.show();
 	}
 	//	@Override
 //	public void onWindowFocusChanged(boolean hasFocus) {
@@ -174,7 +176,7 @@ public class MapActivity extends Fragment implements UserListener,
 				final List<Place> places = PelMelApplication.getDataService()
 						.getNearbyPlaces(user, lat, lng,
 								null, null, radius, forceRefresh);
-				isLoaded = true;
+
 				return places;
 			}
 
@@ -224,10 +226,11 @@ public class MapActivity extends Fragment implements UserListener,
 						}
 					}
 				}
-				snippetContainerSupport.showSnippetFor(new ContextSnippetInfoProvider(),false,false);
-				if(progressDialog != null) {
-					progressDialog.dismiss();
+				if(!isLoaded) {
+					snippetContainerSupport.showSnippetFor(new ContextSnippetInfoProvider(), false, false);
 				}
+				isLoaded = true;
+				snippetContainerSupport.hideMessages();
 			}
 
 		}.execute();

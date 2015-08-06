@@ -1,6 +1,7 @@
 package com.nextep.pelmel.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.nextep.pelmel.PelMelApplication;
+import com.nextep.pelmel.PelMelConstants;
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.activities.GalleryActivity;
+import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Image;
 
 import java.util.List;
@@ -19,12 +23,16 @@ import java.util.List;
 public class ImagePagerAdapter extends PagerAdapter {
 
     private Context context;
+    private CalObject calObject;
     private List<Image> images;
     private LayoutInflater layoutInflater;
+    private boolean clickEnabled;
 
-    public ImagePagerAdapter(Context context,List<Image> images) {
+    public ImagePagerAdapter(Context context,CalObject calObject, boolean clickEnabled) {
         this.context = context;
-        this.images = images;
+        this.calObject = calObject;
+        this.images = calObject.getImages();
+        this.clickEnabled = clickEnabled;
         layoutInflater =(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
     @Override
@@ -38,7 +46,7 @@ public class ImagePagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
         View viewLayout = layoutInflater.inflate(R.layout.fullscreen_image, container,
                 false);
 
@@ -48,6 +56,21 @@ public class ImagePagerAdapter extends PagerAdapter {
             PelMelApplication.getImageService().displayImage(img,false,imgDisplay);
         }
         container.addView(viewLayout);
+
+        if(clickEnabled) {
+            imgDisplay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final Intent intent = new Intent(context,GalleryActivity.class);
+                    intent.putExtra(PelMelConstants.INTENT_PARAM_INDEX,position);
+                    intent.putExtra(PelMelConstants.INTENT_PARAM_CAL_KEY,calObject.getKey());
+                    context.startActivity(intent);
+//                    GalleryActivity activity = new GalleryActivity();
+//                    activity.setImages(images.get(position), images);
+//                    PelMelApplication.getSnippetContainerSupport().showSnippetForFragment(activity, true, false);
+                }
+            });
+        }
         return viewLayout;
     }
 

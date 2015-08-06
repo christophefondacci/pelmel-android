@@ -58,8 +58,9 @@ public class SnippetGalleryAdapter extends BaseAdapter {
 
         }
         galleryPager = (ViewPager)convertView.findViewById(R.id.viewPager);
-        final ImagePagerAdapter adapter = new ImagePagerAdapter(context,calObject.getImages());
+        final ImagePagerAdapter adapter = new ImagePagerAdapter(context,calObject,true);
         galleryPager.setAdapter(adapter);
+
 //        ExpandingLayout expandingLayout = (ExpandingLayout)convertView.findViewById(R.id
 //                .expanding_layout);
 //        expandingLayout.setExpandedHeight(expandableGalleryListItem.getExpandedHeight());

@@ -35,6 +35,7 @@
     <color name="background_material_light">#ffeeeeee</color>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values/colors.xml -->
     <eat-comment/>
+    <color name="bannerInfo">#3083ea</color>
     <color name="black">#000000</color>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
     <eat-comment/>

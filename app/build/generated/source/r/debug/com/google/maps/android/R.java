@@ -29,18 +29,18 @@ public final class R {
 		public static final int zOrderOnTop = 0x7f010047;
 	}
 	public static final class color {
-		public static final int common_action_bar_splitter = 0x7f0b0013;
-		public static final int common_signin_btn_dark_text_default = 0x7f0b0014;
-		public static final int common_signin_btn_dark_text_disabled = 0x7f0b0015;
-		public static final int common_signin_btn_dark_text_focused = 0x7f0b0016;
-		public static final int common_signin_btn_dark_text_pressed = 0x7f0b0017;
-		public static final int common_signin_btn_default_background = 0x7f0b0018;
-		public static final int common_signin_btn_light_text_default = 0x7f0b0019;
-		public static final int common_signin_btn_light_text_disabled = 0x7f0b001a;
-		public static final int common_signin_btn_light_text_focused = 0x7f0b001b;
-		public static final int common_signin_btn_light_text_pressed = 0x7f0b001c;
-		public static final int common_signin_btn_text_dark = 0x7f0b006d;
-		public static final int common_signin_btn_text_light = 0x7f0b006e;
+		public static final int common_action_bar_splitter = 0x7f0b0014;
+		public static final int common_signin_btn_dark_text_default = 0x7f0b0015;
+		public static final int common_signin_btn_dark_text_disabled = 0x7f0b0016;
+		public static final int common_signin_btn_dark_text_focused = 0x7f0b0017;
+		public static final int common_signin_btn_dark_text_pressed = 0x7f0b0018;
+		public static final int common_signin_btn_default_background = 0x7f0b0019;
+		public static final int common_signin_btn_light_text_default = 0x7f0b001a;
+		public static final int common_signin_btn_light_text_disabled = 0x7f0b001b;
+		public static final int common_signin_btn_light_text_focused = 0x7f0b001c;
+		public static final int common_signin_btn_light_text_pressed = 0x7f0b001d;
+		public static final int common_signin_btn_text_dark = 0x7f0b006e;
+		public static final int common_signin_btn_text_light = 0x7f0b006f;
 	}
 	public static final class drawable {
 		public static final int bubble_mask = 0x7f020051;
@@ -90,7 +90,7 @@ public final class R {
 		public static final int google_play_services_version = 0x7f0a0003;
 	}
 	public static final class layout {
-		public static final int text_bubble = 0x7f03004f;
+		public static final int text_bubble = 0x7f030050;
 	}
 	public static final class raw {
 		public static final int gtm_analytics = 0x7f050000;

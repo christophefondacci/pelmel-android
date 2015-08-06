@@ -5,7 +5,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
@@ -25,6 +27,9 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
     private SnippetChildSupport snippetChildSupport;
     private boolean snippetOpened = false;
     private MapActivity mapFragment;
+    private TextView bannerText;
+    private View bannerContainer;
+    private ProgressBar bannerProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,9 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
         snippetHeight = getResources().getDimensionPixelSize(R.dimen.snippet_height);
         final SlidingUpPanelLayout slidingLayout = (SlidingUpPanelLayout) findViewById(R.id.slidingPanel);
         final View snippetView = findViewById(R.id.pelmelSnippetContainer);
+        bannerText = (TextView)findViewById(R.id.bannerText);
+        bannerContainer = findViewById(R.id.bannerContainer);
+        bannerProgress = (ProgressBar)findViewById(R.id.bannerProgress);
 
         slidingLayout.setPanelSlideListener(this);
         slidingLayout.setParalaxOffset(getResources().getDimensionPixelSize(R.dimen.snippet_parallax));
@@ -147,7 +155,9 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
     public void setSnippetChild(SnippetChildSupport childSupport) {
         this.snippetChildSupport=childSupport;
         final SlidingUpPanelLayout slidingLayout = (SlidingUpPanelLayout) findViewById(R.id.slidingPanel);
-        slidingLayout.setScrollableView(childSupport.getScrollableView());
+        if(childSupport != null) {
+            slidingLayout.setScrollableView(childSupport.getScrollableView());
+        }
         notifySnippetOpenState();
     }
 
@@ -203,6 +213,17 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
         return mapFragment;
     }
 
+    @Override
+    public void showMessage(int messageResId, int colorRes, int timeMs) {
+        bannerContainer.setVisibility(View.VISIBLE);
+        bannerContainer.setBackgroundResource(colorRes);
+        bannerText.setText(messageResId);
+    }
+
+    @Override
+    public void hideMessages() {
+        bannerContainer.setVisibility(View.INVISIBLE);
+    }
 
     //    @Override
 //    public boolean onChildTouch(View v, MotionEvent e) {

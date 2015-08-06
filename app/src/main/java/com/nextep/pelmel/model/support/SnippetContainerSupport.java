@@ -66,4 +66,13 @@ public interface SnippetContainerSupport {
      * @return the Map fragment (mainly for marker interactions)
      */
     MapActivity getMapFragment();
+
+    /**
+     * Displays a message as a top banner
+     * @param messageResId resource ID of the message to display
+     * @param colorRes resource ID of the background color
+     * @param timeMs duration of the message, or 0 for unlimited (hideMessage should be called)
+     */
+    void showMessage(int messageResId, int colorRes, int timeMs);
+    void hideMessages();
 }
