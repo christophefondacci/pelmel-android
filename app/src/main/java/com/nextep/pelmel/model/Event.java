@@ -23,4 +23,10 @@ public interface Event extends CalObject {
 	void setComers(List<User> comers);
 
 	void addComer(User comer);
+
+	void setComersCount(int comersCount);
+	int getComersCount();
+
+	int getReviewsCount();
+	void setReviewsCount(int reviewsCount);
 }

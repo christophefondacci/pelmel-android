@@ -27,6 +27,8 @@ public class SnippetSectionedAdapter extends SectionedAdapter implements View.On
     public static final String SECTION_DESCRIPTION="description";
     public static final String SECTION_THUMBS   ="thumbs";
     public static final String SECTION_CHECKIN   ="checkin";
+    public static final String SECTION_ATTEND   ="attend";
+    public static final String SECTION_LOCATION ="location";
 
     private LayoutInflater layoutInflater;
 
@@ -74,6 +76,8 @@ public class SnippetSectionedAdapter extends SectionedAdapter implements View.On
                 return getSectionTitleConvertView(convertView,parent,R.string.section_general_info);
             case SECTION_EVENTS:
                 return getSectionTitleConvertView(convertView,parent,R.string.section_events);
+            case SECTION_LOCATION:
+                return getSectionTitleConvertView(convertView,parent,R.string.section_event_location);
 //            case SECTION_CHECKIN:
 //                return getSectionTitleConvertView(convertView,parent,R.string.section_current_checkin);
             case SECTION_OPENING:

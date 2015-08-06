@@ -1,13 +1,13 @@
 package com.nextep.pelmel.model.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.model.base.AbstractCalObject;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class EventImpl extends AbstractCalObject implements Event {
 
@@ -15,6 +15,8 @@ public class EventImpl extends AbstractCalObject implements Event {
 	private Date endDate;
 	private Place place;
 	private List<User> comers = new ArrayList<User>();
+	private int comersCount;
+	private int reviewsCount;
 
 	@Override
 	public Date getStartDate() {
@@ -59,5 +61,25 @@ public class EventImpl extends AbstractCalObject implements Event {
 	@Override
 	public List<User> getComers() {
 		return comers;
+	}
+
+	@Override
+	public void setReviewsCount(int reviewsCount) {
+		this.reviewsCount = reviewsCount;
+	}
+
+	@Override
+	public int getReviewsCount() {
+		return reviewsCount;
+	}
+
+	@Override
+	public int getComersCount() {
+		return getLikeCount();
+	}
+
+	@Override
+	public void setComersCount(int comersCount) {
+		setLikeCount(comersCount);
 	}
 }

@@ -4,6 +4,8 @@ package com.nextep.pelmel.model;
  * Created by cfondacci on 23/07/15.
  */
 public interface RecurringEvent extends Event {
+
+    String CAL_TYPE_RECURRING = "SERI";
     EventType getEventType();
     RecurrencyType getRecurrencyType();
     int getStartHour();

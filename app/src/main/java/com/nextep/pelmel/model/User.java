@@ -47,4 +47,8 @@ public interface User extends CalObject {
 
 	double getRawDistanceMiles();
 	void setRawDistanceMiles(double miles);
+
+	void setEvents(List<Event> events);
+	List<Event> getEvents();
+
 }

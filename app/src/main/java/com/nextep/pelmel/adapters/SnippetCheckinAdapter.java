@@ -34,6 +34,15 @@ public class SnippetCheckinAdapter extends SnippetPlacesListAdapter {
     }
 
     @Override
+    public Object getItem(int position) {
+        if(position == 0) {
+            return null;
+        } else {
+            return super.getItem(position - 1);
+        }
+    }
+
+    @Override
     public int getItemViewType(int position) {
         return position;
     }

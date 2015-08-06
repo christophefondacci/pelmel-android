@@ -107,7 +107,8 @@ public class SnippetPlacesListAdapter extends BaseAdapter {
         final double distance = convService.getDistanceTo(place);
         final String distanceStr = convService.getDistanceStringForMiles(distance);
 
-        viewHolder.titleLabel.setText(distanceStr + " - " + place.getCityName());
+        final String placeTypeLabel = Strings.getText(PelMelApplication.getUiService().getLabelForPlaceType(place.getType()));
+        viewHolder.titleLabel.setText(distanceStr + " - " + placeTypeLabel);
         viewHolder.countIcon.setImageBitmap(BitmapFactory.decodeResource(PelMelApplication.getInstance().getResources(), R.drawable.snp_icon_like_white));
         viewHolder.countLabel.setText(Strings.getCountedText(R.string.counter_likes_singular,R.string.counter_likes,place.getLikeCount()));
         viewHolder.locationLabel.setText(place.getCityName());

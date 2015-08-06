@@ -2,6 +2,8 @@
 <resources>
 
     <string name="action_settings">Settings</string>
+    <string name="action_attend">Attend</string>
+    <string name="action_unattend">Cancel</string>
     <string name="action_checkin">Check In</string>
     <string name="action_checkout">Check Out</string>
     <string name="action_comment">Comment</string>
@@ -13,6 +15,10 @@
     <string name="age_days">days</string>
 
 
+    <string name="alert_attend_success_title">You will attend!</string>
+    <string name="alert_attend_success">You will attend this event, other users will be able to see that you are going to be here.</string>
+    <string name="alert_unattend_success_title">You will not attend!</string>
+    <string name="alert_unattend_success">You have been removed from the list of users who will be at this event.</string>
     <string name="alert_checkin_success_title">Checked In!</string>
     <string name="alert_checkin_success">You are now checked in, other users will be able to see that you are here. You can do a \'check out\' to stop sharing that information. If you forget to check out, you will be automatically checked out after some time.</string>
     <string name="alert_checkout_success_title">Checked Out!</string>
@@ -44,8 +50,8 @@
 
     <string name="counter_arehere">{0} are here</string>
     <string name="counter_arehere_singular">{0} is here</string>
-    <string name="counter_arein">{0} will attend</string>
-    <string name="counter_arein_singular">{0} will attend</string>
+    <string name="counter_attend">{0} will attend</string>
+    <string name="counter_attend_singular">{0} will attend</string>
     <string name="counter_chat">Chat</string>
     <string name="counter_comments">{0} Comments</string>
     <string name="counter_comments_singular">{0} Comment</string>
@@ -158,8 +164,10 @@
     <string name="search_extend_label">No gay venues found, you can search again in a larger zone :</string>
     <string name="search_no_localization">Could not get your position. Please check that localization services are enabled in your Android settings.</string>
     <string name="search_no_google_services">Google Services are not installed or are too old, please install or update Google Services from the play store.</string>
+    <string name="section_attending_events">He will attend</string>
     <string name="section_current_checkin">Currently checked in at</string>
     <string name="section_events">Upcoming events</string>
+    <string name="section_event_location">This event will take place at</string>
     <string name="section_general_info">General Information</string>
     <string name="section_title_descriptions">Description</string>
     <string name="section_title_happyhours">Happy Hours</string>
@@ -205,6 +213,8 @@
     <string name="tapToEdit">Tap to edit</string>
 
 
+    <string name="thumbs_section_attend">They will attend</string>
+    <string name="thumbs_section_attend_singular">He will attend</string>
     <string name="thumbs_section_like">They Like</string>
     <string name="thumbs_section_like_singular">He Likes</string>
     <string name="thumbs_section_liked_places">Hangouts he likes</string>

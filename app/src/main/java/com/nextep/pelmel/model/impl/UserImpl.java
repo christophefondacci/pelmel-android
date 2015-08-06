@@ -1,5 +1,6 @@
 package com.nextep.pelmel.model.impl;
 
+import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.model.base.AbstractCalObject;
@@ -17,6 +18,7 @@ public class UserImpl extends AbstractCalObject implements User {
 	private double rawDistanceMiles;
 	private final List<Place> likedPlaces = new ArrayList<Place>();
 	private final List<User> likedUsers = new ArrayList<User>();
+	private  List<Event> events = new ArrayList<Event>();
 	private int heightInCm = 170;
 	private int weightInKg = 70;
 	private String token;
@@ -132,5 +134,15 @@ public class UserImpl extends AbstractCalObject implements User {
 	@Override
 	public double getRawDistanceMiles() {
 		return rawDistanceMiles;
+	}
+
+	@Override
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
+	@Override
+	public List<Event> getEvents() {
+		return events;
 	}
 }

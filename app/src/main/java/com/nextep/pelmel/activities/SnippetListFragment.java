@@ -14,6 +14,7 @@ import android.widget.ListView;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
 import com.nextep.pelmel.adapters.SnippetAddressInfoAdapter;
+import com.nextep.pelmel.adapters.SnippetAttendAdapter;
 import com.nextep.pelmel.adapters.SnippetCheckinAdapter;
 import com.nextep.pelmel.adapters.SnippetDescriptionListAdapter;
 import com.nextep.pelmel.adapters.SnippetEventsListAdapter;
@@ -37,8 +38,8 @@ import com.nextep.pelmel.model.support.SnippetChildSupport;
 import com.nextep.pelmel.model.support.SnippetContainerSupport;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
 import com.nextep.pelmel.providers.impl.ContextSnippetInfoProvider;
-import com.nextep.pelmel.providers.impl.PlaceInfoProvider;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -134,6 +135,12 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
             if(infoProvider.getItem() instanceof  User) {
                 final User user = (User) infoProvider.getItem();
                 adapter.addSection(SnippetSectionedAdapter.SECTION_CHECKIN,new SnippetCheckinAdapter(this.getActivity(),user));
+                adapter.addSection(SnippetSectionedAdapter.SECTION_ATTEND,new SnippetAttendAdapter(this.getActivity(),user));
+            } else if(infoProvider.getItem() instanceof Event) {
+                final Event event = (Event)infoProvider.getItem();
+                if(event.getPlace()!=null) {
+                    adapter.addSection(SnippetSectionedAdapter.SECTION_LOCATION, new SnippetPlacesListAdapter(this.getActivity(), Arrays.asList(event.getPlace())));
+                }
             }
 
             // Address section
@@ -177,9 +184,12 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         final Object obj = adapter.getItem(position);
-        if(obj instanceof Place) {
-            SnippetInfoProvider provider = new PlaceInfoProvider((Place)obj);
-            snippetContainerSupport.showSnippetFor(provider, true, false);
+        if(obj instanceof CalObject) {
+
+            SnippetInfoProvider provider = PelMelApplication.getUiService().buildInfoProviderFor((CalObject)obj);
+            if(provider != null) {
+                snippetContainerSupport.showSnippetFor(provider, true, false);
+            }
         }
     }
 

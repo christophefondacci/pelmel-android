@@ -284,6 +284,14 @@ public class DataServiceImpl implements DataService {
         }
         user.setTags(tags);
 
+        // Converting events
+        final List<Event> events = new ArrayList<>();
+        for(final IJsonLightEvent jsonEvent : json.getEvents()) {
+            final Event event = getEventFromLightJson(jsonEvent);
+            events.add(event);
+        }
+        user.setEvents(events);
+
         return user;
     }
 
@@ -320,18 +328,26 @@ public class DataServiceImpl implements DataService {
             comers.add(user);
         }
         event.setComers(comers);
+        event.setComersCount(json.getLikes());
+        event.setDescription(json.getDescription());
+        event.setLiked(json.isLiked());
+        event.setReviewsCount(json.getCommentsCount());
 
         return event;
     }
 
     @Override
     public Event getEventFromLightJson(IJsonLightEvent json) {
-        final String key = json.getKey();
-        Event event = eventCache.get(key);
+        String key = json.getKey();
+        String cacheKey = key;
+        if(!cacheKey.startsWith(Event.CAL_TYPE)) {
+            cacheKey = Event.CAL_TYPE + key;
+        }
+        Event event = eventCache.get(cacheKey);
         if (event == null) {
             event = new EventImpl();
             event.setKey(key);
-            eventCache.put(key, event);
+            eventCache.put(cacheKey, event);
         }
         event.setName(json.getName());
 

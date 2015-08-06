@@ -10,14 +10,18 @@ import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.PelMelConstants;
 import com.nextep.pelmel.R;
 import com.nextep.pelmel.model.CalObject;
+import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
 import com.nextep.pelmel.providers.impl.ContextSnippetInfoProvider;
+import com.nextep.pelmel.providers.impl.EventInfoProvider;
 import com.nextep.pelmel.providers.impl.PlaceInfoProvider;
 import com.nextep.pelmel.providers.impl.UserInfoProvider;
 import com.nextep.pelmel.services.UIService;
 import com.nextep.pelmel.views.BadgeView;
+
+import java.text.MessageFormat;
 
 public class UIServiceImpl implements UIService {
 
@@ -129,7 +133,9 @@ public class UIServiceImpl implements UIService {
         if(object instanceof Place) {
             return new PlaceInfoProvider((Place) object);
         } else if(object instanceof User) {
-            return new UserInfoProvider((User)object);
+            return new UserInfoProvider((User) object);
+        } else if(object instanceof Event) {
+            return new EventInfoProvider((Event)object);
         } else if(object ==null) {
             return new ContextSnippetInfoProvider();
         }
@@ -150,7 +156,8 @@ public class UIServiceImpl implements UIService {
     @Override
     public void showInfoMessage(Context context, int resTitle, int resMessage, String arg) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        final String msg = PelMelApplication.getInstance().getResources().getString(resMessage,arg);
+        final String template = PelMelApplication.getInstance().getResources().getString(resMessage);
+        final String msg = MessageFormat.format(template,arg);
         builder.setMessage(msg).setTitle(resTitle).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

@@ -214,6 +214,7 @@
     <string name="search_no_localization">Impossible d\'accéder à votre localisation. Veuillez vérifier que les services de localisation sont activés dans vos préférences Android.</string>
     <string name="search_placeholder">Cherchez une ville ou un lieu</string>
     <string name="section_current_checkin">A indiqué se trouver actuellment à</string>
+    <string name="section_event_location">Cet évènement aura lieu à</string>
     <string name="section_events">Évènements à venir</string>
     <string name="section_general_info">Informations Générales</string>
     <string name="section_title_descriptions">Description</string>
@@ -286,6 +287,8 @@ In no event will the COMPANY, its suppliers or other third parties mentioned at 
 
     <b>Article 9</b><br>
 The COMPANY may revise this Agreement at any time without notice by updating this posting. By using this Site you agree to be bound by any such revisions and should therefore periodically visit this Site and page to determine the then current Terms of Access and Use conditions of use to which you are bound.]]></string>
+    <string name="thumbs_section_attend">Ils y seront</string>
+    <string name="thumbs_section_attend_singular">Il y sera</string>
     <string name="thumbs_section_checkedin">Actuellement Là (check in)</string>
     <string name="thumbs_section_checkedin_singular">Actuellement Là (check in)</string>
     <string name="thumbs_section_like">Ils Aiment</string>

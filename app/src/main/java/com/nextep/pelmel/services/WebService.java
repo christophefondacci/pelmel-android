@@ -16,6 +16,7 @@ import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.gson.GsonHelper;
 import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.Place;
+import com.nextep.pelmel.model.RecurringEvent;
 import com.nextep.pelmel.model.User;
 
 import java.io.BufferedWriter;
@@ -249,7 +250,7 @@ public class WebService {
                 actionUrl = PLACES_OVERVIEW_ACTION;
             } else if (key.startsWith(User.CAL_TYPE)) {
                 actionUrl = USERS_OVERVIEW_ACTION;
-            } else if (key.startsWith(Event.CAL_TYPE)) {
+            } else if (key.startsWith(Event.CAL_TYPE) || key.startsWith(RecurringEvent.CAL_TYPE_RECURRING)) {
                 actionUrl = EVENTS_OVERVIEW_ACTION;
             }
             // querying places

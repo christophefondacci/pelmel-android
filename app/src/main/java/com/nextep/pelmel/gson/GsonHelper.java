@@ -2,8 +2,11 @@ package com.nextep.pelmel.gson;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.nextep.json.model.IJsonLightEvent;
 import com.nextep.json.model.IJsonLightPlace;
 import com.nextep.json.model.IJsonLightUser;
+import com.nextep.json.model.impl.JsonEvent;
+import com.nextep.json.model.impl.JsonLightEvent;
 import com.nextep.json.model.impl.JsonLightPlace;
 import com.nextep.json.model.impl.JsonLightUser;
 import com.nextep.json.model.impl.JsonPlace;
@@ -51,7 +54,17 @@ public final class GsonHelper {
                         }
                     }
                 }
-            }).createGson();
+            }).registerTypeSelector(IJsonLightEvent.class, new TypeSelector<IJsonLightEvent>() {
+                @Override
+                public Class<? extends IJsonLightEvent> getClassForElement(JsonElement readElement) {
+                    if(!readElement.isJsonNull() && readElement.getAsJsonObject().has("commentsCount")) {
+                        return JsonEvent.class;
+                    } else {
+                        return JsonLightEvent.class;
+                    }
+                }
+            }).
+                    createGson();
         }
         return gson;
     }

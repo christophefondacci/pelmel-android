@@ -324,16 +324,20 @@
     <string name="accept">Accept</string>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="action_attend">Attend</string>
     <string name="action_chat">Chat</string>
     <string name="action_checkin">Check In</string>
     <string name="action_checkout">Check Out</string>
     <string name="action_comment">Comment</string>
     <string name="action_like">Like</string>
     <string name="action_settings">Settings</string>
+    <string name="action_unattend">Cancel</string>
     <string name="action_unlike">Unlike</string>
     <string name="age_days">days</string>
     <string name="age_hours">hours</string>
     <string name="age_minutes">minutes</string>
+    <string name="alert_attend_success">You will attend this event, other users will be able to see that you are going to be here.</string>
+    <string name="alert_attend_success_title">You will attend!</string>
     <string name="alert_checkin_success">You are now checked in, other users will be able to see that you are here. You can do a \'check out\' to stop sharing that information. If you forget to check out, you will be automatically checked out after some time.</string>
     <string name="alert_checkin_success_title">Checked In!</string>
     <string name="alert_checkout_success">You checked out from {0}, other users can no longer see that you are here. Nobody can see that you have been here from now on.</string>
@@ -341,6 +345,8 @@
     <string name="alert_like_place_success">You are now part of the users who like this place.</string>
     <string name="alert_like_success_title">You like!</string>
     <string name="alert_like_user_success">The user has been notified that you like him.</string>
+    <string name="alert_unattend_success">You have been removed from the list of users who will be at this event.</string>
+    <string name="alert_unattend_success_title">You will not attend!</string>
     <string name="alert_unlike_place_success">You are no longer part of the users who like this place.</string>
     <string name="alert_unlike_success_title">Like cancelled!</string>
     <string name="alert_unlike_user_success">Your like has been removed.</string>
@@ -408,8 +414,8 @@
     <eat-comment/>
     <string name="counter_arehere">{0} are here</string>
     <string name="counter_arehere_singular">{0} is here</string>
-    <string name="counter_arein">{0} will attend</string>
-    <string name="counter_arein_singular">{0} will attend</string>
+    <string name="counter_attend">{0} will attend</string>
+    <string name="counter_attend_singular">{0} will attend</string>
     <string name="counter_chat">Chat</string>
     <string name="counter_comments">{0} Comments</string>
     <string name="counter_comments_singular">{0} Comment</string>
@@ -553,7 +559,9 @@
     <string name="search_no_google_services">Google Services are not installed or are too old, please install or update Google Services from the play store.</string>
     <string name="search_no_localization">Could not get your position. Please check that localization services are enabled in your Android settings.</string>
     <string name="search_placeholder">Search a city or venue</string>
+    <string name="section_attending_events">He will attend</string>
     <string name="section_current_checkin">Currently checked in at</string>
+    <string name="section_event_location">This event will take place at</string>
     <string name="section_events">Upcoming events</string>
     <string name="section_general_info">General Information</string>
     <string name="section_title_descriptions">Description</string>
@@ -632,6 +640,8 @@ In no event will the COMPANY, its suppliers or other third parties mentioned at 
 
     <b>Article 9</b><br>
 The COMPANY may revise this Agreement at any time without notice by updating this posting. By using this Site you agree to be bound by any such revisions and should therefore periodically visit this Site and page to determine the then current Terms of Access and Use conditions of use to which you are bound.]]></string>
+    <string name="thumbs_section_attend">They will attend</string>
+    <string name="thumbs_section_attend_singular">He will attend</string>
     <string name="thumbs_section_checkedin">Checked In</string>
     <string name="thumbs_section_checkedin_singular">Checked In</string>
     <string name="thumbs_section_like">They Like</string>

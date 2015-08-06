@@ -59,7 +59,6 @@ public class MapActivity extends Fragment implements UserListener,
 	private SnippetContainerSupport snippetContainerSupport;
 	private boolean forceRefresh;
 	private boolean isLoaded = false;
-	private boolean isResuming = false;
 	private LayoutInflater layoutInflater;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -173,7 +172,7 @@ public class MapActivity extends Fragment implements UserListener,
 				double lat = 0;
 				double lng = 0;
 				Integer radius = null;
-				if(region.latLngBounds.contains(myPos) || ! isLoaded) {
+				if(region.latLngBounds.contains(myPos) || (! isLoaded && !forceRefresh)) {
 					lat = loc.getLatitude();
 					lng = loc.getLongitude();
 					radius = null;
