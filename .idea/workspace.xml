@@ -37,95 +37,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6994282f-24c4-4727-99fd-58a72f587d66" name="Default" comment="#2 Snippet counters, description, map integration, photo reorganization">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/snp_icon_ticket.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/providers/impl/EventInfoProvider.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/SnippetAttendAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/SnippetLocationAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/AccountActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/AccountActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/ChatActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/ChatActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/providers/impl/ContextSnippetInfoProvider.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/providers/impl/ContextSnippetInfoProvider.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/DataServiceImpl$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/DataServiceImpl$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/DataServiceImpl$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/DataServiceImpl$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/DataServiceImpl$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/DataServiceImpl$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/DataServiceImpl$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/DataServiceImpl$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/DataServiceImpl$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/DataServiceImpl$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/DataServiceImpl$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/DataServiceImpl$6.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/ChatConversationActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/ChatConversationActivity$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/ChatConversationActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/ChatConversationActivity$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/ChatConversationActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/ChatConversationActivity$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/ChatConversationActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/ChatConversationActivity$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/ChatConversationActivity$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/ChatConversationActivity$5.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/ChatConversationActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/ChatConversationActivity.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/DataServiceImpl.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/DataServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/model/Event.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/model/Event.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/model/impl/EventImpl.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/model/impl/EventImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/providers/impl/EventOverviewProvider.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/providers/impl/EventOverviewProvider.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/gson/GsonHelper$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/gson/GsonHelper$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/gson/GsonHelper$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/gson/GsonHelper$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/gson/GsonHelper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/gson/GsonHelper.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/ListEventsActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/ListEventsActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/ListPlacesActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/ListPlacesActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/LoginActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/LoginActivity$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/LoginActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/LoginActivity$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/LoginActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/LoginActivity$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/LoginActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/LoginActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/MapActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/MapActivity$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/MapActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/MapActivity$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/MapActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/MapActivity$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/MapActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/MapActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/MyProfileActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/MyProfileActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/PhotosManagerActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/PhotosManagerActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/providers/impl/PlaceInfoProvider.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/providers/impl/PlaceInfoProvider.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/providers/impl/PlaceOverviewProvider.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/providers/impl/PlaceOverviewProvider.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/ProfileSectionedAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/ProfileSectionedAdapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/R$drawable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/R$integer.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/R$integer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/R$menu.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/R$menu.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/R$raw.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/R$raw.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/ads/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/ads/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/analytics/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/analytics/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/appindexing/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/appindexing/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/appinvite/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/appinvite/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/appstate/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/appstate/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/cast/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/cast/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/drive/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/drive/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/fitness/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/fitness/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/games/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/games/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/gcm/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/gcm/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/identity/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/identity/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/location/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/location/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/maps/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/maps/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/nearby/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/nearby/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/panorama/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/panorama/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/plus/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/plus/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/safetynet/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/safetynet/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/wallet/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/wallet/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/wearable/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/wearable/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/makeramen/roundedimageview/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/makeramen/roundedimageview/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/R$style.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/R$styleable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/R.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/R.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/model/RecurringEvent.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/model/RecurringEvent.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/dialogs/SelectImageDialogFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/dialogs/SelectImageDialogFragment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/SnippetCheckinAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/SnippetCheckinAdapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/SnippetListFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/SnippetListFragment$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/SnippetListFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/SnippetListFragment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/SnippetPlacesListAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/SnippetPlacesListAdapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/SnippetSectionedAdapter$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/SnippetSectionedAdapter$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/SnippetSectionedAdapter$Tab.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/SnippetSectionedAdapter$Tab.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/SnippetSectionedAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/SnippetSectionedAdapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/TabBarActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/activities/TabBarActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/TagAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/TagAdapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/TagServiceimpl.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/TagServiceimpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/UIServiceImpl$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/UIServiceImpl$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/UIServiceImpl$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/UIServiceImpl$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/UIServiceImpl$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/UIServiceImpl$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/UIServiceImpl.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/UIServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/model/User.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/model/User.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/model/impl/UserImpl.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/model/impl/UserImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/providers/impl/UserInfoProvider.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/providers/impl/UserInfoProvider.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/providers/impl/UserOverviewProvider.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/providers/impl/UserOverviewProvider.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/WebService$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/WebService$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/WebService$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/WebService$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/WebService$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/WebService$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/io/realm/DefaultRealmModuleMediator.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/io/realm/DefaultRealmModuleMediator.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/MessageAdapter$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/MessageAdapter$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/MessageAdapter$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/MessageAdapter$ViewHolder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/MessageAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/MessageAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/MessageService.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/MessageService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/MessageServiceImpl$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/MessageServiceImpl$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/MessageServiceImpl.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/impl/MessageServiceImpl.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/MessageThreadAdapter$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/MessageThreadAdapter$ViewHolder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/MessageThreadAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/adapters/MessageThreadAdapter.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/WebService.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/nextep/pelmel/services/WebService.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" />
@@ -135,51 +62,19 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/activities/ChatConversationActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/activities/ChatConversationActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/impl/DataServiceImpl.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/impl/DataServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/model/Event.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/model/Event.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/model/impl/EventImpl.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/model/impl/EventImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/gson/GsonHelper.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/gson/GsonHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/activities/MapActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/activities/MapActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/ads/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/ads/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/analytics/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/analytics/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/appindexing/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/appindexing/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/appinvite/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/appinvite/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/appstate/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/appstate/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/cast/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/cast/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/drive/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/drive/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/fitness/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/fitness/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/games/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/games/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/gcm/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/gcm/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/identity/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/identity/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/location/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/location/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/maps/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/maps/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/nearby/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/nearby/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/panorama/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/panorama/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/plus/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/plus/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/safetynet/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/safetynet/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/wallet/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/wallet/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/wearable/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/wearable/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/makeramen/roundedimageview/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/makeramen/roundedimageview/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/nextep/pelmel/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/nextep/pelmel/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/model/RecurringEvent.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/model/RecurringEvent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/SnippetCheckinAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/SnippetCheckinAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/activities/SnippetListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/activities/SnippetListFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/SnippetPlacesListAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/SnippetPlacesListAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/SnippetSectionedAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/SnippetSectionedAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/impl/UIServiceImpl.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/impl/UIServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/model/User.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/model/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/model/impl/UserImpl.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/model/impl/UserImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/io/realm/DefaultRealmModuleMediator.java" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/io/realm/DefaultRealmModuleMediator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/MessageAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/MessageAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/MessageService.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/MessageService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/impl/MessageServiceImpl.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/impl/MessageServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/MessageThreadAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/MessageThreadAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/WebService.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/WebService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" afterPath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/list_row_chat_left.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/list_row_chat_left.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/list_row_chat_left.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_row_chat_left.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/list_row_chat_right.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/list_row_chat_right.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/list_row_chat_right.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_row_chat_right.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeResources/debug/merger.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeResources/debug/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values-fr/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values-fr/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-fr/values-fr.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-fr/values-fr.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/values/values.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/values/values.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="pelmelguide.iws" />
@@ -254,123 +149,114 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DataServiceImpl.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DataServiceImpl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/impl/DataServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="653" column="0" selection-start-line="653" selection-start-column="0" selection-end-line="653" selection-end-column="0" />
+            <state vertical-scroll-proportion="1.2571429">
+              <caret line="864" column="13" selection-start-line="864" selection-start-column="13" selection-end-line="864" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SnippetLocationAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/SnippetLocationAdapter.java">
+      <file leaf-file-name="MessageThreadAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/MessageThreadAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="32" />
-              <folding>
-                <element signature="e#561#562#0" expanded="true" />
-                <element signature="e#600#601#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SnippetEventsListAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/SnippetEventsListAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-              <folding>
-                <element signature="e#1069#1070#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SnippetCheckinAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/SnippetCheckinAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="42" selection-end-column="5" />
+              <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JsonUser.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/nextep/web-json/0.0.1-SNAPSHOT/web-json-0.0.1-SNAPSHOT-sources.jar!/com/nextep/json/model/impl/JsonUser.java">
+      <file leaf-file-name="MessageServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/impl/MessageServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="218" column="33" selection-start-line="218" selection-start-column="33" selection-end-line="218" selection-end-column="33" />
-              <folding>
-                <element signature="e#5004#5005#0" expanded="true" />
-                <element signature="e#5024#5025#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JsonEvent.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/nextep/web-json/0.0.1-SNAPSHOT/web-json-0.0.1-SNAPSHOT-sources.jar!/com/nextep/json/model/impl/JsonEvent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+            <state vertical-scroll-proportion="-0.3846154">
+              <caret line="173" column="0" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SnippetListFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/activities/SnippetListFragment.java">
+      <file leaf-file-name="Utils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/helpers/Utils.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="136" column="67" selection-start-line="136" selection-start-column="67" selection-end-line="136" selection-end-column="67" />
+              <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SnippetSectionedAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/SnippetSectionedAdapter.java">
+      <file leaf-file-name="MapActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/activities/MapActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="56" selection-start-line="29" selection-start-column="56" selection-end-line="29" selection-end-column="56" />
+              <caret line="314" column="0" selection-start-line="314" selection-start-column="0" selection-end-line="314" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SnippetAttendAdapter.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/SnippetAttendAdapter.java">
+      <file leaf-file-name="WebService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/WebService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5248869">
-              <caret line="47" column="5" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="360" column="53" selection-start-line="360" selection-start-column="53" selection-end-line="360" selection-end-column="53" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ChatConversationActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/activities/ChatConversationActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-10.76">
+              <caret line="148" column="0" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#902#903#0" expanded="true" />
-                <element signature="e#926#927#0" expanded="true" />
-                <element signature="e#988#989#0" expanded="true" />
-                <element signature="e#1032#1033#0" expanded="true" />
-                <element signature="e#1710#1760#0" expanded="true" />
+                <element signature="e#3579#5131#0" expanded="true" />
+                <element signature="e#5130#5131#0" expanded="true" />
+                <element signature="e#7218#7256#0" expanded="true" />
+                <element signature="e#7274#7306#0" expanded="true" />
+                <element signature="e#7331#7351#0" expanded="true" />
+                <element signature="e#7556#7579#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/model/impl/UserImpl.java">
+      <file leaf-file-name="MessageService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/MessageService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.8">
-              <caret line="20" column="53" selection-start-line="20" selection-start-column="53" selection-end-line="20" selection-end-column="53" />
+            <state vertical-scroll-proportion="-9.92">
+              <caret line="42" column="82" selection-start-line="42" selection-start-column="82" selection-end-line="42" selection-end-column="82" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MessageAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/MessageAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="134" column="80" selection-start-line="134" selection-start-column="80" selection-end-line="134" selection-end-column="80" />
               <folding>
-                <element signature="e#549#556#0" expanded="true" />
-                <element signature="e#2712#2713#0" expanded="true" />
-                <element signature="e#2739#2740#0" expanded="true" />
-                <element signature="e#2785#2786#0" expanded="true" />
-                <element signature="e#2805#2806#0" expanded="true" />
+                <element signature="e#4890#5614#0" expanded="true" />
+                <element signature="e#5263#5264#0" expanded="true" />
+                <element signature="e#5335#5336#0" expanded="true" />
+                <element signature="e#5613#5614#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/DataService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="135" column="14" selection-start-line="135" selection-start-column="14" selection-end-line="135" selection-end-column="14" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1965,13 +1851,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/ProfileDescriptionAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/ProfileHeaderAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/ProfileSectionedAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_row_profile_tag.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/menu/account_menu.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/activities/AccountActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/ProfilePhotoAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/activities/MyProfileActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/ProfileTagAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/listview/ExpandingListView.java" />
@@ -2005,7 +1884,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/SnippetPlacesListAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/model/impl/EventImpl.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/model/RecurringEvent.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/WebService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/providers/impl/EventInfoProvider.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/gson/GsonHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/model/impl/UserImpl.java" />
@@ -2013,9 +1891,17 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/activities/SnippetListFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/SnippetSectionedAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/impl/DataServiceImpl.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/SnippetCheckinAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/SnippetAttendAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_row_chat_left.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_row_chat_right.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/MessageAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/MessageThreadAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/MessageService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/WebService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/impl/MessageServiceImpl.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/activities/ChatConversationActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/impl/DataServiceImpl.java" />
       </list>
     </option>
   </component>
@@ -2429,7 +2315,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="drawable-hdpi" />
+              <option name="myItemId" value="layout" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3098,6 +2984,7 @@
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31688127" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33719248" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298969" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -3108,7 +2995,7 @@
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32874617" sideWeight="0.5029455" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.50506514" sideWeight="0.4970545" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45007235" sideWeight="0.4899857" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5542692" sideWeight="0.4899857" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32874617" sideWeight="0.4970545" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18097281" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -3120,7 +3007,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964234" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31688127" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -3218,18 +3104,6 @@
           <option name="timeStamp" value="129" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/impl/MessageServiceImpl.java</url>
-          <line>174</line>
-          <properties />
-          <option name="timeStamp" value="134" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/activities/ChatConversationActivity.java</url>
-          <line>124</line>
-          <properties />
-          <option name="timeStamp" value="135" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/providers/impl/UserInfoProvider.java</url>
           <line>252</line>
           <properties />
@@ -3249,7 +3123,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/impl/MessageServiceImpl.java</url>
-          <line>139</line>
+          <line>138</line>
           <properties />
           <option name="timeStamp" value="144" />
         </line-breakpoint>
@@ -3319,11 +3193,23 @@
           <properties />
           <option name="timeStamp" value="176" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/MessageAdapter.java</url>
+          <line>142</line>
+          <properties />
+          <option name="timeStamp" value="186" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/MessageAdapter.java</url>
+          <line>134</line>
+          <properties />
+          <option name="timeStamp" value="187" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="177" />
+      <option name="time" value="188" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="app">
@@ -3334,135 +3220,13 @@
         <watch expression="user" />
         <watch expression="buf" language="JAVA" custom="" />
         <watch expression="paramsBuf" language="JAVA" custom="" />
+        <watch expression="recipient.getImageThumbUrl()" />
+        <watch expression="m.isUnread()" />
+        <watch expression="recipient.getItemKey()" />
       </configuration>
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login_register.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/activities/LoginActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="41" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/bg_chat_text.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/log_logo.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/pelmel_menu.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="43" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
-          <folding>
-            <element signature="e#739#760#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_row_no_geoloc.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/bg_login_button.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="16" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/activities/MainActionBarActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="45" column="11" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_row_login.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.724138">
-          <caret line="109" column="50" selection-start-line="109" selection-start-column="38" selection-end-line="109" selection-end-column="50" />
-          <folding>
-            <element signature="e#2627#2658#0" expanded="false" />
-            <element signature="e#4609#4637#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/handlers/MyLifecycleHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="38" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
-          <folding>
-            <element signature="e#1119#1120#0" expanded="false" />
-            <element signature="e#1159#1160#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/PelMelApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.0">
-          <caret line="73" column="69" selection-start-line="73" selection-start-column="69" selection-end-line="73" selection-end-column="69" />
-          <folding>
-            <element signature="e#5010#5011#0" expanded="false" />
-            <element signature="e#5044#5045#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/DataService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="139" column="22" selection-start-line="139" selection-start-column="22" selection-end-line="139" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.5.0/jars/classes.jar!/com/google/android/gms/maps/model/BitmapDescriptorFactory.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.12">
-          <caret line="88" column="35" selection-start-line="88" selection-start-column="35" selection-end-line="88" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/spinner_row_text.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -3562,26 +3326,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/SnippetPlacesListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="99" column="16" selection-start-line="99" selection-start-column="16" selection-end-line="99" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/model/impl/PlaceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="21" column="35" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/activities/MapActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="186" column="0" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -3623,8 +3371,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="43" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
           <folding>
-            <element signature="e#1158#1159#0" expanded="true" />
-            <element signature="e#1178#1179#0" expanded="true" />
+            <element signature="e#1158#1159#0" expanded="false" />
+            <element signature="e#1178#1179#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3660,25 +3408,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/WebService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="281" column="0" selection-start-line="281" selection-start-column="0" selection-end-line="281" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/gson/GsonHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="59" column="52" selection-start-line="59" selection-start-column="52" selection-end-line="59" selection-end-column="52" />
           <folding>
-            <element signature="e#925#1387#0" expanded="true" />
-            <element signature="e#1386#1387#0" expanded="true" />
-            <element signature="e#1433#2317#0" expanded="true" />
-            <element signature="e#2316#2317#0" expanded="true" />
-            <element signature="e#2363#2818#0" expanded="true" />
-            <element signature="e#2817#2818#0" expanded="true" />
+            <element signature="e#925#1387#0" expanded="false" />
+            <element signature="e#1386#1387#0" expanded="false" />
+            <element signature="e#1433#2317#0" expanded="false" />
+            <element signature="e#2316#2317#0" expanded="false" />
+            <element signature="e#2363#2818#0" expanded="false" />
+            <element signature="e#2817#2818#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3728,8 +3468,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="218" column="33" selection-start-line="218" selection-start-column="33" selection-end-line="218" selection-end-column="33" />
           <folding>
-            <element signature="e#5004#5005#0" expanded="true" />
-            <element signature="e#5024#5025#0" expanded="true" />
+            <element signature="e#5004#5005#0" expanded="false" />
+            <element signature="e#5024#5025#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3739,20 +3479,12 @@
         <state vertical-scroll-proportion="-4.8">
           <caret line="20" column="53" selection-start-line="20" selection-start-column="53" selection-end-line="20" selection-end-column="53" />
           <folding>
-            <element signature="e#549#556#0" expanded="true" />
-            <element signature="e#2712#2713#0" expanded="true" />
-            <element signature="e#2739#2740#0" expanded="true" />
-            <element signature="e#2785#2786#0" expanded="true" />
-            <element signature="e#2805#2806#0" expanded="true" />
+            <element signature="e#549#556#0" expanded="false" />
+            <element signature="e#2712#2713#0" expanded="false" />
+            <element signature="e#2739#2740#0" expanded="false" />
+            <element signature="e#2785#2786#0" expanded="false" />
+            <element signature="e#2805#2806#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/impl/DataServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="653" column="0" selection-start-line="653" selection-start-column="0" selection-end-line="653" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3761,8 +3493,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="32" />
           <folding>
-            <element signature="e#561#562#0" expanded="true" />
-            <element signature="e#600#601#0" expanded="true" />
+            <element signature="e#561#562#0" expanded="false" />
+            <element signature="e#600#601#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3772,7 +3504,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
           <folding>
-            <element signature="e#1069#1070#0" expanded="true" />
+            <element signature="e#1069#1070#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3787,16 +3519,178 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/SnippetAttendAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5248869">
+        <state vertical-scroll-proportion="0.0">
           <caret line="47" column="5" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#902#903#0" expanded="true" />
-            <element signature="e#926#927#0" expanded="true" />
-            <element signature="e#988#989#0" expanded="true" />
-            <element signature="e#1032#1033#0" expanded="true" />
-            <element signature="e#1710#1760#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#902#903#0" expanded="false" />
+            <element signature="e#926#927#0" expanded="false" />
+            <element signature="e#902#903#0" expanded="false" />
+            <element signature="e#926#927#0" expanded="false" />
+            <element signature="e#1710#1760#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/activities/ChatActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="165" column="60" selection-start-line="165" selection-start-column="60" selection-end-line="165" selection-end-column="60" />
+          <folding>
+            <element signature="e#3674#4951#0" expanded="false" />
+            <element signature="e#4950#4951#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/no_photo_profile_small.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/SnippetPlacesListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="99" column="16" selection-start-line="99" selection-start-column="16" selection-end-line="99" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Dev/android/adt-bundle-mac-x86_64-20140702/sdk/sources/android-22/android/app/Activity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5288" column="22" selection-start-line="5288" selection-start-column="22" selection-end-line="5288" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_row_chat_right.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.137931">
+          <caret line="34" column="31" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_row_chat_left.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.310345">
+          <caret line="43" column="41" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/model/db/MessageRecipient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/model/db/Message.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/WebService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="360" column="53" selection-start-line="360" selection-start-column="53" selection-end-line="360" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/MessageService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.92">
+          <caret line="42" column="82" selection-start-line="42" selection-start-column="82" selection-end-line="42" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/activities/MapActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="314" column="0" selection-start-line="314" selection-start-column="0" selection-end-line="314" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/helpers/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/MessageThreadAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/impl/MessageServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.3846154">
+          <caret line="173" column="0" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/activities/ChatConversationActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.76">
+          <caret line="148" column="0" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
+          <folding>
+            <element signature="e#3579#5131#0" expanded="true" />
+            <element signature="e#5130#5131#0" expanded="true" />
+            <element signature="e#7218#7256#0" expanded="true" />
+            <element signature="e#7274#7306#0" expanded="true" />
+            <element signature="e#7331#7351#0" expanded="true" />
+            <element signature="e#7556#7579#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/adapters/MessageAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="134" column="80" selection-start-line="134" selection-start-column="80" selection-end-line="134" selection-end-column="80" />
+          <folding>
+            <element signature="e#4890#5614#0" expanded="true" />
+            <element signature="e#5263#5264#0" expanded="true" />
+            <element signature="e#5335#5336#0" expanded="true" />
+            <element signature="e#5613#5614#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/DataService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="135" column="14" selection-start-line="135" selection-start-column="14" selection-end-line="135" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nextep/pelmel/services/impl/DataServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.2571429">
+          <caret line="864" column="13" selection-start-line="864" selection-start-column="13" selection-end-line="864" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>

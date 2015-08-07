@@ -1,6 +1,7 @@
 package com.nextep.pelmel.services.impl;
 
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -9,7 +10,6 @@ import com.nextep.json.model.impl.JsonLightUser;
 import com.nextep.json.model.impl.JsonManyToOneMessageList;
 import com.nextep.json.model.impl.JsonMedia;
 import com.nextep.json.model.impl.JsonMessage;
-import com.nextep.json.model.impl.JsonOneToOneMessageList;
 import com.nextep.json.model.impl.JsonRecipientsGroup;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.PelMelConstants;
@@ -39,7 +39,6 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -185,6 +184,7 @@ public class MessageServiceImpl implements MessageService {
 			}
 		}
 		realm.close();
+		messagesFetchInProgress = false;
 		return newMessagesCount>0;
 	}
 
@@ -345,26 +345,13 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public List<ChatMessage> listConversation(User currentUser,
-			String otherUserKey, double latitude, double longitude) {
-		final JsonOneToOneMessageList messagesList = webService.getMessages(
-				currentUser, otherUserKey, latitude, longitude);
+	public void readConversationWith(String otherUserKey) {
+		final User currentUser = PelMelApplication.getUserService().getLoggedUser();
+		final Location location = PelMelApplication.getLocalizationService().getLocation();
 
-		// Building from/to user map
-		final Map<String, User> usersMap = new HashMap<String, User>();
-		if (messagesList != null) {
-			final User fromUser = dataService.getUserFromLightJson(messagesList
-					.getFromUser());
-			usersMap.put(fromUser.getKey(), fromUser);
-			final User toUser = dataService.getUserFromLightJson(messagesList
-					.getToUser());
-			usersMap.put(toUser.getKey(), toUser);
+		webService.getMessages(
+				currentUser, otherUserKey, location.getLatitude(), location.getLongitude(),true);
 
-			return buildChatMessagesFromJson(messagesList.getMessages(),
-					usersMap);
-		} else {
-			return Collections.emptyList();
-		}
 	}
 
 	@Override

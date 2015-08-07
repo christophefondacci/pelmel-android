@@ -1,6 +1,7 @@
 package com.nextep.pelmel.adapters;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.helpers.Strings;
 import com.nextep.pelmel.listeners.MessageCallback;
 import com.nextep.pelmel.model.db.MessageRecipient;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -57,6 +59,9 @@ public class MessageThreadAdapter extends RealmBaseAdapter<MessageRecipient> {
                 viewHolder.threadContentsLabel = (TextView)convertView.findViewById(R.id.threadMessageCount);
                 viewHolder.badgeLabel= (TextView)convertView.findViewById(R.id.badgeLabel);
                 viewHolder.imageView = (ImageView) convertView.findViewById(R.id.chat_image);
+                Strings.setFontFamily(viewHolder.dateView);
+                Strings.setFontFamily(viewHolder.threadContentsLabel);
+                Strings.setFontFamily(viewHolder.threadNicknameLabel);
             }
             convertView.setTag(viewHolder);
 
@@ -74,9 +79,11 @@ public class MessageThreadAdapter extends RealmBaseAdapter<MessageRecipient> {
                 viewHolder.badgeLabel.setVisibility(View.INVISIBLE);
             }
             viewHolder.threadContentsLabel.setText(recipient.getMessages().size() + " messages");
-            viewHolder.imageView.setImageResource(R.drawable.no_photo);
-            if (recipient.getImageThumbUrl() != null) {
+            if (recipient.getImageThumbUrl() != null && recipient.getImageThumbUrl().startsWith("http")) {
                 ImageLoader.getInstance().displayImage(recipient.getImageThumbUrl(),viewHolder.imageView);
+            } else {
+                viewHolder.imageView.setImageBitmap(
+                        BitmapFactory.decodeResource(context.getResources(),R.drawable.no_photo_profile_small));
             }
         }
         return convertView;

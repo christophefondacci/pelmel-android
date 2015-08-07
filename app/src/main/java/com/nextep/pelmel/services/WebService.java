@@ -346,16 +346,19 @@ public class WebService {
     }
 
     public JsonOneToOneMessageList getMessages(User user, String otherUserKey,
-                                               double latitude, double longitude) {
+                                               double latitude, double longitude, boolean markReadOnly) {
         try {
             // querying places
-            final InputStream inputStream = sendRequest(new URL(BASE_URL
-                    + CONVERSATION_LIST_ACTION + "?nxtpUserToken="
-                    + user.getToken() + "&from=" + otherUserKey + "&lat="
-                    + latitude + "&lng=" + longitude));
+            final InputStream inputStream = postRequest(new URL(BASE_URL
+                    + CONVERSATION_LIST_ACTION),
+                    "nxtpUserToken",user.getToken(),
+                    "from",otherUserKey,
+                    "lat",String.valueOf(latitude),
+                    "lng",String.valueOf(longitude),
+                    "markUnreadOnly",String.valueOf(markReadOnly));
 
             // If we got something
-            if (inputStream != null) {
+            if (inputStream != null && ! markReadOnly) {
                 // Reading stream
                 final InputStreamReader reader = new InputStreamReader(
                         inputStream);

@@ -859,6 +859,10 @@ public class DataServiceImpl implements DataService {
                     return null;
                 }
             }.execute();
+        } else {
+            if(listener != null) {
+                listener.overviewDataAvailable(obj);
+            }
         }
 
         return obj;

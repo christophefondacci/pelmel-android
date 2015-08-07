@@ -1,17 +1,24 @@
 package com.nextep.pelmel.adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.helpers.Strings;
 import com.nextep.pelmel.listeners.MessageCallback;
+import com.nextep.pelmel.listeners.OverviewListener;
+import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.ChatMessage;
 import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.model.db.Message;
+import com.nextep.pelmel.model.db.MessageRecipient;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.text.DateFormat;
@@ -98,6 +105,9 @@ public class MessageAdapter extends RealmBaseAdapter<Message> {
                     .findViewById(R.id.chat_image);
             viewHolder.nicknameText = (TextView)convertView.findViewById(R.id.usernameLabel);
 
+            Strings.setFontFamily(viewHolder.dateView);
+            Strings.setFontFamily(viewHolder.textView);
+            Strings.setFontFamily(viewHolder.nicknameText);
             convertView.setTag(viewHolder);
 
         } else {
@@ -110,12 +120,32 @@ public class MessageAdapter extends RealmBaseAdapter<Message> {
             final String thumbUrl = msg.getFrom().getImageThumbUrl();
             viewHolder.imageView.setImageResource(R.drawable.no_photo_profile_small);
             viewHolder.nicknameText.setText(msg.getFrom().getUsername());
-            if (thumbUrl != null) {
+            if (thumbUrl != null && thumbUrl.startsWith("http")) {
                 ImageLoader.getInstance().displayImage(thumbUrl,viewHolder.imageView);
 //                PelMelApplication.getImageService().displayImage(thumb, true,
 //                        viewHolder.imageView);
+            } else {
+                viewHolder.imageView.setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.no_photo_profile_small));
             }
         }
+        viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final MessageRecipient recipient = msg.getFrom();
+                final CalObject obj = PelMelApplication.getDataService().getCalObject(recipient.getItemKey(), new OverviewListener() {
+                    @Override
+                    public Activity getContext() {
+                        return (Activity)context;
+                    }
+
+                    @Override
+                    public void overviewDataAvailable(CalObject object) {
+                        PelMelApplication.getSnippetContainerSupport().showSnippetFor(object,true,false);
+                    }
+                });
+
+            }
+        });
         return convertView;
     }
 

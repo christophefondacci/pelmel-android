@@ -35,8 +35,14 @@ public interface MessageService {
 	 *            current longitude
 	 * @return a list of messages
 	 */
-	List<ChatMessage> listConversation(User currentUser, String otherUserKey,
-			double latitude, double longitude);
+//	List<ChatMessage> listConversation(User currentUser, String otherUserKey,
+//			double latitude, double longitude);
+
+	/**
+	 * Marks all messages with this user marked as read on the server
+	 * @param otherUserKey ItemKey of the user of the conversation to mark as read
+	 */
+	void readConversationWith(String otherUserKey);
 
 	/**
 	 * Sends a message to the given user.

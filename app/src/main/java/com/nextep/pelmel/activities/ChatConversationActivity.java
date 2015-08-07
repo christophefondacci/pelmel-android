@@ -3,6 +3,8 @@ package com.nextep.pelmel.activities;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -105,6 +107,50 @@ public class ChatConversationActivity extends Fragment implements
 	public void userInfoAvailable(final User user) {
 		currentUser = user;
 		updateData();
+		// In background, fetch any new message (we'll be notified by callback)
+		new AsyncTask<Void, Void, Boolean>() {
+
+			@Override
+			protected Boolean doInBackground(Void... params) {
+				final Location loc = PelMelApplication.getLocalizationService().getLocation();
+				final MessageService messageService = PelMelApplication
+						.getMessageService();
+				List<ChatMessage> messages = Collections.emptyList();
+
+				// Fetching list of messages
+				boolean hasNewMessages = messageService.listMessages(user,
+						loc.getLatitude(), loc.getLongitude(),ChatConversationActivity.this);
+
+				// Marking messages as read
+				final Realm realm = Realm.getInstance(ChatConversationActivity.this.getActivity(), user.getKey());
+				realm.beginTransaction();
+				final RealmQuery<Message> query =  realm.where(Message.class);
+				query.beginGroup();
+				query.equalTo("toItemKey",otherUserKey);
+				query.equalTo("from.itemKey", user.getKey());
+				query.endGroup();
+				query.or();
+				query.beginGroup();
+				query.equalTo("toItemKey", user.getKey());
+				query.equalTo("from.itemKey", otherUserKey);
+				query.endGroup();
+				final List<Message> messagesToRead = query.findAll();
+				for(int i = 0 ; i < messagesToRead.size() ; i++) {
+					final Message m = messagesToRead.get(i);
+					if(m.isUnread()) {
+						m.setUnread(false);
+						m.getFrom().setUnreadMessageCount(m.getFrom().getUnreadMessageCount() - 1);
+					}
+				}
+				realm.commitTransaction();
+				realm.close();
+
+				// Marking messages as read on server
+				PelMelApplication.getMessageService().readConversationWith(otherUserKey);
+				return hasNewMessages;
+			}
+
+		}.execute();
 	}
 
 	private void updateData() {
