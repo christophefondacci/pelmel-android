@@ -3,6 +3,8 @@ package com.nextep.pelmel.services.impl;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -165,6 +167,18 @@ public class UIServiceImpl implements UIService {
             }
         });
         builder.create().show();
+    }
+
+    @Override
+    public Bitmap getNoPhotoFor(CalObject obj, boolean thumb) {
+        int res = 0;
+        if(obj instanceof Event) {
+            res = R.drawable.no_photo_event;
+        } else {
+            res = R.drawable.no_photo_add;
+        }
+
+        return BitmapFactory.decodeResource(PelMelApplication.getInstance().getResources(),res);
     }
 
     @Override

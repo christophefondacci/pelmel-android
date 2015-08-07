@@ -1,6 +1,7 @@
 package com.nextep.pelmel.services;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
@@ -67,5 +68,12 @@ public interface UIService {
 	void showInfoMessage(Context context, int resTitle, int resMessage, String argument);
 
 	void executeOnUiThread(Runnable task);
+
+	/**
+	 * Provides a no photo bitmap for the given object
+	 * @param obj
+	 * @return
+	 */
+	Bitmap getNoPhotoFor(CalObject obj, boolean thumb);
 
 }

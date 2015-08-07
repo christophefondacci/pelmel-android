@@ -9,6 +9,7 @@ import android.util.Log;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.nextep.pelmel.handlers.MyLifecycleHandler;
+import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.User;
@@ -58,7 +59,7 @@ public class PelMelApplication extends Application implements
 	private ConversionService conversionService;
 	private SnippetContainerSupport snippetContainerSupport;
 
-	private Object overviewObject;
+	private CalObject overviewObject;
 	private int tabIndex = 0;
 	private String searchParentKey;
 
@@ -168,8 +169,11 @@ public class PelMelApplication extends Application implements
 	public static void setSnippetContainerSupport(SnippetContainerSupport snippetContainerSupport) {
 		instance.snippetContainerSupport = snippetContainerSupport;
 	}
-	public static void setOverviewObject(Object overviewObject) {
+	public static void setOverviewObject(CalObject overviewObject) {
 		instance.overviewObject = overviewObject;
+	}
+	public static CalObject getOverviewObject() {
+		return instance.overviewObject;
 	}
 
 	public static void setSearchParentKey(String parentKey) {

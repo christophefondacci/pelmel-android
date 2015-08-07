@@ -153,7 +153,7 @@ public class ChatConversationActivity extends Fragment implements
 		}.execute();
 	}
 
-	private void updateData() {
+	public void updateData() {
 		final User currentUser = PelMelApplication.getUserService().getLoggedUser();
 		Realm realm = Realm.getInstance(this.getActivity(), currentUser.getKey());
 		RealmQuery<Message> query = realm.where(Message.class);

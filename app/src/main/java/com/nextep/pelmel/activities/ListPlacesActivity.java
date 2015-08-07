@@ -173,7 +173,7 @@ public class ListPlacesActivity extends MainActionBarActivity implements
 		final Object place = placesAdapter.getItem(position);
 		if (place instanceof Place) {
 			final Intent intent = new Intent(this, OverviewActivity.class);
-			PelMelApplication.setOverviewObject(place);
+			PelMelApplication.setOverviewObject((Place)place);
 			startActivity(intent);
 			overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 		} else {

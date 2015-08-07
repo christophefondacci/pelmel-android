@@ -2,12 +2,14 @@ package com.nextep.pelmel.model.support;
 
 import android.view.View;
 
+import com.nextep.pelmel.activities.Refreshable;
+
 /**
  * A child support optionally implemented by fragments integrated in the snippet. Implementing
  * this method allow them to be notified of snippet events
  * Created by cfondacci on 23/07/15.
  */
-public interface SnippetChildSupport {
+public interface SnippetChildSupport extends Refreshable{
 
     /**
      * The snippet has been opened or closed.

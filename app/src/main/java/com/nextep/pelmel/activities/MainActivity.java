@@ -1,23 +1,32 @@
 package com.nextep.pelmel.activities;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.listeners.ImageUploadCallback;
 import com.nextep.pelmel.model.CalObject;
+import com.nextep.pelmel.model.Image;
 import com.nextep.pelmel.model.support.SnippetChildSupport;
 import com.nextep.pelmel.model.support.SnippetContainerSupport;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
-public class MainActivity extends MainActionBarActivity implements SnippetContainerSupport, SlidingUpPanelLayout.PanelSlideListener {
+import java.io.File;
+
+public class MainActivity extends MainActionBarActivity implements SnippetContainerSupport, SlidingUpPanelLayout.PanelSlideListener,ImageUploadCallback {
 
     private static final String TAG_SNIPPET = "snippet";
     private static final String TAG_DIALOG = "dialog";
@@ -30,6 +39,7 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
     private TextView bannerText;
     private View bannerContainer;
     private ProgressBar bannerProgress;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -225,6 +235,53 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
         bannerContainer.setVisibility(View.INVISIBLE);
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("photo", "Result is " + requestCode + " : result code "
+                + resultCode);
+        // If user cancelled the photo upload, then data will be null
+        if (data != null && data.getData() != null) {
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage(getString(R.string.upload_wait_message));
+            progressDialog.setTitle(getString(R.string.waitTitle));
+            progressDialog.setIndeterminate(true);
+            progressDialog.show();
+
+            final Uri selectedImage = data.getData();
+            final File f = PelMelApplication.getImageService().getOrientedImageFileFromUri(this,
+                    selectedImage);
+            PelMelApplication.getImageService().uploadImage(f, PelMelApplication.getOverviewObject(), PelMelApplication.getUserService().getLoggedUser(), this);
+        }
+
+    }
+
+    @Override
+    public void imageUploaded(Image image, CalObject parent) {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+            progressDialog = null;
+        }
+        if(snippetChildSupport != null) {
+            snippetChildSupport.updateData();
+        }
+        final Toast t = Toast.makeText(getBaseContext(),
+                getText(R.string.photoUploadSuccess), Toast.LENGTH_LONG);
+        t.show();
+
+    }
+
+    @Override
+    public void imageUploadFailed() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+            progressDialog = null;
+        }
+        final Toast t = Toast.makeText(getBaseContext(),
+                getText(R.string.photoUploadFailed), Toast.LENGTH_LONG);
+        t.show();
+    }
     //    @Override
 //    public boolean onChildTouch(View v, MotionEvent e) {
 //        final View snippetContainer = findViewById(R.id.pelmelSnippetContainer);

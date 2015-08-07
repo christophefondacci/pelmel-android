@@ -2,6 +2,7 @@ package com.nextep.pelmel.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.PelMelConstants;
 import com.nextep.pelmel.R;
 import com.nextep.pelmel.activities.GalleryActivity;
+import com.nextep.pelmel.dialogs.SelectImageDialogFragment;
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Image;
 
@@ -54,6 +56,8 @@ public class ImagePagerAdapter extends PagerAdapter {
         if(images.size()>position) {
             final Image img = images.get(position);
             PelMelApplication.getImageService().displayImage(img,false,imgDisplay);
+        } else {
+            imgDisplay.setImageBitmap(PelMelApplication.getUiService().getNoPhotoFor(calObject,false));
         }
         container.addView(viewLayout);
 
@@ -61,10 +65,16 @@ public class ImagePagerAdapter extends PagerAdapter {
             imgDisplay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final Intent intent = new Intent(context,GalleryActivity.class);
-                    intent.putExtra(PelMelConstants.INTENT_PARAM_INDEX,position);
-                    intent.putExtra(PelMelConstants.INTENT_PARAM_CAL_KEY,calObject.getKey());
-                    context.startActivity(intent);
+                    if(position < images.size()) {
+                        final Intent intent = new Intent(context, GalleryActivity.class);
+                        intent.putExtra(PelMelConstants.INTENT_PARAM_INDEX, position);
+                        intent.putExtra(PelMelConstants.INTENT_PARAM_CAL_KEY, calObject.getKey());
+                        context.startActivity(intent);
+                    } else {
+                        PelMelApplication.setOverviewObject(calObject);
+                        final SelectImageDialogFragment selectDialog = new SelectImageDialogFragment();
+                        selectDialog.show(((FragmentActivity)context).getSupportFragmentManager(), "PHOTO");
+                    }
 //                    GalleryActivity activity = new GalleryActivity();
 //                    activity.setImages(images.get(position), images);
 //                    PelMelApplication.getSnippetContainerSupport().showSnippetForFragment(activity, true, false);
