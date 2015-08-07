@@ -1,9 +1,5 @@
 package com.nextep.pelmel.services;
 
-import java.util.List;
-
-import com.nextep.pelmel.listeners.MessageCallback;
-import com.nextep.pelmel.model.ChatMessage;
 import com.nextep.pelmel.model.User;
 
 public interface MessageService {
@@ -20,6 +16,15 @@ public interface MessageService {
 	 */
 	boolean listMessages(User currentUser, double latitude,
 			double longitude, OnNewMessageListener listener);
+
+	/**
+	 * Fetches all reviews for the given object, loads it into the database and notifies back the
+	 * listener when done.
+	 * @param itemKey the CalObject's ItemKey to get reviews for
+	 * @param listener the OnNewMessageListener to notify when done
+	 * @return <code>true</code> when at least one comment has been fetched, else <code>false</code>
+	 */
+	boolean getReviewsAsMessages(String itemKey, OnNewMessageListener listener);
 
 	/**
 	 * Retrieves the conversation between current user and the other given user
@@ -49,8 +54,8 @@ public interface MessageService {
 	 * 
 	 * @param currentUser
 	 *            current {@link User}
-	 * @param otherUser
-	 *            the user to send message to
+	 * @param otherUserKey
+	 *            the user item key to send message to
 	 * @param message
 	 *            the message to send
 	 * @param callback

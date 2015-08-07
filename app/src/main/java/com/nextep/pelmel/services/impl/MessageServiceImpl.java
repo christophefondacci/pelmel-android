@@ -69,7 +69,6 @@ public class MessageServiceImpl implements MessageService {
 		// Preparing database
 		final Realm realm = Realm.getInstance(PelMelApplication.getInstance(), currentUser.getKey()); // Anyway the non-deprecated constructor calls this one
 		while(iterationMessagesCount!=0) {
-			realm.beginTransaction();
 			final int startMsgId = getMaxMessageId();
 			Log.d(LOG_MSG_TAG,"Fetching messages from ID " + startMsgId);
 			final JsonManyToOneMessageList messagesList = webService.getMessages(
@@ -78,104 +77,13 @@ public class MessageServiceImpl implements MessageService {
 			iterationMessagesCount = messagesList.getMessages().size();
 			Log.d(LOG_MSG_TAG, iterationMessagesCount + " messages fetched from ID " + startMsgId);
 
-
-
-			// Building / retrieving recipients definition for this list of messages
-			final List<JsonLightUser> users = messagesList.getUsers();
-			final Map<String, MessageRecipient> recipientsMap = new HashMap<>();
-			fillRecipientsMapFromJson(realm, (List) users, recipientsMap);
-
-			// Building group recipient in db
-			final List<JsonRecipientsGroup> groups = messagesList.getRecipientsGroups();
-			Map<String, MessageRecipient> groupsMap = fillRecipientsGroupMapFromJson(realm, groups, recipientsMap);
-
-			// Hashing messages
-			final Map<String, JsonMessage> jsonMessageMap = new HashMap<>();
-			int maxId = 0;
-			for (JsonMessage jsonMessage : messagesList.getMessages()) {
-				jsonMessageMap.put(jsonMessage.getKey(), jsonMessage);
-
-				// Adjusting max message ID
-				final int id = getIdFromKey(jsonMessage.getKey());
-				if (id > maxId) {
-					maxId = id;
-				}
-			}
-
-			// Looking for already downloaded messages
-			RealmQuery<Message> query = realm.where(Message.class);
-			boolean isFirst = true;
-			for (String key : jsonMessageMap.keySet()) {
-				if (!isFirst) {
-					query.or();
-				}
-				query.equalTo("messageKey", key);
-				isFirst = false;
-			}
-			// Executing search
-			RealmResults<Message> results = query.findAll();
-
-			// Hashing found messages by key
-			Map<String, Message> existingMessagesMap = new HashMap<>();
-			for (Message message : results) {
-				existingMessagesMap.put(message.getMessageKey(), message);
-			}
-
-			// Processing all messages
-
-			for (String messageKey : jsonMessageMap.keySet()) {
-				JsonMessage jsonMessage = jsonMessageMap.get(messageKey);
-
-				// Retrieving or creating message in DB
-				boolean newMessage = false;
-				Message message = existingMessagesMap.get(messageKey);
-				if (message == null) {
-					message = realm.createObject(Message.class);
-					newMessage = true;
-					newMessagesCount++;
-				}
-
-				// Filling db structure from JSON
-				message.setMessageKey(messageKey);
-				message.setMessageDate(new Date(jsonMessage.getTime() * 1000));
-				message.setToItemKey(jsonMessage.getToKey());
-				final JsonMedia media = jsonMessage.getMedia();
-				if (media != null) {
-					message.setMessageImageKey(media.getKey());
-					message.setMessageImageUrl(media.getUrl());
-					message.setMessageImageThumbUrl(media.getThumbUrl());
-				}
-				message.setMessageText(jsonMessage.getMessage());
-				message.setUnread(jsonMessage.isUnread());
-
-				MessageRecipient fromRecipient = recipientsMap.get(jsonMessage.getFromKey());
-				fromRecipient.getMessages().add(message);
-				message.setFrom(fromRecipient);
-				MessageRecipient groupRecipient = null;
-				if (jsonMessage.getRecipientsGroupKey() != null && !"".equals(jsonMessage.getRecipientsGroupKey())) {
-					groupRecipient = groupsMap.get(jsonMessage.getRecipientsGroupKey());
-					message.setReplyTo(groupRecipient);
-				}
-
-				// Adjusting unread flag
-				MessageRecipient countedRecipient = groupRecipient != null ? groupRecipient : fromRecipient;
-				if (newMessage && jsonMessage.isUnread()) {
-					// Counting unread on the group if a group message, or user if one to one message
-					countedRecipient.setUnreadMessageCount(countedRecipient.getUnreadMessageCount() + 1);
-				}
-
-				// Adjusting last date
-				if (countedRecipient.getLastMessageDate() == null || message.getMessageDate().compareTo(countedRecipient.getLastMessageDate()) > 0) {
-					countedRecipient.setLastMessageDate(message.getMessageDate());
-					countedRecipient.setLastMessageDefined(true);
-				}
-			}
-			// Committing changes
-			realm.commitTransaction();
+			// Processing messages
+			final int maxId = processMessages(messagesList,realm);
 
 			// Storing max id
 			final int currentMaxId = getMaxMessageId();
 			if (maxId > currentMaxId) {
+				newMessagesCount++;
 				Log.d(LOG_MSG_TAG,"Storing new max ID " + maxId);
 				setMaxMessageId(maxId);
 			}
@@ -188,6 +96,124 @@ public class MessageServiceImpl implements MessageService {
 		return newMessagesCount>0;
 	}
 
+	@Override
+	public boolean getReviewsAsMessages(String calItemKey, OnNewMessageListener listener) {
+		final User currentUser = PelMelApplication.getUserService().getLoggedUser();
+		final Location loc = PelMelApplication.getLocalizationService().getLocation();
+		final Realm realm = Realm.getInstance(PelMelApplication.getInstance(), currentUser.getKey()); // Anyway the non-deprecated constructor calls this one
+		int reviewsCount=-1;
+		int page = 0;
+		while(reviewsCount!=0) {
+			final int startMsgId = getMaxMessageId();
+			Log.d(LOG_MSG_TAG, "Fetching messages from ID " + startMsgId);
+			final JsonManyToOneMessageList messagesList = webService.getReviewsAsMessages(
+					currentUser, calItemKey, loc.getLatitude(), loc.getLongitude(), page);
+
+			processMessages(messagesList,realm);
+			reviewsCount = messagesList.getMessages().size();
+			page++;
+		}
+		realm.close();
+		return true;
+	}
+
+	private int processMessages(JsonManyToOneMessageList messagesList, Realm realm) {
+
+		realm.beginTransaction();
+
+		// Building / retrieving recipients definition for this list of messages
+		final List<JsonLightUser> users = messagesList.getUsers();
+		final Map<String, MessageRecipient> recipientsMap = new HashMap<>();
+		fillRecipientsMapFromJson(realm, (List) users, recipientsMap);
+
+		// Building group recipient in db
+		final List<JsonRecipientsGroup> groups = messagesList.getRecipientsGroups();
+		Map<String, MessageRecipient> groupsMap = fillRecipientsGroupMapFromJson(realm, groups, recipientsMap);
+
+		// Hashing messages
+		final Map<String, JsonMessage> jsonMessageMap = new HashMap<>();
+		int maxId = 0;
+		for (JsonMessage jsonMessage : messagesList.getMessages()) {
+			jsonMessageMap.put(jsonMessage.getKey(), jsonMessage);
+
+			// Adjusting max message ID
+			final int id = getIdFromKey(jsonMessage.getKey());
+			if (id > maxId) {
+				maxId = id;
+			}
+		}
+
+		// Looking for already downloaded messages
+		RealmQuery<Message> query = realm.where(Message.class);
+		boolean isFirst = true;
+		for (String key : jsonMessageMap.keySet()) {
+			if (!isFirst) {
+				query.or();
+			}
+			query.equalTo("messageKey", key);
+			isFirst = false;
+		}
+		// Executing search
+		RealmResults<Message> results = query.findAll();
+
+		// Hashing found messages by key
+		Map<String, Message> existingMessagesMap = new HashMap<>();
+		for (Message message : results) {
+			existingMessagesMap.put(message.getMessageKey(), message);
+		}
+
+		// Processing all messages
+
+		for (String messageKey : jsonMessageMap.keySet()) {
+			JsonMessage jsonMessage = jsonMessageMap.get(messageKey);
+
+			// Retrieving or creating message in DB
+			boolean newMessage = false;
+			Message message = existingMessagesMap.get(messageKey);
+			if (message == null) {
+				message = realm.createObject(Message.class);
+				newMessage = true;
+			}
+
+			// Filling db structure from JSON
+			message.setMessageKey(messageKey);
+			message.setMessageDate(new Date(jsonMessage.getTime() * 1000));
+			message.setToItemKey(jsonMessage.getToKey());
+			final JsonMedia media = jsonMessage.getMedia();
+			if (media != null) {
+				message.setMessageImageKey(media.getKey());
+				message.setMessageImageUrl(media.getUrl());
+				message.setMessageImageThumbUrl(media.getThumbUrl());
+			}
+			message.setMessageText(jsonMessage.getMessage());
+			message.setUnread(jsonMessage.isUnread());
+
+			MessageRecipient fromRecipient = recipientsMap.get(jsonMessage.getFromKey());
+			fromRecipient.getMessages().add(message);
+			message.setFrom(fromRecipient);
+			MessageRecipient groupRecipient = null;
+			if (jsonMessage.getRecipientsGroupKey() != null && !"".equals(jsonMessage.getRecipientsGroupKey())) {
+				groupRecipient = groupsMap.get(jsonMessage.getRecipientsGroupKey());
+				message.setReplyTo(groupRecipient);
+			}
+
+			// Adjusting unread flag
+			MessageRecipient countedRecipient = groupRecipient != null ? groupRecipient : fromRecipient;
+			if (newMessage && jsonMessage.isUnread()) {
+				// Counting unread on the group if a group message, or user if one to one message
+				countedRecipient.setUnreadMessageCount(countedRecipient.getUnreadMessageCount() + 1);
+			}
+
+			// Adjusting last date
+			if (countedRecipient.getLastMessageDate() == null || message.getMessageDate().compareTo(countedRecipient.getLastMessageDate()) > 0) {
+				countedRecipient.setLastMessageDate(message.getMessageDate());
+				countedRecipient.setLastMessageDefined(true);
+			}
+		}
+		// Committing changes
+		realm.commitTransaction();
+		return maxId;
+	}
 	private int getIdFromKey(String key) {
 		return Integer.parseInt(key.substring(4));
 	}
@@ -357,20 +383,21 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public void sendMessage(final User currentUser, final String otherUserKey,
 			final String message, final MessageService.OnNewMessageListener callback) {
+		final boolean isComment = !otherUserKey.startsWith(User.CAL_TYPE);
 		new AsyncTask<Void, Void, Message>() {
 			@Override
 			protected Message doInBackground(Void... params) {
 
 				HttpClient http = new DefaultHttpClient();
 				HttpPost post = new HttpPost(WebService.BASE_URL
-						+ "/mobileSendMsg");
+						+ "/" + (isComment ?  "mobilePostComment" : "mobileSendMsg"));
 
 				MultipartEntity multipart = new MultipartEntity();
 				try {
 					multipart.addPart("nxtpUserToken", new StringBody(
 							currentUser.getToken()));
-					multipart.addPart("to", new StringBody(otherUserKey));
-					multipart.addPart("msgText", new StringBody(message,
+					multipart.addPart(isComment ? "commentItemKey" : "to", new StringBody(otherUserKey));
+					multipart.addPart(isComment ? "comment" : "msgText", new StringBody(message,
 							Charset.forName("UTF-8")));
 					post.setEntity(multipart);
 					HttpResponse response = http.execute(post);

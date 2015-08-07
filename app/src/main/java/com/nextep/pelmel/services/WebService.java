@@ -40,12 +40,13 @@ public class WebService {
 
     public static final String LOG_TAG = "WebService";
 //    public static final String BASE_URL = "http://www.pelmelguide.com";
-//    public static final String BASE_URL = "http://10.0.0.2";
-    public static final String BASE_URL = "http://www.pelmelguide.com";
+    public static final String BASE_URL = "http://10.0.0.2";
+//    public static final String BASE_URL = "http://www.pelmelguide.com";
     private static final String LOGIN_ACTION = "/mobileLogin";
     private static final String PLACES_LIST_ACTION = "/mapPlaces";
     private static final String EVENTS_LIST_ACTION = "/mobileEvents";
     private static final String MESSAGES_LIST_ACTION = "/mobileMyMessages";
+    private static final String REVIEWS_LIST_ACTION = "/mobileComments";
     private static final String CONVERSATION_LIST_ACTION = "/mobileMyMessagesReply";
     private static final String PLACES_OVERVIEW_ACTION = "/api/place";
     private static final String USERS_OVERVIEW_ACTION = "/api/user";
@@ -344,18 +345,47 @@ public class WebService {
         }
         return null;
     }
+    public JsonManyToOneMessageList getReviewsAsMessages(User user, String forObjectItemKey, double latitude,
+                                                double longitude, int page) {
+        try {
+            // querying places
+            final InputStream inputStream = postRequest(new URL(BASE_URL
+                            + REVIEWS_LIST_ACTION),
+                    "nxtpUserToken", user.getToken(),
+                    "lat", String.valueOf(latitude),
+                    "lng", String.valueOf(longitude),
+                    "id", forObjectItemKey,
+                    "page", String.valueOf(page));
+
+            // If we got something
+            if (inputStream != null) {
+                // Reading stream
+                final InputStreamReader reader = new InputStreamReader(
+                        inputStream);
+
+                // Unwrapping JSON
+                final JsonManyToOneMessageList response = gson.fromJson(reader,
+                        JsonManyToOneMessageList.class);
+                return response;
+            }
+
+        } catch (final Exception e) {
+            Log.e(LOG_TAG, "Failed to get messages : " + e.getMessage(), e);
+        }
+        return null;
+    }
 
     public JsonOneToOneMessageList getMessages(User user, String otherUserKey,
                                                double latitude, double longitude, boolean markReadOnly) {
         try {
             // querying places
             final InputStream inputStream = postRequest(new URL(BASE_URL
-                    + CONVERSATION_LIST_ACTION),
-                    "nxtpUserToken",user.getToken(),
-                    "from",otherUserKey,
-                    "lat",String.valueOf(latitude),
-                    "lng",String.valueOf(longitude),
-                    "markUnreadOnly",String.valueOf(markReadOnly));
+                            + CONVERSATION_LIST_ACTION),
+                    "nxtpUserToken", user.getToken(),
+                    "from", otherUserKey,
+                    "lat", String.valueOf(latitude),
+                    "lng", String.valueOf(longitude),
+                    "markUnreadOnly", String.valueOf(markReadOnly));
 
             // If we got something
             if (inputStream != null && ! markReadOnly) {

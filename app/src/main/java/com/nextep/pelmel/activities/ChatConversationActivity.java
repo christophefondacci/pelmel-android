@@ -118,36 +118,41 @@ public class ChatConversationActivity extends Fragment implements
 				List<ChatMessage> messages = Collections.emptyList();
 
 				// Fetching list of messages
-				boolean hasNewMessages = messageService.listMessages(user,
-						loc.getLatitude(), loc.getLongitude(),ChatConversationActivity.this);
+				if(otherUserKey.startsWith(User.CAL_TYPE)) {
+					boolean hasNewMessages = messageService.listMessages(user,
+							loc.getLatitude(), loc.getLongitude(), ChatConversationActivity.this);
 
-				// Marking messages as read
-				final Realm realm = Realm.getInstance(ChatConversationActivity.this.getActivity(), user.getKey());
-				realm.beginTransaction();
-				final RealmQuery<Message> query =  realm.where(Message.class);
-				query.beginGroup();
-				query.equalTo("toItemKey",otherUserKey);
-				query.equalTo("from.itemKey", user.getKey());
-				query.endGroup();
-				query.or();
-				query.beginGroup();
-				query.equalTo("toItemKey", user.getKey());
-				query.equalTo("from.itemKey", otherUserKey);
-				query.endGroup();
-				final List<Message> messagesToRead = query.findAll();
-				for(int i = 0 ; i < messagesToRead.size() ; i++) {
-					final Message m = messagesToRead.get(i);
-					if(m.isUnread()) {
-						m.setUnread(false);
-						m.getFrom().setUnreadMessageCount(m.getFrom().getUnreadMessageCount() - 1);
+					// Marking messages as read
+					final Realm realm = Realm.getInstance(ChatConversationActivity.this.getActivity(), user.getKey());
+					realm.beginTransaction();
+					final RealmQuery<Message> query = realm.where(Message.class);
+					query.beginGroup();
+					query.equalTo("toItemKey", otherUserKey);
+					query.equalTo("from.itemKey", user.getKey());
+					query.endGroup();
+					query.or();
+					query.beginGroup();
+					query.equalTo("toItemKey", user.getKey());
+					query.equalTo("from.itemKey", otherUserKey);
+					query.endGroup();
+					final List<Message> messagesToRead = query.findAll();
+					for (int i = 0; i < messagesToRead.size(); i++) {
+						final Message m = messagesToRead.get(i);
+						if (m.isUnread()) {
+							m.setUnread(false);
+							m.getFrom().setUnreadMessageCount(m.getFrom().getUnreadMessageCount() - 1);
+						}
 					}
-				}
-				realm.commitTransaction();
-				realm.close();
+					realm.commitTransaction();
+					realm.close();
 
-				// Marking messages as read on server
-				PelMelApplication.getMessageService().readConversationWith(otherUserKey);
-				return hasNewMessages;
+					// Marking messages as read on server
+					PelMelApplication.getMessageService().readConversationWith(otherUserKey);
+					return hasNewMessages;
+				} else {
+					messageService.getReviewsAsMessages(otherUserKey,ChatConversationActivity.this);
+					return true;
+				}
 			}
 
 		}.execute();
@@ -157,16 +162,20 @@ public class ChatConversationActivity extends Fragment implements
 		final User currentUser = PelMelApplication.getUserService().getLoggedUser();
 		Realm realm = Realm.getInstance(this.getActivity(), currentUser.getKey());
 		RealmQuery<Message> query = realm.where(Message.class);
-		query.beginGroup();
-		query.equalTo("from.itemKey", currentUser.getKey());
-		query.equalTo("toItemKey", otherUserKey);
+		if(otherUserKey.startsWith(User.CAL_TYPE)) {
+			query.beginGroup();
+			query.equalTo("from.itemKey", currentUser.getKey());
+			query.equalTo("toItemKey", otherUserKey);
 //		query.equalTo("replyTo.itemKey",currentUser.getKey());
-		query.endGroup();
-		query.or().beginGroup();
-		query.equalTo("from.itemKey", otherUserKey);
-		query.equalTo("toItemKey",currentUser.getKey());
+			query.endGroup();
+			query.or().beginGroup();
+			query.equalTo("from.itemKey", otherUserKey);
+			query.equalTo("toItemKey", currentUser.getKey());
 //		query.equalTo("replyTo.itemKey", otherUserKey);
-		query.endGroup();
+			query.endGroup();
+		} else {
+			query.equalTo("toItemKey",otherUserKey);
+		}
 
 		final RealmResults<Message> messages = query.findAllSorted("messageDate", true);
 

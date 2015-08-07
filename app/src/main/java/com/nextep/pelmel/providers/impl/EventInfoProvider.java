@@ -285,6 +285,10 @@ public class EventInfoProvider implements SnippetInfoProvider, CountersProvider 
                         }
                     });
                 }
+                break;
+            case COUNTER_CHAT:
+                mgr.executeAction(Action.CHAT,event);
+                break;
         }
     }
 

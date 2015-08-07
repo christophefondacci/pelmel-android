@@ -389,6 +389,10 @@ public class PlaceInfoProvider implements SnippetInfoProvider, CountersProvider 
                         }
                     });
                 }
+                break;
+            case COUNTER_CHAT:
+                mgr.executeAction(Action.CHAT,place);
+                break;
         }
     }
     @Override
