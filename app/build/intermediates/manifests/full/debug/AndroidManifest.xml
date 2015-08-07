@@ -63,7 +63,9 @@
         <activity android:name="com.nextep.pelmel.activities.AccountActivity" />
         <activity android:name="com.nextep.pelmel.activities.MyProfileActivity" />
         <activity android:name="com.nextep.pelmel.activities.PhotosManagerActivity" />
-        <activity android:name="com.nextep.pelmel.activities.LoginActivity" >
+        <activity
+            android:name="com.nextep.pelmel.activities.LoginActivity"
+            android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -69,10 +69,12 @@ public class ImageServiceImpl implements ImageService {
 	private final Map<Integer, BitmapDescriptor> descriptorsMap = new HashMap<Integer, BitmapDescriptor>();
 	final int stub_id = R.drawable.no_photo_big;
 	private final ImageLoader imageLoader;
+	private final WebService webservice;
 
 	public ImageServiceImpl(Context context) {
 		executorService = Executors.newFixedThreadPool(5);
 		imageLoader = ImageLoader.getInstance();
+		webservice = new WebService();
 	}
 
 	@Override
@@ -491,5 +493,32 @@ public class ImageServiceImpl implements ImageService {
 		}
 
 		return null;
+	}
+
+	@Override
+	public void reorderImage(final Image image, final CalObject parent, final int newIndex, final ImageReorderCallback callback) {
+		executorService.execute(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					final int oldIndex = parent.getImages().indexOf(image);
+					final URL url = new URL(WebService.BASE_URL + "/moveMedia");
+					final User user = PelMelApplication.getUserService().getLoggedUser();
+					final InputStream is = webservice.postRequest(url, "id", image.getKey(), "parent", parent.getKey(), "newIndex", String.valueOf(newIndex), "nxtpUserToken", user.getToken());
+					if(is!=null) {
+						PelMelApplication.runOnMainThread(new Runnable() {
+							@Override
+							public void run() {
+								callback.imageReordered(image,oldIndex,newIndex);
+							}
+						});
+					}
+				} catch(Exception e) {
+					Log.e(TAG_IMAGE_SERVICE,"Problems while reordering image: " + e.getMessage(),e);
+					callback.imageReorderingFailed(image,e.getMessage());
+				}
+
+			}
+		});
 	}
 }

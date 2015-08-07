@@ -58,6 +58,7 @@
     <string name="counter_network_cancel">Cancel</string>
     <string name="counter_network_friends">Friends</string>
 
+    <string name="disconnect">Déconnexion</string>
     <string name="distance.feet">{0} pieds</string>
     <string name="distance.miles">{0} miles</string>
     <string name="distance.meters">{0} mètres</string>
@@ -113,6 +114,7 @@
     <string name="profileDescriptionLabel">Description</string>
     <string name="profileDescriptionHint">Editez votre description</string>
     <string name="profileAddButton">Ajouter une description</string>
+    <string name="profileNicknameInputTitle">Entrez un pseudonyme</string>
 
     <string name="profileAddPhoto">Ajouter une photo</string>
     <string name="profilePhoto">Photo du profil</string>
@@ -121,6 +123,8 @@
 
     <string name="profileSave">Sauver</string>
     <string name="profileTags">Définissez vous</string>
+    <string name="photoMovedSuccess">Photo déplacée avec succès!</string>
+    <string name="photoMovedFailure">/!\ Impossible de déplacer la photo</string>
     <string name="photoRemoveButton">Supprimer</string>
     <string name="photoTopAddButton">Ajouter</string>
     <string name="photoTopRemoveButton">Supprimer</string>

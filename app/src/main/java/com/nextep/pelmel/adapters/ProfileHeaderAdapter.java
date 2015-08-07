@@ -1,16 +1,20 @@
 package com.nextep.pelmel.adapters;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.support.v4.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -101,6 +105,8 @@ public class ProfileHeaderAdapter extends BaseAdapter {
                     editNickname(viewHolder.nicknameText);
                 }
             });
+
+
         } else {
             final BirthdayViewHolder viewHolder;
             if(convertView == null || convertView.getTag() == null) {
@@ -149,6 +155,28 @@ public class ProfileHeaderAdapter extends BaseAdapter {
 
     private void editNickname(TextView targetTextView) {
         // Prompt for nickname
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(R.string.profileNicknameInputTitle);
+
+        final EditText nicknameEdit = new EditText(activity);
+        nicknameEdit.setInputType(InputType.TYPE_CLASS_TEXT);
+        nicknameEdit.setText(user.getName());
+        nicknameEdit.setSingleLine(true);
+        builder.setView(nicknameEdit);
+
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                user.setName(nicknameEdit.getText().toString());
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
     }
 
     class ProfileThumbViewHolder {

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.PelMelConstants;
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.helpers.Strings;
 import com.nextep.pelmel.listeners.UserListener;
 import com.nextep.pelmel.listeners.UserRegisterListener;
 import com.nextep.pelmel.model.User;
@@ -55,6 +56,23 @@ public class LoginActivity extends Activity implements OnClickListener,
 		registerPasswordConfirm = (EditText) findViewById(R.id.registerPasswordConfirm);
 		registerPseudo = (EditText) findViewById(R.id.registerPseudo);
 		registerButton = (Button) findViewById(R.id.registerButton);
+		TextView loginIntroLabel = (TextView) findViewById(R.id.loginIntroLabel);
+		TextView loginLabel = (TextView) findViewById(R.id.loginLabel);
+		TextView registerIntroLabel = (TextView) findViewById(R.id.registerIntroHint);
+		TextView registerLabel = (TextView) findViewById(R.id.registerLabel);
+		Strings.setFontFamily(loginEmail);
+		Strings.setFontFamily(loginPassword);
+		Strings.setFontFamily(loginButton);
+		Strings.setFontFamily(registerLogin);
+		Strings.setFontFamily(registerPassword);
+		Strings.setFontFamily(registerPasswordConfirm);
+		Strings.setFontFamily(registerPseudo);
+		Strings.setFontFamily(registerButton);
+		Strings.setFontFamily(loginIntroLabel);
+		Strings.setFontFamily(loginLabel);
+		Strings.setFontFamily(registerIntroLabel);
+		Strings.setFontFamily(registerLabel);
+
 		registerButton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -149,6 +167,7 @@ public class LoginActivity extends Activity implements OnClickListener,
 
 		// Starting the tab
 		final Intent mapIntent = new Intent(this, MainActivity.class); // TabBarActivity.class);
+		mapIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Removes other Activities from stack
 		startActivity(mapIntent);
 	}
 
@@ -179,6 +198,7 @@ public class LoginActivity extends Activity implements OnClickListener,
 
 		// Starting the tab
 		final Intent mapIntent = new Intent(this, MainActivity.class); // TabBarActivity.class);
+		mapIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Removes other Activities from stack
 		startActivity(mapIntent);
 	}
 

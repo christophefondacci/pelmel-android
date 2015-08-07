@@ -107,6 +107,7 @@
     <string name="counter_network_add">Add</string>
     <string name="counter_network_cancel">Cancel</string>
     <string name="counter_network_friends">Friends</string>
+    <string name="disconnect">Déconnexion</string>
     <string name="distance.feet">{0} pieds</string>
     <string name="distance.kilometers">{0} km</string>
     <string name="distance.meters">{0} mètres</string>
@@ -166,6 +167,8 @@
     <string name="offline">Hors ligne</string>
     <string name="ok">OK</string>
     <string name="online">Disponible</string>
+    <string name="photoMovedFailure">/!\ Impossible de déplacer la photo</string>
+    <string name="photoMovedSuccess">Photo déplacée avec succès!</string>
     <string name="photoRemoveButton">Supprimer</string>
     <string name="photoRemovedSuccess">Photo supprimée avec succès !</string>
     <string name="photoTopAddButton">Ajouter</string>
@@ -190,6 +193,7 @@
     <string name="profileHeightVal">167 cm / 5\'6\'\'</string>
     <string name="profileInformation">Informations</string>
     <string name="profileName">Surnom</string>
+    <string name="profileNicknameInputTitle">Entrez un pseudonyme</string>
     <string name="profilePhoto">Photo du profil</string>
     <string name="profilePhotoButton">Gérer les photos</string>
     <string name="profilePhotoDeleting">Suppression de la photo...</string>

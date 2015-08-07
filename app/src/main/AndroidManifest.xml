@@ -62,12 +62,13 @@
         <activity android:name=".activities.AccountActivity" />
         <activity android:name=".activities.MyProfileActivity" />
         <activity android:name=".activities.PhotosManagerActivity" />
-        <activity android:name=".activities.LoginActivity" >
+        <activity android:name=".activities.LoginActivity" android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".activities.ListEventsActivity" />
         <activity android:name=".activities.TextActivity" />

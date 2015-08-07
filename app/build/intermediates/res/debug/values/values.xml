@@ -440,6 +440,7 @@
     <string name="define_roundedimageview"/>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="disconnect">Disconnect</string>
     <string name="distance.feet">{0} feet</string>
     <string name="distance.kilometers">{0} km</string>
     <string name="distance.meters">{0} meters</string>
@@ -512,6 +513,8 @@
     <string name="offline">Offline</string>
     <string name="ok">OK</string>
     <string name="online">Available</string>
+    <string name="photoMovedFailure">/!\ Cannot move photo</string>
+    <string name="photoMovedSuccess">Photo moved successfully!</string>
     <string name="photoRemoveButton">Delete</string>
     <string name="photoRemovedSuccess">Photo removed successfully!</string>
     <string name="photoTopAddButton">Add</string>
@@ -536,6 +539,7 @@
     <string name="profileHeightVal">167 cm / 5\'6\'\'</string>
     <string name="profileInformation">Informations</string>
     <string name="profileName">Nickname</string>
+    <string name="profileNicknameInputTitle">Enter your nickname</string>
     <string name="profilePhoto">Profile photo</string>
     <string name="profilePhotoButton">Manage photos</string>
     <string name="profilePhotoDeleting">Deleting photo...</string>

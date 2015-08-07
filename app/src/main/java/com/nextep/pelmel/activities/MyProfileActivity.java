@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.adapters.ProfileButtonsAdapter;
 import com.nextep.pelmel.adapters.ProfileDescriptionAdapter;
 import com.nextep.pelmel.adapters.ProfileHeaderAdapter;
 import com.nextep.pelmel.adapters.ProfilePhotoAdapter;
@@ -63,6 +64,7 @@ public class MyProfileActivity extends ActionBarActivity implements UserListener
         adapter.addSection(ProfileSectionedAdapter.SECTION_PHOTOS,new ProfilePhotoAdapter(this,this,user));
         adapter.addSection(ProfileSectionedAdapter.SECTION_DESCRIPTIONS,new ProfileDescriptionAdapter(this,user));
         adapter.addSection(ProfileSectionedAdapter.SECTION_TAGS,new ProfileTagAdapter(this,user));
+        adapter.addSection(ProfileSectionedAdapter.SECTION_BUTTONS,new ProfileButtonsAdapter(this));
 
         listview.setAdapter(adapter);
     }

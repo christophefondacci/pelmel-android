@@ -20,6 +20,16 @@ import com.nextep.pelmel.model.User;
  */
 public interface ImageService {
 
+	interface ImageReorderCallback {
+		/**
+		 * Method called when image has been successfully reordered server side
+		 * @param image
+		 * @param oldIndex
+		 * @param newIndex
+		 */
+		void imageReordered(Image image, int oldIndex, int newIndex);
+		void imageReorderingFailed(Image image, String reason);
+	}
 	/**
 	 * Fetches the image referenced by the given URL and displays it in the
 	 * specified image view
@@ -68,6 +78,15 @@ public interface ImageService {
 	 */
 	void removeImage(Image image, CalObject parent, User user,
 			ImageRemovalCallback callback);
+
+	/**
+	 * Re-orders an image to set it to the given new index in the parent's set of
+	 * images
+	 * @param image the image to change order for
+	 * @param newIndex the new index of this image in the parent set of images
+	 * @param callback the callback to call when reordering has been made on the server
+	 */
+	void reorderImage(Image image, CalObject parent, int newIndex, ImageReorderCallback callback);
 
 	/**
 	 * Reorients the image referenced by its {@link Uri} and dumps it to a local

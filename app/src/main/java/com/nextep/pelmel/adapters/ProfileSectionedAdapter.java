@@ -15,6 +15,7 @@ public class ProfileSectionedAdapter extends SectionedAdapter {
     public static final String SECTION_PHOTOS = "photos";
     public static final String SECTION_DESCRIPTIONS = "description";
     public static final String SECTION_TAGS= "tags";
+    public static final String SECTION_BUTTONS= "buttons";
 
     private LayoutInflater layoutInflater;
     public ProfileSectionedAdapter(Context context) {
