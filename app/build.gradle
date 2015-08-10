@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 repositories {
     mavenLocal()
@@ -34,4 +35,5 @@ dependencies {
     compile files('libs/universal-image-loader-1.8.6.jar')
     compile 'com.makeramen:roundedimageview:2.1.2'
     compile 'io.realm:realm-android:0.82.0'
+
 }

@@ -78,7 +78,7 @@ public class MessageThreadAdapter extends RealmBaseAdapter<MessageRecipient> {
             } else {
                 viewHolder.badgeLabel.setVisibility(View.INVISIBLE);
             }
-            viewHolder.threadContentsLabel.setText(recipient.getMessages().size() + " messages");
+            viewHolder.threadContentsLabel.setText(recipient.getMessageCount() + " messages");
             if (recipient.getImageThumbUrl() != null && recipient.getImageThumbUrl().startsWith("http")) {
                 ImageLoader.getInstance().displayImage(recipient.getImageThumbUrl(),viewHolder.imageView);
             } else {

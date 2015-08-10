@@ -7,6 +7,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.View;
+import android.widget.TextView;
 
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.PelMelConstants;
@@ -21,13 +23,12 @@ import com.nextep.pelmel.providers.impl.EventInfoProvider;
 import com.nextep.pelmel.providers.impl.PlaceInfoProvider;
 import com.nextep.pelmel.providers.impl.UserInfoProvider;
 import com.nextep.pelmel.services.UIService;
-import com.nextep.pelmel.views.BadgeView;
 
 import java.text.MessageFormat;
 
 public class UIServiceImpl implements UIService {
 
-    private BadgeView badgeView;
+    private TextView badgeView;
     private int unreadMessages = 0;
     private Handler uiThreadHandler = new Handler(Looper.getMainLooper());
 
@@ -40,10 +41,10 @@ public class UIServiceImpl implements UIService {
                 @Override
                 public void run() {
                     badgeView.setText(String.valueOf(unreadMessages));
-                    if (badgeView.isShown() != (unreadMessages > 0)) {
-                        badgeView.toggle();
+                    if (unreadMessages > 0) {
+                        badgeView.setVisibility(View.VISIBLE);
                     } else {
-                        badgeView.show(true);
+                        badgeView.setVisibility(View.INVISIBLE);
                     }
                 }
             });
@@ -51,7 +52,7 @@ public class UIServiceImpl implements UIService {
     }
 
     @Override
-    public void registerUnreadMsgBadgeView(BadgeView badgeView) {
+    public void registerUnreadMsgBadgeView(TextView badgeView) {
         this.badgeView = badgeView;
         setUnreadMessagesCount(unreadMessages);
     }

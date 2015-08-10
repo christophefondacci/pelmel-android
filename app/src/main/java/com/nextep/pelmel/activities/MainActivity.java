@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nextep.pelmel.PelMelApplication;
+import com.nextep.pelmel.PelMelConstants;
 import com.nextep.pelmel.R;
 import com.nextep.pelmel.listeners.ImageUploadCallback;
 import com.nextep.pelmel.model.CalObject;
@@ -64,12 +66,21 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         mapFragment = (MapActivity)getSupportFragmentManager().findFragmentById(R.id.pelmelMap);
+
+
 //        slidingLayout.setPanelHeight(0);
 //        slidingLayout.setOverlayed(true);
 
     }
 
-
+    @Override
+    public void onPostCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+        super.onPostCreate(savedInstanceState, persistentState);
+        if(getIntent().getBooleanExtra(PelMelConstants.INTENT_PARAM_SHOW_MESSAGES,false)) {
+            Fragment fragment = new ChatActivity();
+            showSnippetForFragment(fragment,true,true);
+        }
+    }
 
     @Override
     public void showSnippetFor(SnippetInfoProvider provider, boolean isOpen, boolean isRoot) {

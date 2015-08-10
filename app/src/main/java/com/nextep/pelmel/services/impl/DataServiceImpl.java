@@ -771,6 +771,8 @@ public class DataServiceImpl implements DataService {
         params.put("description", user.getDescription());
         if (user.getDescriptionKey() != null) {
             params.put("descriptionKey", user.getDescriptionKey());
+        } else {
+            params.put("descriptionKey", "");
         }
         params.put("descriptionLanguageCode", "en");
 //        params.put("pseudo", user.getName());

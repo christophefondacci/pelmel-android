@@ -2,6 +2,7 @@ package com.nextep.pelmel.services;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.widget.TextView;
 
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
@@ -23,7 +24,7 @@ public interface UIService {
 	 * @param badgeView
 	 *            the {@link BadgeView}
 	 */
-	void registerUnreadMsgBadgeView(BadgeView badgeView);
+	void registerUnreadMsgBadgeView(TextView badgeView);
 
 	/**
 	 * Provides the color resource id corresponding to the given place type

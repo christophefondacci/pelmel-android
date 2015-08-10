@@ -40,6 +40,7 @@ public class MessageRecipientRealmProxy extends MessageRecipient
     private static long INDEX_USERNAME;
     private static long INDEX_USERS;
     private static long INDEX_MESSAGES;
+    private static long INDEX_MESSAGECOUNT;
     private static Map<String, Long> columnIndices;
     private static final List<String> FIELD_NAMES;
     static {
@@ -54,6 +55,7 @@ public class MessageRecipientRealmProxy extends MessageRecipient
         fieldNames.add("username");
         fieldNames.add("users");
         fieldNames.add("messages");
+        fieldNames.add("messageCount");
         FIELD_NAMES = Collections.unmodifiableList(fieldNames);
     }
 
@@ -187,6 +189,18 @@ public class MessageRecipientRealmProxy extends MessageRecipient
         }
     }
 
+    @Override
+    public int getMessageCount() {
+        realm.checkIfValid();
+        return (int) row.getLong(INDEX_MESSAGECOUNT);
+    }
+
+    @Override
+    public void setMessageCount(int value) {
+        realm.checkIfValid();
+        row.setLong(INDEX_MESSAGECOUNT, (long) value);
+    }
+
     public static Table initTable(ImplicitTransaction transaction) {
         if (!transaction.hasTable("class_MessageRecipient")) {
             Table table = transaction.getTable("class_MessageRecipient");
@@ -206,6 +220,7 @@ public class MessageRecipientRealmProxy extends MessageRecipient
                 MessageRealmProxy.initTable(transaction);
             }
             table.addColumnLink(ColumnType.LINK_LIST, "messages", transaction.getTable("class_Message"));
+            table.addColumn(ColumnType.INTEGER, "messageCount");
             table.addSearchIndex(table.getColumnIndex("itemKey"));
             table.setPrimaryKey("itemKey");
             return table;
@@ -216,11 +231,11 @@ public class MessageRecipientRealmProxy extends MessageRecipient
     public static void validateTable(ImplicitTransaction transaction) {
         if (transaction.hasTable("class_MessageRecipient")) {
             Table table = transaction.getTable("class_MessageRecipient");
-            if (table.getColumnCount() != 10) {
-                throw new RealmMigrationNeededException(transaction.getPath(), "Field count does not match - expected 10 but was " + table.getColumnCount());
+            if (table.getColumnCount() != 11) {
+                throw new RealmMigrationNeededException(transaction.getPath(), "Field count does not match - expected 11 but was " + table.getColumnCount());
             }
             Map<String, ColumnType> columnTypes = new HashMap<String, ColumnType>();
-            for (long i = 0; i < 10; i++) {
+            for (long i = 0; i < 11; i++) {
                 columnTypes.put(table.getColumnName(i), table.getColumnType(i));
             }
 
@@ -242,6 +257,7 @@ public class MessageRecipientRealmProxy extends MessageRecipient
             INDEX_USERNAME = table.getColumnIndex("username");
             INDEX_USERS = table.getColumnIndex("users");
             INDEX_MESSAGES = table.getColumnIndex("messages");
+            INDEX_MESSAGECOUNT = table.getColumnIndex("messageCount");
 
             if (!columnTypes.containsKey("itemKey")) {
                 throw new RealmMigrationNeededException(transaction.getPath(), "Missing field 'itemKey'");
@@ -323,6 +339,12 @@ public class MessageRecipientRealmProxy extends MessageRecipient
             if (!table.getLinkTarget(INDEX_MESSAGES).hasSameSchema(table_9)) {
                 throw new RealmMigrationNeededException(transaction.getPath(), "Invalid RealmList type for field 'messages': '" + table.getLinkTarget(INDEX_MESSAGES).getName() + "' expected - was '" + table_9.getName() + "'");
             }
+            if (!columnTypes.containsKey("messageCount")) {
+                throw new RealmMigrationNeededException(transaction.getPath(), "Missing field 'messageCount'");
+            }
+            if (columnTypes.get("messageCount") != ColumnType.INTEGER) {
+                throw new RealmMigrationNeededException(transaction.getPath(), "Invalid type 'int' for field 'messageCount'");
+            }
         } else {
             throw new RealmMigrationNeededException(transaction.getPath(), "The MessageRecipient class is missing from the schema for this Realm.");
         }
@@ -403,6 +425,9 @@ public class MessageRecipientRealmProxy extends MessageRecipient
                 obj.getMessages().add(item);
             }
         }
+        if (!json.isNull("messageCount")) {
+            obj.setMessageCount((int) json.getInt("messageCount"));
+        }
         return obj;
     }
 
@@ -449,6 +474,8 @@ public class MessageRecipientRealmProxy extends MessageRecipient
                     obj.getMessages().add(item);
                 }
                 reader.endArray();
+            } else if (name.equals("messageCount")  && reader.peek() != JsonToken.NULL) {
+                obj.setMessageCount((int) reader.nextInt());
             } else {
                 reader.skipValue();
             }
@@ -528,6 +555,7 @@ public class MessageRecipientRealmProxy extends MessageRecipient
             }
         }
 
+        realmObject.setMessageCount(newObject.getMessageCount());
         return realmObject;
     }
 
@@ -567,6 +595,7 @@ public class MessageRecipientRealmProxy extends MessageRecipient
                 }
             }
         }
+        realmObject.setMessageCount(newObject.getMessageCount());
         return realmObject;
     }
 
@@ -614,6 +643,10 @@ public class MessageRecipientRealmProxy extends MessageRecipient
         stringBuilder.append(",");
         stringBuilder.append("{messages:");
         stringBuilder.append("RealmList<Message>[").append(getMessages().size()).append("]");
+        stringBuilder.append("}");
+        stringBuilder.append(",");
+        stringBuilder.append("{messageCount:");
+        stringBuilder.append(getMessageCount());
         stringBuilder.append("}");
         stringBuilder.append("]");
         return stringBuilder.toString();

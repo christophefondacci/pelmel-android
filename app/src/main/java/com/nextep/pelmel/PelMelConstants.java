@@ -34,4 +34,7 @@ public interface PelMelConstants {
 
 	String INTENT_PARAM_INDEX = "index";
 	String INTENT_PARAM_CAL_KEY = "calkey";
+	String INTENT_PARAM_SHOW_MESSAGES = "openMessages";
+
+	String PREF_KEY_PUSH_TOKEN = "androidPushToken";
 }

@@ -77,6 +77,8 @@ public class SnippetGalleryAdapter extends BaseAdapter {
                     selectDialog.show(((FragmentActivity) context).getSupportFragmentManager(), "PHOTO");
                 }
             });
+        } else {
+            addPhotoButton.setVisibility(View.INVISIBLE);
         }
 //        ExpandingLayout expandingLayout = (ExpandingLayout)convertView.findViewById(R.id
 //                .expanding_layout);

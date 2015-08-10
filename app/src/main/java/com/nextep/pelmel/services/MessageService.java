@@ -63,4 +63,7 @@ public interface MessageService {
 	 */
 	void sendMessage(User currentUser, String otherUserKey, String message,
 			OnNewMessageListener callback);
+
+
+	void requestPushToken();
 }

@@ -293,7 +293,7 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
         super.onViewStateRestored(savedInstanceState);
         if(savedInstanceState != null) {
             final String itemKey = savedInstanceState.getString(BUNDLE_STATE_ITEM_KEY);
-            if (itemKey.equals(BUNDLE_STATE_NULL_OBJ)) {
+            if (itemKey == null || itemKey.equals(BUNDLE_STATE_NULL_OBJ)) {
                 infoProvider = new ContextSnippetInfoProvider();
             } else {
                 CalObject obj = PelMelApplication.getDataService().getCalObject(itemKey, this);

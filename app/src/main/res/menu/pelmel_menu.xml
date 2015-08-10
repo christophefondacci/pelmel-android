@@ -3,6 +3,6 @@
     xmlns:pelmel="http://schemas.android.com/apk/res-auto">
     <!--<item android:id="@+id/menu_export" android:icon="@drawable/tab_location" android:title="@string/tabMap" pelmel:showAsAction="always|withText"></item>-->
     <item android:id="@+id/menu_map" android:icon="@drawable/tab_map_white" android:title="@string/tabMap" pelmel:showAsAction="always|withText"></item>
-    <item android:id="@+id/menu_chat" android:icon="@drawable/snp_icon_chat" android:title="@string/tabMessages" pelmel:showAsAction="always|withText"></item>
+    <item android:id="@+id/menu_chat" android:title="@string/tabMessages" pelmel:showAsAction="always|withText" pelmel:actionLayout="@layout/menu_chat_badge"></item>
     <item android:id="@+id/menu_settings" android:icon="@drawable/tab_settings_white" android:title="@string/tabSettings" pelmel:showAsAction="always|withText"></item>
 </menu>

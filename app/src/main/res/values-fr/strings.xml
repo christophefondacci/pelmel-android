@@ -131,6 +131,8 @@
     <string name="photoRemovedSuccess">Photo supprimée avec succès !</string>
     <string name="photoUploadFailed">Impossible d\'uploader la photo, vérifiez votre connexion ou connectez-vous à un wifi puis essayez à nouveau</string>
     <string name="photoUploadSuccess">Téléchargement de la photo réussi !</string>
+    <string name="pushNewMessageTitle">{0} nouveaux messages</string>
+    <string name="pushNewMessageTitle.singular">{0} nouveau message</string>
     <string name="registerIntroLabel">INSCRIPTION</string>
     <string name="registerButtonLabel">S\'inscrire</string>
     <string name="registerEmptyValueError">Tous les champs doivent être renseignés</string>

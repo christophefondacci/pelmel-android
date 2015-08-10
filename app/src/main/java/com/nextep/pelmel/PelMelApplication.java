@@ -42,6 +42,9 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class PelMelApplication extends Application implements
 		GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
 
@@ -62,6 +65,7 @@ public class PelMelApplication extends Application implements
 	private CalObject overviewObject;
 	private int tabIndex = 0;
 	private String searchParentKey;
+	private ExecutorService executorService;
 
 	public static Application getInstance() {
 		return instance;
@@ -83,6 +87,15 @@ public class PelMelApplication extends Application implements
 				.defaultDisplayImageOptions(defaultOptions).threadPoolSize(3)
 				.memoryCache(new LruMemoryCache(100)).build();
 		ImageLoader.getInstance().init(config);
+
+		// Starting push
+		executorService = Executors.newFixedThreadPool(5);
+		runOnBackgroundThread(new Runnable() {
+			@Override
+			public void run() {
+				messageService.requestPushToken();
+			}
+		});
 
 	}
 
@@ -220,5 +233,8 @@ public class PelMelApplication extends Application implements
 	public static void runOnMainThread(Runnable runnable) {
 		final Handler handler = new Handler(instance.getMainLooper());
 		handler.post(runnable);
+	}
+	public static void runOnBackgroundThread(Runnable runnable) {
+		instance.executorService.execute(runnable);
 	}
 }

@@ -5,6 +5,8 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.android.gms.iid.InstanceID;
 import com.nextep.json.model.IJsonLightUser;
 import com.nextep.json.model.impl.JsonLightUser;
 import com.nextep.json.model.impl.JsonManyToOneMessageList;
@@ -13,7 +15,10 @@ import com.nextep.json.model.impl.JsonMessage;
 import com.nextep.json.model.impl.JsonRecipientsGroup;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.PelMelConstants;
+import com.nextep.pelmel.R;
+import com.nextep.pelmel.exception.PelmelException;
 import com.nextep.pelmel.gson.GsonHelper;
+import com.nextep.pelmel.helpers.Strings;
 import com.nextep.pelmel.model.ChatMessage;
 import com.nextep.pelmel.model.Image;
 import com.nextep.pelmel.model.User;
@@ -36,6 +41,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -43,6 +50,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import io.realm.Realm;
 import io.realm.RealmQuery;
@@ -55,8 +64,12 @@ public class MessageServiceImpl implements MessageService {
 
 	private DataService dataService;
 	private WebService webService;
+	private ExecutorService executorService;
 	private boolean messagesFetchInProgress = false;
 
+	public MessageServiceImpl() {
+		executorService = Executors.newFixedThreadPool(5);
+	}
 	@Override
 	public boolean listMessages(final User currentUser, final double latitude,
 			final double longitude, final OnNewMessageListener listener) {
@@ -163,7 +176,7 @@ public class MessageServiceImpl implements MessageService {
 		}
 
 		// Processing all messages
-
+		final User currentUser = PelMelApplication.getUserService().getLoggedUser();
 		for (String messageKey : jsonMessageMap.keySet()) {
 			JsonMessage jsonMessage = jsonMessageMap.get(messageKey);
 
@@ -199,15 +212,21 @@ public class MessageServiceImpl implements MessageService {
 
 			// Adjusting unread flag
 			MessageRecipient countedRecipient = groupRecipient != null ? groupRecipient : fromRecipient;
-			if (newMessage && jsonMessage.isUnread()) {
-				// Counting unread on the group if a group message, or user if one to one message
-				countedRecipient.setUnreadMessageCount(countedRecipient.getUnreadMessageCount() + 1);
-			}
+			if(message.getToItemKey().equals(currentUser.getKey())) {
+				countedRecipient.setMessageCount(countedRecipient.getMessageCount()+1);
+				if (newMessage && jsonMessage.isUnread()) {
 
-			// Adjusting last date
-			if (countedRecipient.getLastMessageDate() == null || message.getMessageDate().compareTo(countedRecipient.getLastMessageDate()) > 0) {
-				countedRecipient.setLastMessageDate(message.getMessageDate());
-				countedRecipient.setLastMessageDefined(true);
+					// Counting unread on the group if a group message, or user if one to one message
+					countedRecipient.setUnreadMessageCount(countedRecipient.getUnreadMessageCount() + 1);
+				}
+
+				// Adjusting last date
+				if (countedRecipient.getLastMessageDate() == null || message.getMessageDate().compareTo(countedRecipient.getLastMessageDate()) > 0) {
+					if(message.getToItemKey().equals(currentUser.getKey())) {
+						countedRecipient.setLastMessageDate(message.getMessageDate());
+						countedRecipient.setLastMessageDefined(true);
+					}
+				}
 			}
 		}
 		// Committing changes
@@ -454,7 +473,7 @@ public class MessageServiceImpl implements MessageService {
 
 	private MessageRecipient getRecipient(Realm realm, String itemKey) {
 		RealmQuery<MessageRecipient> query = realm.where(MessageRecipient.class);
-		query.equalTo("itemKey",itemKey);
+		query.equalTo("itemKey", itemKey);
 		final MessageRecipient recipient = query.findFirst();
 		return recipient;
 	}
@@ -473,15 +492,50 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	private int getMaxMessageId() {
+		final User user = PelMelApplication.getUserService().getLoggedUser();
 		final SharedPreferences preferences = PelMelApplication.getInstance()
 				.getSharedPreferences(PelMelConstants.PREFS_NAME, 0);
-		return preferences.getInt(PREF_MAX_MESSAGE_ID,0);
+		return preferences.getInt(PREF_MAX_MESSAGE_ID+ user.getKey(),0);
 	}
 	private void setMaxMessageId(int id) {
+		final User user = PelMelApplication.getUserService().getLoggedUser();
 		final SharedPreferences preferences = PelMelApplication.getInstance()
 				.getSharedPreferences(PelMelConstants.PREFS_NAME, 0);
 		final SharedPreferences.Editor editor = preferences.edit();
-		editor.putInt(PREF_MAX_MESSAGE_ID, id);
+		editor.putInt(PREF_MAX_MESSAGE_ID+ user.getKey(), id);
 		editor.commit();
+	}
+
+
+
+	public void requestPushToken() {
+		try {
+			InstanceID instanceID = InstanceID.getInstance(PelMelApplication.getInstance());
+			String token = instanceID.getToken(Strings.getText(R.string.gcm_defaultSenderId),
+					GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
+			registerDeviceToken(token);
+		} catch(IOException e) {
+			Log.e(LOG_MSG_TAG,"Unable to get PUSH token: " + e.getMessage(),e);
+		}
+	}
+
+	private void registerDeviceToken(String token) {
+		final User user = PelMelApplication.getUserService().getLoggedUser();
+		try {
+			final InputStream is = webService.postRequest(new URL(WebService.BASE_URL + "/mobileRegisterToken"),
+					"nxtpUserToken", user.getToken(),
+					"pushDeviceId", token,
+					"pushProvider", "ANDROID");
+			// We don't really car about the result as long as there is no exception
+
+			// But we store the preferences
+			final SharedPreferences preferences = PelMelApplication.getInstance()
+					.getSharedPreferences(PelMelConstants.PREFS_NAME, 0);
+			final SharedPreferences.Editor editor = preferences.edit();
+			editor.putString(PelMelConstants.PREF_KEY_PUSH_TOKEN, token);
+			editor.commit();
+		} catch(MalformedURLException | PelmelException | RuntimeException e) {
+			Log.e(LOG_MSG_TAG,"Unable to register push device token: " + e.getMessage(),e);
+		}
 	}
 }

@@ -6,6 +6,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
@@ -15,6 +17,7 @@ import com.nextep.pelmel.services.LocalizationService;
 public class MainActionBarActivity extends ActionBarActivity {
 
 	private LocalizationService localizationService;
+	private TextView messagesCountBadge;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,16 @@ public class MainActionBarActivity extends ActionBarActivity {
 		// Inflate the menu items for use in the action bar
 		final MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.pelmel_menu, menu);
+		final View chatActionView = menu.findItem(R.id.menu_chat).getActionView();
+		messagesCountBadge = (TextView)chatActionView.findViewById(R.id.actionBadge);
+		PelMelApplication.getUiService().registerUnreadMsgBadgeView(messagesCountBadge);
+		chatActionView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				final ChatActivity chatFragment = new ChatActivity();
+				PelMelApplication.getSnippetContainerSupport().showSnippetForFragment(chatFragment, true, false);
+			}
+		});
 		return super.onCreateOptionsMenu(menu);
 	}
 

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollProfileView"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="fill_parent"
+        android:layout_height="2071dp"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical" >
+
+        <com.nextep.pelmel.views.HorizontalListView
+            android:id="@+id/photosList"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profile_photo_height" >
+        </com.nextep.pelmel.views.HorizontalListView>
+
+        <TextView
+            android:id="@+id/tapToEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tapToEdit"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/profileLabelName"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/profile_margin_left"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:text="@string/profileName" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/pseudoText"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/profile_margin_left"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/profileName"
+                android:inputType="textPersonName"
+                android:textSize="@dimen/title_font_size"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/birthDateLabel"
+            android:layout_width="@dimen/profile_label_size"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/profile_margin_left"
+            android:layout_marginTop="@dimen/profile_margin_top"
+            android:text="@string/profileBirthday" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/profile_margin_left" >
+
+            <Spinner
+                android:id="@+id/birthDaySpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:gravity="center_horizontal"
+                tools:listitem="@android:layout/simple_spinner_item" />
+
+            <Spinner
+                android:id="@+id/birthMonthSpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:gravity="center_horizontal"
+                tools:listitem="@android:layout/simple_spinner_item" />
+            <Spinner
+                android:id="@+id/birthYearSpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:gravity="center_horizontal"
+                tools:listitem="@android:layout/simple_spinner_item" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/heightLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/profile_margin_left"
+            android:layout_marginTop="@dimen/profile_margin_top"
+            android:text="@string/profileHeight" />
+
+        <SeekBar
+            android:id="@+id/heightSlider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/profile_margin_left" />
+
+        <TextView
+            android:id="@+id/heightValue"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/profileHeightVal" />
+
+        <TextView
+            android:id="@+id/weightLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/profile_margin_left"
+            android:layout_marginTop="@dimen/profile_margin_top"
+            android:text="@string/profileWeight" />
+
+        <SeekBar
+            android:id="@+id/weightSlider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/profile_margin_left" />
+
+        <TextView
+            android:id="@+id/weightValue"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/profileWeightVal" />
+
+        <TextView
+            android:id="@+id/descTitleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/profile_margin_left"
+            android:layout_marginTop="@dimen/profile_margin_top"
+            android:text="@string/profileDescriptionLabel" />
+
+        <EditText
+            android:id="@+id/descText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profile_desc_height"
+            android:layout_marginLeft="@dimen/profile_margin_left"
+            android:ems="10"
+            android:gravity="top"
+            android:inputType="textMultiLine" >
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:id="@+id/profileTagsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/profile_margin_left"
+            android:layout_marginTop="@dimen/profile_margin_top"
+            android:text="@string/profileTags" />
+
+        <ListView
+            android:id="@+id/tagsListView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profile_tags_height"
+            android:layout_marginLeft="@dimen/profile_margin_left" >
+        </ListView>
+		<Button
+	                android:id="@+id/logout_button"
+	                style="?android:attr/buttonStyleSmall"
+	                android:layout_width="fill_parent"
+	                android:layout_height="wrap_content"
+	                android:layout_marginLeft="@dimen/profile_margin_left"
+	                android:layout_marginTop="@dimen/profile_margin_top"
+	                android:drawableLeft="@drawable/logout"
+	                android:background="@drawable/logout_button"
+	                android:text="@string/logout" />
+    </LinearLayout>
+</ScrollView><!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/layout/activity_user_profile.xml -->

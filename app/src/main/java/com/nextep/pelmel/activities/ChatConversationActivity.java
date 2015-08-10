@@ -43,6 +43,7 @@ public class ChatConversationActivity extends Fragment implements
 		UserListener, OnItemClickListener, MessageCallback, SnippetChildSupport, MessageService.OnNewMessageListener {
 
 	public static final String CHAT_WITH_USER_KEY = "userKey";
+	public static final String BUNDLE_STATE_OTHER_ITEM_KEY = "otherUserKey";
 
 	private ListView listView;
 	private View sendButton;
@@ -93,6 +94,9 @@ public class ChatConversationActivity extends Fragment implements
 
 
 		userService = PelMelApplication.getUserService();
+		if(savedInstanceState!=null && otherUserKey == null) {
+			otherUserKey = savedInstanceState.getString(BUNDLE_STATE_OTHER_ITEM_KEY);
+		}
 		// Getting user, notifying us when ready
 		userService.getCurrentUser(this);
 
@@ -282,5 +286,19 @@ public class ChatConversationActivity extends Fragment implements
 	@Override
 	public View getScrollableView() {
 		return listView;
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putString(BUNDLE_STATE_OTHER_ITEM_KEY, otherUserKey);
+	}
+
+	@Override
+	public void onViewStateRestored(Bundle savedInstanceState) {
+		super.onViewStateRestored(savedInstanceState);
+		if(savedInstanceState != null) {
+			otherUserKey = savedInstanceState.getString(BUNDLE_STATE_OTHER_ITEM_KEY);
+		}
 	}
 }

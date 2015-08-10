@@ -9,6 +9,9 @@ package com.nextep.pelmel;
 
 public final class Manifest {
     public static final class permission {
+        /**  PUSH NOTIFICATIONS PERMISSIONS 
+         */
+        public static final String C2D_MESSAGE="com.nextep.pelmel.permission.C2D_MESSAGE";
         /**  Google MAPS permissions 
          */
         public static final String MAPS_RECEIVE="com.nextep.pelmel.permission.MAPS_RECEIVE";

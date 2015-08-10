@@ -1,5 +1,6 @@
 package com.nextep.pelmel.services;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -13,6 +14,8 @@ import com.nextep.json.model.impl.JsonNearbyPlacesResponse;
 import com.nextep.json.model.impl.JsonOneToOneMessageList;
 import com.nextep.json.model.impl.JsonUser;
 import com.nextep.pelmel.PelMelApplication;
+import com.nextep.pelmel.PelMelConstants;
+import com.nextep.pelmel.exception.PelmelException;
 import com.nextep.pelmel.gson.GsonHelper;
 import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.Place;
@@ -39,8 +42,8 @@ import java.util.Map;
 public class WebService {
 
     public static final String LOG_TAG = "WebService";
-//    public static final String BASE_URL = "http://www.pelmelguide.com";
-    public static final String BASE_URL = "http://10.0.0.2";
+    public static final String BASE_URL = "http://www.pelmelguide.com";
+//    public static final String BASE_URL = "http://10.0.0.2";
 //    public static final String BASE_URL = "http://www.pelmelguide.com";
     private static final String LOGIN_ACTION = "/mobileLogin";
     private static final String PLACES_LIST_ACTION = "/mapPlaces";
@@ -60,10 +63,10 @@ public class WebService {
         gson = GsonHelper.getGson();
     }
 
-    public InputStream postRequest(URL url, String... keyValueParams) throws Exception {
+    public InputStream postRequest(URL url, String... keyValueParams) throws PelmelException {
         return postRequest(url, Arrays.asList(keyValueParams));
     }
-    public InputStream postRequest(URL url, Map<String, String> params) throws Exception {
+    public InputStream postRequest(URL url, Map<String, String> params) throws PelmelException {
         final List<String> keyValueParams = new ArrayList<>();
         for(String key : params.keySet()) {
             final String value = params.get(key);
@@ -73,7 +76,7 @@ public class WebService {
         return postRequest(url,keyValueParams);
     }
 
-    public InputStream postRequest(URL url, List<String> params) throws Exception {
+    public InputStream postRequest(URL url, List<String> params) throws PelmelException {
         InputStream is = null;
         try {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -99,7 +102,7 @@ public class WebService {
                 is = conn.getInputStream();
             }
         } catch(IOException e) {
-            throw new Exception("Cannot connect to PelMel server : "
+            throw new PelmelException("Cannot connect to PelMel server : "
                     + e.getMessage(), e);
         }
         return is;
@@ -154,8 +157,20 @@ public class WebService {
     public JsonUser connect(String login, String password) {
         JsonUser user = null;
         try {
+            // Preparing parameters
+            final Map<String,String> params = new HashMap<>();
+            params.put("email", login);
+            params.put("password", password);
 
-            final InputStream is = postRequest(new URL(BASE_URL + LOGIN_ACTION), "email", login, "password", password);
+            // Getting push token if any
+            final SharedPreferences preferences = PelMelApplication.getInstance()
+                    .getSharedPreferences(PelMelConstants.PREFS_NAME, 0);
+            final String pushToken = preferences.getString(PelMelConstants.PREF_KEY_PUSH_TOKEN,null);
+            if(pushToken != null) {
+                params.put("pushDeviceId",pushToken);
+                params.put("pushProvider","ANDROID");
+            }
+            final InputStream is = postRequest(new URL(BASE_URL + LOGIN_ACTION), params);
             if (is != null) {
                 final InputStreamReader reader = new InputStreamReader(is);
                 user = gson.fromJson(reader, new TypeToken<JsonUser>() {
@@ -163,10 +178,8 @@ public class WebService {
                 PelMelApplication.getUiService().setUnreadMessagesCount(
                         user.getUnreadMsgCount());
             }
-        } catch (final MalformedURLException e) {
+        } catch (final MalformedURLException | PelmelException e) {
             Log.e("Login", "Unable to login: " + e.getMessage());
-        } catch (final Exception e) {
-            Log.e("Login", "Exception during login : " + e.getMessage());
         }
         return user;
     }

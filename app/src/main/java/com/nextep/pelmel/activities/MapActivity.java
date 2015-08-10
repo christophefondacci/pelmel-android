@@ -51,6 +51,8 @@ public class MapActivity extends Fragment implements UserListener,
 		OnInfoWindowClickListener,GoogleMap.OnMarkerClickListener {
 
 	private static final String TAG_MAP = "MAP";
+	private static final String BUNDLE_STATE_LOADED = "isLoaded";
+
 	private Map<Marker, Place> placeMarkersMap;
 	private Map<String,Marker> markersKeyMap;
 	private Map<String,BitmapDescriptor> markersBitmapMap;
@@ -68,6 +70,10 @@ public class MapActivity extends Fragment implements UserListener,
 		placeMarkersMap = new HashMap<Marker, Place>();
 		markersKeyMap = new HashMap<>();
 		markersBitmapMap = new HashMap<>();
+
+		if(savedInstanceState != null) {
+			isLoaded = savedInstanceState.getBoolean(BUNDLE_STATE_LOADED);
+		}
 
 		// Initializing map and zooming to current location
 		final Location loc = PelMelApplication.getLocalizationService().getLocation();
@@ -344,5 +350,19 @@ public class MapActivity extends Fragment implements UserListener,
 		m.remove();
 		final Marker marker = buildMarkerFor(place);
 
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putBoolean(BUNDLE_STATE_LOADED, isLoaded);
+	}
+
+	@Override
+	public void onViewStateRestored(Bundle savedInstanceState) {
+		super.onViewStateRestored(savedInstanceState);
+		if(savedInstanceState != null) {
+			isLoaded = savedInstanceState.getBoolean(BUNDLE_STATE_LOADED);
+		}
 	}
 }

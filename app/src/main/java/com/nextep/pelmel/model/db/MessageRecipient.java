@@ -25,6 +25,7 @@ public class MessageRecipient extends RealmObject {
 
     private RealmList<MessageRecipient> users;
     private RealmList<Message> messages;
+    private int messageCount = 0;
 
     public String getItemKey() {
         return itemKey;
@@ -105,5 +106,13 @@ public class MessageRecipient extends RealmObject {
 
     public boolean isLastMessageDefined() {
         return lastMessageDefined;
+    }
+
+    public void setMessageCount(int messageCount) {
+        this.messageCount = messageCount;
+    }
+
+    public int getMessageCount() {
+        return messageCount;
     }
 }
