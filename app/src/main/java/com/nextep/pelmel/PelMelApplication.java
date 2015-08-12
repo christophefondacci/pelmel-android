@@ -90,12 +90,7 @@ public class PelMelApplication extends Application implements
 
 		// Starting push
 		executorService = Executors.newFixedThreadPool(5);
-		runOnBackgroundThread(new Runnable() {
-			@Override
-			public void run() {
-				messageService.requestPushToken();
-			}
-		});
+
 
 	}
 

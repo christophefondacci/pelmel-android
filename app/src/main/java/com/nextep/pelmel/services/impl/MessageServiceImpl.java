@@ -521,21 +521,26 @@ public class MessageServiceImpl implements MessageService {
 
 	private void registerDeviceToken(String token) {
 		final User user = PelMelApplication.getUserService().getLoggedUser();
-		try {
-			final InputStream is = webService.postRequest(new URL(WebService.BASE_URL + "/mobileRegisterToken"),
-					"nxtpUserToken", user.getToken(),
-					"pushDeviceId", token,
-					"pushProvider", "ANDROID");
-			// We don't really car about the result as long as there is no exception
-
-			// But we store the preferences
+		if(user != null) {
 			final SharedPreferences preferences = PelMelApplication.getInstance()
 					.getSharedPreferences(PelMelConstants.PREFS_NAME, 0);
-			final SharedPreferences.Editor editor = preferences.edit();
-			editor.putString(PelMelConstants.PREF_KEY_PUSH_TOKEN, token);
-			editor.commit();
-		} catch(MalformedURLException | PelmelException | RuntimeException e) {
-			Log.e(LOG_MSG_TAG,"Unable to register push device token: " + e.getMessage(),e);
+			final String previousToken = preferences.getString(PelMelConstants.PREF_KEY_PUSH_TOKEN,null);
+			if(previousToken == null || !previousToken.equals(token)) {
+				try {
+					final InputStream is = webService.postRequest(new URL(WebService.BASE_URL + "/mobileRegisterToken"),
+							"nxtpUserToken", user.getToken(),
+							"pushDeviceId", token,
+							"pushProvider", "ANDROID");
+					// We don't really care about the result as long as there is no exception
+
+					// But we store the preferences
+					final SharedPreferences.Editor editor = preferences.edit();
+					editor.putString(PelMelConstants.PREF_KEY_PUSH_TOKEN, token);
+					editor.commit();
+				} catch (MalformedURLException | PelmelException | RuntimeException e) {
+					Log.e(LOG_MSG_TAG, "Unable to register push device token: " + e.getMessage(), e);
+				}
+			}
 		}
 	}
 }

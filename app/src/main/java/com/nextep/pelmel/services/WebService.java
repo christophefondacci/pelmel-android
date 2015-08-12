@@ -1,6 +1,10 @@
 package com.nextep.pelmel.services;
 
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.os.Build;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -17,6 +21,7 @@ import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.PelMelConstants;
 import com.nextep.pelmel.exception.PelmelException;
 import com.nextep.pelmel.gson.GsonHelper;
+import com.nextep.pelmel.helpers.Devices;
 import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.RecurringEvent;
@@ -165,11 +170,25 @@ public class WebService {
             // Getting push token if any
             final SharedPreferences preferences = PelMelApplication.getInstance()
                     .getSharedPreferences(PelMelConstants.PREFS_NAME, 0);
-            final String pushToken = preferences.getString(PelMelConstants.PREF_KEY_PUSH_TOKEN,null);
+            final String pushToken = preferences.getString(PelMelConstants.PREF_KEY_PUSH_TOKEN, null);
             if(pushToken != null) {
                 params.put("pushDeviceId",pushToken);
                 params.put("pushProvider","ANDROID");
             }
+
+            String deviceInfo = null;
+            try {
+                final PackageInfo pInfo = PelMelApplication.getInstance().getPackageManager().getPackageInfo(PelMelApplication.getInstance().getPackageName(), 0);
+                final String version = pInfo.versionName;
+                final int versionCode = pInfo.versionCode;
+                final String deviceName = Devices.getDeviceName();
+
+                deviceInfo = version + ";" + String.valueOf(versionCode) + ";ANDROID/" + deviceName + ";" + Build.VERSION.SDK_INT;
+                params.put("deviceInfo",deviceInfo);
+            } catch(PackageManager.NameNotFoundException e) {
+                Log.e(LOG_TAG,"Unable to get device information: " + e.getMessage(),e);
+            }
+
             final InputStream is = postRequest(new URL(BASE_URL + LOGIN_ACTION), params);
             if (is != null) {
                 final InputStreamReader reader = new InputStreamReader(is);
@@ -188,8 +207,12 @@ public class WebService {
                                               String token, String parentKey, Integer radius, String searchText) {
         try {
             final Map<String, String> params = new HashMap<>();
-            params.put("lat",String.valueOf(latitude));
-            params.put("lng",String.valueOf(longitude));
+            final LocalizationService localizationService = PelMelApplication.getLocalizationService();
+            final Location currentLocation = localizationService.getLocation();
+            params.put("lat",String.valueOf(currentLocation.getLatitude()));
+            params.put("lng",String.valueOf(currentLocation.getLongitude()));
+            params.put("searchLat",String.valueOf(latitude));
+            params.put("searchLng",String.valueOf(longitude));
             params.put("nxtpUserToken",token);
             if(parentKey!=null) {
                 params.put("parentKey",parentKey);

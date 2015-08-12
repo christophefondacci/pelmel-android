@@ -26,6 +26,8 @@ public interface PelMelConstants {
 
 
 	double MAP_USERLOCATION_RADIUS = 1000;
+	double DEFAULT_RADIUS = 50;
+	double EXTENDED_RADIUS = 1500;
 	int MAP_MINIMUM_PLACES_FOR_ZOOM = 3;
 
 

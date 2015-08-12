@@ -166,6 +166,14 @@ public class MapActivity extends Fragment implements UserListener,
 
 	@Override
 	public void userInfoAvailable(final User user) {
+
+		PelMelApplication.runOnBackgroundThread(new Runnable() {
+			@Override
+			public void run() {
+				PelMelApplication.getMessageService().requestPushToken();
+			}
+		});
+
 		final Location loc = PelMelApplication.getLocalizationService().getLocation();
 		final LatLng myPos = new LatLng(loc.getLatitude(), loc.getLongitude()); //map.getMyLocation().getLatitude(),map.getMyLocation().getLongitude());
 		final VisibleRegion region = map.getProjection().getVisibleRegion();
@@ -177,8 +185,13 @@ public class MapActivity extends Fragment implements UserListener,
 //				final ConversionService
 				double lat = 0;
 				double lng = 0;
+				double boundLat = region.latLngBounds.northeast.latitude;
+				double boundLng = region.latLngBounds.northeast.longitude;
+				double centerLat = region.latLngBounds.getCenter().latitude;
+				double centerLng = region.latLngBounds.getCenter().longitude;
+				double cameraRadius = GeoUtils.distance(boundLat,boundLng,centerLat,centerLng);
 				Integer radius = null;
-				if(region.latLngBounds.contains(myPos) || (! isLoaded && !forceRefresh)) {
+				if((region.latLngBounds.contains(myPos)&& cameraRadius<100) || (! isLoaded && !forceRefresh)) {
 					lat = loc.getLatitude();
 					lng = loc.getLongitude();
 					radius = null;
@@ -186,14 +199,17 @@ public class MapActivity extends Fragment implements UserListener,
 					lat = cameraPosition.target.latitude;
 					lng = cameraPosition.target.longitude;
 
-					double boundLat = region.latLngBounds.northeast.latitude;
-					double boundLng = region.latLngBounds.northeast.longitude;
+
 					radius = (int)GeoUtils.distance(lat,lng,boundLat,boundLng);
 				}
-				final List<Place> places = PelMelApplication.getDataService()
+				List<Place> places = PelMelApplication.getDataService()
 						.getNearbyPlaces(user, lat, lng,
 								null, null, radius, forceRefresh);
-
+				if(places == null || places.isEmpty()) {
+					places = PelMelApplication.getDataService()
+							.getNearbyPlaces(user, lat, lng,
+									null, null, (int)PelMelConstants.EXTENDED_RADIUS, forceRefresh);
+				}
 				return places;
 			}
 
@@ -233,9 +249,10 @@ public class MapActivity extends Fragment implements UserListener,
 							final CameraUpdate upd = CameraUpdateFactory.newLatLngBounds(userZoomBounds, 0);
 							map.animateCamera(upd);
 						} else {
-							LatLngBounds bounds = zoomFitBoundsBuilder.build();
+
 							if (places.size() > 2) {
 								try {
+									final LatLngBounds bounds = zoomFitBoundsBuilder.build();
 									final CameraUpdate upd = CameraUpdateFactory.newLatLngBounds(bounds, 30);
 									map.animateCamera(upd);
 								} catch (IllegalStateException e) {

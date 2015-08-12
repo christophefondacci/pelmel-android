@@ -24,6 +24,7 @@ import com.nextep.json.model.impl.JsonPlaceOverview;
 import com.nextep.json.model.impl.JsonSpecialEvent;
 import com.nextep.json.model.impl.JsonUser;
 import com.nextep.pelmel.PelMelApplication;
+import com.nextep.pelmel.PelMelConstants;
 import com.nextep.pelmel.cache.model.Cache;
 import com.nextep.pelmel.cache.model.impl.MemorySizedTTLCacheImpl;
 import com.nextep.pelmel.helpers.ContextHolder;
@@ -613,6 +614,7 @@ public class DataServiceImpl implements DataService {
             ContextHolder.users = users;
             ContextHolder.events = events;
             ContextHolder.deals = deals;
+            ContextHolder.radius = radius == null ? (int)PelMelConstants.DEFAULT_RADIUS : radius;
             return places;
         } else {
             return Collections.emptyList();
@@ -706,10 +708,11 @@ public class DataServiceImpl implements DataService {
     public List<Place> getNearbyPlaces(User currentUser, double latitude,
                                        double longitude, String parentKey, String searchText,
                                        Integer radius, boolean forceRefresh) {
+        final int realRadius = radius == null ? (int)PelMelConstants.DEFAULT_RADIUS : radius;
         if (parentKey != null) {
             return listNearbyPlaces(currentUser, latitude, longitude,
                     parentKey, searchText, radius);
-        } else if (nearbyPlaces == null || forceRefresh) {
+        } else if (nearbyPlaces == null || forceRefresh || realRadius != ContextHolder.radius) {
             nearbyPlaces = listNearbyPlaces(currentUser, latitude, longitude,
                     null, null, radius);
         }
@@ -766,7 +769,7 @@ public class DataServiceImpl implements DataService {
         final int day = cal.get(Calendar.DAY_OF_MONTH);
         params.put("birthYYYY", String.valueOf(year));
         params.put("birthMM", String.valueOf(month+1));
-        params.put("birthDD", String.valueOf(day+1));
+        params.put("birthDD", String.valueOf(day));
 
         params.put("description", user.getDescription());
         if (user.getDescriptionKey() != null) {
