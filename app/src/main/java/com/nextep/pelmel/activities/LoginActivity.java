@@ -5,9 +5,11 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -60,6 +62,18 @@ public class LoginActivity extends Activity implements OnClickListener,
 		TextView loginLabel = (TextView) findViewById(R.id.loginLabel);
 		TextView registerIntroLabel = (TextView) findViewById(R.id.registerIntroHint);
 		TextView registerLabel = (TextView) findViewById(R.id.registerLabel);
+		registerPseudo.setSingleLine(true);
+		registerPseudo.setImeOptions(EditorInfo.IME_ACTION_SEND);
+		registerPseudo.setOnKeyListener(new View.OnKeyListener() {
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				if(event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+					register();
+					return true;
+				}
+				return false;
+			}
+		});
 		Strings.setFontFamily(loginEmail);
 		Strings.setFontFamily(loginPassword);
 		Strings.setFontFamily(loginButton);
@@ -77,19 +91,7 @@ public class LoginActivity extends Activity implements OnClickListener,
 
 			@Override
 			public void onClick(View v) {
-				final String login = registerLogin.getText().toString();
-				final String password = registerPassword.getText().toString();
-				final String passwordConfirm = registerPasswordConfirm
-						.getText().toString();
-				final String pseudo = registerPseudo.getText().toString();
-				progressDialog = new ProgressDialog(LoginActivity.this);
-				progressDialog.setCancelable(false);
-				progressDialog.setMessage(getString(R.string.loginWaitMsg));
-				progressDialog.setTitle(getString(R.string.waitTitle));
-				progressDialog.setIndeterminate(true);
-				progressDialog.show();
-				PelMelApplication.getUserService().register(login, password,
-						passwordConfirm, pseudo, LoginActivity.this);
+				register();
 			}
 		});
 		loggingHint = (TextView) findViewById(R.id.loggingHint);
@@ -137,7 +139,21 @@ public class LoginActivity extends Activity implements OnClickListener,
 		}
 
 	}
-
+	private void register() {
+		final String login = registerLogin.getText().toString();
+		final String password = registerPassword.getText().toString();
+		final String passwordConfirm = registerPasswordConfirm
+				.getText().toString();
+		final String pseudo = registerPseudo.getText().toString();
+		progressDialog = new ProgressDialog(LoginActivity.this);
+		progressDialog.setCancelable(false);
+		progressDialog.setMessage(getString(R.string.loginWaitMsg));
+		progressDialog.setTitle(getString(R.string.waitTitle));
+		progressDialog.setIndeterminate(true);
+		progressDialog.show();
+		PelMelApplication.getUserService().register(login, password,
+				passwordConfirm, pseudo, LoginActivity.this);
+	}
 	private void login(String username, String password) {
 		PelMelApplication.setSearchParentKey(null);
 		progressDialog = new ProgressDialog(this);

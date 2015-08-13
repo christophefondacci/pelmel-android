@@ -122,8 +122,12 @@ public class MessageServiceImpl implements MessageService {
 			final JsonManyToOneMessageList messagesList = webService.getReviewsAsMessages(
 					currentUser, calItemKey, loc.getLatitude(), loc.getLongitude(), page);
 
-			processMessages(messagesList,realm);
-			reviewsCount = messagesList.getMessages().size();
+			if(messagesList != null) {
+				processMessages(messagesList, realm);
+				reviewsCount = messagesList.getMessages().size();
+			} else {
+				break;
+			}
 			page++;
 		}
 		realm.close();
@@ -132,6 +136,10 @@ public class MessageServiceImpl implements MessageService {
 
 	private int processMessages(JsonManyToOneMessageList messagesList, Realm realm) {
 
+		// Might be null for group messages, we avoid a crash for now
+		if(messagesList == null) {
+			return 0;
+		}
 		realm.beginTransaction();
 
 		// Building / retrieving recipients definition for this list of messages

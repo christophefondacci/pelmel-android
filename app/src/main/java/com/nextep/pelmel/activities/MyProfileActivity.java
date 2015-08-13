@@ -51,6 +51,7 @@ public class MyProfileActivity extends ActionBarActivity implements UserListener
         setContentView(R.layout.activity_myprofile);
         listview = (ListView)findViewById(R.id.listView);
         listview.setOnItemClickListener(this);
+        listview.setDividerHeight(0);
         imageService = PelMelApplication.getImageService();
         PelMelApplication.getUserService().getCurrentUser(this);
     }

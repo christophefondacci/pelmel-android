@@ -16,6 +16,7 @@ import com.nextep.pelmel.activities.GalleryActivity;
 import com.nextep.pelmel.dialogs.SelectImageDialogFragment;
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Image;
+import com.nextep.pelmel.model.User;
 
 import java.util.List;
 
@@ -61,7 +62,7 @@ public class ImagePagerAdapter extends PagerAdapter {
         }
         container.addView(viewLayout);
 
-        if(clickEnabled) {
+        if(clickEnabled && !(calObject instanceof User)) {
             imgDisplay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

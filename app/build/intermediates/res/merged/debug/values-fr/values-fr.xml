@@ -91,8 +91,6 @@
     <eat-comment/>
     <string name="counter_arehere">{0} y sont</string>
     <string name="counter_arehere_singular">{0} y est</string>
-    <string name="counter_arein">{0} y seront</string>
-    <string name="counter_arein_singular">{0} y seront</string>
     <string name="counter_chat">Chat</string>
     <string name="counter_comments">{0} Commentaires</string>
     <string name="counter_comments_singular">{0} Commentaires</string>

@@ -306,7 +306,7 @@ public class DataServiceImpl implements DataService {
         // Getting thumb
         if (json instanceof JsonLightUser) {
             final JsonMedia jsonMedia = ((JsonLightUser) json).getThumb();
-            if (user.getImages().isEmpty()) {
+            if (jsonMedia != null && user.getImages().isEmpty()) {
                 final Image thumb = getImageFromJson(jsonMedia);
                 user.addImage(thumb);
             }

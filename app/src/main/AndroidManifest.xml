@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nextep.pelmel"
-    android:versionCode="9"
-    android:versionName="2.6.1" >
+    android:versionCode="11"
+    android:versionName="2.6.2" >
 
     <uses-sdk
         android:minSdkVersion="12"
@@ -74,8 +74,6 @@
                 <action android:name="com.google.android.gms.iid.InstanceID"/>
             </intent-filter>
         </service>
-        <activity android:name=".activities.TabBarActivity" >
-        </activity>
         <activity
             android:name=".activities.ListPlacesActivity"
             android:label="@string/app_name" >
@@ -92,7 +90,6 @@
         <!-- DON'T KNOW, NOT WORKING -->
         <!--android:value="AIzaSyCrHWO2iZlLYbCM3U9UrCOYNQ6kiMmxWTQ" />-->
 
-        <activity android:name=".activities.AccountActivity" />
         <activity android:name=".activities.MyProfileActivity" />
         <activity android:name=".activities.PhotosManagerActivity" />
         <activity android:name=".activities.LoginActivity" android:noHistory="true" >

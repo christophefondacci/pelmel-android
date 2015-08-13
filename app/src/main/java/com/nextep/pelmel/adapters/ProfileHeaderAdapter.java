@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
 import com.nextep.pelmel.activities.Refreshable;
+import com.nextep.pelmel.dialogs.SelectImageDialogFragment;
 import com.nextep.pelmel.model.User;
 
 import java.text.DateFormat;
@@ -106,6 +107,13 @@ public class ProfileHeaderAdapter extends BaseAdapter {
                 }
             });
 
+            viewHolder.thumbImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final SelectImageDialogFragment selectDialog = new SelectImageDialogFragment();
+                    selectDialog.show(activity.getSupportFragmentManager(), "PHOTO");
+                }
+            });
 
         } else {
             final BirthdayViewHolder viewHolder;

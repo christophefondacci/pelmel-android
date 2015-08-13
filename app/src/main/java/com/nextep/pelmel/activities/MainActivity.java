@@ -110,11 +110,15 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
         }
         getSupportFragmentManager().executePendingTransactions();
 
-        slidingLayout.setPanelHeight(snippetHeight);
-        if(isOpen) {
-            slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+        try {
+            slidingLayout.setPanelHeight(snippetHeight);
+            if (isOpen) {
+                slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+            }
+            notifySnippetOpenState();
+        } catch(RuntimeException e) {
+            Log.e(TAG_SNIPPET,"Unable to set snippet height for now: " + e.getMessage(),e);
         }
-        notifySnippetOpenState();
     }
 
     @Override
