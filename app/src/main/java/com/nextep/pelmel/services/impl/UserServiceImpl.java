@@ -14,9 +14,11 @@ import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.PelMelConstants;
 import com.nextep.pelmel.R;
 import com.nextep.pelmel.activities.LoginActivity;
+import com.nextep.pelmel.exception.PelmelException;
 import com.nextep.pelmel.listeners.UserListener;
 import com.nextep.pelmel.listeners.UserRegisterListener;
 import com.nextep.pelmel.model.Place;
+import com.nextep.pelmel.model.ServiceCallback;
 import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.services.DataService;
 import com.nextep.pelmel.services.UserService;
@@ -35,6 +37,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -342,5 +346,33 @@ public class UserServiceImpl implements UserService {
 
 	public void checkOut(Place place, CheckInCallback callback) {
 		checkInOrOut(place,callback,true);
+	}
+
+	@Override
+	public void resetPassword(final String email, final ServiceCallback callback) {
+
+		PelMelApplication.runOnBackgroundThread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					webService.postRequest(new URL(WebService.BASE_URL + "/lostPassword"), "email", email);
+					PelMelApplication.runOnMainThread(new Runnable() {
+						@Override
+						public void run() {
+							callback.success();
+						}
+					});
+
+				} catch (MalformedURLException | PelmelException e) {
+					Log.e(LOG_USER_TAG, "Unable to call lostPassword service: " + e.getMessage(), e);
+					PelMelApplication.runOnMainThread(new Runnable() {
+						@Override
+						public void run() {
+							callback.failure("Unable to call lostPassword service: " + e.getMessage());
+						}
+					});
+				}
+			}
+		});
 	}
 }

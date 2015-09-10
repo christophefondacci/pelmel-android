@@ -21,6 +21,7 @@ import com.nextep.pelmel.R;
 import com.nextep.pelmel.helpers.Strings;
 import com.nextep.pelmel.listeners.UserListener;
 import com.nextep.pelmel.listeners.UserRegisterListener;
+import com.nextep.pelmel.model.ServiceCallback;
 import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.services.UserService;
 
@@ -35,6 +36,7 @@ public class LoginActivity extends Activity implements OnClickListener,
 	private EditText registerPassword;
 	private EditText registerPasswordConfirm;
 	private EditText registerPseudo;
+	private TextView forgotPassword;
 	private Button registerButton;
 	private UserService userService;
 	private ProgressDialog progressDialog;
@@ -58,6 +60,7 @@ public class LoginActivity extends Activity implements OnClickListener,
 		registerPasswordConfirm = (EditText) findViewById(R.id.registerPasswordConfirm);
 		registerPseudo = (EditText) findViewById(R.id.registerPseudo);
 		registerButton = (Button) findViewById(R.id.registerButton);
+		forgotPassword = (TextView)findViewById(R.id.forgotPassword);
 		TextView loginIntroLabel = (TextView) findViewById(R.id.loginIntroLabel);
 		TextView loginLabel = (TextView) findViewById(R.id.loginLabel);
 		TextView registerIntroLabel = (TextView) findViewById(R.id.registerIntroHint);
@@ -67,7 +70,7 @@ public class LoginActivity extends Activity implements OnClickListener,
 		registerPseudo.setOnKeyListener(new View.OnKeyListener() {
 			@Override
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
-				if(event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+				if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
 					register();
 					return true;
 				}
@@ -82,11 +85,30 @@ public class LoginActivity extends Activity implements OnClickListener,
 		Strings.setFontFamily(registerPasswordConfirm);
 		Strings.setFontFamily(registerPseudo);
 		Strings.setFontFamily(registerButton);
+		Strings.setFontFamily(forgotPassword);
 		Strings.setFontFamily(loginIntroLabel);
 		Strings.setFontFamily(loginLabel);
 		Strings.setFontFamily(registerIntroLabel);
 		Strings.setFontFamily(registerLabel);
 
+		forgotPassword.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				PelMelApplication.getUserService().resetPassword(loginEmail.getText().toString(), new ServiceCallback() {
+					@Override
+					public void success(Object... successObjects) {
+						Toast t = Toast.makeText(LoginActivity.this,"Reset password email has been sent",Toast.LENGTH_LONG);
+						t.show();
+					}
+
+					@Override
+					public void failure(Object... failureObjects) {
+						Toast t = Toast.makeText(LoginActivity.this,"Unable to send password reset email",Toast.LENGTH_LONG);
+						t.show();
+					}
+				});
+			}
+		});
 		registerButton.setOnClickListener(new OnClickListener() {
 
 			@Override

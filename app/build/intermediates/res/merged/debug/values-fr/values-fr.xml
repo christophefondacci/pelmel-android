@@ -135,6 +135,7 @@
     <string name="loginPasswordConfirmPlaceholder">Confirmation</string>
     <string name="loginPasswordPlaceholder">Mot de passe</string>
     <string name="loginWaitMsg">Connexion…</string>
+    <string name="login_forgot_password">Oublié votre mot de passe ?</string>
     <string name="logout">Déconnexion</string>
     <string name="month.april">Avril</string>
     <string name="month.august">Août</string>

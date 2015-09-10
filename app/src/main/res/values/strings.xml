@@ -276,7 +276,7 @@ In no event will the COMPANY, its suppliers or other third parties mentioned at 
 The COMPANY may revise this Agreement at any time without notice by updating this posting. By using this Site you agree to be bound by any such revisions and should therefore periodically visit this Site and page to determine the then current Terms of Access and Use conditions of use to which you are bound.]]></string>
     <string name="snippet_distance_intro">snapshot</string>
     <string name="gcmServerId">AIzaSyACN6vBXmMCvzg4yddWkGZxBOk3VtK50vQ</string>
-
+    <string name="login_forgot_password">Forgot your password?</string>
 
 
 </resources>

@@ -120,7 +120,15 @@
                 android:background="@drawable/bg_login_button"/>
 
         </LinearLayout>
-
+        <TextView
+            android:id="@+id/forgotPassword"
+            android:layout_gravity="right"
+            android:textColor="@color/white"
+            android:padding="10dp"
+            android:text="@string/login_forgot_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
     </LinearLayout>
 
     <TextView

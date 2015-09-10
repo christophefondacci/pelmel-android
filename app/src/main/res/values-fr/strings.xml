@@ -82,6 +82,7 @@
     <string name="liked_users_title">Il aime</string>
     <string name="loadingWaitMsg">Chargment&#8230;</string>
     <string name="locationProviderUnavailable">Impossible d\'obtenir votre position, vous devrez peut-être activer les services de localisation.</string>
+    <string name="login_forgot_password">Oublié votre mot de passe ?</string>
     <string name="loginIntroLabel">CONNEXION</string>
     <string name="loginWaitMsg">Connexion&#8230;</string>
     <string name="loginButtonLabel">Login</string>

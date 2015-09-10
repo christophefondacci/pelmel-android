@@ -3,6 +3,7 @@ package com.nextep.pelmel.services;
 import com.nextep.pelmel.listeners.UserListener;
 import com.nextep.pelmel.listeners.UserRegisterListener;
 import com.nextep.pelmel.model.Place;
+import com.nextep.pelmel.model.ServiceCallback;
 import com.nextep.pelmel.model.User;
 
 public interface UserService {
@@ -109,4 +110,12 @@ public interface UserService {
      * @param callback the callback that should be called when action is complete
      */
     void checkOut(Place place, CheckInCallback callback);
+
+    /**
+     * Sends a reset password email to this user
+     *
+     * @param email the email of the user to send the reset password link
+     * @param callback the ServiceCallback
+     */
+    void resetPassword(String email, ServiceCallback callback);
 }
