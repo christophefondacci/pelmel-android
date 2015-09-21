@@ -21,6 +21,10 @@
 	<color name="pelmel">#f48020</color>
 	<color name="pelmelActionBar">#eb7500</color>
 	<color name="pelmelBackground">#272a2e</color>
+	<color name="pelmelDealBackground">#E4E2E2</color>
+	<color name="dealTextColor">#717171</color>
+	<color name="dealListBgColor">#141A2F</color>
+
 	<color name="hours_open">#72ff00</color>
 	<color name="hours_closed">#ffbb56</color>
 	<color name="counterBackground">#31363a</color>

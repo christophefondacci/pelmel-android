@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+    android:background="@color/pelmelBackground">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        android:background="@color/dealListBgColor"></View>
+    <ImageView
+        android:layout_width="57dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:id="@+id/placeImage"
+        android:src="@drawable/no_photo"
+        android:scaleType="centerCrop"/>
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/placeImage"
+        android:layout_marginLeft="25dp"
+        android:layout_alignTop="@id/placeImage"
+        android:text="Nom de l'établissement"
+        android:textColor="@color/dealTextColor"
+        android:id="@+id/placeLabel"
+        android:textSize="20dp"/>
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/placeLabel"
+        android:layout_alignEnd="@id/placeLabel"
+        android:layout_below="@id/placeLabel"
+        android:layout_marginTop="3dp"
+        android:text="Buy 1 / Get 1 Free"
+        android:textColor="@color/white"
+        android:id="@+id/dealLabel"
+        android:textSize="16sp"/>
+    <View
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/placeImage"
+        android:layout_alignBottom="@id/placeImage"
+        android:background="@color/pelmelDealBackground"
+        android:layout_toRightOf="@id/placeImage"
+        android:layout_marginLeft="13dp"
+    ></View>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="34dp"
+        android:layout_alignLeft="@id/placeLabel"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+        android:background="@color/pelmel"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp"
+        android:id="@+id/useDealButton"
+        android:text="USE THIS DEAL"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        />
+</RelativeLayout>

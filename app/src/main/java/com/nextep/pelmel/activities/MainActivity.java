@@ -43,6 +43,8 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
     private ProgressBar bannerProgress;
     private ProgressDialog progressDialog;
 
+    private View slidingDragView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -182,6 +184,11 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
         final SlidingUpPanelLayout slidingLayout = (SlidingUpPanelLayout) findViewById(R.id.slidingPanel);
         if(childSupport != null) {
             slidingLayout.setScrollableView(childSupport.getScrollableView());
+            if(childSupport.getScrollableView()==null) {
+                slidingLayout.setDragView(null);
+            } else {
+                slidingLayout.setTouchEnabled(true);
+            }
         }
         notifySnippetOpenState();
     }

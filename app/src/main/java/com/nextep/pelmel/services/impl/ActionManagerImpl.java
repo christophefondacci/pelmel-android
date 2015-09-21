@@ -9,6 +9,7 @@ import com.nextep.json.model.impl.JsonLikeInfo;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.activities.ChatConversationActivity;
 import com.nextep.pelmel.activities.ListCheckinsFragment;
+import com.nextep.pelmel.activities.ListDealsFragment;
 import com.nextep.pelmel.model.Action;
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Event;
@@ -36,6 +37,7 @@ public class ActionManagerImpl implements ActionManager {
         registerChatAction();
         registerCheckinAction();
         registerCheckoutAction();
+        registerListDealsAction();
         webService = new WebService();
     }
     @Override
@@ -185,6 +187,24 @@ public class ActionManagerImpl implements ActionManager {
             }
         };
         commandsActionMap.put(Action.CHECKIN,cmd);
+    }
+    private void registerListDealsAction() {
+        final ActionCommand cmd = new ActionCommand() {
+            @Override
+            public Object execute(Object parameter) {
+                // If no object passed for checkin we display the selection dialog
+                final ListDealsFragment dealsFragment = new ListDealsFragment();
+                uiThreadHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        PelMelApplication.getSnippetContainerSupport().showDialog(dealsFragment);
+                    }
+                });
+
+                return parameter;
+            }
+        };
+        commandsActionMap.put(Action.LIST_DEALS,cmd);
     }
     private void registerCheckoutAction() {
         final ActionCommand cmd = new ActionCommand() {

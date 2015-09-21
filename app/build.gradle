@@ -30,7 +30,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:18.0.0'
     compile 'com.google.maps.android:android-maps-utils:0.3.4'
     compile 'io.gsonfire:gson-fire:1.2.0'
-    compile 'com.sothree.slidinguppanel:library:3.1.0'
+    compile 'com.sothree.slidinguppanel:library:3.1.1'
     compile files('libs/httpmime-4.2.5.jar')
     compile files('libs/universal-image-loader-1.8.6.jar')
     compile 'com.makeramen:roundedimageview:2.1.2'

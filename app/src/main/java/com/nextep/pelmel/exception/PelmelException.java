@@ -5,6 +5,9 @@ package com.nextep.pelmel.exception;
  */
 public class PelmelException extends Exception {
 
+    public PelmelException(String msg) {
+        super(msg);
+    }
     public PelmelException(String msg, Throwable cause) {
         super(msg,cause);
     }

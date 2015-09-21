@@ -45,8 +45,8 @@
     <string name="counter_arehere">{0} y sont</string>
     <string name="counter_arehere_singular">{0} y est</string>
     <string name="counter_chat">Chat</string>
-    <string name="counter_comments">{0} Commentaires</string>
-    <string name="counter_comments_singular">{0} Commentaires</string>
+    <string name="counter_comments">{0} Avis</string>
+    <string name="counter_comments_singular">{0} Avis</string>
     <string name="counter_likes_user">{0} l\'aiment</string>
     <string name="counter_likes_user_singular">{0} l\'aime</string>
 
@@ -55,6 +55,26 @@
     <string name="counter_network_add">Add</string>
     <string name="counter_network_cancel">Cancel</string>
     <string name="counter_network_friends">Friends</string>
+
+    <string name="deal.activation.message">Activation de la promo...</string>
+    <string name="deal.available">Disponible</string>
+    <string name="deal.button.problem">Il y a un problème</string>
+    <string name="deal.button.whatsthis">Aide</string>
+    <string name="deal.delay">Disponible dans {0}</string>
+    <string name="deal.error.alreadyUsed">Déjà utilisé il y a moins de 24h</string>
+    <string name="deal.error.generic">Erreur technique, réessayez plus tard</string>
+    <string name="deal.error.quotaReached">Plus de promos disponibles</string>
+    <string name="deal.list.title">Promos à proximité</string>
+    <string name="deal.present">PRÉSENTER AU BARMAN</string>
+    <string name="deal.proceed">OFFREZ LA PROMOTION !</string>
+    <string name="deal.quota.label">Reste {0} / {1} total</string>
+    <string name="deal.report.error.text">Nous n\'avons pas réussi à contacter nos serveurs pour reporter votre problème. Vous avez peut-être des problèmes de connexion/réseau qui pourraient aussi être la cause du problème initial. Veuillez vérifier votre connexion et essayez à nouveau.</string>
+    <string name="deal.report.text">Nos administrateurs et le gérant de cet établissement ont été notifiés d\'un problème et vont faire de leur mieux pour le résoudre ou vous recontacter. Nous sommes désolé de la gêne occasionnée.</string>
+    <string name="deal.report.title">Problème signalé</string>
+    <string name="deal.type.TWO_FOR_ONE">1 acheté / 1 offert</string>
+    <string name="deal.use.countdown">Activation dans {0}</string>
+    <string name="deal.use.button">UTILISER LA PROMO</string>
+    <string name="deal.use.legal">Cette promotion est offerte par {0}, pas par nous.\nVous certifiez avoir l\'âge légal pour utiliser cette promotion.</string>
 
     <string name="disconnect">Déconnexion</string>
     <string name="distance.feet">{0} pieds</string>

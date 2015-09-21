@@ -107,6 +107,17 @@ public class MapActivity extends Fragment implements UserListener,
 				PelMelApplication.getActionManager().executeAction(Action.CHECKIN,null);
 			}
 		});
+
+		final ImageView dealAction = (ImageView)view.findViewById(R.id.dealButton);
+		final TextView dealBadge = (TextView) view.findViewById(R.id.dealsCountBadge);
+		PelMelApplication.getDealService().registerDealsViews(dealAction,dealBadge);
+		dealAction.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				PelMelApplication.getActionManager().executeAction(Action.LIST_DEALS,null);
+			}
+		});
+
 		// Setting bounds on user location
 //		final LatLng latlng = new LatLng(loc.getLatitude(), loc.getLongitude());
 //		final CameraUpdate upd = CameraUpdateFactory.newLatLngZoom(latlng, 14);

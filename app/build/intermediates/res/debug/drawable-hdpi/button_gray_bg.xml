@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-  <gradient
-      android:startColor="#ffffff"
-      android:centerColor="#c9c9c9"
-      android:endColor="#919191"
-      android:angle="270" />
-</shape><!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/drawable-hdpi/button_gray_bg.xml -->

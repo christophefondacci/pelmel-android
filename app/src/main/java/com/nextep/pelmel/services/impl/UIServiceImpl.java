@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.PelMelConstants;
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.helpers.Strings;
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.Place;
@@ -25,6 +26,7 @@ import com.nextep.pelmel.providers.impl.UserInfoProvider;
 import com.nextep.pelmel.services.UIService;
 
 import java.text.MessageFormat;
+import java.util.Date;
 
 public class UIServiceImpl implements UIService {
 
@@ -57,6 +59,31 @@ public class UIServiceImpl implements UIService {
         setUnreadMessagesCount(unreadMessages);
     }
 
+    @Override
+    public String getDelayString(Date fromDate) {
+        long delta = (fromDate.getTime()-System.currentTimeMillis())/1000;
+
+        if(delta < 60) {
+            delta = 60;
+        }
+        long value;
+        if(delta < 3600 || delta > 999999999) {
+            // Display in minutes
+            value = delta / 60;
+            String minStr = Strings.getText(R.string.time_minutes);
+            return value + " " + minStr;
+        } else if(delta < 86400) {
+            // Display in hours
+            value = delta / 3600;
+            String hourStr = Strings.getText(R.string.time_hours);
+            return value + " " + hourStr;
+        } else {
+            // Display in days
+            value = delta / 86400;
+            String dayStr =Strings.getText(R.string.time_days);
+            return value + " " + dayStr;
+        }
+    }
     @Override
     public int getColorForPlaceType(String placeType) {
         if (PelMelConstants.PLACE_TYPE_ASSOCIATION.equals(placeType)) {

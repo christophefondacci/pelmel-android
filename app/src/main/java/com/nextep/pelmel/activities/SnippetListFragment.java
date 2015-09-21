@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.nextep.pelmel.R;
 import com.nextep.pelmel.adapters.SnippetAddressInfoAdapter;
 import com.nextep.pelmel.adapters.SnippetAttendAdapter;
 import com.nextep.pelmel.adapters.SnippetCheckinAdapter;
+import com.nextep.pelmel.adapters.SnippetDealsAdapter;
 import com.nextep.pelmel.adapters.SnippetDescriptionListAdapter;
 import com.nextep.pelmel.adapters.SnippetEventsListAdapter;
 import com.nextep.pelmel.adapters.SnippetGalleryAdapter;
@@ -29,6 +31,7 @@ import com.nextep.pelmel.listeners.OverviewListener;
 import com.nextep.pelmel.listeners.UserListener;
 import com.nextep.pelmel.listview.ExpandableListItem;
 import com.nextep.pelmel.model.CalObject;
+import com.nextep.pelmel.model.Deal;
 import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.EventType;
 import com.nextep.pelmel.model.Place;
@@ -48,13 +51,15 @@ import java.util.Map;
  */
 public class SnippetListFragment extends ListFragment implements UserListener, AdapterView.OnItemClickListener, SnippetChildSupport, OverviewListener, Refreshable {
 
+
+    private static final String LOG_TAG = "SNIPPET";
     private static final String BUNDLE_STATE_ITEM_KEY = "itemKey";
     private static final String BUNDLE_STATE_NULL_OBJ = "null";
 
     private SnippetInfoProvider infoProvider;
     private SnippetSectionedAdapter adapter;
     private SnippetContainerSupport snippetContainerSupport;
-    private boolean isOpened = false;
+    private Boolean paused;
 
     public void setInfoProvider(SnippetInfoProvider provider) {
         this.infoProvider = provider;
@@ -66,6 +71,30 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
         if(snippetContainerSupport != null) {
             snippetContainerSupport.setSnippetChild(this);
         }
+        if(paused != null && paused.booleanValue()) {
+            updateData();
+            paused = Boolean.FALSE;
+        }
+        Log.d(LOG_TAG,"resume");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        paused = Boolean.TRUE;
+        Log.d(LOG_TAG,"pause");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(LOG_TAG,"destroy");
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.d(LOG_TAG,"detach");
     }
 
     @Override
@@ -128,6 +157,10 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
         if(infoProvider.getItem() == null) {
             adapter.addSection(SnippetSectionedAdapter.SECTION_PLACES, new SnippetPlacesListAdapter(this.getActivity(), ContextHolder.places));
         } else {
+            // Deals section
+            if(infoProvider.getItem() instanceof Place) {
+                adapter.addSection(SnippetSectionedAdapter.SECTION_DEALS, new SnippetDealsAdapter(this.getActivity(), (Place)infoProvider.getItem(),snippetContainerSupport));
+            }
             // Thumbs section
             adapter.addSection(SnippetSectionedAdapter.SECTION_THUMBS,new SnippetThumbsListAdapter(this.getActivity(),infoProvider));
 
@@ -184,7 +217,11 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         final Object obj = adapter.getItem(position);
-        if(obj instanceof CalObject) {
+        if(obj instanceof Deal) {
+            final DealUseActivity dealUseActivity = new DealUseActivity();
+            dealUseActivity.setDeal((Deal)obj);
+            snippetContainerSupport.showSnippetForFragment(dealUseActivity,true,false);
+        } else if(obj instanceof CalObject) {
 
             SnippetInfoProvider provider = PelMelApplication.getUiService().buildInfoProviderFor((CalObject)obj);
             if(provider != null) {
@@ -199,7 +236,6 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
             SnippetGalleryAdapter galleryAdapter = (SnippetGalleryAdapter)adapter.getSection(SnippetSectionedAdapter.SECTION_GALLERY);
             if(galleryAdapter != null) {
                 ExpandableListItem listItem = (ExpandableListItem)galleryAdapter.getItem(0);
-//                listItem.getContentView().setTextViewWrap((LinearLayout) view);
 
                 int fromHeight = 0;
                 int toHeight = 0;
@@ -215,48 +251,18 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
                 if(listItem.getContentView()!=null) {
 //                    toggleAnimation(listItem, fromHeight, toHeight, true);
                 }
-//                if (snippetOpened) {
-//                    ((ExpandingListView) getListView()).expandItem(1);
-//                } else {
-//                    ((ExpandingListView) getListView()).collapseItem(1);
-//                }
             }
         }
     }
     private void toggleAnimation(final ExpandableListItem listItem,
                                  final int fromHeight, final int toHeight, final boolean goToItem) {
 
-//        ResizeAnimation resizeAnimation = new ResizeAnimation(adapter,
-//                listItem, 0, fromHeight, 0, toHeight);
-//        resizeAnimation.setAnimationListener(new Animation.AnimationListener() {
-//
-//            @Override
-//            public void onAnimationStart(Animation animation) {
-//            }
-//
-//            @Override
-//            public void onAnimationRepeat(Animation animation) {
-//            }
-//
-//            @Override
-//            public void onAnimationEnd(Animation animation) {
         AbsListView.LayoutParams p = (AbsListView.LayoutParams) listItem.getContentView().getLayoutParams();
         p.height = (int) toHeight;
-//        p.width = (int) width;
         listItem.setCurrentHeight(p.height);
-//        ((BaseAdapter)mListAdapter).notifyDataSetChanged();
-                listItem.setExpanded(!listItem.isExpanded());
-//                listItem.setDrawable(listItem.isOpen() ? R.drawable.up
-//                        : R.drawable.down);
-                listItem.setCurrentHeight(toHeight);
-                adapter.notifyDataSetChanged();
-//
-////                if (goToItem)
-////                    goToItem(position);
-//            }
-//        });
-//
-//        listItem.getContentView().startAnimation(resizeAnimation);
+        listItem.setExpanded(!listItem.isExpanded());
+        listItem.setCurrentHeight(toHeight);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -267,7 +273,9 @@ public class SnippetListFragment extends ListFragment implements UserListener, A
     @Override
     public void overviewDataAvailable(CalObject object) {
         infoProvider = PelMelApplication.getUiService().buildInfoProviderFor(object);
-        updateData();
+        if(paused == null || !paused.booleanValue()) {
+            updateData();
+        }
     }
 
     @Override

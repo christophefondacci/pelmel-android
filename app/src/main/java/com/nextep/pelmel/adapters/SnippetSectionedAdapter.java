@@ -25,6 +25,7 @@ public class SnippetSectionedAdapter extends SectionedAdapter implements View.On
     public static final String SECTION_THEME    = "THEME";
     public static final String SECTION_EVENTS    = "events";
     public static final String SECTION_DESCRIPTION="description";
+    public static final String SECTION_DEALS    ="deals";
     public static final String SECTION_THUMBS   ="thumbs";
     public static final String SECTION_CHECKIN   ="checkin";
     public static final String SECTION_ATTEND   ="attend";
@@ -119,7 +120,7 @@ public class SnippetSectionedAdapter extends SectionedAdapter implements View.On
                     replaceSection(SECTION_PLACES, new SnippetEventsListAdapter(context, ContextHolder.events));
                     break;
                 case DEALS:
-                    replaceSection(SECTION_PLACES, new SnippetEventsListAdapter(context, ContextHolder.deals));
+                    replaceSection(SECTION_PLACES, new SnippetEventsListAdapter(context, ContextHolder.happyHours));
                     break;
                 case PLACES:
                     replaceSection(SECTION_PLACES, new SnippetPlacesListAdapter(context, ContextHolder.places));

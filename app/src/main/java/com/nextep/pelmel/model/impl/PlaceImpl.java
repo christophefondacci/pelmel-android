@@ -1,5 +1,6 @@
 package com.nextep.pelmel.model.impl;
 
+import com.nextep.pelmel.model.Deal;
 import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.RecurringEvent;
@@ -18,6 +19,7 @@ public class PlaceImpl extends AbstractCalObject implements Place {
 	private int insidersCount;
 	private int reviewsCount;
 
+	private List<Deal> deals = new ArrayList<>();
 	private final List<Event> events = new ArrayList<Event>();
 	private final List<User> likers = new ArrayList<User>();
 	private final List<User> insiders = new ArrayList<User>();
@@ -134,5 +136,15 @@ public class PlaceImpl extends AbstractCalObject implements Place {
 	@Override
 	public int getReviewsCount() {
 		return reviewsCount;
+	}
+
+	@Override
+	public List<Deal> getDeals() {
+		return deals;
+	}
+
+	@Override
+	public void setDeals(List<Deal> deals) {
+		this.deals = deals;
 	}
 }

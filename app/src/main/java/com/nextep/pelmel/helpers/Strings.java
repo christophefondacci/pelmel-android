@@ -1,6 +1,7 @@
 package com.nextep.pelmel.helpers;
 
 import android.graphics.Typeface;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.nextep.pelmel.PelMelApplication;
@@ -13,7 +14,9 @@ import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * Created by cfondacci on 22/07/15.
@@ -21,7 +24,7 @@ import java.util.Locale;
 public final class Strings {
     private static  DateFormat eventDayFormat =  new SimpleDateFormat("EEE");
     private static  DateFormat eventTimeFormat =  DateFormat.getTimeInstance(DateFormat.SHORT);
-    private static Typeface typeface;
+    private static Map<PelmelFont,Typeface> fontsMap = new HashMap<>();
 
     private Strings() {
     }
@@ -97,11 +100,29 @@ public final class Strings {
     }
 
     public static void setFontFamily(TextView textView) {
+        setFontFamily(textView,PelmelFont.DEFAULT);
+    }
+    public static void setFontFamily(TextView textView, PelmelFont font) {
+        textView.setTypeface(getTypeface(font));
+    }
+    public static void setFontFamily(Button button, PelmelFont font) {
+        button.setTypeface(getTypeface(font));
+    }
+    private static Typeface getTypeface(PelmelFont font) {
+        Typeface typeface = fontsMap.get(font);
         if(typeface == null) {
             synchronized (Strings.class) {
-                typeface = Typeface.createFromAsset(PelMelApplication.getInstance().getAssets(),"OpenSans-Regular.ttf");
+                switch(font) {
+                    case DEFAULT:
+                        typeface = Typeface.createFromAsset(PelMelApplication.getInstance().getAssets(),"OpenSans-Regular.ttf");
+                        break;
+                    case SOURCE_SANSPRO_LIGHT:
+                        typeface = Typeface.createFromAsset(PelMelApplication.getInstance().getAssets(),"SourceSansPro-Light.ttf");
+                        break;
+                }
+                fontsMap.put(font,typeface);
             }
         }
-        textView.setTypeface(typeface);
+        return typeface;
     }
 }

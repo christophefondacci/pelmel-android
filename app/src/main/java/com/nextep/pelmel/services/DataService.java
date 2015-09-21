@@ -5,6 +5,7 @@ import android.content.Context;
 import com.nextep.json.model.IJsonLightEvent;
 import com.nextep.json.model.IJsonLightPlace;
 import com.nextep.json.model.IJsonLightUser;
+import com.nextep.json.model.impl.JsonDeal;
 import com.nextep.json.model.impl.JsonEvent;
 import com.nextep.json.model.impl.JsonMedia;
 import com.nextep.json.model.impl.JsonPlace;
@@ -13,6 +14,7 @@ import com.nextep.json.model.impl.JsonUser;
 import com.nextep.pelmel.listeners.LikeCallback;
 import com.nextep.pelmel.listeners.OverviewListener;
 import com.nextep.pelmel.model.CalObject;
+import com.nextep.pelmel.model.Deal;
 import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.Image;
 import com.nextep.pelmel.model.Place;
@@ -37,6 +39,8 @@ public interface DataService {
     Event getEventFromLightJson(IJsonLightEvent json);
 
     Image getImageFromJson(JsonMedia json);
+
+    Deal getDealFromJson(JsonDeal json, CalObject place);
 
     /**
      * Provides the user for the specified key

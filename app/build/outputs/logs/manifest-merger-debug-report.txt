@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/cfondacci/Documents/pelmelguide/app/src/main/AndroidManifest.xml:2:1-112:12
+ADDED from /Users/cfondacci/Documents/pelmelguide/app/src/main/AndroidManifest.xml:2:1-113:12
 	xmlns:android
 		ADDED from /Users/cfondacci/Documents/pelmelguide/app/src/main/AndroidManifest.xml:2:11-69
 	package
@@ -102,7 +102,7 @@ MERGED from [com.android.support:support-v4:22.0.0] /Users/cfondacci/Documents/p
 MERGED from [com.android.support:appcompat-v7:22.0.0] /Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:support-v4:22.0.0] /Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/AndroidManifest.xml:20:5-43
 MERGED from [com.google.maps.android:android-maps-utils:0.3.4] /Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.maps.android/android-maps-utils/0.3.4/AndroidManifest.xml:5:5-43
-MERGED from [com.sothree.slidinguppanel:library:3.1.0] /Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.sothree.slidinguppanel/library/3.1.0/AndroidManifest.xml:7:5-43
+MERGED from [com.sothree.slidinguppanel:library:3.1.1] /Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.sothree.slidinguppanel/library/3.1.1/AndroidManifest.xml:7:5-43
 MERGED from [com.android.support:support-v4:22.0.0] /Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/AndroidManifest.xml:20:5-43
 MERGED from [com.makeramen:roundedimageview:2.1.2] /Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.makeramen/roundedimageview/2.1.2/AndroidManifest.xml:7:5-9:41
 	android:targetSdkVersion
@@ -228,7 +228,7 @@ ADDED from /Users/cfondacci/Documents/pelmelguide/app/src/main/AndroidManifest.x
 	android:name
 		ADDED from /Users/cfondacci/Documents/pelmelguide/app/src/main/AndroidManifest.xml:46:22-65
 application
-ADDED from /Users/cfondacci/Documents/pelmelguide/app/src/main/AndroidManifest.xml:48:5-110:19
+ADDED from /Users/cfondacci/Documents/pelmelguide/app/src/main/AndroidManifest.xml:48:5-111:19
 MERGED from [com.google.android.gms:play-services:7.5.0] /Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/7.5.0/AndroidManifest.xml:19:5-20
 MERGED from [com.google.android.gms:play-services-ads:7.5.0] /Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.5.0/AndroidManifest.xml:24:5-32:19
 MERGED from [com.google.android.gms:play-services-base:7.5.0] /Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/AndroidManifest.xml:20:5-24:19
@@ -316,7 +316,7 @@ MERGED from [com.android.support:support-v4:22.0.0] /Users/cfondacci/Documents/p
 MERGED from [com.android.support:appcompat-v7:22.0.0] /Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:22.0.0] /Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.maps.android:android-maps-utils:0.3.4] /Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.maps.android/android-maps-utils/0.3.4/AndroidManifest.xml:7:5-20
-MERGED from [com.sothree.slidinguppanel:library:3.1.0] /Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.sothree.slidinguppanel/library/3.1.0/AndroidManifest.xml:9:5-20
+MERGED from [com.sothree.slidinguppanel:library:3.1.1] /Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.sothree.slidinguppanel/library/3.1.1/AndroidManifest.xml:9:5-20
 MERGED from [com.android.support:support-v4:22.0.0] /Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/AndroidManifest.xml:22:5-20
 	android:label
 		ADDED from /Users/cfondacci/Documents/pelmelguide/app/src/main/AndroidManifest.xml:52:9-41
@@ -424,12 +424,16 @@ activity#com.nextep.pelmel.activities.MainActionBarActivity
 ADDED from /Users/cfondacci/Documents/pelmelguide/app/src/main/AndroidManifest.xml:106:9-70
 	android:name
 		ADDED from /Users/cfondacci/Documents/pelmelguide/app/src/main/AndroidManifest.xml:106:19-67
-activity#com.nextep.pelmel.activities.MainActivity
-ADDED from /Users/cfondacci/Documents/pelmelguide/app/src/main/AndroidManifest.xml:107:9-109:20
-	android:label
-		ADDED from /Users/cfondacci/Documents/pelmelguide/app/src/main/AndroidManifest.xml:108:53-69
+activity#com.nextep.pelmel.activities.WebBrowserFragment
+ADDED from /Users/cfondacci/Documents/pelmelguide/app/src/main/AndroidManifest.xml:107:9-67
 	android:name
-		ADDED from /Users/cfondacci/Documents/pelmelguide/app/src/main/AndroidManifest.xml:108:13-52
+		ADDED from /Users/cfondacci/Documents/pelmelguide/app/src/main/AndroidManifest.xml:107:19-64
+activity#com.nextep.pelmel.activities.MainActivity
+ADDED from /Users/cfondacci/Documents/pelmelguide/app/src/main/AndroidManifest.xml:108:9-110:20
+	android:label
+		ADDED from /Users/cfondacci/Documents/pelmelguide/app/src/main/AndroidManifest.xml:109:53-69
+	android:name
+		ADDED from /Users/cfondacci/Documents/pelmelguide/app/src/main/AndroidManifest.xml:109:13-52
 activity#com.google.android.gms.ads.AdActivity
 ADDED from [com.google.android.gms:play-services-ads:7.5.0] /Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.5.0/AndroidManifest.xml:26:9-29:64
 	android:configChanges

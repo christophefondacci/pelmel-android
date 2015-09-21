@@ -39,4 +39,7 @@ public interface PelMelConstants {
 	String INTENT_PARAM_SHOW_MESSAGES = "openMessages";
 
 	String PREF_KEY_PUSH_TOKEN = "androidPushToken";
+
+	long DEAL_USE_TIME_MILLIS = 1000*60*60*24;
+
 }

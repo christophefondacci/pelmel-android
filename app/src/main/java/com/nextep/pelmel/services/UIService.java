@@ -8,6 +8,8 @@ import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
 import com.nextep.pelmel.views.BadgeView;
 
+import java.util.Date;
+
 public interface UIService {
 
 	/**
@@ -76,5 +78,12 @@ public interface UIService {
 	 * @return
 	 */
 	Bitmap getNoPhotoFor(CalObject obj, boolean thumb);
+
+	/**
+	 * Builds a string expressing the delay between now and the given date
+	 * @param fromDate the date to compute the delay with
+	 * @return the delay string between current date and given date
+	 */
+	String getDelayString(Date fromDate);
 
 }

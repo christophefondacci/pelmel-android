@@ -10,6 +10,8 @@ import android.util.Log;
 import com.nextep.json.model.IJsonLightEvent;
 import com.nextep.json.model.IJsonLightPlace;
 import com.nextep.json.model.IJsonLightUser;
+import com.nextep.json.model.IJsonPlace;
+import com.nextep.json.model.impl.JsonDeal;
 import com.nextep.json.model.impl.JsonDescription;
 import com.nextep.json.model.impl.JsonEvent;
 import com.nextep.json.model.impl.JsonHour;
@@ -31,6 +33,9 @@ import com.nextep.pelmel.helpers.ContextHolder;
 import com.nextep.pelmel.listeners.LikeCallback;
 import com.nextep.pelmel.listeners.OverviewListener;
 import com.nextep.pelmel.model.CalObject;
+import com.nextep.pelmel.model.Deal;
+import com.nextep.pelmel.model.DealStatus;
+import com.nextep.pelmel.model.DealType;
 import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.EventType;
 import com.nextep.pelmel.model.Image;
@@ -39,11 +44,13 @@ import com.nextep.pelmel.model.RecurrencyType;
 import com.nextep.pelmel.model.RecurringEvent;
 import com.nextep.pelmel.model.Tag;
 import com.nextep.pelmel.model.User;
+import com.nextep.pelmel.model.impl.DealImpl;
 import com.nextep.pelmel.model.impl.EventImpl;
 import com.nextep.pelmel.model.impl.ImageImpl;
 import com.nextep.pelmel.model.impl.PlaceImpl;
 import com.nextep.pelmel.model.impl.RecurringEventImpl;
 import com.nextep.pelmel.model.impl.UserImpl;
+import com.nextep.pelmel.services.ConversionService;
 import com.nextep.pelmel.services.DataService;
 import com.nextep.pelmel.services.TagService;
 import com.nextep.pelmel.services.UserService;
@@ -69,6 +76,7 @@ public class DataServiceImpl implements DataService {
 
     private final static String LOG_TAG = "DataService";
     private Cache<Place> placeCache;
+    private Cache<Deal> dealCache;
     private Cache<User> userCache;
     private Cache<Image> imageCache;
     private Cache<Event> eventCache;
@@ -87,6 +95,7 @@ public class DataServiceImpl implements DataService {
         userCache = new MemorySizedTTLCacheImpl<User>(600000, 300);
         eventCache = new MemorySizedTTLCacheImpl<Event>(600000, 300);
         imageCache = new MemorySizedTTLCacheImpl<Image>(600000, 300);
+        dealCache = new MemorySizedTTLCacheImpl<Deal>(600000, 300);
     }
     @Override
     public Place getPlaceFromJson(JsonPlace json) {
@@ -95,43 +104,12 @@ public class DataServiceImpl implements DataService {
             place = new PlaceImpl();
             placeCache.put(json.getKey(), place);
         }
-        place.setKey(json.getKey());
-        place.setAddress(json.getAddress());
-        place.setDescription(json.getDescription());
+        fillPlaceFromJson(place,json);
         place.setDistance(json.getRawDistance());
         place.setDistanceLabel(json.getDistance());
-        place.setLatitude(json.getLat());
-        place.setLongitude(json.getLng());
         place.setLikeCount(json.getLikesCount());
         place.setInsidersCount(json.getUsersCount());
-        place.setName(json.getName());
-        place.setType(json.getType());
-        place.setCityName(json.getCity());
-        // Building tag list
-        final List<Tag> tags = new ArrayList<Tag>();
-        for (final String tagCode : json.getTags()) {
-            final Tag tag = tagService.getTag(tagCode);
-            if (tag != null) {
-                tags.add(tag);
-            }
-        }
-        place.setTags(tags);
 
-        // Building images
-        final List<Image> images = new ArrayList<Image>();
-        final JsonMedia mainJsonImage = json.getThumb();
-        if (mainJsonImage != null) {
-            // Processing main image if one defined
-            final Image mainImage = getImageFromJson(mainJsonImage);
-            images.add(mainImage);
-            // Processing other images
-            for (final JsonMedia media : json.getOtherImages()) {
-                final Image image = getImageFromJson(media);
-                images.add(image);
-            }
-            // Adding to object images list
-            place.setImages(images);
-        }
 
         // Building recurring events
         for (JsonSpecialEvent jsonSpecial : json.getSpecials()) {
@@ -139,6 +117,8 @@ public class DataServiceImpl implements DataService {
             event.setPlace(place);
             place.addRecurringEvent(event);
         }
+
+
         return place;
     }
 
@@ -183,10 +163,8 @@ public class DataServiceImpl implements DataService {
             }
             place.setName(json.getName());
             place.setType(json.getType());
-            if (place.getImages().isEmpty()) {
-                final Image thumb = getImageFromJson(json.getThumb());
-                place.addImage(thumb);
-            }
+            final Image thumb = getImageFromJson(json.getThumb());
+            place.setThumb(thumb);
             return place;
         }
         return null;
@@ -338,6 +316,41 @@ public class DataServiceImpl implements DataService {
     }
 
     @Override
+    public Deal getDealFromJson(JsonDeal json, CalObject place) {
+        final String key = json.getKey();
+        Deal deal = dealCache.get(key);
+        if (deal == null) {
+            deal = new DealImpl();
+            dealCache.put(key, deal);
+        }
+        deal.setKey(key);
+        if (place != null && json.getRelatedItemKey().equals(place.getKey())) {
+            deal.setRelatedObject(place);
+        }
+        DealType dealType = DealType.TWO_FOR_ONE;
+        try {
+            dealType = DealType.valueOf(json.getType());
+        } catch(IllegalArgumentException e) {
+            Log.e(LOG_TAG,"Invalid deal type '" + json.getType() + "' ignoring deal " + key,e);
+            return null;
+        }
+        deal.setDealType(dealType);
+        DealStatus status = DealStatus.PAUSED;
+        try {
+            status = DealStatus.valueOf(json.getStatus());
+        } catch(IllegalArgumentException e) {
+            Log.w(LOG_TAG,"Unknwon deal status '" + json.getStatus() + "' using PAUSED status" + key,e);
+        }
+        deal.setDealStatus(status);
+        deal.setStartDate(new Date(json.getStartDate() * 1000));
+        if(json.getLastUsedTime()>0)
+        deal.setLastUsedDate(new Date(json.getLastUsedTime()*1000));
+        deal.setMaxUses(json.getMaxUses());
+        deal.setUsedToday(json.getUsedToday());
+        return deal;
+    }
+
+    @Override
     public Event getEventFromLightJson(IJsonLightEvent json) {
         String key = json.getKey();
         String cacheKey = key;
@@ -405,28 +418,15 @@ public class DataServiceImpl implements DataService {
         }
     }
 
-    @Override
-    public Place getPlaceFromJsonOverview(JsonPlaceOverview json) {
-        if (json == null) {
-            return null;
-        }
-        Place place = placeCache.get(json.getKey());
-        if (place == null) {
-            place = new PlaceImpl();
-            place.setKey(json.getKey());
-            placeCache.put(json.getKey(), place);
-        }
+    private void fillPlaceFromJson(Place place, IJsonPlace json) {
+        place.setKey(json.getKey());
         place.setAddress(json.getAddress());
         place.setDescription(json.getDescription());
         place.setName(json.getName());
         place.setType(json.getType());
-        place.setLikeCount(json.getLikes());
-        place.setLiked(json.isLiked());
-        place.setReviewsCount(json.getCommentsCount());
         place.setLatitude(json.getLat());
         place.setLongitude(json.getLng());
         place.setCityName(json.getCity());
-
         // Building media
         final List<Image> images = new ArrayList<>();
         for(JsonMedia jsonMedia : json.getOtherImages()) {
@@ -447,6 +447,29 @@ public class DataServiceImpl implements DataService {
             tags.add(tag);
         }
         place.setTags(tags);
+
+        // Building happyHours
+        final List<Deal> deals = new ArrayList<>();
+        for(JsonDeal jsonDeal : json.getDeals()) {
+            final Deal deal = getDealFromJson(jsonDeal, place);
+            deals.add(deal);
+        }
+        place.setDeals(deals);
+    }
+    @Override
+    public Place getPlaceFromJsonOverview(JsonPlaceOverview json) {
+        if (json == null) {
+            return null;
+        }
+        Place place = placeCache.get(json.getKey());
+        if (place == null) {
+            place = new PlaceImpl();
+            placeCache.put(json.getKey(), place);
+        }
+        fillPlaceFromJson(place,json);
+        place.setLikeCount(json.getLikes());
+        place.setLiked(json.isLiked());
+        place.setReviewsCount(json.getCommentsCount());
 
         // Building likers
         final List<User> likers = new ArrayList<User>();
@@ -480,6 +503,8 @@ public class DataServiceImpl implements DataService {
             hours.add(hour);
         }
         place.setRecurringEvents(hours);
+
+
         return place;
     }
 
@@ -552,7 +577,7 @@ public class DataServiceImpl implements DataService {
         final List<JsonPlace> jsonPlaces = jsonResponse.getPlaces();
         if (jsonPlaces != null) {
             final List<Place> places = new ArrayList<Place>(jsonPlaces.size());
-            final List<Event> deals = new ArrayList<Event>();
+            final List<Event> happyHours = new ArrayList<Event>();
             final List<Event> themes = new ArrayList<Event>();
 
             // Processing places
@@ -570,7 +595,7 @@ public class DataServiceImpl implements DataService {
                                 themes.add(e);
                                 break;
                             case HAPPY_HOUR:
-                                deals.add(e);
+                                happyHours.add(e);
                                 break;
                             default:
                                 break;
@@ -603,18 +628,37 @@ public class DataServiceImpl implements DataService {
                     return lhs.getStartDate().compareTo(rhs.getStartDate());
                 }
             });
-            Collections.sort(deals, new Comparator<Event>() {
+            Collections.sort(happyHours, new Comparator<Event>() {
                 @Override
                 public int compare(Event lhs, Event rhs) {
                     return lhs.getStartDate().compareTo(rhs.getStartDate());
                 }
             });
+
+            // Sorting places by distance
+            final List<Place> sortedPlaces = new ArrayList<>(places);
+            final ConversionService conversionService = PelMelApplication.getConversionService();
+            Collections.sort(sortedPlaces, new Comparator<Place>() {
+                @Override
+                public int compare(Place lhs, Place rhs) {
+                    double dist1 = conversionService.getDistanceTo(lhs);
+                    double dist2 = conversionService.getDistanceTo(rhs);
+                    return (int)(dist1-dist2);
+                }
+            });
+            // Extracting deals
+            final List<Deal> deals = new ArrayList<>();
+            for(Place p : sortedPlaces) {
+                deals.addAll(p.getDeals());
+            }
             // Assigning to our global context
             ContextHolder.places = places;
             ContextHolder.users = users;
             ContextHolder.events = events;
+            ContextHolder.happyHours = happyHours;
             ContextHolder.deals = deals;
             ContextHolder.radius = radius == null ? (int)PelMelConstants.DEFAULT_RADIUS : radius;
+            PelMelApplication.getDealService().updateDealsBadge();
             return places;
         } else {
             return Collections.emptyList();

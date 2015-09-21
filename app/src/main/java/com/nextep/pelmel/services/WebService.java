@@ -20,6 +20,7 @@ import com.nextep.json.model.impl.JsonUser;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.PelMelConstants;
 import com.nextep.pelmel.exception.PelmelException;
+import com.nextep.pelmel.exception.PelmelWebServiceException;
 import com.nextep.pelmel.gson.GsonHelper;
 import com.nextep.pelmel.helpers.Devices;
 import com.nextep.pelmel.model.Event;
@@ -47,8 +48,8 @@ import java.util.Map;
 public class WebService {
 
     public static final String LOG_TAG = "WebService";
-    public static final String BASE_URL = "http://www.pelmelguide.com";
-//    public static final String BASE_URL = "http://10.0.0.2";
+//    public static final String BASE_URL = "http://www.pelmelguide.com";
+    public static final String BASE_URL = "http://10.0.0.2";
 //    public static final String BASE_URL = "http://www.pelmelguide.com";
     private static final String LOGIN_ACTION = "/mobileLogin";
     private static final String PLACES_LIST_ACTION = "/mapPlaces";
@@ -61,6 +62,7 @@ public class WebService {
     private static final String EVENTS_OVERVIEW_ACTION = "/api/event";
     private static final String LIKE_ACTION = "/mobileIlike";
     private static final String CHECKIN_ACTION = "/mobileCheckin";
+
 
     Gson gson;
 
@@ -81,6 +83,23 @@ public class WebService {
         return postRequest(url,keyValueParams);
     }
 
+    public <T> T post(String url, Map<String, String> params, Class<T> result) throws PelmelException {
+        final InputStream is;
+        try {
+            is = postRequest(new URL(url),params);
+            if (is != null) {
+                final InputStreamReader reader = new InputStreamReader(is);
+                T resultObject = gson.fromJson(reader, new TypeToken<T>() {
+                }.getType());
+                Log.d(LOG_TAG,"DEBUG RESULT IS " + resultObject);
+                return resultObject;
+            }
+
+        } catch (MalformedURLException e) {
+            Log.e(LOG_TAG,"Invalid URL: " + url + " - " + e.getMessage(), e);
+        }
+        return null;
+    }
     public InputStream postRequest(URL url, List<String> params) throws PelmelException {
         InputStream is = null;
         try {
@@ -105,6 +124,14 @@ public class WebService {
             // Checking if we're OK status
             if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 is = conn.getInputStream();
+            } else {
+                try {
+                    is = conn.getInputStream();
+                } catch(IOException e) {
+                    is = conn.getErrorStream();
+                }
+                PelmelWebServiceException ex = new PelmelWebServiceException(conn.getResponseCode(),is);
+                throw ex;
             }
         } catch(IOException e) {
             throw new PelmelException("Cannot connect to PelMel server : "

@@ -6,7 +6,7 @@
     <string name="action_unattend">Cancel</string>
     <string name="action_checkin">Check In</string>
     <string name="action_checkout">Check Out</string>
-    <string name="action_comment">Comment</string>
+    <string name="action_comment">Review</string>
     <string name="action_chat">Chat</string>
     <string name="action_like">Like</string>
     <string name="action_unlike">Unlike</string>
@@ -53,8 +53,8 @@
     <string name="counter_attend">{0} will attend</string>
     <string name="counter_attend_singular">{0} will attend</string>
     <string name="counter_chat">Chat</string>
-    <string name="counter_comments">{0} Comments</string>
-    <string name="counter_comments_singular">{0} Comment</string>
+    <string name="counter_comments">{0} Reviews</string>
+    <string name="counter_comments_singular">{0} Review</string>
     <string name="counter_likes_user">{0} Like Him</string>
     <string name="counter_likes_user_singular">{0} Likes Him</string>
 
@@ -63,6 +63,29 @@
     <string name="counter_network_add">Add</string>
     <string name="counter_network_cancel">Cancel</string>
     <string name="counter_network_friends">Friends</string>
+
+
+    <string name="deal.activation.message">Activating the deal...</string>
+    <string name="deal.available">Available</string>
+    <string name="deal.button.problem">Report a problem</string>
+    <string name="deal.button.whatsthis">What\'s this?</string>
+    <string name="deal.list.title">Nearby Deals</string>
+
+    <string name="deal.delay">Available in {0}</string>
+    <string name="deal.error.alreadyUsed">Already used in past 24h</string>
+    <string name="deal.error.generic">Technical error, please retry later</string>
+    <string name="deal.error.quotaReached">No more deals left</string>
+
+    <string name="deal.present">PRESENT TO BARTENDER</string>
+    <string name="deal.proceed">PROCEED WITH THE DEAL</string>
+    <string name="deal.quota.label">{0} left / {1} total</string>
+    <string name="deal.report.error.text">We were unable to contact our servers to report your problem. You may experience network issues which might also be the cause of your problem. Please check your network and try again.</string>
+    <string name="deal.report.text">Our administrators and the owner of this place have been notified of a problem and will do their best to fix it or get in touch with you. We are very sorry for the inconvenience.</string>
+    <string name="deal.report.title">Problem reported!</string>
+    <string name="deal.type.TWO_FOR_ONE">Buy 1 / Get 1 free</string>
+    <string name="deal.use.button">USE THIS DEAL</string>
+    <string name="deal.use.countdown">Activation in {0}</string>
+    <string name="deal.use.legal">This deal is offered by {0}, not by us.\nYou certify being of legal age to use this deal</string>
 
     <string name="disconnect">Disconnect</string>
     <string name="distance.feet">{0} feet</string>

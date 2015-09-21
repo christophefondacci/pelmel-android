@@ -24,8 +24,32 @@
         android:id="@+id/checkinButton"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="80dp"
         android:src="@drawable/btn_checkin"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dealButton"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/checkinButton"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/btn_deal"
+        android:visibility="invisible"/>
+    <TextView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/bg_badge"
+        android:gravity="center"
+        android:text="2"
+        android:textColor="@color/white"
+        android:layout_alignRight="@id/dealButton"
+        android:layout_alignTop="@id/dealButton"
+        android:layout_marginRight="-8dp"
+        android:layout_marginTop="-5dp"
+        android:id="@+id/dealsCountBadge"
+        android:visibility="invisible"
+        />
 
 </RelativeLayout><!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/layout/activity_map.xml -->

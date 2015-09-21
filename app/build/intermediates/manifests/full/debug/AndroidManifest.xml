@@ -88,7 +88,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDZrq-ZiDdyYRBcoNjLrul-J11vo8oqC0M" />
+            android:value="AIzaSyCUrzVh3F9ttywWpMdtRfRUrkpLKCCGUIQ" />
         <!-- PROD -->
         <!-- android:value="AIzaSyDZrq-ZiDdyYRBcoNjLrul-J11vo8oqC0M" /> -->
         <!-- DEBUG -->
@@ -111,6 +111,7 @@
         <activity android:name="com.nextep.pelmel.activities.TextActivity" />
         <activity android:name="com.nextep.pelmel.activities.GalleryActivity" />
         <activity android:name="com.nextep.pelmel.activities.MainActionBarActivity" />
+        <activity android:name="com.nextep.pelmel.activities.WebBrowserFragment" />
         <activity
             android:name="com.nextep.pelmel.activities.MainActivity"
             android:label="" >

@@ -21,6 +21,7 @@ import com.nextep.pelmel.providers.impl.UserOverviewProvider;
 import com.nextep.pelmel.services.ActionManager;
 import com.nextep.pelmel.services.ConversionService;
 import com.nextep.pelmel.services.DataService;
+import com.nextep.pelmel.services.DealService;
 import com.nextep.pelmel.services.ImageService;
 import com.nextep.pelmel.services.LocalizationService;
 import com.nextep.pelmel.services.MessageService;
@@ -31,6 +32,7 @@ import com.nextep.pelmel.services.WebService;
 import com.nextep.pelmel.services.impl.ActionManagerImpl;
 import com.nextep.pelmel.services.impl.ConversionServiceImpl;
 import com.nextep.pelmel.services.impl.DataServiceImpl;
+import com.nextep.pelmel.services.impl.DealServiceImpl;
 import com.nextep.pelmel.services.impl.ImageServiceImpl;
 import com.nextep.pelmel.services.impl.LocalizationServiceImpl;
 import com.nextep.pelmel.services.impl.MessageServiceImpl;
@@ -60,6 +62,7 @@ public class PelMelApplication extends Application implements
 	private LocalizationService localizationService;
 	private LocationManager locationManager;
 	private ConversionService conversionService;
+	private DealService dealService;
 	private SnippetContainerSupport snippetContainerSupport;
 
 	private CalObject overviewObject;
@@ -113,7 +116,7 @@ public class PelMelApplication extends Application implements
 		conversionService = new ConversionServiceImpl();
 		localizationService = new LocalizationServiceImpl();
 		actionManager = new ActionManagerImpl();
-
+		dealService = new DealServiceImpl();
 		((UserServiceImpl) userService).setWebService(webService);
 		((MessageServiceImpl) messageService).setDataService(dataService);
 		((MessageServiceImpl) messageService).setWebService(webService);
@@ -157,6 +160,9 @@ public class PelMelApplication extends Application implements
 
 	public static UserService getUserService() {
 		return instance.userService;
+	}
+	public static DealService getDealService() {
+		return instance.dealService;
 	}
 
 	public static MessageService getMessageService() {

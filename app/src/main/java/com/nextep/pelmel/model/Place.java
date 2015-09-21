@@ -57,4 +57,7 @@ public interface Place extends CalObject {
 	void setRecurringEvents(Collection<RecurringEvent> recurringEvents);
 
 	void addRecurringEvent(RecurringEvent recurringEvent);
+
+	List<Deal> getDeals();
+	void setDeals(List<Deal> deals);
 }
