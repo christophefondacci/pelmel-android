@@ -9,9 +9,17 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.RelativeLayout.LayoutParams;
 
+import com.nextep.pelmel.PelMelApplication;
+import com.nextep.pelmel.model.CalObject;
+import com.nextep.pelmel.model.User;
+
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Utils {
@@ -58,5 +66,35 @@ public class Utils {
         view.draw(canvas);
 
         return bitmap;
+    }
+
+    public static int getColor(int colorRes) {
+        return PelMelApplication.getInstance().getResources().getColor(colorRes);
+    }
+
+    public static <T extends CalObject> List<CalObject> sortCalObjectsForDisplay(final List<T> objects) {
+        final List<CalObject> sortedObjects = new ArrayList<>();
+        sortedObjects.addAll(objects);
+        Collections.sort(sortedObjects, new Comparator<CalObject>() {
+            @Override
+            public int compare(CalObject lhs, CalObject rhs) {
+                if (lhs.getThumb()!= null && rhs.getThumb()== null) {
+                    return -1;
+                } else if (rhs.getThumb()!= null && lhs.getThumb() == null) {
+                    return 1;
+                } else if(lhs instanceof User && rhs instanceof User) {
+                    final User lu = (User)lhs;
+                    final User ru = (User)rhs;
+
+                    if (lu.isOnline() && !ru.isOnline()) {
+                        return -1;
+                    } else if (lu.isOnline() && ru.isOnline()) {
+                        return 1;
+                    }
+                }
+                return objects.indexOf(lhs)- objects.indexOf(rhs);
+            }
+        });
+        return sortedObjects;
     }
 }

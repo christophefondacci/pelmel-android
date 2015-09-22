@@ -1,7 +1,6 @@
 package com.nextep.pelmel.activities;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -151,7 +150,6 @@ public class DealUseActivity extends Fragment implements UserListener, DealServi
         super.onAttach(activity);
         try {
             snippetContainerSupport = (SnippetContainerSupport)activity;
-            snippetContainerSupport.setSnippetChild(this);
         } catch(ClassCastException e) {
             throw new IllegalStateException("Parent of SnippetListFragment must be a snippetContainerSupport");
         }
@@ -216,9 +214,13 @@ public class DealUseActivity extends Fragment implements UserListener, DealServi
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent = new Intent(getActivity(),WebBrowserFragment.class);
-                intent.putExtra("URL",WebService.BASE_URL + URL_HELP);
-                startActivity(intent);
+
+                WebBrowserFragment fragment = new WebBrowserFragment();
+                fragment.setUrl(WebService.BASE_URL + URL_HELP);
+                snippetContainerSupport.showSnippetForFragment(fragment, true, false);
+//                final Intent intent = new Intent(getActivity(),WebBrowserFragment.class);
+//                intent.putExtra("URL",WebService.BASE_URL + URL_HELP);
+//                startActivity(intent);
 //                WebBrowserFragment fragment = new WebBrowserFragment();
 //                fragment.setUrl(WebService.BASE_URL + URL_HELP);
 //                snippetContainerSupport.showSnippetForFragment(fragment,true,false);
@@ -227,6 +229,7 @@ public class DealUseActivity extends Fragment implements UserListener, DealServi
         animate(orangeCircle, 2000);
         animate(grayCircle,1000);
         PelMelApplication.getUserService().getCurrentUser(this);
+        snippetContainerSupport.setSnippetChild(this);
         return view;
     }
 

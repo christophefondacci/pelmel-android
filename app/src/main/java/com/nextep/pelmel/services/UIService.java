@@ -74,10 +74,20 @@ public interface UIService {
 
 	/**
 	 * Provides a no photo bitmap for the given object
-	 * @param obj
-	 * @return
+	 * @param obj the object to get a no photo placeholder image for
+	 * @param thumb whether it's a placeholder for a thumb size
+	 * @return the no photo bitmap, which by default will allow additions (if possible)
 	 */
 	Bitmap getNoPhotoFor(CalObject obj, boolean thumb);
+
+	/**
+	 * Provides a no photo bitmap for the given object
+	 * @param obj the object to get a no photo placeholder image for
+	 * @param thumb whether it's a placeholder for a thumb size
+	 * @param allowAdditions whether or not additions are allowed (may or may not result in a different image)
+	 * @return the no photo bitmap
+	 */
+	Bitmap getNoPhotoFor(CalObject obj, boolean thumb, boolean allowAdditions);
 
 	/**
 	 * Builds a string expressing the delay between now and the given date

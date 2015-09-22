@@ -104,7 +104,6 @@
         <activity android:name=".activities.TextActivity" />
         <activity android:name=".activities.GalleryActivity" />
         <activity android:name=".activities.MainActionBarActivity" />
-        <activity android:name=".activities.WebBrowserFragment" />
         <activity
             android:name=".activities.MainActivity" android:label="">
         </activity>

@@ -145,6 +145,7 @@
     <string name="placeType.asso">Association</string>
     <string name="placeType.hotel">Hotel</string>
     <string name="placeType.other">Other</string>
+    <string name="placeType.outdoors">Outdoors / Nature</string>
     <string name="profileName">Nickname</string>
     <string name="profileInformation">Informations</string>
     <string name="profileBirthday">Birth date</string>

@@ -3,7 +3,9 @@ package com.nextep.pelmel.providers.impl;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 
@@ -11,9 +13,11 @@ import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
 import com.nextep.pelmel.adapters.CALObjectThumbAdapter;
 import com.nextep.pelmel.helpers.ContextHolder;
+import com.nextep.pelmel.helpers.Utils;
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.Image;
+import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.providers.CountersProvider;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
 import com.nextep.pelmel.views.HorizontalListView;
@@ -132,7 +136,14 @@ public class ContextSnippetInfoProvider implements SnippetInfoProvider, AdapterV
 
     @Override
     public void refreshCustomSnippetView(Context context, LinearLayout parent) {
-        horizontalListView.setAdapter(new CALObjectThumbAdapter(context,(List)ContextHolder.users));
+        WindowManager wm = (WindowManager)PelMelApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
+        Point p = new Point();
+        wm.getDefaultDisplay().getSize(p);
+        List<CalObject> objects = Utils.sortCalObjectsForDisplay(ContextHolder.users);
+        final CALObjectThumbAdapter adapter = new CALObjectThumbAdapter(context,objects);
+        adapter.setGrid(true, p.x);
+        horizontalListView.setAdapter(adapter);
+        horizontalListView.setOnItemClickListener(adapter);
     }
 
     @Override

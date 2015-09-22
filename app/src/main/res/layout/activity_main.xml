@@ -4,7 +4,7 @@
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
     >
-    <com.sothree.slidinguppanel.SlidingUpPanelLayout
+    <com.nextep.pelmel.views.SlidingUpPanelLayout
                                                      android:layout_width="match_parent"
                                                      android:layout_height="match_parent"
                                                      android:id="@+id/slidingPanel"
@@ -53,7 +53,7 @@
             android:layout_height="match_parent"  android:background="#272a2e"
             />
     
-    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
+    </com.nextep.pelmel.views.SlidingUpPanelLayout>
 
 
     <RelativeLayout

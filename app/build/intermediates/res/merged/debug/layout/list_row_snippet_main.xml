@@ -4,10 +4,10 @@
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/thumbImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
-        android:src="@drawable/no_photo"
+        android:src="@drawable/no_photo_small"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="9dp"
         app:riv_corner_radius="25dp"

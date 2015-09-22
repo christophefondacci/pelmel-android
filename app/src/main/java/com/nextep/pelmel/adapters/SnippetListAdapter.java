@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nextep.pelmel.PelMelApplication;
@@ -141,6 +142,10 @@ public class SnippetListAdapter extends BaseAdapter {
             PelMelApplication.getImageService().displayImage(thumb,true,viewHolder.thumbImage);
         } else {
             viewHolder.thumbImage.setImageBitmap(null);
+            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)viewHolder.thumbImage.getLayoutParams();
+            lp.width = 0;
+            lp.height = 0;
+            viewHolder.thumbImage.setLayoutParams(lp);
         }
         viewHolder.titleLabel.setText(infoProvider.getTitle());
         viewHolder.subtitleLabel.setText(infoProvider.getSubtitle());

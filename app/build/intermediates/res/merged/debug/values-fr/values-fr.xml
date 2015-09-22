@@ -198,6 +198,7 @@
     <string name="placeType.club">Club</string>
     <string name="placeType.hotel">Hôtel</string>
     <string name="placeType.other">Autre</string>
+    <string name="placeType.outdoors">Extérieur / Nature</string>
     <string name="placeType.restaurant">Restaurant</string>
     <string name="placeType.sauna">Sauna</string>
     <string name="placeType.sexclub">Sex Club</string>

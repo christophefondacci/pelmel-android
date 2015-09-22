@@ -7,6 +7,11 @@ public interface MessageService {
 	interface OnNewMessageListener {
 		void onNewMessages();
 	}
+	interface OnPushMessageListener {
+		void onPushMessage();
+	}
+	void registerPushListener(OnPushMessageListener listener);
+	void unregisterPushListener(OnPushMessageListener listener);
 	/**
 	 * Retrieves latest messages of the given user from server.
 	 * 

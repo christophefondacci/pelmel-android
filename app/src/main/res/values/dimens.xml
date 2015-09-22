@@ -31,6 +31,7 @@
     <dimen name="snippet_parallax">125dp</dimen>
     <dimen name="snippet_gallery_height">160dp</dimen>
     <dimen name="snippet_height">125dp</dimen>
+    <dimen name="snippet_thumbs_hoziontal_margins">18dp</dimen>
 
     <dimen name="thumbs_default_size">40dp</dimen>
     <dimen name="thumbs_overview_size">58dp</dimen>

@@ -18,6 +18,8 @@
 		android:layout_alignParentTop="true"
 		android:layout_alignParentRight="true"
 		android:layout_marginRight="10dp"
+		android:scaleType="centerCrop"
+		android:adjustViewBounds="true"
 		android:src="@drawable/no_photo_profile_small"
 		app:riv_corner_radius="25dp"
 		app:riv_border_width="1dp"

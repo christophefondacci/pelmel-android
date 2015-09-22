@@ -62,7 +62,7 @@ public class ImagePagerAdapter extends PagerAdapter {
         }
         container.addView(viewLayout);
 
-        if(clickEnabled && !(calObject instanceof User)) {
+        if(clickEnabled ) {
             imgDisplay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -71,7 +71,7 @@ public class ImagePagerAdapter extends PagerAdapter {
                         intent.putExtra(PelMelConstants.INTENT_PARAM_INDEX, position);
                         intent.putExtra(PelMelConstants.INTENT_PARAM_CAL_KEY, calObject.getKey());
                         context.startActivity(intent);
-                    } else {
+                    } else if(!(calObject instanceof User)){
                         PelMelApplication.setOverviewObject(calObject);
                         final SelectImageDialogFragment selectDialog = new SelectImageDialogFragment();
                         selectDialog.show(((FragmentActivity)context).getSupportFragmentManager(), "PHOTO");

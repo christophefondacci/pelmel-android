@@ -111,7 +111,6 @@
         <activity android:name="com.nextep.pelmel.activities.TextActivity" />
         <activity android:name="com.nextep.pelmel.activities.GalleryActivity" />
         <activity android:name="com.nextep.pelmel.activities.MainActionBarActivity" />
-        <activity android:name="com.nextep.pelmel.activities.WebBrowserFragment" />
         <activity
             android:name="com.nextep.pelmel.activities.MainActivity"
             android:label="" >

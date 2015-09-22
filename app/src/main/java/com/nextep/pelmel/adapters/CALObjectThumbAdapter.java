@@ -7,12 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.activities.CALObjectGridFragment;
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Image;
 import com.nextep.pelmel.model.User;
@@ -24,6 +26,10 @@ public class CALObjectThumbAdapter extends BaseAdapter implements AdapterView.On
 	private final Context context;
 	private final List<CalObject> calObjects;
 	private final int resSize;
+	private boolean grid = false;
+	private int width;
+	private int maxObjects;
+	private Resources resources;
 	public CALObjectThumbAdapter(Context context, List<CalObject> objects) {
 		this(context,objects,R.dimen.thumbs_default_size);
 	}
@@ -31,11 +37,22 @@ public class CALObjectThumbAdapter extends BaseAdapter implements AdapterView.On
 		this.context = context;
 		this.calObjects = objects;
 		this.resSize = resSize;
+		resources = PelMelApplication.getInstance().getResources();
+	}
+
+	public void setGrid(boolean grid, int width) {
+		this.grid = grid;
+		this.width = width-(int)resources.getDimension(R.dimen.snippet_thumbs_hoziontal_margins);
+		maxObjects = (int)((float)width / (resources.getDimension(resSize)+10));
 	}
 
 	@Override
 	public int getCount() {
-		return calObjects.size();
+		if(!grid) {
+			return calObjects.size();
+		} else {
+			return Math.min(calObjects.size(),maxObjects);
+		}
 	}
 
 	@Override
@@ -60,20 +77,20 @@ public class CALObjectThumbAdapter extends BaseAdapter implements AdapterView.On
 			// Registering widgets into holder object
 			viewHolder.thumbImageView = (RoundedImageView) convertView
 					.findViewById(R.id.thumb_img);
-
+			viewHolder.moreLabel = (TextView)convertView.findViewById(R.id.moreLabel);
 			// Adjusting layout parameters
-			Resources resources = PelMelApplication.getInstance().getResources();
+
 			final float size =  resources.getDimension(resSize);
 
 			// Sizing image
-			LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams)viewHolder.thumbImageView.getLayoutParams();
+			RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)viewHolder.thumbImageView.getLayoutParams();
 			layoutParams.width = (int)size;
 			layoutParams.height = (int)size;
 			viewHolder.thumbImageView.setLayoutParams(layoutParams);
 
 			// Adjusting radius
 			final CalObject obj = (CalObject)getItem(position);
-			if(obj instanceof User) {
+			if((obj instanceof User) || (grid && position == maxObjects-1 && (getItem(position-1) instanceof User))) {
 				viewHolder.thumbImageView.setCornerRadius(size / 2);
 			} else {
 				viewHolder.thumbImageView.setCornerRadius(0);
@@ -81,7 +98,7 @@ public class CALObjectThumbAdapter extends BaseAdapter implements AdapterView.On
 
 			// Sizing label
 			viewHolder.title = (TextView) convertView.findViewById(R.id.pseudo);
-			layoutParams = (LinearLayout.LayoutParams)viewHolder.title.getLayoutParams();
+			layoutParams = (RelativeLayout.LayoutParams)viewHolder.title.getLayoutParams();
 			layoutParams.width = (int)size+10;
 			viewHolder.title.setLayoutParams(layoutParams);
 
@@ -93,58 +110,58 @@ public class CALObjectThumbAdapter extends BaseAdapter implements AdapterView.On
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		final CalObject object = (CalObject) getItem(position);
-		if (object != null) {
-			// Injecting thumbnail into image view
-			final Image image = object.getThumb();
-			if (image != null) {
-				// Adding thumb if already loaded
-				if (image.getThumb() != null) {
-					viewHolder.thumbImageView.setImageBitmap(image.getThumb());
+		if(!grid || position < maxObjects-1) {
+			final CalObject object = (CalObject) getItem(position);
+			if (object != null) {
+				// Injecting thumbnail into image view
+				final Image image = object.getThumb();
+				if (image != null) {
+					// Adding thumb if already loaded
+					if (image.getThumb() != null) {
+						viewHolder.thumbImageView.setImageBitmap(image.getThumb());
+					} else {
+						// Or loading it
+						PelMelApplication.getImageService().displayImage(image,
+								true, viewHolder.thumbImageView);
+					}
 				} else {
-					// Or loading it
-					PelMelApplication.getImageService().displayImage(image,
-							true, viewHolder.thumbImageView);
+					// If no photo then we display default image
+					if (object instanceof User) {
+						// Default no user photo
+						viewHolder.thumbImageView
+								.setImageResource(R.drawable.no_photo_profile_small);
+					} else {
+						// Or default photo
+						viewHolder.thumbImageView
+								.setImageResource(R.drawable.no_photo);
+					}
 				}
-			} else {
-				// If no photo then we display default image
+				// Injecting name
+				viewHolder.title.setText(object.getName());
+
+				// Handling online / offline status for users
 				if (object instanceof User) {
-					// Default no user photo
-					viewHolder.thumbImageView
-							.setImageResource(R.drawable.no_photo_profile_small);
+					if (((User) object).isOnline()) {
+						viewHolder.thumbImageView.setBorderColor(PelMelApplication.getInstance().getResources().getColor(R.color.online));
+					} else {
+						viewHolder.thumbImageView.setBorderColor(PelMelApplication.getInstance().getResources().getColor(R.color.offline));
+					}
 				} else {
-					// Or default photo
-					viewHolder.thumbImageView
-							.setImageResource(R.drawable.no_photo);
+					//				viewHolder.onlineStatusView.setImageBitmap(null);
 				}
-			}
-			// Injecting name
-			viewHolder.title.setText(object.getName());
 
-			// Handling online / offline status for users
-			if (object instanceof User) {
-				if (((User) object).isOnline()) {
-					viewHolder.thumbImageView.setBorderColor(PelMelApplication.getInstance().getResources().getColor(R.color.online));
-				} else {
-					viewHolder.thumbImageView.setBorderColor(PelMelApplication.getInstance().getResources().getColor(R.color.offline));
-				}
-			} else {
-//				viewHolder.onlineStatusView.setImageBitmap(null);
 			}
-
-			// Handling tap events
-//			viewHolder.thumbImageView.setOnClickListener(new OnClickListener() {
-//
-//				@Override
-//				public void onClick(View v) {
-//					final Intent intent = new Intent(context,
-//							OverviewActivity.class);
-//					PelMelApplication.setOverviewObject(object);
-//					context.startActivity(intent);
-//					// context.overridePendingTransition(R.anim.push_left_in,
-//					// R.anim.push_left_out);
-//				}
-//			});
+		} else {
+			viewHolder.thumbImageView.setImageResource(R.drawable.grid);
+//			viewHolder.moreLabel.setText("More");
+//			viewHolder.moreLabel.setVisibility(View.VISIBLE);
+			viewHolder.title.setText("Grid");
+			viewHolder.thumbImageView.setBorderColor(PelMelApplication.getInstance().getResources().getColor(R.color.white));
+			RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)viewHolder.moreLabel.getLayoutParams();
+			layoutParams.topMargin = (int)(resources.getDimension(resSize) / 2.0f) - layoutParams.height/2;
+			viewHolder.moreLabel.setLayoutParams(layoutParams);
+			viewHolder.thumbImageView.setBorderWidth(0.0f);
+			viewHolder.thumbImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 		}
 
 		return convertView;
@@ -153,11 +170,18 @@ public class CALObjectThumbAdapter extends BaseAdapter implements AdapterView.On
 	private class ViewHolder {
 		RoundedImageView thumbImageView;
 		TextView title;
+		TextView moreLabel;
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		final CalObject obj = calObjects.get(position);
-		PelMelApplication.getSnippetContainerSupport().showSnippetFor(obj,false,false);
+		if(!grid || position!=maxObjects-1) {
+			PelMelApplication.getSnippetContainerSupport().showSnippetFor(obj, false, false);
+		} else {
+			CALObjectGridFragment f = new CALObjectGridFragment();
+			f.setCalObjects(calObjects);
+			PelMelApplication.getSnippetContainerSupport().showSnippetForFragment(f,true,false);
+		}
 	}
 }

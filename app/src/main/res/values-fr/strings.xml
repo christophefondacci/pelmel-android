@@ -123,6 +123,7 @@
     <string name="placeType.asso">Association</string>
     <string name="placeType.hotel">Hôtel</string>
     <string name="placeType.other">Autre</string>
+    <string name="placeType.outdoors">Extérieur / Nature</string>
     <string name="profileName">Surnom</string>
     <string name="profileInformation">Informations</string>
     <string name="profileBirthday">Date de naissance</string>

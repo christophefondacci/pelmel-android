@@ -67,7 +67,7 @@ public class ImageServiceImpl implements ImageService {
 			.synchronizedMap(new WeakHashMap<String, String>());
 	private final ExecutorService executorService;
 	private final Map<Integer, BitmapDescriptor> descriptorsMap = new HashMap<Integer, BitmapDescriptor>();
-	final int stub_id = R.drawable.no_photo_big;
+	final int stub_id = R.drawable.no_photo;
 	private final ImageLoader imageLoader;
 	private final WebService webservice;
 
@@ -87,6 +87,7 @@ public class ImageServiceImpl implements ImageService {
 
 		// And loading full image
 		if(image!=null) {
+			imageView.setTag(image.getKey());
 			imageLoader.displayImage(
 					isThumb ? image.getThumbUrl() : image.getUrl(), imageView,
 					new ImageLoadingListener() {
@@ -128,6 +129,12 @@ public class ImageServiceImpl implements ImageService {
 		// queuePhoto(image, isThumb, imageView);
 		// imageView.setImageResource(stub_id);
 		// }
+	}
+
+	@Override
+	public void cancelDisplay(ImageView imageView) {
+		imageLoader.cancelDisplayTask(imageView);
+		imageView.setTag(null);
 	}
 
 	private void queuePhoto(Image image, boolean isThumb, ImageView imageView) {

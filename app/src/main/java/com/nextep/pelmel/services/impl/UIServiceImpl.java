@@ -126,6 +126,8 @@ public class UIServiceImpl implements UIService {
             labelResource = R.string.placeType_hotel;
         } else if (PelMelConstants.PLACE_TYPE_SAUNA.equals(placeType)) {
             labelResource = R.string.placeType_sauna;
+        } else if(PelMelConstants.PLACE_TYPE_OUTDOORS.equals(placeType)) {
+            labelResource = R.string.placeType_outdoors;
         } else {
             labelResource = R.string.placeType_other;
         }
@@ -199,11 +201,22 @@ public class UIServiceImpl implements UIService {
 
     @Override
     public Bitmap getNoPhotoFor(CalObject obj, boolean thumb) {
+        return getNoPhotoFor(obj,thumb,true);
+    }
+
+    @Override
+    public Bitmap getNoPhotoFor(CalObject obj, boolean thumb, boolean allowAdditions) {
         int res = 0;
         if(obj instanceof Event) {
             res = R.drawable.no_photo_event;
+        } else if(obj instanceof User) {
+            res = thumb ? R.drawable.no_photo_profile_small : R.drawable.no_photo_profile;
         } else {
-            res = R.drawable.no_photo_add;
+            if(allowAdditions) {
+                res = R.drawable.no_photo_add;
+            } else {
+                res = thumb ? R.drawable.no_photo_small : R.drawable.no_photo;
+            }
         }
 
         return BitmapFactory.decodeResource(PelMelApplication.getInstance().getResources(),res);

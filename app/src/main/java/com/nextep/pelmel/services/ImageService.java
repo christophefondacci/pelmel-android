@@ -40,6 +40,7 @@ public interface ImageService {
 	 *            the {@link ImageView} in which the image should be rendered
 	 */
 	void displayImage(Image image, boolean isThumb, ImageView imageView);
+	void cancelDisplay(ImageView imageView);
 
 	/**
 	 * Clears any cache, if cache is supported by the underlying implementation

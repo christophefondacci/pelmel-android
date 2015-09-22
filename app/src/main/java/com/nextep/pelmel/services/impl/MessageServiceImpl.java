@@ -48,8 +48,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -66,6 +68,7 @@ public class MessageServiceImpl implements MessageService {
 	private WebService webService;
 	private ExecutorService executorService;
 	private boolean messagesFetchInProgress = false;
+	private Set<OnPushMessageListener> listeners = new HashSet<>();
 
 	public MessageServiceImpl() {
 		executorService = Executors.newFixedThreadPool(5);
@@ -550,5 +553,15 @@ public class MessageServiceImpl implements MessageService {
 				}
 			}
 		}
+	}
+
+	@Override
+	public void registerPushListener(OnPushMessageListener listener) {
+		
+	}
+
+	@Override
+	public void unregisterPushListener(OnPushMessageListener listener) {
+
 	}
 }

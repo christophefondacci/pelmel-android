@@ -276,6 +276,7 @@
     <dimen name="snippet_gallery_height">160dp</dimen>
     <dimen name="snippet_height">125dp</dimen>
     <dimen name="snippet_parallax">125dp</dimen>
+    <dimen name="snippet_thumbs_hoziontal_margins">18dp</dimen>
     <dimen name="spinner_row_text_padding">5dp</dimen>
     <dimen name="thumbs_default_size">40dp</dimen>
     <dimen name="thumbs_overview_size">58dp</dimen>
@@ -562,6 +563,7 @@
     <string name="placeType.club">Club</string>
     <string name="placeType.hotel">Hotel</string>
     <string name="placeType.other">Other</string>
+    <string name="placeType.outdoors">Outdoors / Nature</string>
     <string name="placeType.restaurant">Restaurant</string>
     <string name="placeType.sauna">Bathhouse</string>
     <string name="placeType.sexclub">Sex Club</string>

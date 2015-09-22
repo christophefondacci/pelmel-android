@@ -24,7 +24,7 @@ import com.nextep.pelmel.model.Image;
 import com.nextep.pelmel.model.support.SnippetChildSupport;
 import com.nextep.pelmel.model.support.SnippetContainerSupport;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
-import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import com.nextep.pelmel.views.SlidingUpPanelLayout;
 
 import java.io.File;
 
@@ -94,10 +94,8 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
 
     @Override
     public void showSnippetForFragment(Fragment fragment, boolean isOpen, boolean isRoot) {
-
-
-        Fragment snippetFragment = getSupportFragmentManager().findFragmentByTag(TAG_SNIPPET);
         final SlidingUpPanelLayout slidingLayout = (SlidingUpPanelLayout) findViewById(R.id.slidingPanel);
+        Fragment snippetFragment = getSupportFragmentManager().findFragmentByTag(TAG_SNIPPET);
         if(snippetFragment == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.add(R.id.pelmelSnippetContainer,fragment,TAG_SNIPPET).commit();
@@ -121,6 +119,7 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
         } catch(RuntimeException e) {
             Log.e(TAG_SNIPPET,"Unable to set snippet height for now: " + e.getMessage(),e);
         }
+
     }
 
     @Override
@@ -185,10 +184,17 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
         if(childSupport != null) {
             slidingLayout.setScrollableView(childSupport.getScrollableView());
             if(childSupport.getScrollableView()==null) {
-                slidingLayout.setDragView(null);
+                slidingLayout.setSlidingEnabled(false);
+//                slidingLayout.setEnabled(false);
             } else {
-                slidingLayout.setTouchEnabled(true);
+                slidingLayout.setSlidingEnabled(true);
+//                slidingLayout.setEnabled(true);
+
             }
+//                slidingLayout.setDragView(null);
+//            } else {
+//                slidingLayout.setTouchEnabled(true);
+//            }
         }
         notifySnippetOpenState();
     }

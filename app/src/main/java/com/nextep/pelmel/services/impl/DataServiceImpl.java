@@ -574,6 +574,9 @@ public class DataServiceImpl implements DataService {
         final JsonNearbyPlacesResponse jsonResponse = webService.getPlaces(latitude,
                 longitude, currentUser.getToken(), parentKey, radius,
                 searchText);
+        if(jsonResponse == null) {
+            return Collections.emptyList();
+        }
         final List<JsonPlace> jsonPlaces = jsonResponse.getPlaces();
         if (jsonPlaces != null) {
             final List<Place> places = new ArrayList<Place>(jsonPlaces.size());
