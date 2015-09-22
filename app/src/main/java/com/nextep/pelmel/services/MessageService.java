@@ -12,6 +12,8 @@ public interface MessageService {
 	}
 	void registerPushListener(OnPushMessageListener listener);
 	void unregisterPushListener(OnPushMessageListener listener);
+	void handlePushNotification();
+
 	/**
 	 * Retrieves latest messages of the given user from server.
 	 * 

@@ -557,11 +557,18 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	public void registerPushListener(OnPushMessageListener listener) {
-		
+		listeners.add(listener);
 	}
 
 	@Override
 	public void unregisterPushListener(OnPushMessageListener listener) {
+		listeners.remove(listener);
+	}
 
+	@Override
+	public void handlePushNotification() {
+		for(OnPushMessageListener l : listeners) {
+			l.onPushMessage();
+		}
 	}
 }

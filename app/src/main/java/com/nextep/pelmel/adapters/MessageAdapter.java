@@ -118,7 +118,6 @@ public class MessageAdapter extends RealmBaseAdapter<Message> {
             viewHolder.textView.setText(msg.getMessageText());
             viewHolder.dateView.setText(DATE_FORMATTER.format(msg.getMessageDate()));
             final String thumbUrl = msg.getFrom().getImageThumbUrl();
-            viewHolder.imageView.setImageResource(R.drawable.no_photo_profile_small);
             viewHolder.nicknameText.setText(msg.getFrom().getUsername());
             if (thumbUrl != null && thumbUrl.startsWith("http")) {
                 ImageLoader.getInstance().displayImage(thumbUrl,viewHolder.imageView);

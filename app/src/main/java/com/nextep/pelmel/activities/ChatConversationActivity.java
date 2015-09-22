@@ -40,7 +40,7 @@ import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 public class ChatConversationActivity extends Fragment implements
-		UserListener, OnItemClickListener, MessageCallback, SnippetChildSupport, MessageService.OnNewMessageListener {
+		UserListener, OnItemClickListener, MessageCallback, SnippetChildSupport, MessageService.OnNewMessageListener, MessageService.OnPushMessageListener {
 
 	public static final String CHAT_WITH_USER_KEY = "userKey";
 	public static final String BUNDLE_STATE_OTHER_ITEM_KEY = "otherUserKey";
@@ -111,6 +111,9 @@ public class ChatConversationActivity extends Fragment implements
 	public void userInfoAvailable(final User user) {
 		currentUser = user;
 		updateData();
+		fetchNewMessages();
+	}
+	private void fetchNewMessages() {
 		// In background, fetch any new message (we'll be notified by callback)
 		new AsyncTask<Void, Void, Boolean>() {
 
@@ -123,20 +126,20 @@ public class ChatConversationActivity extends Fragment implements
 
 				// Fetching list of messages
 				if(otherUserKey.startsWith(User.CAL_TYPE)) {
-					boolean hasNewMessages = messageService.listMessages(user,
+					boolean hasNewMessages = messageService.listMessages(currentUser,
 							loc.getLatitude(), loc.getLongitude(), ChatConversationActivity.this);
 
 					// Marking messages as read
-					final Realm realm = Realm.getInstance(ChatConversationActivity.this.getActivity(), user.getKey());
+					final Realm realm = Realm.getInstance(ChatConversationActivity.this.getActivity(), currentUser.getKey());
 					realm.beginTransaction();
 					final RealmQuery<Message> query = realm.where(Message.class);
 					query.beginGroup();
 					query.equalTo("toItemKey", otherUserKey);
-					query.equalTo("from.itemKey", user.getKey());
+					query.equalTo("from.itemKey", currentUser.getKey());
 					query.endGroup();
 					query.or();
 					query.beginGroup();
-					query.equalTo("toItemKey", user.getKey());
+					query.equalTo("toItemKey", currentUser.getKey());
 					query.equalTo("from.itemKey", otherUserKey);
 					query.endGroup();
 					final List<Message> messagesToRead = query.findAll();
@@ -279,6 +282,18 @@ public class ChatConversationActivity extends Fragment implements
 	}
 
 	@Override
+	public void onStart() {
+		super.onStart();
+		PelMelApplication.getMessageService().registerPushListener(this);
+	}
+
+	@Override
+	public void onDestroy() {
+		PelMelApplication.getMessageService().unregisterPushListener(this);
+		super.onDestroy();
+	}
+
+	@Override
 	public void onSnippetOpened(boolean snippetOpened) {
 
 	}
@@ -300,5 +315,10 @@ public class ChatConversationActivity extends Fragment implements
 		if(savedInstanceState != null) {
 			otherUserKey = savedInstanceState.getString(BUNDLE_STATE_OTHER_ITEM_KEY);
 		}
+	}
+
+	@Override
+	public void onPushMessage() {
+		fetchNewMessages();
 	}
 }

@@ -30,6 +30,7 @@ public class MyGcmListenerService extends GcmListenerService {
         if(unreadCountStr != null) {
             unreadCount = Integer.parseInt(unreadCountStr);
             PelMelApplication.getUiService().setUnreadMessagesCount(unreadCount);
+            PelMelApplication.getMessageService().handlePushNotification();
         }
 
         // System Notification

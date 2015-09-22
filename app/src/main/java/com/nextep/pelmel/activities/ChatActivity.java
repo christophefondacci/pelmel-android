@@ -38,7 +38,7 @@ import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 public class ChatActivity extends Fragment implements
-		UserListener, OnItemClickListener, MessageCallback, SnippetChildSupport, MessageService.OnNewMessageListener {
+		UserListener, OnItemClickListener, MessageCallback, SnippetChildSupport, MessageService.OnNewMessageListener, MessageService.OnPushMessageListener {
 
 	public static final String CHAT_WITH_USER_KEY = "userKey";
 
@@ -96,8 +96,15 @@ public class ChatActivity extends Fragment implements
 		if (progressDialog != null && progressDialog.isShowing()) {
 			progressDialog.dismiss();
 		}
+		PelMelApplication.getMessageService().unregisterPushListener(this);
 		super.onDestroy();
 	}
+	@Override
+	public void onStart() {
+		super.onStart();
+		PelMelApplication.getMessageService().registerPushListener(this);
+	}
+
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -114,7 +121,10 @@ public class ChatActivity extends Fragment implements
 
 		// Updating list view with current contents of our database
 		updateData();
+		fetchNewMessages();
+	}
 
+	private void fetchNewMessages() {
 		// In background, fetch any new message (we'll be notified by callback)
 		new AsyncTask<Void, Void, Boolean>() {
 
@@ -124,7 +134,7 @@ public class ChatActivity extends Fragment implements
 				final MessageService messageService = PelMelApplication
 						.getMessageService();
 				List<ChatMessage> messages = Collections.emptyList();
-				boolean hasNewMessages = messageService.listMessages(user,
+				boolean hasNewMessages = messageService.listMessages(currentUser,
 						loc.getLatitude(), loc.getLongitude(),ChatActivity.this);
 				return hasNewMessages;
 			}
@@ -188,7 +198,7 @@ public class ChatActivity extends Fragment implements
 		final String otherUserKey = msg.getItemKey();
 		final ChatConversationActivity conversationActivity = new ChatConversationActivity();
 		conversationActivity.setOtherUserKey(otherUserKey);
-		snippetContainerSupport.showSnippetForFragment(conversationActivity,true,false);
+		snippetContainerSupport.showSnippetForFragment(conversationActivity, true, false);
 
 	}
 
@@ -219,7 +229,7 @@ public class ChatActivity extends Fragment implements
 						new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog,
-									int which) {
+												int which) {
 								// Retrying to send message
 								PelMelApplication.getMessageService()
 										.sendMessage(currentUser,
@@ -249,5 +259,11 @@ public class ChatActivity extends Fragment implements
 	@Override
 	public View getScrollableView() {
 		return listView;
+	}
+
+
+	@Override
+	public void onPushMessage() {
+		fetchNewMessages();
 	}
 }
