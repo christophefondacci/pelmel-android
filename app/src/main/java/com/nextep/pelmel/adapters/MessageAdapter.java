@@ -2,6 +2,7 @@ package com.nextep.pelmel.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,15 +11,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nextep.pelmel.PelMelApplication;
+import com.nextep.pelmel.PelMelConstants;
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.activities.GalleryActivity;
 import com.nextep.pelmel.helpers.Strings;
 import com.nextep.pelmel.listeners.MessageCallback;
 import com.nextep.pelmel.listeners.OverviewListener;
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.ChatMessage;
+import com.nextep.pelmel.model.Image;
 import com.nextep.pelmel.model.User;
+import com.nextep.pelmel.model.base.AbstractCalObject;
 import com.nextep.pelmel.model.db.Message;
 import com.nextep.pelmel.model.db.MessageRecipient;
+import com.nextep.pelmel.model.impl.ImageImpl;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.text.DateFormat;
@@ -33,8 +39,9 @@ public class MessageAdapter extends RealmBaseAdapter<Message> {
     private static final DateFormat DATE_FORMATTER = SimpleDateFormat
             .getDateTimeInstance();
     private static final int VIEW_TYPE_MSG_SELF = 0;
+    private static final int VIEW_TYPE_MSG_SELF_IMG = 2;
     private static final int VIEW_TYPE_MSG_OTHER = 1;
-    private static final int VIEW_TYPE_STATUS = 2;
+    private static final int VIEW_TYPE_MSG_OTHER_IMG = 3;
     private final User user;
     private final String otherUserKey;
     private final MessageCallback messageCallback;
@@ -62,16 +69,16 @@ public class MessageAdapter extends RealmBaseAdapter<Message> {
 
     @Override
     public int getViewTypeCount() {
-        return 3;
+        return 4;
     }
 
     @Override
     public int getItemViewType(int position) {
         final Message msg = getItem(position);
         if (isSelfMsg(msg)) {
-            return VIEW_TYPE_MSG_SELF;
+            return isImageMessage(msg) ? VIEW_TYPE_MSG_SELF_IMG : VIEW_TYPE_MSG_SELF;
         } else {
-            return VIEW_TYPE_MSG_OTHER;
+            return isImageMessage(msg) ? VIEW_TYPE_MSG_OTHER_IMG : VIEW_TYPE_MSG_OTHER;
         }
     }
 
@@ -80,7 +87,7 @@ public class MessageAdapter extends RealmBaseAdapter<Message> {
     }
 
     @Override
-    public View getView(int position, View c, ViewGroup parent) {
+    public View getView(final int position, View c, ViewGroup parent) {
         ViewHolder viewHolder;
         View convertView = c;
         final Message msg = getItem(position);
@@ -90,23 +97,38 @@ public class MessageAdapter extends RealmBaseAdapter<Message> {
             // If we are not on the status line (i.e. we have a non null
             // message)
             if (isSelfMsg(msg)) {
-                convertView = layoutInflater.inflate(
-                        R.layout.list_row_chat_right, null);
+                if(!isImageMessage(msg)) {
+                    convertView = layoutInflater.inflate(
+                            R.layout.list_row_chat_right, null);
+                } else {
+                    convertView = layoutInflater.inflate(R.layout.list_row_chat_image_right,null);
+                }
             } else {
-                convertView = layoutInflater.inflate(
-                        R.layout.list_row_chat_left, null);
+                if(!isImageMessage(msg)) {
+                    convertView = layoutInflater.inflate(
+                            R.layout.list_row_chat_left, null);
+                } else {
+                    convertView = layoutInflater.inflate(
+                            R.layout.list_row_chat_image_left, null);
+                }
             }
 
             viewHolder.dateView = (TextView) convertView
                     .findViewById(R.id.msgDate);
-            viewHolder.textView = (TextView) convertView
-                    .findViewById(R.id.chat_message);
+
             viewHolder.imageView = (ImageView) convertView
                     .findViewById(R.id.chat_image);
             viewHolder.nicknameText = (TextView)convertView.findViewById(R.id.usernameLabel);
+            if(isImageMessage(msg)) {
+                viewHolder.msgImageView = (ImageView)convertView.findViewById(R.id.chat_message_image);
+            } else {
+                viewHolder.textView = (TextView) convertView
+                        .findViewById(R.id.chat_message);
+                Strings.setFontFamily(viewHolder.textView);
+            }
 
             Strings.setFontFamily(viewHolder.dateView);
-            Strings.setFontFamily(viewHolder.textView);
+
             Strings.setFontFamily(viewHolder.nicknameText);
             convertView.setTag(viewHolder);
 
@@ -115,16 +137,46 @@ public class MessageAdapter extends RealmBaseAdapter<Message> {
         }
 
         if (msg != null) {
-            viewHolder.textView.setText(msg.getMessageText());
+            // Common attributes
             viewHolder.dateView.setText(DATE_FORMATTER.format(msg.getMessageDate()));
             final String thumbUrl = msg.getFrom().getImageThumbUrl();
             viewHolder.nicknameText.setText(msg.getFrom().getUsername());
             if (thumbUrl != null && thumbUrl.startsWith("http")) {
-                ImageLoader.getInstance().displayImage(thumbUrl,viewHolder.imageView);
+                ImageLoader.getInstance().displayImage(thumbUrl, viewHolder.imageView);
 //                PelMelApplication.getImageService().displayImage(thumb, true,
 //                        viewHolder.imageView);
             } else {
                 viewHolder.imageView.setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.no_photo_profile_small));
+            }
+            // Text message VS image message
+            if(!isImageMessage(msg)) {
+                // Setting textual contents
+                viewHolder.textView.setText(msg.getMessageText());
+            } else {
+                // Image message, loading image
+                final Image img = buildImageFromMessage(msg);
+                PelMelApplication.getImageService().displayImage(img, false,
+                        viewHolder.msgImageView);
+                viewHolder.msgImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Building a fake CAL object to hold images from the whole conversation
+                        CalObject imageholder = new AbstractCalObject() {} ;
+                        for(int i = 0; i < getCount() ; i++) {
+                            Message m = getItem(i);
+                            if(isImageMessage(m)) {
+                                Image img = buildImageFromMessage(m);
+                                imageholder.addImage(img);
+                            }
+                        }
+                        PelMelApplication.setOverviewObject(imageholder);
+                        // Starting gallery activity
+                        final Intent intent = new Intent(context, GalleryActivity.class);
+                        intent.putExtra(PelMelConstants.INTENT_PARAM_INDEX, position);
+                        context.startActivity(intent);
+
+                    }
+                });
             }
         }
         viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
@@ -148,11 +200,23 @@ public class MessageAdapter extends RealmBaseAdapter<Message> {
         return convertView;
     }
 
+    private Image buildImageFromMessage(Message msg) {
+        final ImageImpl img = new ImageImpl();
+        img.setKey(msg.getMessageImageKey());
+        img.setThumbUrl(msg.getMessageImageThumbUrl());
+        img.setUrl(msg.getMessageImageUrl());
+        return img;
+    }
+    private boolean isImageMessage(Message msg) {
+        return msg.getMessageImageKey() != null && !msg.getMessageImageKey().isEmpty();
+    }
+
     private class ViewHolder {
         TextView textView;
         TextView dateView;
         ImageView imageView;
         TextView nicknameText;
+        ImageView msgImageView;
     }
 
 }

@@ -3,7 +3,9 @@ package com.nextep.pelmel.activities;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Location;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,6 +22,7 @@ import android.widget.ListView;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
 import com.nextep.pelmel.adapters.MessageAdapter;
+import com.nextep.pelmel.dialogs.SelectImageDialogFragment;
 import com.nextep.pelmel.listeners.MessageCallback;
 import com.nextep.pelmel.listeners.OverviewListener;
 import com.nextep.pelmel.listeners.UserListener;
@@ -32,6 +35,7 @@ import com.nextep.pelmel.model.support.SnippetContainerSupport;
 import com.nextep.pelmel.services.MessageService;
 import com.nextep.pelmel.services.UserService;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
@@ -47,6 +51,7 @@ public class ChatConversationActivity extends Fragment implements
 
 	private ListView listView;
 	private View sendButton;
+	private View sendPhotoButton;
 	private EditText chatTextView;
 	private UserService userService;
 	private String otherUserKey;
@@ -92,6 +97,17 @@ public class ChatConversationActivity extends Fragment implements
 			}
 		});
 
+		// Configuring photo attachments
+		sendPhotoButton = view.findViewById(R.id.chat_add_photo);
+		sendPhotoButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				snippetContainerSupport.setFragmentForActivityResult(ChatConversationActivity.this);
+				final SelectImageDialogFragment selectDialog = new SelectImageDialogFragment();
+				selectDialog.setInitiatingFragment(ChatConversationActivity.this);
+				selectDialog.show(ChatConversationActivity.this.getActivity().getSupportFragmentManager(), "PHOTO");
+			}
+		});
 
 		userService = PelMelApplication.getUserService();
 		if(savedInstanceState!=null && otherUserKey == null) {
@@ -320,5 +336,20 @@ public class ChatConversationActivity extends Fragment implements
 	@Override
 	public void onPushMessage() {
 		fetchNewMessages();
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		final Uri selectedImage = data.getData();
+		final File f = PelMelApplication.getImageService().getOrientedImageFileFromUri(this.getActivity(),
+				selectedImage);
+
+		PelMelApplication.getMessageService().sendMessageWithPhoto(PelMelApplication.getUserService().getLoggedUser(), otherUserKey,
+				"", f, ChatConversationActivity.this);
+
+		// Resetting data to prevent any other upload
+		data.setData(null);
 	}
 }

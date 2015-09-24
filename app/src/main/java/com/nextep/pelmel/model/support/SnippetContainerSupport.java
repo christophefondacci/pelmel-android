@@ -75,4 +75,13 @@ public interface SnippetContainerSupport {
      */
     void showMessage(int messageResId, int colorRes, int timeMs);
     void hideMessages();
+
+    /**
+     * Workaround activity results limitation with nested fragments by offering children
+     * to register themselves for activity result. When registered, the next result will
+     * be dispatched to the given fragment and then cleared.
+     *
+     * @param f the Fragment that should be notified of the next activity result
+     */
+    void setFragmentForActivityResult(Fragment f);
 }

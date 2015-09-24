@@ -52,17 +52,22 @@ public class GalleryActivity extends Activity {
 
         final int index = getIntent().getIntExtra(PelMelConstants.INTENT_PARAM_INDEX, 0);
         final String objKey = getIntent().getStringExtra(PelMelConstants.INTENT_PARAM_CAL_KEY);
-        final CalObject obj = PelMelApplication.getDataService().getCalObject(objKey, new OverviewListener() {
-            @Override
-            public Activity getContext() {
-                return GalleryActivity.this;
-            }
+        CalObject obj = null;
+        if(objKey != null) {
+            obj = PelMelApplication.getDataService().getCalObject(objKey, new OverviewListener() {
+                @Override
+                public Activity getContext() {
+                    return GalleryActivity.this;
+                }
 
-            @Override
-            public void overviewDataAvailable(CalObject object) {
-                refreshData(index, object);
-            }
-        });
+                @Override
+                public void overviewDataAvailable(CalObject object) {
+                    refreshData(index, object);
+                }
+            });
+        } else {
+            obj = PelMelApplication.getOverviewObject();
+        }
         refreshData(index, obj);
     }
 

@@ -2,6 +2,8 @@ package com.nextep.pelmel.services;
 
 import com.nextep.pelmel.model.User;
 
+import java.io.File;
+
 public interface MessageService {
 
 	interface OnNewMessageListener {
@@ -70,7 +72,8 @@ public interface MessageService {
 	 */
 	void sendMessage(User currentUser, String otherUserKey, String message,
 			OnNewMessageListener callback);
-
+	void sendMessageWithPhoto(final User currentUser, final String otherUserKey,
+							  final String message, final File imageFile, final MessageService.OnNewMessageListener callback);
 
 	void requestPushToken();
 }

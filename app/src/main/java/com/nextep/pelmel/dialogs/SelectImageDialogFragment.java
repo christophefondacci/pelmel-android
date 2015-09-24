@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.nextep.pelmel.R;
@@ -16,6 +17,11 @@ public class SelectImageDialogFragment extends DialogFragment {
 
 	private static final int ACTIVITY_PICK_PHOTO = 10;
 	private static final int ACTIVITY_CAMERA = 100;
+	private Fragment initiatingFragment;
+
+	public void setInitiatingFragment(Fragment initiatingFragment) {
+		this.initiatingFragment = initiatingFragment;
+	}
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -54,5 +60,8 @@ public class SelectImageDialogFragment extends DialogFragment {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		Log.d("photo", "Result is " + requestCode + " : result code "
 				+ resultCode);
+		if(initiatingFragment != null) {
+			initiatingFragment.onActivityResult(requestCode,resultCode,data);
+		}
 	}
 }

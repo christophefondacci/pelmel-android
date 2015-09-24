@@ -42,7 +42,7 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
     private View bannerContainer;
     private ProgressBar bannerProgress;
     private ProgressDialog progressDialog;
-
+    private Fragment fragmentForActivityResult;
     private View slidingDragView;
 
     @Override
@@ -266,21 +266,29 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("photo", "Result is " + requestCode + " : result code "
-                + resultCode);
-        // If user cancelled the photo upload, then data will be null
-        if (data != null && data.getData() != null) {
-            progressDialog = new ProgressDialog(this);
-            progressDialog.setCancelable(false);
-            progressDialog.setMessage(getString(R.string.upload_wait_message));
-            progressDialog.setTitle(getString(R.string.waitTitle));
-            progressDialog.setIndeterminate(true);
-            progressDialog.show();
+        if(fragmentForActivityResult != null) {
+            // Dispatching
+            fragmentForActivityResult.onActivityResult(requestCode,resultCode,data);
+            // Clearing it
+            fragmentForActivityResult = null;
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+            Log.d("photo", "Result is " + requestCode + " : result code "
+                    + resultCode);
+            // If user cancelled the photo upload, then data will be null
+            if (data != null && data.getData() != null) {
+                progressDialog = new ProgressDialog(this);
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage(getString(R.string.upload_wait_message));
+                progressDialog.setTitle(getString(R.string.waitTitle));
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
 
-            final Uri selectedImage = data.getData();
-            final File f = PelMelApplication.getImageService().getOrientedImageFileFromUri(this,
-                    selectedImage);
-            PelMelApplication.getImageService().uploadImage(f, PelMelApplication.getOverviewObject(), PelMelApplication.getUserService().getLoggedUser(), this);
+                final Uri selectedImage = data.getData();
+                final File f = PelMelApplication.getImageService().getOrientedImageFileFromUri(this,
+                        selectedImage);
+                PelMelApplication.getImageService().uploadImage(f, PelMelApplication.getOverviewObject(), PelMelApplication.getUserService().getLoggedUser(), this);
+            }
         }
 
     }
@@ -310,6 +318,12 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
                 getText(R.string.photoUploadFailed), Toast.LENGTH_LONG);
         t.show();
     }
+
+    @Override
+    public void setFragmentForActivityResult(Fragment fragmentForActivityResult) {
+        this.fragmentForActivityResult = fragmentForActivityResult;
+    }
+
     //    @Override
 //    public boolean onChildTouch(View v, MotionEvent e) {
 //        final View snippetContainer = findViewById(R.id.pelmelSnippetContainer);

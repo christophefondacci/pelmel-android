@@ -34,9 +34,11 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -413,6 +415,11 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public void sendMessage(final User currentUser, final String otherUserKey,
 			final String message, final MessageService.OnNewMessageListener callback) {
+		sendMessageWithPhoto(currentUser,otherUserKey,message,null, callback);
+	}
+
+	public void sendMessageWithPhoto(final User currentUser, final String otherUserKey,
+									 final String message, final File imageFile, final MessageService.OnNewMessageListener callback) {
 		final boolean isComment = !otherUserKey.startsWith(User.CAL_TYPE);
 		new AsyncTask<Void, Void, Message>() {
 			@Override
@@ -429,6 +436,10 @@ public class MessageServiceImpl implements MessageService {
 					multipart.addPart(isComment ? "commentItemKey" : "to", new StringBody(otherUserKey));
 					multipart.addPart(isComment ? "comment" : "msgText", new StringBody(message,
 							Charset.forName("UTF-8")));
+					if(imageFile != null) {
+						FileBody bin = new FileBody(imageFile);
+						multipart.addPart("media",bin);
+					}
 					post.setEntity(multipart);
 					HttpResponse response = http.execute(post);
 					final InputStream is = response.getEntity().getContent();
