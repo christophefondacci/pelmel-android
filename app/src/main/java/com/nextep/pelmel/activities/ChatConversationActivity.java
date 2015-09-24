@@ -56,11 +56,16 @@ public class ChatConversationActivity extends Fragment implements
 	private UserService userService;
 	private String otherUserKey;
 	private User currentUser;
+	private boolean commentMode;
 	private List<ChatMessage> messages = Collections.emptyList();
 	private SnippetContainerSupport snippetContainerSupport;
 
 	public void setOtherUserKey(String otherUserKey) {
 		this.otherUserKey = otherUserKey;
+	}
+
+	public void setCommentMode(boolean commentMode) {
+		this.commentMode = commentMode;
 	}
 
 	@Override
@@ -141,23 +146,14 @@ public class ChatConversationActivity extends Fragment implements
 				List<ChatMessage> messages = Collections.emptyList();
 
 				// Fetching list of messages
-				if(otherUserKey.startsWith(User.CAL_TYPE)) {
+				if(!commentMode) {
 					boolean hasNewMessages = messageService.listMessages(currentUser,
 							loc.getLatitude(), loc.getLongitude(), ChatConversationActivity.this);
 
 					// Marking messages as read
 					final Realm realm = Realm.getInstance(ChatConversationActivity.this.getActivity(), currentUser.getKey());
 					realm.beginTransaction();
-					final RealmQuery<Message> query = realm.where(Message.class);
-					query.beginGroup();
-					query.equalTo("toItemKey", otherUserKey);
-					query.equalTo("from.itemKey", currentUser.getKey());
-					query.endGroup();
-					query.or();
-					query.beginGroup();
-					query.equalTo("toItemKey", currentUser.getKey());
-					query.equalTo("from.itemKey", otherUserKey);
-					query.endGroup();
+					final RealmQuery<Message> query = buildMessagesQuery(realm);
 					final List<Message> messagesToRead = query.findAll();
 					for (int i = 0; i < messagesToRead.size(); i++) {
 						final Message m = messagesToRead.get(i);
@@ -181,27 +177,32 @@ public class ChatConversationActivity extends Fragment implements
 		}.execute();
 	}
 
-	public void updateData() {
-		final User currentUser = PelMelApplication.getUserService().getLoggedUser();
-		Realm realm = Realm.getInstance(this.getActivity(), currentUser.getKey());
+	private RealmQuery<Message> buildMessagesQuery(Realm realm) {
 		RealmQuery<Message> query = realm.where(Message.class);
-		if(otherUserKey.startsWith(User.CAL_TYPE)) {
+		if(!commentMode) {
 			query.beginGroup();
-			query.equalTo("from.itemKey", currentUser.getKey());
-			query.equalTo("toItemKey", otherUserKey);
-//		query.equalTo("replyTo.itemKey",currentUser.getKey());
-			query.endGroup();
-			query.or().beginGroup();
 			query.equalTo("from.itemKey", otherUserKey);
 			query.equalTo("toItemKey", currentUser.getKey());
 //		query.equalTo("replyTo.itemKey", otherUserKey);
 			query.endGroup();
+			if(otherUserKey.startsWith(User.CAL_TYPE)) {
+				query.or().beginGroup();
+				query.equalTo("from.itemKey", currentUser.getKey());
+				query.equalTo("toItemKey", otherUserKey);
+//		query.equalTo("replyTo.itemKey",currentUser.getKey());
+				query.endGroup();
+			}
 		} else {
 			query.equalTo("toItemKey",otherUserKey);
 		}
-
+		return query;
+	}
+	
+	public void updateData() {
+		final User currentUser = PelMelApplication.getUserService().getLoggedUser();
+		Realm realm = Realm.getInstance(this.getActivity(), currentUser.getKey());
+		final RealmQuery<Message> query = buildMessagesQuery(realm);
 		final RealmResults<Message> messages = query.findAllSorted("messageDate", true);
-
 		final MessageAdapter adapter=  new MessageAdapter(this.getActivity(),messages,currentUser,otherUserKey,this);
 		listView.setAdapter(adapter);
 		listView.setSelection(messages.size() - 1);

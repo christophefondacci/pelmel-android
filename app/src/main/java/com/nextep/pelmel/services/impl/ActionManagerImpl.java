@@ -155,8 +155,9 @@ public class ActionManagerImpl implements ActionManager {
                 uiThreadHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        ChatConversationActivity chatFragment = new ChatConversationActivity();
+                        final ChatConversationActivity chatFragment = new ChatConversationActivity();
                         chatFragment.setOtherUserKey(((CalObject) parameter).getKey());
+                        chatFragment.setCommentMode(!(parameter instanceof User));
                         PelMelApplication.getSnippetContainerSupport().showSnippetForFragment(chatFragment, true, false);
                     }
                 });
