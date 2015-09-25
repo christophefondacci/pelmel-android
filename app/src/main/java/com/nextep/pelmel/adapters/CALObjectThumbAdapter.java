@@ -2,9 +2,11 @@ package com.nextep.pelmel.adapters;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -40,9 +42,12 @@ public class CALObjectThumbAdapter extends BaseAdapter implements AdapterView.On
 		resources = PelMelApplication.getInstance().getResources();
 	}
 
-	public void setGrid(boolean grid, int width) {
+	public void setGrid(boolean grid) {
 		this.grid = grid;
-		this.width = width-(int)resources.getDimension(R.dimen.snippet_thumbs_hoziontal_margins);
+		WindowManager wm = (WindowManager)PelMelApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
+		Point p = new Point();
+		wm.getDefaultDisplay().getSize(p);
+		this.width = p.x-(int)resources.getDimension(R.dimen.snippet_thumbs_hoziontal_margins);
 		maxObjects = (int)((float)width / (resources.getDimension(resSize)+10));
 	}
 

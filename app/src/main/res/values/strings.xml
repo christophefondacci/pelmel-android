@@ -120,6 +120,8 @@
     <string name="loginPasswordConfirmPlaceholder">Confirm password</string>
     <string name="loginHint">Login to find all places around you</string>
     <string name="logout">Logout</string>
+    <string name="messaging.title.groupChat">Group chat</string>
+    <string name="messaging.chatUsers">Recipients</string>
     <string name="month.january">January</string>
     <string name="month.february">February</string>
     <string name="month.march">March</string>

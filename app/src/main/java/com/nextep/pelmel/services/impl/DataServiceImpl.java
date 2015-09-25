@@ -466,7 +466,7 @@ public class DataServiceImpl implements DataService {
             place = new PlaceImpl();
             placeCache.put(json.getKey(), place);
         }
-        fillPlaceFromJson(place,json);
+        fillPlaceFromJson(place, json);
         place.setLikeCount(json.getLikes());
         place.setLiked(json.isLiked());
         place.setReviewsCount(json.getCommentsCount());
@@ -866,6 +866,23 @@ public class DataServiceImpl implements DataService {
 
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+
+    @Override
+    public <T extends CalObject> T getCachedObject(Class<T> clazz, String itemKey) {
+        Cache<?> cache= null;
+        if(itemKey.startsWith(Place.CAL_TYPE)) {
+            cache = placeCache;
+        } else if(itemKey.startsWith(User.CAL_TYPE)){
+            cache = userCache;
+        } else if (itemKey.startsWith(Event.CAL_TYPE)) {
+            cache = eventCache;
+        }
+        if(cache!=null) {
+            return (T) cache.get(itemKey);
+        } else {
+            return null;
+        }
     }
 
     @Override

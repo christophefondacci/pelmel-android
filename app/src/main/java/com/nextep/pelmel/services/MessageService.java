@@ -72,8 +72,10 @@ public interface MessageService {
 	 */
 	void sendMessage(User currentUser, String otherUserKey, String message,
 			OnNewMessageListener callback);
+	void postComment(final User currentUser, final String otherUserKey,
+					 final String message, final MessageService.OnNewMessageListener callback);
 	void sendMessageWithPhoto(final User currentUser, final String otherUserKey,
-							  final String message, final File imageFile, final MessageService.OnNewMessageListener callback);
+							  final String message,boolean isComment, final File imageFile, final MessageService.OnNewMessageListener callback);
 
 	void requestPushToken();
 }

@@ -136,12 +136,10 @@ public class ContextSnippetInfoProvider implements SnippetInfoProvider, AdapterV
 
     @Override
     public void refreshCustomSnippetView(Context context, LinearLayout parent) {
-        WindowManager wm = (WindowManager)PelMelApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
-        Point p = new Point();
-        wm.getDefaultDisplay().getSize(p);
+
         List<CalObject> objects = Utils.sortCalObjectsForDisplay(ContextHolder.users);
         final CALObjectThumbAdapter adapter = new CALObjectThumbAdapter(context,objects);
-        adapter.setGrid(true, p.x);
+        adapter.setGrid(true);
         horizontalListView.setAdapter(adapter);
         horizontalListView.setOnItemClickListener(adapter);
     }

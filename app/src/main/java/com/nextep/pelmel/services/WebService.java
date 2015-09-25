@@ -48,8 +48,8 @@ import java.util.Map;
 public class WebService {
 
     public static final String LOG_TAG = "WebService";
-//    public static final String BASE_URL = "http://www.pelmelguide.com";
-    public static final String BASE_URL = "http://10.0.0.2";
+    public static final String BASE_URL = "http://www.pelmelguide.com";
+//    public static final String BASE_URL = "http://10.0.0.2";
 //    public static final String BASE_URL = "http://10.2.3.21";
 //    public static final String BASE_URL = "http://www.pelmelguide.com";
     private static final String LOGIN_ACTION = "/mobileLogin";

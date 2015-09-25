@@ -8,9 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
 import com.nextep.pelmel.helpers.Strings;
 import com.nextep.pelmel.listeners.MessageCallback;
+import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.model.db.MessageRecipient;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -70,7 +72,21 @@ public class MessageThreadAdapter extends RealmBaseAdapter<MessageRecipient> {
         }
 
         if (recipient != null) {
-            viewHolder.threadNicknameLabel.setText(recipient.getUsername());
+            if(recipient.getUsers().isEmpty()) {
+                viewHolder.threadNicknameLabel.setText(recipient.getUsername());
+            } else {
+                final User currentUser = PelMelApplication.getUserService().getLoggedUser();
+                final StringBuilder buf = new StringBuilder();
+                String separator = "";
+                for(MessageRecipient r : recipient.getUsers()) {
+                    if(!r.getImageKey().equals(currentUser.getKey())) {
+                        buf.append(separator);
+                        buf.append(r.getUsername());
+                        separator = ", ";
+                    }
+                }
+                viewHolder.threadNicknameLabel.setText(buf.toString());
+            }
             viewHolder.dateView.setText(DATE_FORMATTER.format(recipient.getLastMessageDate()));
             if(recipient.getUnreadMessageCount()>0) {
                 viewHolder.badgeLabel.setText(String.valueOf(recipient.getUnreadMessageCount()));
@@ -80,10 +96,10 @@ public class MessageThreadAdapter extends RealmBaseAdapter<MessageRecipient> {
             }
             viewHolder.threadContentsLabel.setText(recipient.getMessageCount() + " messages");
             if (recipient.getImageThumbUrl() != null && recipient.getImageThumbUrl().startsWith("http")) {
-                ImageLoader.getInstance().displayImage(recipient.getImageThumbUrl(),viewHolder.imageView);
+                ImageLoader.getInstance().displayImage(recipient.getImageThumbUrl(), viewHolder.imageView);
             } else {
                 viewHolder.imageView.setImageBitmap(
-                        BitmapFactory.decodeResource(context.getResources(),R.drawable.no_photo_profile_small));
+                        BitmapFactory.decodeResource(context.getResources(), R.drawable.no_photo_profile_small));
             }
         }
         return convertView;

@@ -324,48 +324,50 @@ public class MessageServiceImpl implements MessageService {
 		final User currentUser = PelMelApplication.getUserService().getLoggedUser();
 		final RealmQuery<MessageRecipient> query = realm.where(MessageRecipient.class);
 		boolean isFirst = true;
-		for(String userKey : usersMap.keySet()) {
-			if(!isFirst) {
-				query.or();
-			}
-			query.equalTo("itemKey", userKey);
-			isFirst = false;
-		}
-
-		// Executing query
-		RealmResults<MessageRecipient> results = query.findAll();
-
-		// Iterating over found results
-		for(int i = 0 ; i < results.size() ; i ++) {
-			final MessageRecipient recipient = results.get(i);
-			recipientMap.put(recipient.getItemKey(),recipient);
-
-			// Retrieving parsed user definition from JSON and injecting in recipient
-			final User user = usersMap.get(recipient.getItemKey());
-			if(user != null) {
-				fillRecipientFromUser(recipient,user);
+		if(!usersMap.isEmpty()) {
+			for (String userKey : usersMap.keySet()) {
+				if (!isFirst) {
+					query.or();
+				}
+				query.equalTo("itemKey", userKey);
+				isFirst = false;
 			}
 
-			// Appending to our result list
-			recipients.add(recipient);
+			// Executing query
+			RealmResults<MessageRecipient> results = query.findAll();
 
-			// Removing from map as this entry is resolved
-			usersMap.remove(recipient.getItemKey());
-		}
+			// Iterating over found results
+			for (int i = 0; i < results.size(); i++) {
+				final MessageRecipient recipient = results.get(i);
+				recipientMap.put(recipient.getItemKey(), recipient);
 
-		// Remaining users need to be created
-		for(String userKey : usersMap.keySet()) {
-			final User user = usersMap.get(userKey);
+				// Retrieving parsed user definition from JSON and injecting in recipient
+				final User user = usersMap.get(recipient.getItemKey());
+				if (user != null) {
+					fillRecipientFromUser(recipient, user);
+				}
 
-			// Creating DB recipient and filling from bean
-			final MessageRecipient recipient = realm.createObject(MessageRecipient.class);
-			fillRecipientFromUser(recipient,user);
+				// Appending to our result list
+				recipients.add(recipient);
 
-			// Filling map of resolved objects
-			recipientMap.put(userKey, recipient);
+				// Removing from map as this entry is resolved
+				usersMap.remove(recipient.getItemKey());
+			}
 
-			// Appending to result list
-			recipients.add(recipient);
+			// Remaining users need to be created
+			for (String userKey : usersMap.keySet()) {
+				final User user = usersMap.get(userKey);
+
+				// Creating DB recipient and filling from bean
+				final MessageRecipient recipient = realm.createObject(MessageRecipient.class);
+				fillRecipientFromUser(recipient, user);
+
+				// Filling map of resolved objects
+				recipientMap.put(userKey, recipient);
+
+				// Appending to result list
+				recipients.add(recipient);
+			}
 		}
 		return recipients;
 	}
@@ -415,12 +417,15 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public void sendMessage(final User currentUser, final String otherUserKey,
 			final String message, final MessageService.OnNewMessageListener callback) {
-		sendMessageWithPhoto(currentUser,otherUserKey,message,null, callback);
+		sendMessageWithPhoto(currentUser,otherUserKey,message,false,null, callback);
+	}
+	public void postComment(final User currentUser, final String otherUserKey,
+			final String message, final MessageService.OnNewMessageListener callback) {
+		sendMessageWithPhoto(currentUser,otherUserKey,message,true,null, callback);
 	}
 
 	public void sendMessageWithPhoto(final User currentUser, final String otherUserKey,
-									 final String message, final File imageFile, final MessageService.OnNewMessageListener callback) {
-		final boolean isComment = !otherUserKey.startsWith(User.CAL_TYPE);
+									 final String message, final boolean isComment, final File imageFile, final MessageService.OnNewMessageListener callback) {
 		new AsyncTask<Void, Void, Message>() {
 			@Override
 			protected Message doInBackground(Void... params) {

@@ -521,6 +521,8 @@
     <string name="loginWaitMsg">Logging in…</string>
     <string name="login_forgot_password">Forgot your password?</string>
     <string name="logout">Logout</string>
+    <string name="messaging.chatUsers">Recipients</string>
+    <string name="messaging.title.groupChat">Group chat</string>
     <string name="month.april">April</string>
     <string name="month.august">August</string>
     <string name="month.december">December</string>

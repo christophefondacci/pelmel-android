@@ -139,6 +139,15 @@ public interface DataService {
      */
     CalObject getCalObject(String itemKey, OverviewListener listener);
 
+    /**
+     * Returns the cached object or <code>null</code> if object not in cache
+     *
+     * @param clazz
+     * @param itemKey
+     * @param <T>
+     * @return
+     */
+    <T extends CalObject> T getCachedObject(Class<T> clazz, String itemKey);
     void exportDatabase(Context context);
 
     void clearCache();

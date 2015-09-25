@@ -111,6 +111,8 @@
     <string name="loginPasswordConfirmPlaceholder">Confirmation</string>
     <string name="loginHint">Connectez-vous pour trouver les lieux autour de vous</string>
     <string name="logout">Déconnexion</string>
+    <string name="messaging.title.groupChat">Chat en groupe</string>
+    <string name="messaging.chatUsers">Destinataires</string>
     <string name="offline">Hors ligne</string>
     <string name="online">Disponible</string>
     <string name="ok">OK</string>

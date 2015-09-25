@@ -21,6 +21,7 @@ import android.widget.ListView;
 
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.adapters.CALObjectThumbAdapter;
 import com.nextep.pelmel.adapters.MessageAdapter;
 import com.nextep.pelmel.dialogs.SelectImageDialogFragment;
 import com.nextep.pelmel.listeners.MessageCallback;
@@ -30,16 +31,22 @@ import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.ChatMessage;
 import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.model.db.Message;
+import com.nextep.pelmel.model.db.MessageRecipient;
+import com.nextep.pelmel.model.impl.ImageImpl;
+import com.nextep.pelmel.model.impl.UserImpl;
 import com.nextep.pelmel.model.support.SnippetChildSupport;
 import com.nextep.pelmel.model.support.SnippetContainerSupport;
 import com.nextep.pelmel.services.MessageService;
 import com.nextep.pelmel.services.UserService;
+import com.nextep.pelmel.views.HorizontalListView;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
@@ -47,8 +54,10 @@ public class ChatConversationActivity extends Fragment implements
 		UserListener, OnItemClickListener, MessageCallback, SnippetChildSupport, MessageService.OnNewMessageListener, MessageService.OnPushMessageListener {
 
 	public static final String CHAT_WITH_USER_KEY = "userKey";
+	public static final String CAL_TYPE_RECIPIENT_GROUP = "RCPT";
 	public static final String BUNDLE_STATE_OTHER_ITEM_KEY = "otherUserKey";
 
+	private HorizontalListView recipientsListView;
 	private ListView listView;
 	private View sendButton;
 	private View sendPhotoButton;
@@ -57,6 +66,7 @@ public class ChatConversationActivity extends Fragment implements
 	private String otherUserKey;
 	private User currentUser;
 	private boolean commentMode;
+	private Realm realm;
 	private List<ChatMessage> messages = Collections.emptyList();
 	private SnippetContainerSupport snippetContainerSupport;
 
@@ -71,10 +81,52 @@ public class ChatConversationActivity extends Fragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-		// Inflating view layout
-		final View view = inflater.inflate(R.layout.activity_chat_conversation,container,false);
+		// Instantiating realm
+		currentUser = PelMelApplication.getUserService().getLoggedUser();
+		realm = Realm.getInstance(ChatConversationActivity.this.getActivity(), currentUser.getKey());
 
 		// Configuring list view
+		View view;
+		if(otherUserKey == null && savedInstanceState!=null) {
+			otherUserKey = savedInstanceState.getString(BUNDLE_STATE_OTHER_ITEM_KEY);
+		}
+		if(!otherUserKey.startsWith(CAL_TYPE_RECIPIENT_GROUP)) {
+			view = inflater.inflate(R.layout.activity_chat_conversation,container,false);
+		} else {
+			view = inflater.inflate(R.layout.activity_group_chat_conversation,container,false);
+			recipientsListView = (HorizontalListView)view.findViewById(R.id.groupRecipientsList);
+
+			// Getting recipient instance
+			final Realm realm = Realm.getInstance(ChatConversationActivity.this.getActivity(), PelMelApplication.getUserService().getLoggedUser().getKey());
+			realm.beginTransaction();
+			final RealmQuery<MessageRecipient> query = realm.where(MessageRecipient.class);
+			query.equalTo("itemKey", otherUserKey);
+			final MessageRecipient group = query.findFirst();
+			final RealmList<MessageRecipient> recipients = group.getUsers();
+			final List<CalObject> users = new ArrayList<>();
+			for(MessageRecipient recipient : recipients) {
+				UserImpl user = PelMelApplication.getDataService().getCachedObject(UserImpl.class,recipient.getItemKey());
+				if(user == null) {
+					user = new UserImpl();
+				}
+				user.setKey(recipient.getItemKey());
+				if(recipient.getImageKey() != null && !recipient.getImageKey().isEmpty()) {
+					final ImageImpl img = new ImageImpl();
+					img.setKey(recipient.getImageKey());
+					img.setUrl(recipient.getImageUrl());
+					img.setThumbUrl(recipient.getImageThumbUrl());
+					user.setThumb(img);
+				}
+				user.setName(recipient.getUsername());
+				users.add(user);
+			}
+			realm.commitTransaction();
+			realm.close();
+			CALObjectThumbAdapter adapter = new CALObjectThumbAdapter(getActivity(),users);
+			recipientsListView.setAdapter(adapter);
+			recipientsListView.setOnItemClickListener(adapter);
+		}
+
 		listView = (ListView) view.findViewById(R.id.chat_list);
 		listView.setOnItemClickListener(this);
 		listView.setDividerHeight(0);
@@ -94,8 +146,8 @@ public class ChatConversationActivity extends Fragment implements
 					if (message != null
 							&& !"".equals(message.trim())) {
 						PelMelApplication.getMessageService()
-								.sendMessage(PelMelApplication.getUserService().getLoggedUser(), otherUserKey,
-										message, ChatConversationActivity.this);
+								.sendMessageWithPhoto(PelMelApplication.getUserService().getLoggedUser(), otherUserKey,
+										message, commentMode, null, ChatConversationActivity.this);
 					}
 					chatTextView.setText("");
 				}
@@ -151,7 +203,7 @@ public class ChatConversationActivity extends Fragment implements
 							loc.getLatitude(), loc.getLongitude(), ChatConversationActivity.this);
 
 					// Marking messages as read
-					final Realm realm = Realm.getInstance(ChatConversationActivity.this.getActivity(), currentUser.getKey());
+					Realm realm = Realm.getInstance(ChatConversationActivity.this.getActivity(), currentUser.getKey());
 					realm.beginTransaction();
 					final RealmQuery<Message> query = buildMessagesQuery(realm);
 					final List<Message> messagesToRead = query.findAll();
@@ -164,7 +216,6 @@ public class ChatConversationActivity extends Fragment implements
 					}
 					realm.commitTransaction();
 					realm.close();
-
 					// Marking messages as read on server
 					PelMelApplication.getMessageService().readConversationWith(otherUserKey);
 					return hasNewMessages;
@@ -179,7 +230,10 @@ public class ChatConversationActivity extends Fragment implements
 
 	private RealmQuery<Message> buildMessagesQuery(Realm realm) {
 		RealmQuery<Message> query = realm.where(Message.class);
-		if(!commentMode) {
+		if(otherUserKey.startsWith(CAL_TYPE_RECIPIENT_GROUP)) {
+			query.equalTo("replyTo.itemKey",otherUserKey);
+			query.equalTo("toItemKey",currentUser.getKey());
+		} else if(!commentMode) {
 			query.beginGroup();
 			query.equalTo("from.itemKey", otherUserKey);
 			query.equalTo("toItemKey", currentUser.getKey());
@@ -197,10 +251,9 @@ public class ChatConversationActivity extends Fragment implements
 		}
 		return query;
 	}
-	
+
 	public void updateData() {
 		final User currentUser = PelMelApplication.getUserService().getLoggedUser();
-		Realm realm = Realm.getInstance(this.getActivity(), currentUser.getKey());
 		final RealmQuery<Message> query = buildMessagesQuery(realm);
 		final RealmResults<Message> messages = query.findAllSorted("messageDate", true);
 		final MessageAdapter adapter=  new MessageAdapter(this.getActivity(),messages,currentUser,otherUserKey,this);
@@ -306,6 +359,9 @@ public class ChatConversationActivity extends Fragment implements
 
 	@Override
 	public void onDestroy() {
+		if(realm != null) {
+			realm.close();
+		}
 		PelMelApplication.getMessageService().unregisterPushListener(this);
 		super.onDestroy();
 	}
@@ -348,7 +404,7 @@ public class ChatConversationActivity extends Fragment implements
 				selectedImage);
 
 		PelMelApplication.getMessageService().sendMessageWithPhoto(PelMelApplication.getUserService().getLoggedUser(), otherUserKey,
-				"", f, ChatConversationActivity.this);
+				"",commentMode, f, ChatConversationActivity.this);
 
 		// Resetting data to prevent any other upload
 		data.setData(null);
