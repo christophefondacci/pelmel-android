@@ -48,7 +48,7 @@ public interface DataService {
      * @param userKey the user for the given item key
      * @return the {@link User}
      */
-    User getUser(String userKey);
+    User getUser(String userKey, IJsonLightUser json);
 
     /**
      * Provides a list of nearby places which may come from a cache. If no

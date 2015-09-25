@@ -104,6 +104,14 @@ public interface UserService {
     void checkIn(Place place,CheckInCallback callback);
 
     /**
+     * Provides the place where the user is currently checked in, if checked in and not expired
+     *
+     * @param user the User to get the check-in place for
+     * @return the Place where this user is checked in or <code>null</code> if none or expired
+     */
+    Place getCheckedInPlace(User user);
+
+    /**
      * Checks the current user out the given place.
      *
      * @param place the place where the user should be checked out from

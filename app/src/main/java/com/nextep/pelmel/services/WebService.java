@@ -12,6 +12,7 @@ import com.google.gson.reflect.TypeToken;
 import com.nextep.json.model.impl.JsonCheckinResponse;
 import com.nextep.json.model.impl.JsonLightEvent;
 import com.nextep.json.model.impl.JsonLikeInfo;
+import com.nextep.json.model.impl.JsonLoggedInUser;
 import com.nextep.json.model.impl.JsonManyToOneMessageList;
 import com.nextep.json.model.impl.JsonMessagingStatistic;
 import com.nextep.json.model.impl.JsonNearbyPlacesResponse;
@@ -220,7 +221,7 @@ public class WebService {
             final InputStream is = postRequest(new URL(BASE_URL + LOGIN_ACTION), params);
             if (is != null) {
                 final InputStreamReader reader = new InputStreamReader(is);
-                user = gson.fromJson(reader, new TypeToken<JsonUser>() {
+                user = gson.fromJson(reader, new TypeToken<JsonLoggedInUser>() {
                 }.getType());
                 PelMelApplication.getUiService().setUnreadMessagesCount(
                         user.getUnreadMsgCount());

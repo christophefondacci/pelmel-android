@@ -108,6 +108,7 @@ public class MapActivity extends Fragment implements UserListener,
 			}
 		});
 
+		// Deal action
 		final ImageView dealAction = (ImageView)view.findViewById(R.id.dealButton);
 		final TextView dealBadge = (TextView) view.findViewById(R.id.dealsCountBadge);
 		PelMelApplication.getDealService().registerDealsViews(dealAction,dealBadge);
@@ -115,6 +116,17 @@ public class MapActivity extends Fragment implements UserListener,
 			@Override
 			public void onClick(View v) {
 				PelMelApplication.getActionManager().executeAction(Action.LIST_DEALS,null);
+			}
+		});
+
+		// Private Network action
+		final ImageView networkAction = (ImageView)view.findViewById(R.id.networkButton);
+		final TextView networkBadge = (TextView)view.findViewById(R.id.networkCountBadge);
+		PelMelApplication.getUiService().registerNetworkRequestsView(networkBadge);
+		networkAction.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
 			}
 		});
 

@@ -29,6 +29,20 @@ public interface UIService {
 	void registerUnreadMsgBadgeView(TextView badgeView);
 
 	/**
+	 * Defines the number of pending network requests
+	 *
+	 * @param requestsCount the number of pending network requests
+	 */
+	void setPendingNetworkRequests(int requestsCount);
+
+	/**
+	 * Registers the badge view that shows the count of pending network requests
+	 *
+	 * @param badgeView the TextView
+	 */
+	void registerNetworkRequestsView(TextView badgeView);
+
+	/**
 	 * Provides the color resource id corresponding to the given place type
 	 * 
 	 * @param placeType

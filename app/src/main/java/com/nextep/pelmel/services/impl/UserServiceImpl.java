@@ -137,6 +137,14 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public Place getCheckedInPlace(User user) {
+		if(user.getLastLocation() != null && user.getLastLocationTime().getTime()+PelMelConstants.CHECKIN_TIMEOUT_MILLISECS>System.currentTimeMillis()) {
+			return user.getLastLocation();
+		}
+		return null;
+	}
+
 	private void showLoginDialog() {
 		final Intent intent = new Intent(PelMelApplication.getInstance()
 				.getBaseContext(), LoginActivity.class);

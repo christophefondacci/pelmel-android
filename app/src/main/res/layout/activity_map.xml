@@ -30,13 +30,38 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/dealButton"
+        android:id="@+id/networkButton"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="5dp"
         android:layout_below="@+id/checkinButton"
         android:layout_marginTop="10dp"
+        android:src="@drawable/btn_network"
+        />
+    <TextView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/bg_badge"
+        android:gravity="center"
+        android:text="2"
+        android:textColor="@color/white"
+        android:layout_alignRight="@id/networkButton"
+        android:layout_alignTop="@id/networkButton"
+        android:layout_marginRight="-8dp"
+        android:layout_marginTop="-5dp"
+        android:id="@+id/networkCountBadge"
+        android:visibility="invisible"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dealButton"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/networkButton"
+        android:layout_marginTop="10dp"
         android:src="@drawable/btn_deal"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        />
     <TextView
         android:layout_width="20dp"
         android:layout_height="20dp"

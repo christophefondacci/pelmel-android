@@ -31,7 +31,9 @@ import java.util.Date;
 public class UIServiceImpl implements UIService {
 
     private TextView badgeView;
+    private TextView networkBadgeView;
     private int unreadMessages = 0;
+    private int networkRequestsCount = 0;
     private Handler uiThreadHandler = new Handler(Looper.getMainLooper());
 
     @Override
@@ -57,6 +59,30 @@ public class UIServiceImpl implements UIService {
     public void registerUnreadMsgBadgeView(TextView badgeView) {
         this.badgeView = badgeView;
         setUnreadMessagesCount(unreadMessages);
+    }
+
+    @Override
+    public void registerNetworkRequestsView(TextView badgeView) {
+        this.networkBadgeView = badgeView;
+        setPendingNetworkRequests(networkRequestsCount);
+    }
+
+    @Override
+    public void setPendingNetworkRequests(int requestsCount) {
+        this.networkRequestsCount = requestsCount;
+        if(networkBadgeView != null) {
+            uiThreadHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    networkBadgeView.setText(String.valueOf(networkRequestsCount));
+                    if (networkRequestsCount > 0) {
+                        networkBadgeView.setVisibility(View.VISIBLE);
+                    } else {
+                        networkBadgeView.setVisibility(View.INVISIBLE);
+                    }
+                }
+            });
+        }
     }
 
     @Override

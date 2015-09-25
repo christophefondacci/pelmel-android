@@ -19,6 +19,7 @@ import com.nextep.json.model.impl.JsonLightEvent;
 import com.nextep.json.model.impl.JsonLightPlace;
 import com.nextep.json.model.impl.JsonLightUser;
 import com.nextep.json.model.impl.JsonLikeInfo;
+import com.nextep.json.model.impl.JsonLoggedInUser;
 import com.nextep.json.model.impl.JsonMedia;
 import com.nextep.json.model.impl.JsonNearbyPlacesResponse;
 import com.nextep.json.model.impl.JsonPlace;
@@ -44,6 +45,7 @@ import com.nextep.pelmel.model.RecurrencyType;
 import com.nextep.pelmel.model.RecurringEvent;
 import com.nextep.pelmel.model.Tag;
 import com.nextep.pelmel.model.User;
+import com.nextep.pelmel.model.impl.CurrentUserImpl;
 import com.nextep.pelmel.model.impl.DealImpl;
 import com.nextep.pelmel.model.impl.EventImpl;
 import com.nextep.pelmel.model.impl.ImageImpl;
@@ -171,10 +173,14 @@ public class DataServiceImpl implements DataService {
     }
 
     @Override
-    public User getUser(String key) {
+    public User getUser(String key, IJsonLightUser json) {
         User user = userCache.get(key);
         if (user == null) {
-            user = new UserImpl();
+            if(json instanceof JsonLoggedInUser) {
+                user = new CurrentUserImpl();
+            } else {
+                user = new UserImpl();
+            }
             user.setKey(key);
             userCache.put(key, user);
         }
@@ -184,7 +190,7 @@ public class DataServiceImpl implements DataService {
     @Override
     public User getUserFromJson(JsonUser json) {
         final String key = json.getKey();
-        final User user = getUser(key);
+        final User user = getUser(key,json);
         // Updating birth date
         final Long birthDate = json.getBirthDate();
         if (birthDate != null) {
@@ -271,13 +277,52 @@ public class DataServiceImpl implements DataService {
         }
         user.setEvents(events);
 
+        if(json instanceof JsonLoggedInUser) {
+            JsonLoggedInUser lu = (JsonLoggedInUser)json;
+            CurrentUserImpl currentUser = (CurrentUserImpl)user;
+
+            // Processing pending approvals
+            final List<User> pendingApprovals = new ArrayList<>();
+            for(IJsonLightUser jsonApprovalUser : lu.getPendingApprovals()) {
+                final User approvalUser = getUserFromLightJson(jsonApprovalUser);
+                pendingApprovals.add(approvalUser);
+            }
+
+            // Processing pending requests
+            final List<User> pendingRequests = new ArrayList<>();
+            for(IJsonLightUser jsonRequestUser : lu.getPendingRequests()) {
+                final User requestUser = getUserFromLightJson(jsonRequestUser);
+                pendingRequests.add(requestUser);
+            }
+
+            // Processing in-network users
+            int checkinsCount = 0;
+            final List<User> networkUsers = new ArrayList<>();
+            for(IJsonLightUser jsonNetworkUser : lu.getNetworkUsers()) {
+                final User networkUser = getUserFromLightJson(jsonNetworkUser);
+                networkUsers.add(networkUser);
+                final Place checkedInPlace = PelMelApplication.getUserService().getCheckedInPlace(networkUser);
+                if(checkedInPlace != null) {
+                    checkinsCount++;
+                }
+            }
+
+            // Filling current user information
+            currentUser.setNetworkPendingApprovals(pendingApprovals);
+            currentUser.setNetworkPendingApprovals(pendingRequests);
+            currentUser.setNetworkPendingApprovals(networkUsers);
+
+
+            PelMelApplication.getUiService().setPendingNetworkRequests(pendingApprovals.size()+checkinsCount);
+
+        }
         return user;
     }
 
     @Override
     public User getUserFromLightJson(IJsonLightUser json) {
         final String key = json.getKey();
-        final User user = getUser(key);
+        final User user = getUser(key,json);
         user.setName(json.getPseudo());
         user.setOnline(json.isOnline());
 
@@ -290,6 +335,14 @@ public class DataServiceImpl implements DataService {
             }
         }
 
+        // Last location
+        if(json.getLastLocation()!= null) {
+            final Place place = getPlaceFromLightJson(json.getLastLocation());
+            user.setLastLocation(place);
+            if(json.getLastLocationTime()!=null) {
+                user.setLastLocationTime(new Date(json.getLastLocationTime() * 1000));
+            }
+        }
         // Returning our user
         return user;
     }
