@@ -1,7 +1,11 @@
 package com.nextep.pelmel.services;
 
+import com.nextep.pelmel.exception.PelmelException;
 import com.nextep.pelmel.listeners.UserListener;
 import com.nextep.pelmel.listeners.UserRegisterListener;
+import com.nextep.pelmel.model.Action;
+import com.nextep.pelmel.model.CurrentUser;
+import com.nextep.pelmel.model.NetworkStatus;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.ServiceCallback;
 import com.nextep.pelmel.model.User;
@@ -85,7 +89,7 @@ public interface UserService {
      *
      * @return the currently logged user (use with care, getCurrentUser() should generally be preferred when possible)
      */
-    User getLoggedUser();
+    CurrentUser getLoggedUser();
 
     /**
      * Returns whether the current user is currently checked in at the given place
@@ -126,4 +130,21 @@ public interface UserService {
      * @param callback the ServiceCallback
      */
     void resetPassword(String email, ServiceCallback callback);
+
+    /**
+     * Provides the status of the network connection between the current logged in user and the
+     * given user
+     * @param user the User to get the network connection status with
+     * @return the NetworkStatus
+     */
+    NetworkStatus getNetworkStatusFor(User user);
+
+    /**
+     * Executes the specified private network action with the given user
+     *
+     * @param action the Action to execute, must be a NETWORK_ action
+     * @param user the user to execute the action on
+     */
+    void executeNetworkAction(Action action, User user) throws PelmelException;
+    void refreshNetwork() throws PelmelException;
 }

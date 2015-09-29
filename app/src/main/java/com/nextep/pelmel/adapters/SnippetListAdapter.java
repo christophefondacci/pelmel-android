@@ -18,6 +18,7 @@ import com.nextep.pelmel.helpers.Strings;
 import com.nextep.pelmel.model.Image;
 import com.nextep.pelmel.providers.CountersProvider;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
+import com.nextep.pelmel.providers.CountersProviderExtended;
 import com.nextep.pelmel.views.SnippetViewHolder;
 
 /**
@@ -210,23 +211,32 @@ public class SnippetListAdapter extends BaseAdapter {
             viewHolder.chatTitleLabel.setVisibility(chatVisibility);
 
             Resources resources = PelMelApplication.getInstance().getResources();
-            if(countersProvider.isCounterSelectedAtIndex(CountersProvider.COUNTER_LIKE)) {
-                viewHolder.likeIconContainerView.setBackgroundResource(R.drawable.bg_counter_selected);
-            } else {
-                viewHolder.likeIconContainerView.setBackgroundResource(R.drawable.bg_counter);
-            }
-            if(countersProvider.isCounterSelectedAtIndex(CountersProvider.COUNTER_CHECKIN)) {
-                viewHolder.checkinIconContainerView.setBackgroundResource(R.drawable.bg_counter_selected);
-            } else {
-                viewHolder.checkinIconContainerView.setBackgroundResource(R.drawable.bg_counter);
-            }
-            if(countersProvider.isCounterSelectedAtIndex(CountersProvider.COUNTER_CHAT)) {
-                viewHolder.chatIconContainerView.setBackgroundResource(R.drawable.bg_counter_selected);
-            } else {
-                viewHolder.chatIconContainerView.setBackgroundResource(R.drawable.bg_counter);
-            }
+
+            int resId = getBackgroundResource(countersProvider, CountersProvider.COUNTER_LIKE);
+            viewHolder.likeIconContainerView.setBackgroundResource(resId);
+
+            resId = getBackgroundResource(countersProvider, CountersProvider.COUNTER_CHECKIN);
+            viewHolder.checkinIconContainerView.setBackgroundResource(resId);
+
+            resId = getBackgroundResource(countersProvider,CountersProvider.COUNTER_CHAT);
+            viewHolder.chatIconContainerView.setBackgroundResource(resId);
+
         } else {
             infoProvider.refreshCustomSnippetView(context, viewHolder.countersContainerView);
         }
+    }
+
+    public int getBackgroundResource(CountersProvider provider, int index) {
+        int bgResId = 0;
+        if(provider instanceof  CountersProviderExtended) {
+            bgResId = ((CountersProviderExtended) provider).getCounterBackgroundResource(index);
+        } else {
+            if(provider.isCounterSelectedAtIndex(index)) {
+                bgResId = R.drawable.bg_counter_selected;
+            } else {
+                bgResId = R.drawable.bg_counter;
+            }
+        }
+        return bgResId;
     }
 }

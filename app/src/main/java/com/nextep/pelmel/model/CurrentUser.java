@@ -9,5 +9,7 @@ public interface CurrentUser extends User {
     List<User> getNetworkPendingApprovals();
     List<User> getNetworkPendingRequests();
     List<User> getNetworkUsers();
-
+    void setNetworkPendingApprovals(List<User> users);
+    void setNetworkPendingRequests(List<User> users);
+    void setNetworkUsers(List<User> users);
 }

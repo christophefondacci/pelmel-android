@@ -586,5 +586,11 @@ public class MessageServiceImpl implements MessageService {
 		for(OnPushMessageListener l : listeners) {
 			l.onPushMessage();
 		}
+		try {
+			PelMelApplication.getUserService().refreshNetwork();
+			PelMelApplication.getSnippetContainerSupport().refresh();
+		} catch(PelmelException e) {
+			Log.e(LOG_MSG_TAG,"Error while refreshing private network info: " + e.getMessage(),e);
+		}
 	}
 }

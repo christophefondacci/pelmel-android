@@ -36,6 +36,10 @@ public interface SnippetContainerSupport {
      */
     void dismissDialog();
 
+    /**
+     * Refreshes the current child
+     */
+    void refresh();
     boolean openSnippet();
     boolean minimizeSnippet();
 

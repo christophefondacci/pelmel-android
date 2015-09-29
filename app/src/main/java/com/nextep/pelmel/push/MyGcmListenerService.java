@@ -25,11 +25,16 @@ public class MyGcmListenerService extends GcmListenerService {
         super.onMessageReceived(from, data);
 
         final String unreadCountStr = data.getString("unreadCount");
+        final String networkUnreadCountStr = data.getString("unreadNetwork");
         final String message = data.getString("message");
         int unreadCount = 0;
         if(unreadCountStr != null) {
             unreadCount = Integer.parseInt(unreadCountStr);
             PelMelApplication.getUiService().setUnreadMessagesCount(unreadCount);
+            if(networkUnreadCountStr != null) {
+                int networkUnread = Integer.parseInt(networkUnreadCountStr);
+                PelMelApplication.getUiService().setPendingNetworkRequests(networkUnread);
+            }
             PelMelApplication.getMessageService().handlePushNotification();
         }
 

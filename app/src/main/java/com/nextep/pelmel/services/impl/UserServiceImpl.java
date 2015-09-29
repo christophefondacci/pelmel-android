@@ -9,14 +9,20 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nextep.json.model.impl.JsonCheckinResponse;
+import com.nextep.json.model.impl.JsonLoggedInUser;
+import com.nextep.json.model.impl.JsonPrivateListResponse;
 import com.nextep.json.model.impl.JsonUser;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.PelMelConstants;
 import com.nextep.pelmel.R;
 import com.nextep.pelmel.activities.LoginActivity;
 import com.nextep.pelmel.exception.PelmelException;
+import com.nextep.pelmel.gson.GsonHelper;
 import com.nextep.pelmel.listeners.UserListener;
 import com.nextep.pelmel.listeners.UserRegisterListener;
+import com.nextep.pelmel.model.Action;
+import com.nextep.pelmel.model.CurrentUser;
+import com.nextep.pelmel.model.NetworkStatus;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.ServiceCallback;
 import com.nextep.pelmel.model.User;
@@ -40,13 +46,21 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class UserServiceImpl implements UserService {
 
 	private static final String LOG_USER_TAG = "USER_SERVICE";
-	private User currentUser;
+
+	private static final String NETWORK_ACTION_ACCEPT = "CONFIRM";
+	private static final String NETWORK_ACTION_CANCEL = "CANCEL";
+	private static final String NETWORK_ACTION_REQUEST= "REQUEST";
+	private static final String NETWORK_ACTION_INVITE = "INVITE";
+
+	private CurrentUser currentUser;
 	private final Set<UserListener> userListeners = new HashSet<UserListener>();
 	private WebService webService;
 
@@ -66,7 +80,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void setCurrentUser(User user) {
-		this.currentUser = user;
+		this.currentUser = (CurrentUser)user;
 		// If the user is logged (i.e. not null)
 		if (user != null) {
 			// We notify everyone the user info is available
@@ -224,9 +238,9 @@ public class UserServiceImpl implements UserService {
 							final Gson gson = new Gson();
 							try {
 								final JsonUser jsonUser = gson.fromJson(reader,
-										new TypeToken<JsonUser>() {
+										new TypeToken<JsonLoggedInUser>() {
 										}.getType());
-								currentUser = PelMelApplication
+								currentUser = (CurrentUser)PelMelApplication
 										.getDataService().getUserFromJson(
 												jsonUser);
 								return currentUser;
@@ -292,7 +306,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getLoggedUser() {
+	public CurrentUser getLoggedUser() {
 		return currentUser;
 	}
 
@@ -353,7 +367,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public void checkOut(Place place, CheckInCallback callback) {
-		checkInOrOut(place,callback,true);
+		checkInOrOut(place, callback, true);
 	}
 
 	@Override
@@ -383,4 +397,82 @@ public class UserServiceImpl implements UserService {
 			}
 		});
 	}
+
+	@Override
+	public NetworkStatus getNetworkStatusFor(User user) {
+		final CurrentUser currentUser = getLoggedUser();
+		for(User u : currentUser.getNetworkPendingApprovals()) {
+			if(u.getKey().equals(user.getKey())) {
+				return NetworkStatus.PENDING_APPROVAL;
+			}
+		}
+		for(User u : currentUser.getNetworkPendingRequests()) {
+			if(u.getKey().equals(user.getKey())) {
+				return NetworkStatus.PENDING_REQUEST;
+			}
+		}
+		for(User u : currentUser.getNetworkUsers()) {
+			if(u.getKey().equals(user.getKey())) {
+				return NetworkStatus.FRIENDS;
+			}
+		}
+		return NetworkStatus.NOT_IN_NETWORK;
+
+	}
+
+	private String getActionCodeFromAction(Action networkAction) {
+		String actionCode =  null;
+		switch(networkAction) {
+			case NETWORK_ACCEPT:
+				actionCode = NETWORK_ACTION_ACCEPT;
+				break;
+			case NETWORK_CANCEL:
+				actionCode = NETWORK_ACTION_CANCEL;
+				break;
+			case NETWORK_INVITE:
+				actionCode = NETWORK_ACTION_INVITE;
+				break;
+			case NETWORK_REQUEST:
+				actionCode = NETWORK_ACTION_REQUEST;
+				break;
+		}
+		return actionCode;
+	}
+
+	public void refreshNetwork() throws PelmelException {
+		executeNetworkAction(Action.NETWORK_LIST,null);
+	}
+	@Override
+	public void executeNetworkAction(Action action, User user) throws PelmelException{
+		String actionCode = getActionCodeFromAction(action);
+		if(actionCode != null || action == Action.NETWORK_LIST) {
+			// Getting logged user
+			final CurrentUser currentUser = getLoggedUser();
+			Log.d(LOG_USER_TAG,"Current user is " + currentUser);
+			// Building arguments map
+			final Map<String, String> params = new HashMap<>();
+			params.put("nxtpUserToken",currentUser.getToken());
+			if(actionCode != null) {
+				params.put("userKey",user.getKey());
+				params.put("action", actionCode);
+			} else {
+				params.put("userKey",currentUser.getKey());
+			}
+
+
+			// Calling
+			try {
+				final InputStream is = webService.postRequest(new URL(WebService.BASE_URL + "/mobilePrivateList"), params);
+				final InputStreamReader reader = new InputStreamReader(is);
+				JsonPrivateListResponse response = GsonHelper.getGson().fromJson(reader, new TypeToken<JsonPrivateListResponse>() {
+				}.getType());
+				PelMelApplication.getDataService().fillPrivateLists(currentUser, response);
+			} catch(MalformedURLException e) {
+				throw new PelmelException("Malformed URL: " + e.getMessage(),e);
+			}
+		}
+
+	}
+
+
 }

@@ -189,4 +189,8 @@ abstract public class SectionedAdapter extends BaseAdapter {
             this.adapter = adapter;
         }
     }
+
+    public List<Section> getSections() {
+        return sections;
+    }
 }

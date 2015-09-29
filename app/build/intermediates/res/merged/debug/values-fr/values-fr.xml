@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values-fr/values.xml -->
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values-fr/values-fr.xml -->
     <eat-comment/>
     <string msgid="4600421777120114993" name="abc_action_bar_home_description">"Revenir à l\'accueil"</string>
-    <string msgid="1397052879051804371" name="abc_action_bar_home_description_format">"%1$s, %2$s"</string>
-    <string msgid="6623331958280229229" name="abc_action_bar_home_subtitle_description_format">"%1$s, %2$s, %3$s"</string>
     <string msgid="1594238315039666878" name="abc_action_bar_up_description">"Revenir en haut de la page"</string>
     <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"Plus d\'options"</string>
     <string msgid="4076576682505996667" name="abc_action_mode_done">"OK"</string>
@@ -17,7 +15,6 @@
     <string msgid="893419373245838918" name="abc_searchview_description_voice">"Recherche vocale"</string>
     <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Partager avec"</string>
     <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"Partager avec %s"</string>
-    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Réduire"</string>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values-fr/strings.xml -->
     <eat-comment/>
     <string name="action_chat">Chater</string>
@@ -184,6 +181,21 @@
     <string msgid="7498112907524977311" name="mr_user_route_category_name">"Appareils"</string>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values-fr/strings.xml -->
     <eat-comment/>
+    <string name="msg.fail">Un problème est survenu pendant la connexion avec notre serveur. Veuillez vérifier votre connexion et essayez à nouveau.</string>
+    <string name="msg.failTitle">Erreur</string>
+    <string name="network.action.add">Ajouter un ami</string>
+    <string name="network.action.groupChat">Chat en groupe</string>
+    <string name="network.action.respond.accept">Accepter</string>
+    <string name="network.action.respond.actionSheetTitle">Répondre à l\'invitation</string>
+    <string name="network.action.respond.decline">Refuser</string>
+    <string name="network.confirm.cancel">Cela va annuler la relation que vous avez avec cet utilisateur. Pour la rétablir vous devrez lui envoyer une nouvelle demande. Êtes-vous certain de vouloir supprimer cet utilisateur de votre réseau ?</string>
+    <string name="network.confirm.request">Cela va envoyer une demande que l\'utilisateur devra accepter. Vous pourrez ensuite l\'inclure dans des discussions de groupe, l\'inviter à des évènements, et voir ses checkins en cours.\nVoulez-vous lui envoyer une demande maintenant ?</string>
+    <string name="network.confirm.title">Confirmation d\'action</string>
+    <string name="network.section.network">Votre réseau</string>
+    <string name="network.section.pendingApproval">En attente de votre approbation</string>
+    <string name="network.section.pendingRequest">Demandes envoyées</string>
+    <string name="network.tab.checkins">Check-ins</string>
+    <string name="network.tab.network">Réseau</string>
     <string name="offline">Hors ligne</string>
     <string name="ok">OK</string>
     <string name="online">Disponible</string>
@@ -254,6 +266,9 @@
     <string name="selectPhotoGallery">Gallerie</string>
     <string name="selectPhotoMessage">Depuis quelle source voulez vous choisir la photo à uploader ?</string>
     <string name="selectPhotoTitle">Source de la photo</string>
+    <string name="snippet.tab.deals">Promos</string>
+    <string name="snippet.tab.events">Soirées</string>
+    <string name="snippet.tab.hangouts">Lieux</string>
     <string name="snippet_context_subtitle">{0} mecs à proximité</string>
     <string name="snippet_context_title">{0} évènements à venir / {1} lieux</string>
     <string name="snippet_distance_intro">snapshot</string>

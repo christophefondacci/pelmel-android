@@ -5,6 +5,7 @@ import android.content.Context;
 import com.nextep.json.model.IJsonLightEvent;
 import com.nextep.json.model.IJsonLightPlace;
 import com.nextep.json.model.IJsonLightUser;
+import com.nextep.json.model.IPrivateListContainer;
 import com.nextep.json.model.impl.JsonDeal;
 import com.nextep.json.model.impl.JsonEvent;
 import com.nextep.json.model.impl.JsonMedia;
@@ -14,6 +15,7 @@ import com.nextep.json.model.impl.JsonUser;
 import com.nextep.pelmel.listeners.LikeCallback;
 import com.nextep.pelmel.listeners.OverviewListener;
 import com.nextep.pelmel.model.CalObject;
+import com.nextep.pelmel.model.CurrentUser;
 import com.nextep.pelmel.model.Deal;
 import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.Image;
@@ -150,6 +152,7 @@ public interface DataService {
     <T extends CalObject> T getCachedObject(Class<T> clazz, String itemKey);
     void exportDatabase(Context context);
 
+    void fillPrivateLists(CurrentUser currentUser, IPrivateListContainer lu);
     void clearCache();
 
 }

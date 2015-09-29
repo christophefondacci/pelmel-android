@@ -11,6 +11,7 @@ import com.nextep.json.model.IJsonLightEvent;
 import com.nextep.json.model.IJsonLightPlace;
 import com.nextep.json.model.IJsonLightUser;
 import com.nextep.json.model.IJsonPlace;
+import com.nextep.json.model.IPrivateListContainer;
 import com.nextep.json.model.impl.JsonDeal;
 import com.nextep.json.model.impl.JsonDescription;
 import com.nextep.json.model.impl.JsonEvent;
@@ -34,6 +35,7 @@ import com.nextep.pelmel.helpers.ContextHolder;
 import com.nextep.pelmel.listeners.LikeCallback;
 import com.nextep.pelmel.listeners.OverviewListener;
 import com.nextep.pelmel.model.CalObject;
+import com.nextep.pelmel.model.CurrentUser;
 import com.nextep.pelmel.model.Deal;
 import com.nextep.pelmel.model.DealStatus;
 import com.nextep.pelmel.model.DealType;
@@ -175,7 +177,7 @@ public class DataServiceImpl implements DataService {
     @Override
     public User getUser(String key, IJsonLightUser json) {
         User user = userCache.get(key);
-        if (user == null) {
+        if (user == null || (!(user instanceof CurrentUser) && (json instanceof JsonLoggedInUser)) || ((user instanceof CurrentUser) && !(json instanceof JsonLoggedInUser))) {
             if(json instanceof JsonLoggedInUser) {
                 user = new CurrentUserImpl();
             } else {
@@ -281,44 +283,48 @@ public class DataServiceImpl implements DataService {
             JsonLoggedInUser lu = (JsonLoggedInUser)json;
             CurrentUserImpl currentUser = (CurrentUserImpl)user;
 
-            // Processing pending approvals
-            final List<User> pendingApprovals = new ArrayList<>();
-            for(IJsonLightUser jsonApprovalUser : lu.getPendingApprovals()) {
-                final User approvalUser = getUserFromLightJson(jsonApprovalUser);
-                pendingApprovals.add(approvalUser);
-            }
-
-            // Processing pending requests
-            final List<User> pendingRequests = new ArrayList<>();
-            for(IJsonLightUser jsonRequestUser : lu.getPendingRequests()) {
-                final User requestUser = getUserFromLightJson(jsonRequestUser);
-                pendingRequests.add(requestUser);
-            }
-
-            // Processing in-network users
-            int checkinsCount = 0;
-            final List<User> networkUsers = new ArrayList<>();
-            for(IJsonLightUser jsonNetworkUser : lu.getNetworkUsers()) {
-                final User networkUser = getUserFromLightJson(jsonNetworkUser);
-                networkUsers.add(networkUser);
-                final Place checkedInPlace = PelMelApplication.getUserService().getCheckedInPlace(networkUser);
-                if(checkedInPlace != null) {
-                    checkinsCount++;
-                }
-            }
-
-            // Filling current user information
-            currentUser.setNetworkPendingApprovals(pendingApprovals);
-            currentUser.setNetworkPendingApprovals(pendingRequests);
-            currentUser.setNetworkPendingApprovals(networkUsers);
-
-
-            PelMelApplication.getUiService().setPendingNetworkRequests(pendingApprovals.size()+checkinsCount);
+            fillPrivateLists(currentUser,lu);
 
         }
         return user;
     }
 
+    public void fillPrivateLists(CurrentUser currentUser, IPrivateListContainer lu) {
+        // Processing pending approvals
+        final List<User> pendingApprovals = new ArrayList<>();
+        for(IJsonLightUser jsonApprovalUser : lu.getPendingApprovals()) {
+            final User approvalUser = getUserFromLightJson(jsonApprovalUser);
+            pendingApprovals.add(approvalUser);
+        }
+
+        // Processing pending requests
+        final List<User> pendingRequests = new ArrayList<>();
+        for(IJsonLightUser jsonRequestUser : lu.getPendingRequests()) {
+            final User requestUser = getUserFromLightJson(jsonRequestUser);
+            pendingRequests.add(requestUser);
+        }
+
+        // Processing in-network users
+        int checkinsCount = 0;
+        final List<User> networkUsers = new ArrayList<>();
+        for(IJsonLightUser jsonNetworkUser : lu.getNetworkUsers()) {
+            final User networkUser = getUserFromLightJson(jsonNetworkUser);
+            networkUsers.add(networkUser);
+            final Place checkedInPlace = PelMelApplication.getUserService().getCheckedInPlace(networkUser);
+            if(checkedInPlace != null) {
+                checkinsCount++;
+            }
+        }
+
+        // Filling current user information
+        currentUser.setNetworkPendingApprovals(pendingApprovals);
+        currentUser.setNetworkPendingRequests(pendingRequests);
+        currentUser.setNetworkUsers(networkUsers);
+
+
+        PelMelApplication.getUiService().setPendingNetworkRequests(pendingApprovals.size()+checkinsCount);
+
+    }
     @Override
     public User getUserFromLightJson(IJsonLightUser json) {
         final String key = json.getKey();

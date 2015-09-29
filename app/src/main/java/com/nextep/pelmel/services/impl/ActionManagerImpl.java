@@ -1,5 +1,9 @@
 package com.nextep.pelmel.services.impl;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
@@ -7,12 +11,16 @@ import android.util.Log;
 
 import com.nextep.json.model.impl.JsonLikeInfo;
 import com.nextep.pelmel.PelMelApplication;
+import com.nextep.pelmel.R;
 import com.nextep.pelmel.activities.ChatConversationActivity;
 import com.nextep.pelmel.activities.ListCheckinsFragment;
 import com.nextep.pelmel.activities.ListDealsFragment;
+import com.nextep.pelmel.exception.PelmelException;
+import com.nextep.pelmel.helpers.Strings;
 import com.nextep.pelmel.model.Action;
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Event;
+import com.nextep.pelmel.model.NetworkStatus;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.services.ActionManager;
@@ -38,6 +46,11 @@ public class ActionManagerImpl implements ActionManager {
         registerCheckinAction();
         registerCheckoutAction();
         registerListDealsAction();
+        registerPrivateNetworkCancelAction();
+        registerPrivateNetworkRequestAction();
+        registerPrivateNetworkOtherActions(Action.NETWORK_INVITE);
+        registerPrivateNetworkOtherActions(Action.NETWORK_ACCEPT);
+        registerPrivateNetworkRespondAction();
         webService = new WebService();
     }
     @Override
@@ -221,10 +234,150 @@ public class ActionManagerImpl implements ActionManager {
                 } else {
                     place = (Place)parameter;
                 }
-                PelMelApplication.getUserService().checkOut(place,null);
+                PelMelApplication.getUserService().checkOut(place, null);
                 return parameter;
             }
         };
         commandsActionMap.put(Action.CHECKOUT,cmd);
     }
+
+    private void promptPrivateNetworkAction(int msgTitleResId, int msgResId, final Action action, final User user) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(
+                (Activity)PelMelApplication.getSnippetContainerSupport());
+        builder.setTitle(msgTitleResId).setMessage(msgResId);
+        builder.setPositiveButton(R.string.ok,
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        executeNetworkAction(action, user);
+                    }
+                });
+
+        builder.setNegativeButton(R.string.cancel,
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        PelMelApplication.runOnMainThread(new Runnable() {
+            @Override
+            public void run() {
+                builder.create().show();
+            }
+        });
+    }
+
+    private void executeNetworkAction(final Action action, final User user) {
+        PelMelApplication.runOnMainThread(new Runnable() {
+            @Override
+            public void run() {
+                final ProgressDialog progressDialog = new ProgressDialog((Activity)PelMelApplication.getSnippetContainerSupport());
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage(Strings.getText(R.string.msg_wait));
+                progressDialog.setTitle(Strings.getText(R.string.waitTitle));
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+
+                new AsyncTask<Void,Void,Void>() {
+                    @Override
+                    protected Void doInBackground(Void... params) {
+                        try {
+                            PelMelApplication.getUserService().executeNetworkAction(action, user);
+                        } catch(PelmelException e) {
+                            Log.e(LOG_TAG,"Exception during private network action: " + e.getMessage(),e);
+                            PelMelApplication.getUiService().showInfoMessage(PelMelApplication.getInstance(),R.string.msg_failTitle,R.string.msg_fail);
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void aVoid) {
+                        progressDialog.dismiss();
+                        PelMelApplication.getSnippetContainerSupport().refresh();
+                    }
+                }.execute();
+            }
+        });
+
+    }
+    private void registerPrivateNetworkRequestAction() {
+        final ActionCommand cmd = new ActionCommand() {
+            @Override
+            public Object execute(Object parameter) {
+                promptPrivateNetworkAction(R.string.network_confirm_title,R.string.network_confirm_request,Action.NETWORK_REQUEST,(User)parameter);
+                return null;
+            }
+        };
+        commandsActionMap.put(Action.NETWORK_REQUEST, cmd);
+    }
+
+    private void registerPrivateNetworkCancelAction() {
+        final ActionCommand cmd = new ActionCommand() {
+            @Override
+            public Object execute(Object parameter) {
+                final NetworkStatus status = PelMelApplication.getUserService().getNetworkStatusFor((User)parameter);
+                if(status != NetworkStatus.PENDING_REQUEST) {
+                    promptPrivateNetworkAction(R.string.network_confirm_title, R.string.network_confirm_cancel, Action.NETWORK_CANCEL, (User) parameter);
+                } else {
+                    executeNetworkAction(Action.NETWORK_CANCEL,(User)parameter);
+                }
+                return null;
+            }
+        };
+        commandsActionMap.put(Action.NETWORK_CANCEL, cmd);
+    }
+    private void registerPrivateNetworkOtherActions(final Action action) {
+        final ActionCommand cmd = new ActionCommand() {
+            @Override
+            public Object execute(Object parameter) {
+                executeNetworkAction(action,(User)parameter);
+                return null;
+            }
+        };
+        commandsActionMap.put(action,cmd);
+    }
+
+    private void registerPrivateNetworkRespondAction(){
+        final ActionCommand cmd = new ActionCommand() {
+            @Override
+            public Object execute(final Object parameter) {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(
+                        (Activity)PelMelApplication.getSnippetContainerSupport());
+                builder.setTitle(R.string.network_action_respond_actionSheetTitle);
+                builder.setPositiveButton(R.string.network_action_respond_accept,
+                        new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                executeNetworkAction(Action.NETWORK_ACCEPT,(User)parameter);
+                            }
+                        });
+
+                builder.setNegativeButton(R.string.network_action_respond_decline,
+                        new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                PelMelApplication.runOnMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        builder.create().show();
+                    }
+                });
+                return null;
+            }
+        };
+        commandsActionMap.put(Action.NETWORK_RESPOND,cmd);
+    }
+
 }

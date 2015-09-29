@@ -113,6 +113,23 @@
     <string name="logout">Déconnexion</string>
     <string name="messaging.title.groupChat">Chat en groupe</string>
     <string name="messaging.chatUsers">Destinataires</string>
+    <string name="msg.failTitle">Erreur</string>
+    <string name="msg.fail">Un problème est survenu pendant la connexion avec notre serveur. Veuillez vérifier votre connexion et essayez à nouveau.</string>
+    <string name="network.action.groupChat">Chat en groupe</string>
+    <string name="network.action.add">Ajouter un ami</string>
+    <string name="network.action.respond.actionSheetTitle">Répondre à l\'invitation</string>
+    <string name="network.action.respond.accept">Accepter</string>
+    <string name="network.action.respond.decline">Refuser</string>
+    <string name="network.confirm.cancel">Cela va annuler la relation que vous avez avec cet utilisateur. Pour la rétablir vous devrez lui envoyer une nouvelle demande. Êtes-vous certain de vouloir supprimer cet utilisateur de votre réseau ?</string>
+    <string name="network.confirm.request">Cela va envoyer une demande que l\'utilisateur devra accepter. Vous pourrez ensuite l\'inclure dans des discussions de groupe, l\'inviter à des évènements, et voir ses checkins en cours.\nVoulez-vous lui envoyer une demande maintenant ?</string>
+    <string name="network.confirm.title">Confirmation d\'action</string>
+
+    <string name="network.section.network">Votre réseau</string>
+    <string name="network.section.pendingApproval">En attente de votre approbation</string>
+    <string name="network.section.pendingRequest">Demandes envoyées</string>
+    <string name="network.tab.network">Réseau</string>
+    <string name="network.tab.checkins">Check-ins</string>
+
     <string name="offline">Hors ligne</string>
     <string name="online">Disponible</string>
     <string name="ok">OK</string>
@@ -289,4 +306,8 @@ In no event will the COMPANY, its suppliers or other third parties mentioned at 
 
     <b>Article 9</b><br>
 The COMPANY may revise this Agreement at any time without notice by updating this posting. By using this Site you agree to be bound by any such revisions and should therefore periodically visit this Site and page to determine the then current Terms of Access and Use conditions of use to which you are bound.]]></string>
+    <string name="snippet.tab.events">Soirées</string>
+    <string name="snippet.tab.deals">Promos</string>
+    <string name="snippet.tab.hangouts">Lieux</string>
+
 </resources>

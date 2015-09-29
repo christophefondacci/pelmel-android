@@ -15,6 +15,7 @@ import com.nextep.pelmel.helpers.Utils;
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,10 +27,19 @@ public class CALObjectGridAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater layoutInflater;
 
-    public CALObjectGridAdapter(Context context,  List<CalObject> calObjects) {
+    public CALObjectGridAdapter(Context context,  List<? extends CalObject> calObjects) {
         this.context = context;
-        this.calObjects = calObjects;
+        this.calObjects = new ArrayList<>(calObjects);
         layoutInflater = LayoutInflater.from(context);
+    }
+    public CALObjectGridAdapter(Context context,  List<? extends CalObject> calObjects, int rowFill) {
+        this(context,calObjects);
+        int mod = this.calObjects.size()%rowFill;
+        if(mod>0) {
+            for(int i = mod; i < rowFill ; i++) {
+                this.calObjects.add(null);
+            }
+        }
     }
 
 

@@ -324,6 +324,19 @@ public class MainActivity extends MainActionBarActivity implements SnippetContai
         this.fragmentForActivityResult = fragmentForActivityResult;
     }
 
+    @Override
+    public void refresh() {
+        if(snippetChildSupport != null) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    snippetChildSupport.updateData();
+                }
+            });
+        }
+
+    }
+
     //    @Override
 //    public boolean onChildTouch(View v, MotionEvent e) {
 //        final View snippetContainer = findViewById(R.id.pelmelSnippetContainer);

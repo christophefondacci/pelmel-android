@@ -126,7 +126,8 @@ public class MapActivity extends Fragment implements UserListener,
 		networkAction.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
+				MyNetworkFragment f = new MyNetworkFragment();
+				snippetContainerSupport.showSnippetForFragment(f,true,false);
 			}
 		});
 

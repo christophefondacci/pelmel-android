@@ -134,6 +134,23 @@
     <string name="month.october">October</string>
     <string name="month.november">November</string>
     <string name="month.december">December</string>
+    <string name="msg.failTitle">Error</string>
+    <string name="msg.fail">A problem occurred while trying to contact our server. Please check your connection and try again.</string>
+    <string name="msg.wait">Please wait&#8230;</string>
+    <string name="network.action.groupChat">Group Chat</string>
+    <string name="network.action.add">Add a friend</string>
+    <string name="network.action.respond.actionSheetTitle">Respond to invite</string>
+    <string name="network.action.respond.accept">Accept</string>
+    <string name="network.action.respond.decline">Decline</string>
+    <string name="network.confirm.cancel">This will cancel the connection you have with this user. To re-establish it you will have to send him a new request. Are you sure you want to remove this user from your network?</string>
+    <string name="network.confirm.request">This will send an invite that this user will have to accept. You will then be able to group chat with him, invite him to events, and see where he is if he\'s checked in.\nDo you want to send a request now?</string>
+    <string name="network.confirm.title">Confirm action</string>
+
+    <string name="network.section.network">Your network</string>
+    <string name="network.section.pendingApproval">Awaiting your approval</string>
+    <string name="network.section.pendingRequest">Requests sent</string>
+    <string name="network.tab.network">Network</string>
+    <string name="network.tab.checkins">Check-ins</string>
     <string name="ok">OK</string>
     <string name="offline">Offline</string>
     <string name="online">Available</string>
@@ -164,7 +181,7 @@
 
     <string name="profileAddPhoto">Add a photo</string>
     <string name="profilePhoto">Profile photo</string>
-    <string name="profilePhotoDeleting">Deleting photo...</string>
+    <string name="profilePhotoDeleting">Deleting photo&#8230;</string>
 
 
     <string name="profileSave">Save</string>
@@ -303,6 +320,10 @@ The COMPANY may revise this Agreement at any time without notice by updating thi
     <string name="snippet_distance_intro">snapshot</string>
     <string name="gcmServerId">AIzaSyACN6vBXmMCvzg4yddWkGZxBOk3VtK50vQ</string>
     <string name="login_forgot_password">Forgot your password?</string>
+    <string name="snippet.tab.events">Events</string>
+    <string name="snippet.tab.deals">Deals</string>
+    <string name="snippet.tab.hangouts">Hangouts</string>
+
 
 
 </resources>

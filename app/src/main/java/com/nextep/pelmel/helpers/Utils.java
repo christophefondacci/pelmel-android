@@ -72,6 +72,9 @@ public class Utils {
         return PelMelApplication.getInstance().getResources().getColor(colorRes);
     }
 
+    public static float getDimension(int dimen) {
+        return PelMelApplication.getInstance().getResources().getDimension(dimen);
+    }
     public static <T extends CalObject> List<CalObject> sortCalObjectsForDisplay(final List<T> objects) {
         final List<CalObject> sortedObjects = new ArrayList<>();
         sortedObjects.addAll(objects);

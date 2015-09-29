@@ -14,8 +14,10 @@ import com.nextep.pelmel.model.Action;
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.Image;
+import com.nextep.pelmel.model.NetworkStatus;
 import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.providers.CountersProvider;
+import com.nextep.pelmel.providers.CountersProviderExtended;
 import com.nextep.pelmel.providers.SnippetInfoProvider;
 import com.nextep.pelmel.services.ActionManager;
 import com.nextep.pelmel.services.ConversionService;
@@ -26,7 +28,7 @@ import java.util.List;
 /**
  * Created by cfondacci on 28/07/15.
  */
-public class UserInfoProvider implements SnippetInfoProvider, CountersProvider {
+public class UserInfoProvider implements SnippetInfoProvider, CountersProviderExtended {
 
     private User user;
     public UserInfoProvider(User user) {
@@ -190,7 +192,7 @@ public class UserInfoProvider implements SnippetInfoProvider, CountersProvider {
             case COUNTER_LIKE:
                 return Strings.getCountedText(R.string.counter_likes_singular,R.string.counter_likes,user.getLikeCount()).toString();
             case COUNTER_CHECKIN:
-                return null;
+                return Strings.getText(R.string.counter_network);
 
             case COUNTER_CHAT:
                 return Strings.getText(R.string.action_chat);
@@ -210,6 +212,21 @@ public class UserInfoProvider implements SnippetInfoProvider, CountersProvider {
                 }
                 break;
             case COUNTER_CHECKIN:
+                final NetworkStatus status = PelMelApplication.getUserService().getNetworkStatusFor(user);
+                switch(status) {
+                    case PENDING_APPROVAL:
+                        res = R.string.counter_network_accept;
+                        break;
+                    case PENDING_REQUEST:
+                        res = R.string.counter_network_cancel;
+                        break;
+                    case FRIENDS:
+                        res = R.string.counter_network_friends;
+                        break;
+                    case NOT_IN_NETWORK:
+                        res = R.string.counter_network_add;
+                        break;
+                }
                 break;
             case COUNTER_CHAT:
                 res = R.string.action_chat;
@@ -226,6 +243,8 @@ public class UserInfoProvider implements SnippetInfoProvider, CountersProvider {
             case COUNTER_LIKE:
                 return user.isLiked();
             case COUNTER_CHECKIN:
+                final NetworkStatus status = PelMelApplication.getUserService().getNetworkStatusFor(user);
+                return status != NetworkStatus.NOT_IN_NETWORK;
             default:
                 return false;
         }
@@ -249,6 +268,25 @@ public class UserInfoProvider implements SnippetInfoProvider, CountersProvider {
                     }
                 });
                 break;
+            case COUNTER_CHECKIN:
+                final NetworkStatus status = PelMelApplication.getUserService().getNetworkStatusFor(user);
+                Action action = null;
+                switch(status) {
+                    case FRIENDS:
+                    case PENDING_REQUEST:
+                        action = Action.NETWORK_CANCEL;
+                        break;
+                    case NOT_IN_NETWORK:
+                        action = Action.NETWORK_REQUEST;
+                        break;
+                    case PENDING_APPROVAL:
+                        action = Action.NETWORK_RESPOND;
+                        break;
+                }
+                if(action != null) {
+                    mgr.executeAction(action, user);
+                }
+                break;
             case COUNTER_CHAT:
                 mgr.executeAction(Action.CHAT,user);
                 break;
@@ -261,12 +299,35 @@ public class UserInfoProvider implements SnippetInfoProvider, CountersProvider {
     }
 
     @Override
+    public int getCounterBackgroundResource(int index) {
+        boolean isSelected = isCounterSelectedAtIndex(index);
+        if(!isSelected) {
+            return R.drawable.bg_counter;
+        } else {
+            return index == COUNTER_CHECKIN ? R.drawable.bg_counter_network_selected : R.drawable.bg_counter_selected;
+        }
+    }
+
+    @Override
     public Bitmap getCounterImageAtIndex(int index) {
         switch(index) {
             case COUNTER_LIKE:
                 return BitmapFactory.decodeResource(PelMelApplication.getInstance().getResources(),R.drawable.snp_icon_like_white);
             case COUNTER_CHECKIN:
-                return BitmapFactory.decodeResource(PelMelApplication.getInstance().getResources(),R.drawable.ovv_icon_check_white);
+                final NetworkStatus status = PelMelApplication.getUserService().getNetworkStatusFor(user);
+                int resId = 0;
+                switch(status) {
+                    case NOT_IN_NETWORK:
+                        resId = R.drawable.btn_snp_network_add;
+                        break;
+                    case FRIENDS:
+                        resId = R.drawable.btn_snp_network_friends;
+                        break;
+                    default:
+                        resId = R.drawable.btn_snp_network_pending;
+                        break;
+                }
+                return BitmapFactory.decodeResource(PelMelApplication.getInstance().getResources(),resId);
             case COUNTER_CHAT:
                 return BitmapFactory.decodeResource(PelMelApplication.getInstance().getResources(),R.drawable.snp_icon_chat);
         }
@@ -275,6 +336,6 @@ public class UserInfoProvider implements SnippetInfoProvider, CountersProvider {
 
     @Override
     public boolean hasCounter(int index) {
-        return index != COUNTER_CHECKIN;
+        return true;
     }
 }
