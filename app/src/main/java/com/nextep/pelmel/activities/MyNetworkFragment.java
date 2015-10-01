@@ -37,22 +37,7 @@ public class MyNetworkFragment extends Fragment implements SnippetChildSupport{
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
 
-        // Computing columns
-        Display display = getActivity().getWindowManager().getDefaultDisplay();
-        final Point p = new Point();
-        display.getSize(p);
-        int i = 1;
-        float width = Float.MAX_VALUE;
-        float maxWidth = Utils.getDimension(R.dimen.grid_max_cell_width);
-        while(width>maxWidth) {
-            width = ((float)(p.x - (i+1)) / (float)i);
-            i++;
-        }
-        final GridLayoutManager layoutManager = new GridLayoutManager(this.getActivity(),i);
-        final NetworkRecycleViewAdapter adapter = new NetworkRecycleViewAdapter(this.getActivity(),i);
-        layoutManager.setSpanSizeLookup(adapter.getSpanSizeLookup());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        updateData();
         snippetContainerSupport.setSnippetChild(this);
         return view;
     }
@@ -75,6 +60,21 @@ public class MyNetworkFragment extends Fragment implements SnippetChildSupport{
 
     @Override
     public void updateData() {
-
+        // Computing columns
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        final Point p = new Point();
+        display.getSize(p);
+        int i = 1;
+        float width = Float.MAX_VALUE;
+        float maxWidth = Utils.getDimension(R.dimen.grid_max_cell_width);
+        while(width>maxWidth) {
+            width = ((float)(p.x - (i+1)) / (float)i);
+            i++;
+        }
+        final GridLayoutManager layoutManager = new GridLayoutManager(this.getActivity(),i);
+        final NetworkRecycleViewAdapter adapter = new NetworkRecycleViewAdapter(this.getActivity(),i);
+        layoutManager.setSpanSizeLookup(adapter.getSpanSizeLookup());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
     }
 }

@@ -8,17 +8,22 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.nextep.json.model.impl.JsonLikeInfo;
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
+import com.nextep.pelmel.activities.CALObjectGridFragment;
 import com.nextep.pelmel.activities.ChatConversationActivity;
 import com.nextep.pelmel.activities.ListCheckinsFragment;
 import com.nextep.pelmel.activities.ListDealsFragment;
 import com.nextep.pelmel.exception.PelmelException;
+import com.nextep.pelmel.helpers.ContextHolder;
 import com.nextep.pelmel.helpers.Strings;
 import com.nextep.pelmel.model.Action;
 import com.nextep.pelmel.model.CalObject;
+import com.nextep.pelmel.model.CurrentUser;
 import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.NetworkStatus;
 import com.nextep.pelmel.model.Place;
@@ -28,7 +33,10 @@ import com.nextep.pelmel.services.WebService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by cfondacci on 29/07/15.
@@ -51,6 +59,7 @@ public class ActionManagerImpl implements ActionManager {
         registerPrivateNetworkOtherActions(Action.NETWORK_INVITE);
         registerPrivateNetworkOtherActions(Action.NETWORK_ACCEPT);
         registerPrivateNetworkRespondAction();
+        registerPrivateNetworkPickAction();
         webService = new WebService();
     }
     @Override
@@ -90,6 +99,8 @@ public class ActionManagerImpl implements ActionManager {
             }.execute(parameter);
 
 
+        } else {
+            Log.e(LOG_TAG,"Action not found: " + action.name());
         }
     }
 
@@ -380,4 +391,51 @@ public class ActionManagerImpl implements ActionManager {
         commandsActionMap.put(Action.NETWORK_RESPOND,cmd);
     }
 
+    private void registerPrivateNetworkPickAction() {
+        final ActionCommand cmd = new ActionCommand() {
+            @Override
+            public Object execute(Object parameter) {
+                PelMelApplication.runOnMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        final CALObjectGridFragment f = new CALObjectGridFragment();
+                        final List<User> users = new ArrayList<User>();
+                        final Set<String> inNetworkKeys = new HashSet<String>();
+                        final Set<String> pendingApprovalKeys = new HashSet<String>();
+                        final CurrentUser currentUser = PelMelApplication.getUserService().getLoggedUser();
+                        for(User u : currentUser.getNetworkUsers()) {
+                            inNetworkKeys.add(u.getKey());
+                        }
+                        for(User u : currentUser.getNetworkPendingRequests()) {
+                            inNetworkKeys.add(u.getKey());
+                        }
+                        for(User u : currentUser.getNetworkPendingApprovals()) {
+                            pendingApprovalKeys.add(u.getKey());
+                        }
+                        for(User u : ContextHolder.users) {
+                            if(!inNetworkKeys.contains(u.getKey())) {
+                                users.add(u);
+                            }
+                        }
+                        f.setCalObjects(users);
+                        f.setClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                final User user = users.get(position);
+                                if (!pendingApprovalKeys.contains(user.getKey())) {
+                                    executeAction(Action.NETWORK_REQUEST, user);
+                                } else {
+                                    executeAction(Action.NETWORK_ACCEPT, user);
+                                }
+                                ((Activity) PelMelApplication.getSnippetContainerSupport()).onBackPressed();
+                            }
+                        });
+                        PelMelApplication.getSnippetContainerSupport().showSnippetForFragment(f, true, false);
+                    }
+                });
+                return null;
+            }
+        };
+        commandsActionMap.put(Action.NETWORK_PICK,cmd);
+    }
 }

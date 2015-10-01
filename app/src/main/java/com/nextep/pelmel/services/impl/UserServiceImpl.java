@@ -467,6 +467,7 @@ public class UserServiceImpl implements UserService {
 				JsonPrivateListResponse response = GsonHelper.getGson().fromJson(reader, new TypeToken<JsonPrivateListResponse>() {
 				}.getType());
 				PelMelApplication.getDataService().fillPrivateLists(currentUser, response);
+				PelMelApplication.getSnippetContainerSupport().refresh();
 			} catch(MalformedURLException e) {
 				throw new PelmelException("Malformed URL: " + e.getMessage(),e);
 			}

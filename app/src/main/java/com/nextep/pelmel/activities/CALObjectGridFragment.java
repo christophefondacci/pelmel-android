@@ -16,6 +16,7 @@ import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.support.SnippetChildSupport;
 import com.nextep.pelmel.model.support.SnippetContainerSupport;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -27,9 +28,14 @@ public class CALObjectGridFragment extends Fragment implements SnippetChildSuppo
     private GridView gridView;
     private List<CalObject> calObjects = Collections.emptyList();
     private SnippetContainerSupport snippetContainerSupport;
+    private AdapterView.OnItemClickListener clickListener;
 
-    public void setCalObjects(List<CalObject> calObjects) {
-        this.calObjects = calObjects;
+    public void setCalObjects(List<? extends CalObject> calObjects) {
+        this.calObjects = new ArrayList<>(calObjects);
+    }
+
+    public void setClickListener(AdapterView.OnItemClickListener clickListener) {
+        this.clickListener = clickListener;
     }
 
     @Override
@@ -37,8 +43,8 @@ public class CALObjectGridFragment extends Fragment implements SnippetChildSuppo
         View view = inflater.inflate(R.layout.layout_gridview,container,false);
         gridView = (GridView)view.findViewById(R.id.gridView);
 
-        gridView.setAdapter(new CALObjectGridAdapter(this.getActivity(),calObjects));
-        gridView.setOnItemClickListener(this);
+        gridView.setAdapter(new CALObjectGridAdapter(this.getActivity(), calObjects));
+        gridView.setOnItemClickListener(clickListener != null ? clickListener : this);
         snippetContainerSupport.setSnippetChild(this);
         return view;
     }

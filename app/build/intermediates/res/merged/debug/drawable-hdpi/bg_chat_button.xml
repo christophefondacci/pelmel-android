@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#007AFF" />
+</shape><!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/drawable-hdpi/bg_chat_button.xml -->

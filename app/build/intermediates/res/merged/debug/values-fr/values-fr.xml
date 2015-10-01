@@ -188,6 +188,10 @@
     <string name="network.action.respond.accept">Accepter</string>
     <string name="network.action.respond.actionSheetTitle">Répondre à l\'invitation</string>
     <string name="network.action.respond.decline">Refuser</string>
+    <string name="network.checkins.addToNetwork">Construire mon réseau</string>
+    <string name="network.checkins.noCheckinMessage">Aucun checkin dans votre réseau\nInvitez-les à vous rejoindre !</string>
+    <string name="network.checkins.noNetworkMessage">Votre réseau est vide.\nConstruisez-le en ajoutant des amis !</string>
+    <string name="network.checkins.startChat">Démarrer un chat en groupe</string>
     <string name="network.confirm.cancel">Cela va annuler la relation que vous avez avec cet utilisateur. Pour la rétablir vous devrez lui envoyer une nouvelle demande. Êtes-vous certain de vouloir supprimer cet utilisateur de votre réseau ?</string>
     <string name="network.confirm.request">Cela va envoyer une demande que l\'utilisateur devra accepter. Vous pourrez ensuite l\'inclure dans des discussions de groupe, l\'inviter à des évènements, et voir ses checkins en cours.\nVoulez-vous lui envoyer une demande maintenant ?</string>
     <string name="network.confirm.title">Confirmation d\'action</string>

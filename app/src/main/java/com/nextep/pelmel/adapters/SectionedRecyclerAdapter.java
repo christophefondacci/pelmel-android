@@ -59,10 +59,10 @@ public abstract class SectionedRecyclerAdapter extends RecyclerView.Adapter<Recy
         notifyDataSetChanged();
     }
 
-    public Adapter getSection(String caption) {
+    public Section getSection(String caption) {
         final Section section = sectionsMap.get(caption);
         if(section != null) {
-            return section.adapter;
+            return section;
         }
         return null;
     }
@@ -127,6 +127,21 @@ public abstract class SectionedRecyclerAdapter extends RecyclerView.Adapter<Recy
         }
 
         Log.d(LOG_TAG,"ViewType: " + viewType + " for index " + i);
+        return viewType;
+    }
+
+    public int getViewType(Section section, int i) {
+        int typeOffset = TYPE_SECTION_HEADER + 2;
+        int viewType = -1;
+        for(Section s : sections) {
+            if(s == section) {
+                viewType = typeOffset + section.adapter.getItemViewType(i);
+                break;
+            }
+
+            typeOffset += section.adapter.getViewTypeCount();
+        }
+
         return viewType;
     }
 
@@ -204,7 +219,7 @@ public abstract class SectionedRecyclerAdapter extends RecyclerView.Adapter<Recy
         } else {
             int position = i;
             int sectionIndex = 0;
-            Section currentSection = null;
+            Section currentSection = this.sections.get(0);
             for (Section section : this.sections) {
                 if (position == 0) {
                     currentSection = section;
@@ -222,7 +237,7 @@ public abstract class SectionedRecyclerAdapter extends RecyclerView.Adapter<Recy
                 sectionIndex++;
                 position -= size;
             }
-            Log.d(LOG_TAG, "I: " + i + " - Section: " + sectionIndex + " - Index: " + position + " (" + viewHolder.getClass().toString() + ")");
+            Log.d(LOG_TAG, "I: " + i + " - sections[" + sections.size() + "] Section: " + sectionIndex + " - Index: " + position + " (" + viewHolder.getClass().toString() + ")");
             bindViewHolder(viewHolder,currentSection.adapter,sectionIndex,position);
         }
     }

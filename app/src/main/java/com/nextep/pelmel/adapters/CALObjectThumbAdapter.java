@@ -21,6 +21,7 @@ import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.Image;
 import com.nextep.pelmel.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CALObjectThumbAdapter extends BaseAdapter implements AdapterView.OnItemClickListener {
@@ -32,12 +33,12 @@ public class CALObjectThumbAdapter extends BaseAdapter implements AdapterView.On
 	private int width;
 	private int maxObjects;
 	private Resources resources;
-	public CALObjectThumbAdapter(Context context, List<CalObject> objects) {
+	public CALObjectThumbAdapter(Context context, List<? extends CalObject> objects) {
 		this(context,objects,R.dimen.thumbs_default_size);
 	}
-	public CALObjectThumbAdapter(Context context, List<CalObject> objects, int resSize) {
+	public CALObjectThumbAdapter(Context context, List<? extends CalObject> objects, int resSize) {
 		this.context = context;
-		this.calObjects = objects;
+		this.calObjects = new ArrayList<>(objects);
 		this.resSize = resSize;
 		resources = PelMelApplication.getInstance().getResources();
 	}

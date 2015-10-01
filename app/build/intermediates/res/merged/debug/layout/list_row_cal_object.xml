@@ -103,6 +103,13 @@
         android:layout_marginLeft="8dp"
         android:layout_alignParentRight="true"
         />
-
+    <com.nextep.pelmel.views.HorizontalListView
+        android:layout_width="fill_parent"
+        android:layout_height="62dp"
+        android:layout_alignLeft="@id/countIcon"
+        android:layout_below="@id/titleLabel"
+        android:layout_marginTop="3dp"
+        android:id="@+id/usersListView"
+        />
 
 </RelativeLayout><!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/layout/list_row_cal_object.xml -->
