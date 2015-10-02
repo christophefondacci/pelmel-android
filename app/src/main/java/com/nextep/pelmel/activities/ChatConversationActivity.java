@@ -42,17 +42,18 @@ import com.nextep.pelmel.views.HorizontalListView;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import io.realm.Realm;
-import io.realm.RealmList;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 public class ChatConversationActivity extends Fragment implements
 		UserListener, OnItemClickListener, MessageCallback, SnippetChildSupport, MessageService.OnNewMessageListener, MessageService.OnPushMessageListener {
 
+	private static final String LOG_TAG = "CHAT";
 	public static final String CHAT_WITH_USER_KEY = "userKey";
 	public static final String CAL_TYPE_RECIPIENT_GROUP = "RCPT";
 	public static final String BUNDLE_STATE_OTHER_ITEM_KEY = "otherUserKey";
@@ -90,7 +91,7 @@ public class ChatConversationActivity extends Fragment implements
 		if(otherUserKey == null && savedInstanceState!=null) {
 			otherUserKey = savedInstanceState.getString(BUNDLE_STATE_OTHER_ITEM_KEY);
 		}
-		if(!otherUserKey.startsWith(CAL_TYPE_RECIPIENT_GROUP)) {
+		if(!isGroupChat()) {
 			view = inflater.inflate(R.layout.activity_chat_conversation,container,false);
 		} else {
 			view = inflater.inflate(R.layout.activity_group_chat_conversation,container,false);
@@ -100,9 +101,31 @@ public class ChatConversationActivity extends Fragment implements
 			final Realm realm = Realm.getInstance(ChatConversationActivity.this.getActivity(), PelMelApplication.getUserService().getLoggedUser().getKey());
 			realm.beginTransaction();
 			final RealmQuery<MessageRecipient> query = realm.where(MessageRecipient.class);
-			query.equalTo("itemKey", otherUserKey);
-			final MessageRecipient group = query.findFirst();
-			final RealmList<MessageRecipient> recipients = group.getUsers();
+
+			// Building list of item keys to fetch
+			final List<String> itemKeys;
+			if(otherUserKey.contains(",")) {
+				itemKeys = Arrays.asList(otherUserKey.split(","));
+			} else {
+				itemKeys = Arrays.asList(otherUserKey);
+			}
+			boolean isFirst=true;
+			for(String itemKey : itemKeys) {
+				if(!isFirst) {
+					query.or();
+				}
+				query.equalTo("itemKey", itemKey);
+				isFirst = false;
+			}
+
+			// Fetching
+			List<MessageRecipient> recipients;
+
+			if(itemKeys.size()>1){
+				recipients = query.findAll();
+			} else {
+				recipients = query.findFirst().getUsers();
+			}
 			final List<CalObject> users = new ArrayList<>();
 			for(MessageRecipient recipient : recipients) {
 				UserImpl user = PelMelApplication.getDataService().getCachedObject(UserImpl.class,recipient.getItemKey());
@@ -180,6 +203,9 @@ public class ChatConversationActivity extends Fragment implements
 		return view;
 	}
 
+	private boolean isGroupChat() {
+		return otherUserKey.startsWith(CAL_TYPE_RECIPIENT_GROUP) || otherUserKey.contains(",");
+	}
 	@Override
 	public void userInfoAvailable(final User user) {
 		currentUser = user;
@@ -231,15 +257,18 @@ public class ChatConversationActivity extends Fragment implements
 	private RealmQuery<Message> buildMessagesQuery(Realm realm) {
 		RealmQuery<Message> query = realm.where(Message.class);
 		if(otherUserKey.startsWith(CAL_TYPE_RECIPIENT_GROUP)) {
+			Log.d(LOG_TAG,"Fetching group with otherUserKey=" + otherUserKey);
 			query.equalTo("replyTo.itemKey",otherUserKey);
 			query.equalTo("toItemKey",currentUser.getKey());
 		} else if(!commentMode) {
+			Log.d(LOG_TAG,"Fetching with otherUserKey=" + otherUserKey);
 			query.beginGroup();
 			query.equalTo("from.itemKey", otherUserKey);
 			query.equalTo("toItemKey", currentUser.getKey());
 //		query.equalTo("replyTo.itemKey", otherUserKey);
 			query.endGroup();
 			if(otherUserKey.startsWith(User.CAL_TYPE)) {
+				Log.d(LOG_TAG,"  > With USER otherUserKey=" + otherUserKey);
 				query.or().beginGroup();
 				query.equalTo("from.itemKey", currentUser.getKey());
 				query.equalTo("toItemKey", otherUserKey);
@@ -247,6 +276,7 @@ public class ChatConversationActivity extends Fragment implements
 				query.endGroup();
 			}
 		} else {
+			Log.d(LOG_TAG,"Fetching comment with otherUserKey=" + otherUserKey);
 			query.equalTo("toItemKey",otherUserKey);
 		}
 		return query;
@@ -325,14 +355,23 @@ public class ChatConversationActivity extends Fragment implements
 
 	@Override
 	public void onNewMessages() {
+		Log.d("CHAT", "onNewMessages");
 		getActivity().runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				updateData();
 			}
 		});
-
 	}
+
+	@Override
+	public void bindMessageGroup(String replyToGroupKey, String othersUserKey) {
+		Log.d("CHAT","Binding '" +replyToGroupKey + "' to users '" + othersUserKey + "'");
+		if(othersUserKey.equals(otherUserKey)) {
+			this.otherUserKey = replyToGroupKey;
+		}
+	}
+
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);

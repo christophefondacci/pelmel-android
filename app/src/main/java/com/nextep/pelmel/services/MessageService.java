@@ -1,13 +1,19 @@
 package com.nextep.pelmel.services;
 
 import com.nextep.pelmel.model.User;
+import com.nextep.pelmel.model.db.MessageRecipient;
 
 import java.io.File;
+import java.util.List;
+import java.util.Map;
+
+import io.realm.Realm;
 
 public interface MessageService {
 
 	interface OnNewMessageListener {
 		void onNewMessages();
+		void bindMessageGroup(String replyToGroupKey, String otherUsersKey);
 	}
 	interface OnPushMessageListener {
 		void onPushMessage();
@@ -57,6 +63,17 @@ public interface MessageService {
 	 * @param otherUserKey ItemKey of the user of the conversation to mark as read
 	 */
 	void readConversationWith(String otherUserKey);
+
+	/**
+	 * Fetches or initializes MessageRecipient instances from/to database from a map of users.
+	 *
+	 * @param realm the Realm instancefor db calls
+	 * @param usersMap the map of users to load / instantiate hashed by their item key
+	 * @param recipientMap the map of already loaded MessageRecipient hashed by their item key
+	 * @return the list of MessageRecipient
+	 */
+	List<MessageRecipient> getMessageRecipientsFromUsersMap(Realm realm, Map<String,User> usersMap, Map<String,MessageRecipient> recipientMap);
+
 
 	/**
 	 * Sends a message to the given user.

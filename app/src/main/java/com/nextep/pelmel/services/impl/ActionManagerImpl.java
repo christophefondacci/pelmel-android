@@ -28,6 +28,7 @@ import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.NetworkStatus;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.User;
+import com.nextep.pelmel.model.db.MessageRecipient;
 import com.nextep.pelmel.services.ActionManager;
 import com.nextep.pelmel.services.WebService;
 
@@ -37,6 +38,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import io.realm.Realm;
 
 /**
  * Created by cfondacci on 29/07/15.
@@ -60,6 +63,7 @@ public class ActionManagerImpl implements ActionManager {
         registerPrivateNetworkOtherActions(Action.NETWORK_ACCEPT);
         registerPrivateNetworkRespondAction();
         registerPrivateNetworkPickAction();
+        registerGroupChat();
         webService = new WebService();
     }
     @Override
@@ -437,5 +441,34 @@ public class ActionManagerImpl implements ActionManager {
             }
         };
         commandsActionMap.put(Action.NETWORK_PICK,cmd);
+    }
+
+    private void registerGroupChat() {
+        final ActionCommand cmd = new ActionCommand() {
+            @Override
+            public Object execute(Object parameter) {
+                final CurrentUser user = PelMelApplication.getUserService().getLoggedUser();
+                final Map<String, User> usersMap = new HashMap<>();
+                final StringBuilder buf = new StringBuilder();
+                String separator = "";
+                for(User u : user.getNetworkUsers()) {
+                    usersMap.put(u.getKey(),u);
+                    buf.append(separator + u.getKey());
+                    separator = ",";
+                }
+                final Map<String, MessageRecipient> recipientsMap = new HashMap<>();
+
+                // Building instance in databse
+                Realm realm = Realm.getInstance(PelMelApplication.getInstance(),user.getKey());
+                realm.beginTransaction();
+                PelMelApplication.getMessageService().getMessageRecipientsFromUsersMap(realm,usersMap,recipientsMap);
+                realm.commitTransaction();
+                ChatConversationActivity chatFragment = new ChatConversationActivity();
+                chatFragment.setOtherUserKey(buf.toString());
+                PelMelApplication.getSnippetContainerSupport().showSnippetForFragment(chatFragment,true,false);
+                return null;
+            }
+        };
+        commandsActionMap.put(Action.GROUP_CHAT,cmd);
     }
 }

@@ -248,6 +248,10 @@ public class ChatActivity extends Fragment implements
 				updateData();
 			}
 		});
+	}
+
+	@Override
+	public void bindMessageGroup(String replyToGroupKey, String otherUsersKey) {
 
 	}
 

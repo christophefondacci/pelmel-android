@@ -320,8 +320,15 @@ public class MessageServiceImpl implements MessageService {
 			}
 		}
 
+		final List<MessageRecipient> loadedRecipients = getMessageRecipientsFromUsersMap(realm,usersMap,recipientMap);
+		recipients.addAll(loadedRecipients);
+		return recipients;
+	}
+
+	@Override
+	public List<MessageRecipient> getMessageRecipientsFromUsersMap(Realm realm, Map<String,User> usersMap, Map<String,MessageRecipient> recipientMap) {
+		final List<MessageRecipient> recipients = new ArrayList<>();
 		// Querying all users we have not found
-		final User currentUser = PelMelApplication.getUserService().getLoggedUser();
 		final RealmQuery<MessageRecipient> query = realm.where(MessageRecipient.class);
 		boolean isFirst = true;
 		if(!usersMap.isEmpty()) {
@@ -371,7 +378,6 @@ public class MessageServiceImpl implements MessageService {
 		}
 		return recipients;
 	}
-
 	private void fillRecipientFromUser(MessageRecipient recipient, User user) {
 		recipient.setItemKey(user.getKey());
 		// Thumb info
@@ -410,18 +416,18 @@ public class MessageServiceImpl implements MessageService {
 		final Location location = PelMelApplication.getLocalizationService().getLocation();
 
 		webService.getMessages(
-				currentUser, otherUserKey, location.getLatitude(), location.getLongitude(),true);
+				currentUser, otherUserKey, location.getLatitude(), location.getLongitude(), true);
 
 	}
 
 	@Override
 	public void sendMessage(final User currentUser, final String otherUserKey,
 			final String message, final MessageService.OnNewMessageListener callback) {
-		sendMessageWithPhoto(currentUser,otherUserKey,message,false,null, callback);
+		sendMessageWithPhoto(currentUser, otherUserKey, message, false, null, callback);
 	}
 	public void postComment(final User currentUser, final String otherUserKey,
 			final String message, final MessageService.OnNewMessageListener callback) {
-		sendMessageWithPhoto(currentUser,otherUserKey,message,true,null, callback);
+		sendMessageWithPhoto(currentUser, otherUserKey, message, true, null, callback);
 	}
 
 	public void sendMessageWithPhoto(final User currentUser, final String otherUserKey,
@@ -468,8 +474,28 @@ public class MessageServiceImpl implements MessageService {
 					message.setMessageText(jsonMessage.getMessage());
 					message.setMessageDate(new Date(jsonMessage.getTime() * 1000));
 					if(jsonMessage.getRecipientsGroupKey()!=null) {
-						final MessageRecipient groupRecipient = getRecipient(realm,jsonMessage.getRecipientsGroupKey());
+						MessageRecipient groupRecipient = getRecipient(realm,jsonMessage.getRecipientsGroupKey());
+						if(groupRecipient == null ) {
+							groupRecipient = realm.createObject(MessageRecipient.class);
+							groupRecipient.setItemKey(jsonMessage.getRecipientsGroupKey());
+							final RealmQuery<MessageRecipient> query = realm.where(MessageRecipient.class);
+							boolean isFirst = true;
+							for(String userKey : otherUserKey.split(",")) {
+								if(!isFirst) {
+									query.or();
+								} else {
+									isFirst = false;
+								}
+								query.equalTo("itemKey",userKey);
+							}
+							RealmResults<MessageRecipient> recipients = query.findAll();
+							final List<MessageRecipient> recipientsList = new ArrayList<>(recipients);
+							groupRecipient.getUsers().addAll(recipientsList);
+						}
 						message.setReplyTo(groupRecipient);
+						if(otherUserKey.contains(",")) {
+							callback.bindMessageGroup(jsonMessage.getRecipientsGroupKey(),otherUserKey);
+						}
 					}
 					realm.commitTransaction();
 					realm.close();
