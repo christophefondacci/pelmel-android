@@ -31,7 +31,7 @@ public interface PelMelConstants {
 	int MAP_MINIMUM_PLACES_FOR_ZOOM = 3;
 
 
-	double CHECKIN_DISTANCE = 1.0f;
+	double CHECKIN_DISTANCE = 1000.0f;
 	int CHECKIN_TIMEOUT_MILLISECS = 10800000;
 
 	String INTENT_PARAM_INDEX = "index";

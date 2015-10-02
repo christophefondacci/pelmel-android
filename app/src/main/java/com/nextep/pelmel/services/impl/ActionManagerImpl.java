@@ -13,9 +13,11 @@ import android.widget.AdapterView;
 
 import com.nextep.json.model.impl.JsonLikeInfo;
 import com.nextep.pelmel.PelMelApplication;
+import com.nextep.pelmel.PelMelConstants;
 import com.nextep.pelmel.R;
 import com.nextep.pelmel.activities.CALObjectGridFragment;
 import com.nextep.pelmel.activities.ChatConversationActivity;
+import com.nextep.pelmel.activities.DealUseActivity;
 import com.nextep.pelmel.activities.ListCheckinsFragment;
 import com.nextep.pelmel.activities.ListDealsFragment;
 import com.nextep.pelmel.exception.PelmelException;
@@ -24,6 +26,7 @@ import com.nextep.pelmel.helpers.Strings;
 import com.nextep.pelmel.model.Action;
 import com.nextep.pelmel.model.CalObject;
 import com.nextep.pelmel.model.CurrentUser;
+import com.nextep.pelmel.model.Deal;
 import com.nextep.pelmel.model.Event;
 import com.nextep.pelmel.model.NetworkStatus;
 import com.nextep.pelmel.model.Place;
@@ -64,6 +67,8 @@ public class ActionManagerImpl implements ActionManager {
         registerPrivateNetworkRespondAction();
         registerPrivateNetworkPickAction();
         registerGroupChat();
+        registerUseDeal();
+        registerPresentDeal();
         webService = new WebService();
     }
     @Override
@@ -470,5 +475,76 @@ public class ActionManagerImpl implements ActionManager {
             }
         };
         commandsActionMap.put(Action.GROUP_CHAT,cmd);
+    }
+
+    private void registerUseDeal() {
+        final ActionCommand cmd = new ActionCommand() {
+            @Override
+            public Object execute(Object parameter) {
+                final Deal deal = (Deal)parameter;
+                double distance = PelMelApplication.getConversionService().getDistanceTo(deal.getRelatedObject());
+                if(distance> PelMelConstants.CHECKIN_DISTANCE) {
+
+                } else {
+                    if(!PelMelApplication.getUserService().isCheckedInAt((Place)deal.getRelatedObject())) {
+
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(
+                                (Activity)PelMelApplication.getSnippetContainerSupport());
+                        builder.setTitle(R.string.deal_use_checkinRequiredTitle);
+                        builder.setMessage(R.string.deal_use_checkinRequiredMsg);
+                        builder.setPositiveButton(R.string.deal_use_checkinRequiredOkBtn,
+                                new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                        executeAction(Action.CHECKIN, (Place) deal.getRelatedObject(), new ActionCallback() {
+                                            @Override
+                                            public void actionCompleted(boolean isSucess, Object result) {
+                                                executeAction(Action.PRESENT_DEAL,deal);
+                                            }
+                                        });
+
+                                    }
+                                });
+
+                        builder.setNegativeButton(R.string.network_action_respond_decline,
+                                new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+
+                        PelMelApplication.runOnMainThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                builder.create().show();
+                            }
+                        });
+                    } else {
+                        executeAction(Action.PRESENT_DEAL,deal);
+                    }
+                }
+
+
+                return null;
+            }
+        };
+        commandsActionMap.put(Action.USE_DEAL,cmd);
+    }
+    private void registerPresentDeal() {
+        final ActionCommand cmd = new ActionCommand() {
+            @Override
+            public Object execute(Object parameter) {
+                final Deal deal = (Deal)parameter;
+                final DealUseActivity activity = new DealUseActivity();
+                activity.setDeal(deal);
+                PelMelApplication.getSnippetContainerSupport().showSnippetForFragment(activity, true, false);
+                return null;
+            }
+        };
+        commandsActionMap.put(Action.PRESENT_DEAL,cmd);
     }
 }

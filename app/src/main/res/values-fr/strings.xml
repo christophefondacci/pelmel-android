@@ -73,6 +73,9 @@
     <string name="deal.report.title">Problème signalé</string>
     <string name="deal.type.TWO_FOR_ONE">1 acheté / 1 offert</string>
     <string name="deal.use.countdown">Activation dans {0}</string>
+    <string name="deal.use.checkinRequiredTitle">Localisez vous !</string>
+    <string name="deal.use.checkinRequiredMsg">You devez vous localiser dans ce lieu (check-in) pour accéder à cette offre, voulez-vous vous localiser maintenant ?</string>
+    <string name="deal.use.checkinRequiredOkBtn">Localisez moi</string>
     <string name="deal.use.button">UTILISER LA PROMO</string>
     <string name="deal.use.legal">Cette promotion est offerte par {0}, pas par nous.\nVous certifiez avoir l\'âge légal pour utiliser cette promotion.</string>
 

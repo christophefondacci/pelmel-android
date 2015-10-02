@@ -81,12 +81,12 @@ public class DealsListAdapter extends BaseAdapter {
         }
 
         final AbsListView.LayoutParams params = (AbsListView.LayoutParams)convertView.getLayoutParams();
-        if(!PelMelApplication.getLocalizationService().isCheckinEnabled(deal.getRelatedObject())) {
+//        if(!PelMelApplication.getLocalizationService().isCheckinEnabled(deal.getRelatedObject())) {
             viewHolder.useDealButton.setVisibility(View.INVISIBLE);
             params.height = (int)PelMelApplication.getInstance().getResources().getDimension(R.dimen.deal_list_height_nousedeal);
-        } else {
-            params.height = (int)PelMelApplication.getInstance().getResources().getDimension(R.dimen.deal_list_height_usedeal);
-        }
+//        } else {
+//            params.height = (int)PelMelApplication.getInstance().getResources().getDimension(R.dimen.deal_list_height_usedeal);
+//        }
         convertView.setLayoutParams(params);
 
         return convertView;

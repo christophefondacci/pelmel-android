@@ -239,7 +239,7 @@ public class MapActivity extends Fragment implements UserListener,
 
 			@Override
 			protected void onPostExecute(List<Place> places) {
-				if (places != cachedPlaces) {
+				if (places != cachedPlaces && !isDetached()) {
 					map.clear();
 					placeMarkersMap.clear();
 					cachedPlaces = places;

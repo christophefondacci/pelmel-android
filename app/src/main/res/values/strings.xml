@@ -69,6 +69,9 @@
     <string name="deal.available">Available</string>
     <string name="deal.button.problem">Report a problem</string>
     <string name="deal.button.whatsthis">What\'s this?</string>
+
+
+
     <string name="deal.list.title">Nearby Deals</string>
 
     <string name="deal.delay">Available in {0}</string>
@@ -84,6 +87,9 @@
     <string name="deal.report.title">Problem reported!</string>
     <string name="deal.type.TWO_FOR_ONE">Buy 1 / Get 1 free</string>
     <string name="deal.use.button">USE THIS DEAL</string>
+    <string name="deal.use.checkinRequiredTitle">Check In Now!</string>
+    <string name="deal.use.checkinRequiredMsg">You need to check in to access this deal, do you want to check in now?</string>
+    <string name="deal.use.checkinRequiredOkBtn">Check Me In</string>
     <string name="deal.use.countdown">Activation in {0}</string>
     <string name="deal.use.legal">This deal is offered by {0}, not by us.\nYou certify being of legal age to use this deal</string>
 

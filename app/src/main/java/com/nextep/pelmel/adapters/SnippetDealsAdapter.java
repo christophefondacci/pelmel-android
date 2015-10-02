@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
-import com.nextep.pelmel.activities.DealUseActivity;
 import com.nextep.pelmel.helpers.PelmelFont;
 import com.nextep.pelmel.helpers.Strings;
+import com.nextep.pelmel.model.Action;
 import com.nextep.pelmel.model.Deal;
 import com.nextep.pelmel.model.Place;
 import com.nextep.pelmel.model.support.SnippetContainerSupport;
@@ -78,9 +78,7 @@ public class SnippetDealsAdapter extends BaseAdapter {
         holder.useDealButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final DealUseActivity activity = new DealUseActivity();
-                activity.setDeal(deal);
-                snippetContainerSupport.showSnippetForFragment(activity, true, false);
+               PelMelApplication.getActionManager().executeAction(Action.USE_DEAL,deal);
             }
         });
         return convertView;

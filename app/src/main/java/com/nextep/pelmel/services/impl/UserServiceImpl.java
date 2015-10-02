@@ -312,7 +312,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean isCheckedInAt(Place place) {
-		return currentUser.getLastLocation() != null && currentUser.getLastLocation().getKey().equals(place.getKey()) && (System.currentTimeMillis()-currentUser.getLastLocationTime().getTime())<PelMelConstants.CHECKIN_TIMEOUT_MILLISECS;
+		if(place != null) {
+			return currentUser.getLastLocation() != null && currentUser.getLastLocationTime() != null && currentUser.getLastLocation().getKey().equals(place.getKey()) && (System.currentTimeMillis() - currentUser.getLastLocationTime().getTime()) < PelMelConstants.CHECKIN_TIMEOUT_MILLISECS;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -345,6 +349,7 @@ public class UserServiceImpl implements UserService {
 		// Adjusting last user location
 		if(!checkout) {
 			currentUser.setLastLocation(place);
+			currentUser.setLastLocationTime(new Date());
 		} else {
 			currentUser.setLastLocation(null);
 		}

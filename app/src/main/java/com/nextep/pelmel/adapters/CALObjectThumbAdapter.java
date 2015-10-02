@@ -96,7 +96,7 @@ public class CALObjectThumbAdapter extends BaseAdapter implements AdapterView.On
 
 			// Adjusting radius
 			final CalObject obj = (CalObject)getItem(position);
-			if((obj instanceof User)) {
+			if((obj instanceof User)&& !(grid && position == maxObjects-1)) {
 				viewHolder.thumbImageView.setCornerRadius(size / 2);
 			} else {
 				viewHolder.thumbImageView.setCornerRadius(0);
