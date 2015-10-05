@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scrollView1"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content" 
     android:background="@color/pelmelActionBar">
-<LinearLayout 
+<RelativeLayout
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/activity_horizontal_margin"
@@ -21,21 +26,16 @@
  
      <!-- Rightend Arrow -->
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp">
 
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/log_logo" />
-
-    </RelativeLayout>
+    <!--<ImageView-->
+        <!--android:id="@+id/imageView1"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_marginBottom="20dp"-->
+        <!--android:src="@drawable/log_logo" />-->
 
     <TextView
         android:id="@+id/loginLabel"
@@ -54,6 +54,8 @@
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_below="@id/loginLabel"
+        android:id="@+id/loginContainer"
          >
 
         <TextView
@@ -140,6 +142,7 @@
         android:paddingBottom="@dimen/header_title_padding"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
+        android:layout_below="@id/loginContainer"
         android:text="@string/registerIntroLabel"
         android:textSize="20sp"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -149,6 +152,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         android:orientation="vertical"
+        android:layout_below="@id/registerLabel"
         >
 
         <TextView
@@ -221,6 +225,7 @@
                 android:layout_width="@dimen/login_button_width"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/bg_login_button"
                 android:text="@string/registerButtonLabel" />
 
@@ -228,5 +233,14 @@
 
     </LinearLayout>
  
-</LinearLayout>
+</RelativeLayout>
 </ScrollView>
+    <LinearLayout
+        android:id="@+id/pelmelTermsContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        />
+</RelativeLayout>

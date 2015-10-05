@@ -320,6 +320,12 @@ public class NetworkRecycleViewAdapter extends SectionedRecyclerAdapter {
                     viewHolder.noCheckinText.setText(Strings.getText(R.string.network_checkins_noCheckinMessage));
                     viewHolder.noCheckinActionButton.setText(Strings.getText(R.string.network_checkins_startChat));
                     viewHolder.noCheckinActionButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ico_chat, 0, 0, 0);
+                    viewHolder.noCheckinActionButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            PelMelApplication.getActionManager().executeAction(Action.GROUP_CHAT,null);
+                        }
+                    });
                 }
             } else {
                 // Retyping our known objects

@@ -29,7 +29,9 @@ public class WebBrowserFragment extends android.support.v4.app.Fragment implemen
         View view = inflater.inflate(R.layout.layout_webbrowser,container,false);
         webview = (WebView)view.findViewById(R.id.webView);
         webview.loadUrl(url);
-        snippetContainerSupport.setSnippetChild(this);
+        if(snippetContainerSupport != null) {
+            snippetContainerSupport.setSnippetChild(this);
+        }
         return view;
     }
 
@@ -51,7 +53,9 @@ public class WebBrowserFragment extends android.support.v4.app.Fragment implemen
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        snippetContainerSupport = (SnippetContainerSupport)activity;
+        if(activity instanceof SnippetContainerSupport) {
+            snippetContainerSupport = (SnippetContainerSupport) activity;
+        }
 
     }
 

@@ -68,6 +68,7 @@ public class ChatConversationActivity extends Fragment implements
 	private User currentUser;
 	private boolean commentMode;
 	private Realm realm;
+	private boolean isDestroyed = false;
 	private List<ChatMessage> messages = Collections.emptyList();
 	private SnippetContainerSupport snippetContainerSupport;
 
@@ -213,6 +214,9 @@ public class ChatConversationActivity extends Fragment implements
 		fetchNewMessages();
 	}
 	private void fetchNewMessages() {
+		if(this.getActivity()==null) {
+			return;
+		}
 		// In background, fetch any new message (we'll be notified by callback)
 		new AsyncTask<Void, Void, Boolean>() {
 
@@ -283,12 +287,14 @@ public class ChatConversationActivity extends Fragment implements
 	}
 
 	public void updateData() {
-		final User currentUser = PelMelApplication.getUserService().getLoggedUser();
-		final RealmQuery<Message> query = buildMessagesQuery(realm);
-		final RealmResults<Message> messages = query.findAllSorted("messageDate", true);
-		final MessageAdapter adapter=  new MessageAdapter(this.getActivity(),messages,currentUser,otherUserKey,this);
-		listView.setAdapter(adapter);
-		listView.setSelection(messages.size() - 1);
+		if(!isDestroyed) {
+			final User currentUser = PelMelApplication.getUserService().getLoggedUser();
+			final RealmQuery<Message> query = buildMessagesQuery(realm);
+			final RealmResults<Message> messages = query.findAllSorted("messageDate", true);
+			final MessageAdapter adapter = new MessageAdapter(this.getActivity(), messages, currentUser, otherUserKey, this);
+			listView.setAdapter(adapter);
+			listView.setSelection(messages.size() - 1);
+		}
 	}
 	@Override
 	public void userInfoUnavailable() {
@@ -356,12 +362,14 @@ public class ChatConversationActivity extends Fragment implements
 	@Override
 	public void onNewMessages() {
 		Log.d("CHAT", "onNewMessages");
-		getActivity().runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				updateData();
-			}
-		});
+		if(getActivity()!=null) {
+			getActivity().runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					updateData();
+				}
+			});
+		}
 	}
 
 	@Override
@@ -398,6 +406,7 @@ public class ChatConversationActivity extends Fragment implements
 
 	@Override
 	public void onDestroy() {
+		isDestroyed = true;
 		if(realm != null) {
 			realm.close();
 		}

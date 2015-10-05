@@ -2,7 +2,7 @@ package com.nextep.pelmel.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,7 +14,7 @@ import com.nextep.pelmel.R;
 import com.nextep.pelmel.providers.impl.ContextSnippetInfoProvider;
 import com.nextep.pelmel.services.LocalizationService;
 
-public class MainActionBarActivity extends ActionBarActivity {
+public class MainActionBarActivity extends AppCompatActivity {
 
 	private LocalizationService localizationService;
 	private TextView messagesCountBadge;

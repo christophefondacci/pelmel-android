@@ -108,7 +108,10 @@ public abstract class SectionedRecyclerAdapter extends RecyclerView.Adapter<Recy
         int typeOffset = TYPE_SECTION_HEADER + 2; // start counting from here
         int position = i;
         int viewType = -1;
+
+        int sectionIndex = 0;
         for (Section section : this.sections) {
+
             if (position == 0) {
                 viewType = TYPE_SECTION_HEADER;
                 break;
@@ -123,7 +126,8 @@ public abstract class SectionedRecyclerAdapter extends RecyclerView.Adapter<Recy
             }
 
             position -= size;
-            typeOffset += section.adapter.getViewTypeCount();
+            sectionIndex++;
+            typeOffset += sectionIndex*100;
         }
 
         Log.d(LOG_TAG,"ViewType: " + viewType + " for index " + i);
@@ -133,13 +137,14 @@ public abstract class SectionedRecyclerAdapter extends RecyclerView.Adapter<Recy
     public int getViewType(Section section, int i) {
         int typeOffset = TYPE_SECTION_HEADER + 2;
         int viewType = -1;
+        int sectionIndex = 0;
         for(Section s : sections) {
             if(s == section) {
                 viewType = typeOffset + section.adapter.getItemViewType(i);
                 break;
             }
-
-            typeOffset += section.adapter.getViewTypeCount();
+            sectionIndex++;
+            typeOffset += sectionIndex*100;
         }
 
         return viewType;

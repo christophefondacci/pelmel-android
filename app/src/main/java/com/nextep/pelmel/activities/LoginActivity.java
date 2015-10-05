@@ -1,10 +1,12 @@
 package com.nextep.pelmel.activities;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,6 +14,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,8 +28,10 @@ import com.nextep.pelmel.model.ServiceCallback;
 import com.nextep.pelmel.model.User;
 import com.nextep.pelmel.services.UserService;
 
-public class LoginActivity extends Activity implements OnClickListener,
+public class LoginActivity extends AppCompatActivity implements OnClickListener,
 		UserListener, UserRegisterListener {
+
+	private static final String FRAGMENT_TERMS = "terms";
 
 	private EditText loginEmail;
 	private EditText loginPassword;
@@ -136,11 +141,21 @@ public class LoginActivity extends Activity implements OnClickListener,
 
 			@Override
 			public void onClick(View v) {
-				final Intent intent = new Intent(getBaseContext(),
-						TextActivity.class);
-				intent.putExtra(TextActivity.KEY_INTENT_TEXT_ID,
-						String.valueOf(R.string.termsText));
-				startActivity(intent);
+				final LinearLayout termsContainer = (LinearLayout) findViewById(R.id.pelmelTermsContainer);
+				final WebBrowserFragment fragment = new WebBrowserFragment();
+				fragment.setUrl(PelMelConstants.URL_TERMS);
+				FragmentManager fragmentManager = getSupportFragmentManager();
+
+				FragmentTransaction transaction = fragmentManager.beginTransaction();
+				transaction.replace(R.id.pelmelTermsContainer, fragment,FRAGMENT_TERMS );
+				transaction.addToBackStack(null);
+				transaction.commit();
+				getSupportFragmentManager().executePendingTransactions();
+//				final Intent intent = new Intent(getBaseContext(),
+//						TextActivity.class);
+//				intent.putExtra(TextActivity.KEY_INTENT_TEXT_ID,
+//						String.valueOf(R.string.termsText));
+//				startActivity(intent);
 			}
 		});
 
@@ -207,6 +222,7 @@ public class LoginActivity extends Activity implements OnClickListener,
 		final Intent mapIntent = new Intent(this, MainActivity.class); // TabBarActivity.class);
 		mapIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Removes other Activities from stack
 		startActivity(mapIntent);
+		finish();
 	}
 
 	@Override

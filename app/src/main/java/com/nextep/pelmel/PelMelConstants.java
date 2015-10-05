@@ -42,4 +42,6 @@ public interface PelMelConstants {
 
 	long DEAL_USE_TIME_MILLIS = 1000*60*60*24;
 
+	String URL_TERMS = "http://www.pelmelguide.com/terms-agreement";
+
 }

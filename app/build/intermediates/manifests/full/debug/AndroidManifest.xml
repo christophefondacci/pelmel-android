@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nextep.pelmel"
-    android:versionCode="12"
-    android:versionName="2.6.3" >
+    android:versionCode="13"
+    android:versionName="2.7.0" >
 
     <uses-sdk
         android:minSdkVersion="16"
@@ -98,9 +98,7 @@
 
         <activity android:name="com.nextep.pelmel.activities.MyProfileActivity" />
         <activity android:name="com.nextep.pelmel.activities.PhotosManagerActivity" />
-        <activity
-            android:name="com.nextep.pelmel.activities.LoginActivity"
-            android:noHistory="true" >
+        <activity android:name="com.nextep.pelmel.activities.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
