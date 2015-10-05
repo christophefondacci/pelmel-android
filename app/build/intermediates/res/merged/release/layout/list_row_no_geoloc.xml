@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dip" >
+
+    <LinearLayout
+        android:id="@+id/radius_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toLeftOf="@+id/img_refresh" >
+
+        <TextView
+            android:id="@+id/info_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/search_no_localization" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/img_refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/radius_layout"
+        android:layout_alignBottom="@+id/radius_layout"
+        android:src="@android:drawable/ic_menu_rotate" />
+
+</RelativeLayout><!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/layout/list_row_no_geoloc.xml -->

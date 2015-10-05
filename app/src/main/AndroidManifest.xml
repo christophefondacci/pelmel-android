@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nextep.pelmel"
-    android:versionCode="12"
-    android:versionName="2.6.3" >
+    android:versionCode="13"
+    android:versionName="2.7.0" >
 
     <uses-sdk
         android:minSdkVersion="12"
@@ -82,7 +82,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCUrzVh3F9ttywWpMdtRfRUrkpLKCCGUIQ" />
+            android:value="AIzaSyDZrq-ZiDdyYRBcoNjLrul-J11vo8oqC0M" />
         <!-- PROD -->
             <!--android:value="AIzaSyDZrq-ZiDdyYRBcoNjLrul-J11vo8oqC0M" />-->
         <!-- DEBUG -->

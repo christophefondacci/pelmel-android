@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:background="#272a2e">
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/snippet.tab.events"
+        android:textColor="#fff"
+        android:background="@drawable/bg_tab_enabled"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="2dp"
+        android:id="@+id/eventsButton"/>
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/snippet.tab.deals"
+        android:textColor="#fff"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/bg_tab_disabled"
+        android:id="@+id/dealsButton"/>
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/snippet.tab.hangouts"
+        android:textColor="#fff"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/bg_tab_disabled"
+        android:id="@+id/placesButton"/>
+
+
+</LinearLayout><!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/layout/section_tabs_snippet.xml -->

@@ -338,8 +338,8 @@ public class UserServiceImpl implements UserService {
 		}
 		final Place lastLocation = currentUser.getLastLocation();
 		if(lastLocation != null && lastLocation.getKey().equals(response.getPreviousPlaceKey())) {
-			currentUser.getLastLocation().setOverviewDataLoaded(false);
-			currentUser.getLastLocation().setInsidersCount(response.getPreviousPlaceUsersCount());
+			lastLocation.setOverviewDataLoaded(false);
+			lastLocation.setInsidersCount(response.getPreviousPlaceUsersCount());
 		}
 		if(place.getKey().equals(response.getNewPlaceKey())) {
 			place.setOverviewDataLoaded(false);
@@ -358,6 +358,9 @@ public class UserServiceImpl implements UserService {
 		PelMelApplication.getUiService().executeOnUiThread(new Runnable() {
 			@Override
 			public void run() {
+				if(lastLocation != null) {
+					PelMelApplication.getSnippetContainerSupport().getMapFragment().refreshMarkerFor(lastLocation);
+				}
 				PelMelApplication.getSnippetContainerSupport().getMapFragment().refreshMarkerFor(place);
 			}
 		});
