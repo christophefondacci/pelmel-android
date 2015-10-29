@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/introImage"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:src="@drawable/intro_bg_3"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/logo_big"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"/>
+
+    <Button
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:text="Log in"
+        android:textColor="@color/white"
+        android:id="@+id/loginButton"
+        android:background="@drawable/bg_login_intro_button"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp"/>
+    <Button
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:textColor="@color/white"
+        android:id="@+id/registerButton"
+        android:background="@drawable/bg_login_intro_button"
+        android:layout_below="@+id/loginButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:textSize="28dp"
+        android:textColor="@color/white"
+        android:id="@+id/loginProgressLabel"
+        android:layout_below="@+id/loginButton"
+        android:layout_marginTop="-10dp"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"/>
+    <ProgressBar
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/loginProgress"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/loginProgressLabel"
+        android:layout_below="@id/loginButton"
+        android:layout_marginTop="-7dp"
+        android:layout_marginRight="10dp"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        />
+</RelativeLayout><!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/layout/intro_page_login.xml -->

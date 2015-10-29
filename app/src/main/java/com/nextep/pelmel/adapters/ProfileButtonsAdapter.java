@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.nextep.pelmel.PelMelApplication;
 import com.nextep.pelmel.R;
-import com.nextep.pelmel.activities.LoginActivity;
+import com.nextep.pelmel.activities.IntroActivity;
 
 /**
  * Created by cfondacci on 07/08/15.
@@ -61,7 +61,7 @@ public class ProfileButtonsAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 PelMelApplication.getUserService().logout();
-                Intent intent = new Intent(context, LoginActivity.class);
+                Intent intent = new Intent(context, IntroActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);

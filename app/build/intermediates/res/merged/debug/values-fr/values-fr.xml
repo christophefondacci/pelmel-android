@@ -37,7 +37,7 @@
     <string name="alert_unlike_place_success">Vous ne faites plus partie des utilisateurs qui aiment ce lieu.</string>
     <string name="alert_unlike_success_title">Vous n\'aimez plus !</string>
     <string name="alert_unlike_user_success">Votre n\'aimez plus.</string>
-    <string name="app_name">PelMel Guide</string>
+    <string name="app_name">PELMEL</string>
     <string name="calendar.daily">Tous les jours</string>
     <string name="calendar.repeat.first">Les 1ers</string>
     <string name="calendar.repeat.fourth">Les 4èmes</string>
@@ -142,6 +142,9 @@
     <string name="hours_open_in">Ouvre dans {0}</string>
     <string name="hours_open_leftHours">Reste {0}</string>
     <string name="insiders_title">Ils étaient là</string>
+    <string name="intro_1">Trouvez la communauté gay</string>
+    <string name="intro_2">Trouvez où tout le monde est</string>
+    <string name="intro_3">Localisez-vous et accédez à des promos</string>
     <string name="liked_places_title">Il y va</string>
     <string name="liked_users_title">Il aime</string>
     <string name="likers_title">Ils aiment</string>

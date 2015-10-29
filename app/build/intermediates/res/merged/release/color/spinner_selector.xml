@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-     android:state_selected="true"
-        android:drawable="@color/pelmel" />
- 
-</selector><!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/color/spinner_selector.xml -->

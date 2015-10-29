@@ -8,6 +8,8 @@
       <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.makeramen/roundedimageview/2.1.2/res" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.makeramen/roundedimageview/2.1.2/f5fbf46334382339e8c0e3ca51e644bfd33c9b8/roundedimageview-2.1.2-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

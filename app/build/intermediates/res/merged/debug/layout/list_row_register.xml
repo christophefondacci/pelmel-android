@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:background="@drawable/intro_bg_3">
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/activity_horizontal_margin"
+    android:orientation="vertical"
+    android:padding="5dip" >
+ 
+    <!--  ListRow Left sied Thumbnail image -->
+ 
+    <!-- Title Of Song-->
+ 
+    <!-- Artist Name -->
+ 
+    <!-- Rightend Duration -->
+ 
+     <!-- Rightend Arrow -->
+
+
+    <ImageView
+        android:id="@+id/logoImage"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/logo_big" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:orientation="vertical"
+        android:layout_below="@id/logoImage"
+        >
+
+        <TextView
+            android:id="@+id/registerIntroHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:textColor="@color/white"
+            android:text="@string/registerIntroHint"
+            android:layout_marginBottom="@dimen/login_padding" />
+
+        <EditText
+            android:id="@+id/registerEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/loginEmailPlaceholder"
+            android:inputType="textEmailAddress"
+            android:padding="7dp"
+            android:background="@drawable/bg_chat_text"/>
+
+        <EditText
+            android:id="@+id/registerPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/loginPasswordPlaceholder"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:layout_marginTop="4dp"
+            android:padding="7dp"
+            android:background="@drawable/bg_chat_text"/>
+        <EditText
+            android:id="@+id/registerPasswordConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/loginPasswordConfirmPlaceholder"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:padding="7dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bg_chat_text"/>
+        <EditText
+            android:id="@+id/registerPseudo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/registerPseudoHint"
+            android:ems="10"
+            android:layout_marginTop="4dp"
+            android:padding="7dp"
+            android:background="@drawable/bg_chat_text"/>
+
+        <TextView
+            android:id="@+id/registerTerms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/registerTermsHint"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:padding="4dp"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/white"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/registerButton"
+                android:layout_width="@dimen/login_button_width"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/bg_login_button"
+                android:text="@string/registerButtonLabel" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+ 
+</RelativeLayout>
+</ScrollView>
+    <LinearLayout
+        android:id="@+id/pelmelTermsContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        />
+</RelativeLayout><!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/layout/list_row_register.xml -->

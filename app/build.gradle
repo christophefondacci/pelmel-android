@@ -36,5 +36,6 @@ dependencies {
     compile 'com.makeramen:roundedimageview:2.1.2'
     compile 'io.realm:realm-android:0.82.0'
     compile 'com.android.support:recyclerview-v7:22.2.1'
+    compile 'com.github.paolorotolo:appintro:3.2.0'
 
 }

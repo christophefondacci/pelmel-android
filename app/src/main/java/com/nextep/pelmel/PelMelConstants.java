@@ -12,6 +12,7 @@ public interface PelMelConstants {
 	String PREFS_NAME = "LOGIN_PREFS";
 	String PREF_USERNAME = "USERNAME";
 	String PREF_PASSWORD = "PASSWORD";
+	String PREF_INTRODONE= "intro";
 	String PREF_SEARCH_RADIUS = "RADIUS";
 
 	String PLACE_TYPE_BAR = "bar";

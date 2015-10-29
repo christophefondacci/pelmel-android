@@ -400,7 +400,7 @@
     <string name="alert_unlike_place_success">You are no longer part of the users who like this place.</string>
     <string name="alert_unlike_success_title">Like cancelled!</string>
     <string name="alert_unlike_user_success">Your like has been removed.</string>
-    <string name="app_name">PelMel Guide</string>
+    <string name="app_name">PELMEL</string>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/res/values/auth_strings.xml -->
     <eat-comment/>
     <string name="auth_google_play_services_client_facebook_display_name">Facebook</string>
@@ -521,6 +521,11 @@
     <string name="distance.kilometers">{0} km</string>
     <string name="distance.meters">{0} meters</string>
     <string name="distance.miles">{0} miles</string>
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.github.paolorotolo/appintro/3.2.0/res/values/values.xml -->
+    <eat-comment/>
+    <string name="done_button">DONE</string>
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
     <string name="eventType">Event</string>
     <string name="event_place_title">Takes place at</string>
     <string name="event_type_happyhour">HAPPY HOUR</string>
@@ -540,6 +545,9 @@
     <string name="hours_open_in">Opens in {0}</string>
     <string name="hours_open_leftHours">{0} left</string>
     <string name="insiders_title">They were in</string>
+    <string name="intro_1">Find the gay community</string>
+    <string name="intro_2">Find where everybody is</string>
+    <string name="intro_3">Check in and get deals</string>
     <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.makeramen/roundedimageview/2.1.2/res/values/values.xml -->
     <eat-comment/>
     <string name="library_roundedimageview_author">Vince Mi</string>
@@ -686,6 +694,11 @@
     <string name="selectPhotoGallery">Gallery</string>
     <string name="selectPhotoMessage">Which source do you want to use to upload a photo ?</string>
     <string name="selectPhotoTitle">Photo source</string>
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/build/intermediates/exploded-aar/com.github.paolorotolo/appintro/3.2.0/res/values/values.xml -->
+    <eat-comment/>
+    <string name="skip_button">SKIP</string>
+    <!-- From: file:/Users/cfondacci/Documents/pelmelguide/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
     <string name="snippet.tab.deals">Deals</string>
     <string name="snippet.tab.events">Events</string>
     <string name="snippet.tab.hangouts">Hangouts</string>
